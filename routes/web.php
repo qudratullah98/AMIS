@@ -4,11 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Morilog\Jalali\Jalalian;
+use Spatie\Permission\Models\Permission;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -35,8 +37,7 @@ Route::middleware('auth')->group(function () {
     // Users
     Route::get('user/layout', [UserController::class, 'layout'])
         ->middleware('can:viewUsers')->name('user.UserLayout');
-    Route::get('users', [UserController::class, 'index'])
-        ->middleware('can:viewUsers')->name('user.index');
+    Route::get('users', [UserController::class, 'index'])->middleware('can:viewUsers')->name('user.index');
     Route::get('user/create', [UserController::class, 'create'])
         ->middleware('can:manageUsers')->name('user.create');
 
@@ -56,7 +57,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('can:manageUsers')->name('role.create');
     Route::post('role', [RoleController::class, 'store'])
         ->middleware('can:manageUsers')->name('role.store');
-        Route::post('role/update', [RoleController::class, 'update'])
+    Route::post('role/update', [RoleController::class, 'update'])
         ->middleware('can:manageUsers')->name('role.update');
     Route::get('role/{roleId}', [RoleController::class, 'Edit'])
         ->middleware('can:manageUsers')->name('role.edit');
@@ -67,18 +68,19 @@ Route::get('/', function () {
     // return redirect('/setting');
 });
 
-Route::get('test', function () {
-     $jDate = Jalalian::now();
-      $jDate = Jalalian::now();
+Route::get('test', function () { 
+       
+    $jDate = Jalalian::now();
+    $jDate = Jalalian::now();
 
-            // Get start & end of current Jalali month (convert to Carbon)
-          $startOfMonth = $jDate->getFirstDayOfMonth()->toCarbon()->format('Y-m-d');
+    // Get start & end of current Jalali month (convert to Carbon)
+    $startOfMonth = $jDate->getFirstDayOfMonth()->toCarbon()->format('Y-m-d');
 
-            $endOfMonth   = $jDate->getEndDayOfMonth()->toCarbon()->format('Y-m-d');
-            return response()->json([
-                'startOfMonth' => $startOfMonth,
-                'endOfMonth' => $endOfMonth,
-            ]);
+    $endOfMonth   = $jDate->getEndDayOfMonth()->toCarbon()->format('Y-m-d');
+    return response()->json([
+        'startOfMonth' => $startOfMonth,
+        'endOfMonth' => $endOfMonth,
+    ]);
 });
 
 

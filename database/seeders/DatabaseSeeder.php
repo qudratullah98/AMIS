@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ProvincesSeeder::class);
         $this->call(DistrictSeeder::class);
+        $this->call(UserTypeSeeder::class);
         $this->call(RolePermissionSeeder::class);
 
         $this->call(ActivityStatusSeeder::class);
         $this->call(ApprovalStatusSeeder::class);
-        $this->call(UserTypeSeeder::class);
 
 
     }
