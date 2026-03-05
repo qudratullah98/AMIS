@@ -55,30 +55,31 @@ const Sidebar = () => {
             keyword: "dashboard",
             can: permissions.includes("viewDashboardMenu"),
         },
+
         {
             href: "/setting",
             label: t("setting"),
             icon: <Settings2 className="w-5 h-5" />,
             keyword: "setting",
-            can: permissions.includes("viewSettingMenu")|| true,
+            can: permissions.includes("viewDashboardMenu")|| true,
             subItems: [
                 {
-                    href: "/setting/owner",
+                    href: "",
                     label: t("vehiclesOwners"),
                     icon: <Users className="w-4 h-4" />,
-                    keyword: "setting-owner",
+                    keyword: "",
                 },
                 {
                     href: "/setting/vehicle",
                     label: t("vehicles"),
                     icon: <Package className="w-4 h-4" />,
-                    keyword: "setting-vehicle",
+                    keyword: "",
                 },
                 {
                     href: "/setting/company",
                     label: t("company"),
                     icon: <Users className="w-4 h-4" />,
-                    keyword: "setting-company",
+                    keyword: "",
                 },
             ],
         },

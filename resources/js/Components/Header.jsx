@@ -3,16 +3,9 @@ import { Link, usePage } from "@inertiajs/react";
 import {
     Truck,
     Users,
-    Building2,
-    Car,
     LogOut,
-    MapPinned,
-    Route,
     ShieldUser,
-    Package,
-    DoorClosed,
     Monitor,
-    BadgeDollarSign,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -23,40 +16,27 @@ export default function Header() {
 
     // Menu groups
     const menuGroups = {
-        settings: [
-
-            {
-                title: t("fares"),
-                href: "/setting/fare",
-                icon: <BadgeDollarSign className="w-5 h-5" />,
-                can: permissions.includes("viewFare"),
-            },
-
-          ],
-
 
         dashboard: [
             {
                 title: t("summary"),
                 href: "/dashboard",
                 icon: <Truck className="w-5 h-5" />,
-                can: permissions.includes("viewOutgoingVehicles"),
+                can: permissions.includes("viewDashboardMenu"),
             },
             {
                 title: t("monthlyRevenue"),
                 href: "/monthlyRevenue",
                 icon: <Monitor className="w-5 h-5" />,
-                can: permissions.includes("viewOutgoingVehicles"),
+                can: permissions.includes("viewDashboardMenu"),
             },
             {
                 title: t("largeVehiclesRevenueGraph"),
                 href: "/largeVehiclesRevenueGraph",
                 icon: <Truck className="w-5 h-5" />,
-                can: permissions.includes("viewOutgoingVehicles"),
+                can: permissions.includes("viewDashboardMenu"),
             },
         ],
-
-
 
         users: [
             {
@@ -85,11 +65,7 @@ export default function Header() {
 
     // Determine which menu group to show based on current path
     const getActiveGroup = () => {
-        if (location.startsWith("/setting")) return menuGroups.settings;
-        if (
-            location === "/dashboard"
-        )
-            return menuGroups.dashboard;
+        if (location === "/dashboard") return menuGroups.dashboard;
 
         if (location.startsWith("/users") || location.startsWith("/user/roles"))
             return menuGroups.users;

@@ -28,7 +28,7 @@ return new class extends Migration
             ])->default('domestic');
 
             // Approval status
-            $table->foreignId('status_id')->constrained('approvel_statuses')->nullOnDelete();
+            $table->foreignId('status_id')->nullable()->constrained('approval_statuses')->nullOnDelete();
 
             // Foreign key to provinces table
             $table->foreignId('province_id')
@@ -45,11 +45,11 @@ return new class extends Migration
 
             $table->decimal('amsl', 8, 2)->nullable();
             // Foreign key to units table
-            $table->foreignId('amsl_unit_id')->constrained('measurement_units')->nullOnDelete();
+            $table->foreignId('amsl_unit_id')->nullable()->constrained('measurement_units')->nullOnDelete();
 
             $table->decimal('area', 10, 2);
             // Foreign key to units table
-            $table->foreignId('area_unit_id')->constrained('measurement_units')->nullOnDelete();
+            $table->foreignId('area_unit_id')->nullable()->constrained('measurement_units')->nullOnDelete();
 
             $table->text('description')->nullable();
 

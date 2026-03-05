@@ -17,14 +17,14 @@ class AirportsSeeder extends Seeder
         $sqmUnit  = MeasurementUnit::where('unit_en', 'M²')->first();
 
         // Example provinces and districts (make sure these exist)
-        $kabulProvince   = Province::where('province_en', 'Kabul')->first();
-        $heratProvince   = Province::where('province_en', 'Herat')->first();
-        $kandaharProvince= Province::where('province_en', 'Kandahar')->first();
+        $kabulProvince   = 1;
+        $heratProvince   = 32;
+        $kandaharProvince= 27;
 
         // Example districts
-        $kabulDistrict    = District::where('name_en', '(Capital) Kabul')->first();
-        $heratDistrict    = District::where('name_en', '(Capital) Herat')->first();
-        $kandaharDistrict = District::where('name_en', '(Capital) KANDAHAR')->first();
+        $kabulDistrict    = 1;
+        $heratDistrict    = 32;
+        $kandaharDistrict = 27;
 
         // Seed Airports
         $airports = [
@@ -36,8 +36,8 @@ class AirportsSeeder extends Seeder
                 'ICAO_code' => 'OAKB',
                 'type' => 'international',
                 'status_id' => 1,
-                'province_id' => $kabulProvince->id,
-                'district_id' => $kabulDistrict->id,
+                'province_id' => $kabulProvince,
+                'district_id' => $kabulDistrict,
                 'latitude' => 34.5658,
                 'longitude' => 69.2120,
                 'amsl' => 1791,
@@ -54,8 +54,8 @@ class AirportsSeeder extends Seeder
                 'ICAO_code' => 'OAHR',
                 'type' => 'international',
                 'status_id' => 1,
-                'province_id' => $heratProvince->id,
-                'district_id' => $heratDistrict->id,
+                'province_id' => $heratProvince,
+                'district_id' => $heratDistrict,
                 'latitude' => 34.2105,
                 'longitude' => 62.2288,
                 'amsl' => 940,
@@ -72,8 +72,8 @@ class AirportsSeeder extends Seeder
                 'ICAO_code' => 'OAKN',
                 'type' => 'international',
                 'status_id' => 1,
-                'province_id' => $kandaharProvince->id,
-                'district_id' => $kandaharDistrict->id,
+                'province_id' => $kandaharProvince,
+                'district_id' => $kandaharDistrict,
                 'latitude' => 31.5050,
                 'longitude' => 65.8472,
                 'amsl' => 1010,

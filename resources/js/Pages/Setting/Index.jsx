@@ -30,51 +30,33 @@ function Index() {
         {
             key: "vehicle_type",
             title: t("vehiclesTypes"),
-            href: "setting/vehicle_type",
+            href: "",
             icon: <Truck className="w-8 h-8 text-slate-700" />,
         },
         {
             key: "owner",
             title: t("vehiclesOwners"),
-            href: "setting/owner",
+            href: "",
             icon: <Users className="w-8 h-8 text-slate-700" />,
         },
-        // {
-        //     key: "driver",
-        //     title: t("drivers"),
-        //     href: "setting/driver",
-        //     icon: <UserRoundCog className="w-8 h-8 text-slate-700" />,
-        // },
         {
             key: "companie",
             title: t("companies"),
-            href: "setting/company",
+            href: "",
             icon: <Building2 className="w-8 h-8 text-slate-700" />,
         },
-        // {
-        //     key: "terminal",
-        //     title: t("terminals"),
-        //     href: "setting/terminal",
-        //     icon: <MapPinned className="w-8 h-8 text-slate-700" />,
-        // },
         {
             key: "large_vehicle",
             title: t("largeVehicles"),
-            href: "setting/viewAllCompanyVehicles",
+            href: "",
             icon: <Bus className="w-8 h-8 text-slate-700" />,
         },
         {
             key: "route",
             title: t("routes"),
-            href: "setting/route",
+            href: "",
             icon: <Route className="w-8 h-8 text-slate-700" />,
         },
-        // {
-        //     key: "bander",
-        //     title: t("bandars"),
-        //     href: "setting/bander",
-        //     icon: <Flag className="w-8 h-8 text-slate-700" />,
-        // },
     ];
 
     useEffect(() => {

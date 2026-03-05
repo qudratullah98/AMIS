@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApprovelStatus extends Model
 {
+    protected $table ='approval_statuses';
     // Get all airports in this approval_status
     public function airports()
     {

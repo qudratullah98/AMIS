@@ -1,23 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Morilog\Jalali\Jalalian;
-use Spatie\Permission\Models\Permission;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canLogin'       => Route::has('login'),
+        'canRegister'    => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion'     => PHP_VERSION,
     ]);
 });
 
@@ -31,8 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-
 
     // Users
     Route::get('user/layout', [UserController::class, 'layout'])
@@ -68,29 +62,21 @@ Route::get('/', function () {
     // return redirect('/setting');
 });
 
-Route::get('test', function () { 
-       
+Route::get('test', function () {
+
     $jDate = Jalalian::now();
     $jDate = Jalalian::now();
 
     // Get start & end of current Jalali month (convert to Carbon)
     $startOfMonth = $jDate->getFirstDayOfMonth()->toCarbon()->format('Y-m-d');
 
-    $endOfMonth   = $jDate->getEndDayOfMonth()->toCarbon()->format('Y-m-d');
+    $endOfMonth = $jDate->getEndDayOfMonth()->toCarbon()->format('Y-m-d');
     return response()->json([
         'startOfMonth' => $startOfMonth,
-        'endOfMonth' => $endOfMonth,
+        'endOfMonth'   => $endOfMonth,
     ]);
 });
 
-
-
-
-
-
-
-
 require __DIR__ . '/auth.php';
-require __DIR__ . '/setting.php';
 
 require __DIR__ . '/log.php';

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Airport;
+use App\Models\GeneralDepartment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +19,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('image')->nullable();
+            $table->string('position_title');
+
+            $table->foreignIdFor(Airport::class)->nullable();
+
+            $table->foreignIdFor(GeneralDepartment::class)->nullable();
+            
+
             $table->rememberToken();
             $table->timestamps();
         });
