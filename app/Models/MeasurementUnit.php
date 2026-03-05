@@ -41,4 +41,9 @@ class MeasurementUnit extends Model
     {
         return $this->hasMany(ConstructionProperty::class);
     }
+
+    public function EquipmentProperty()
+    {
+        return $this->hasMany(EquipmentProperty::class);
+    }
 }

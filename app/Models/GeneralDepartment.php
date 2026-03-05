@@ -1,15 +1,11 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityStatus extends Model
+class GeneralDepartment extends Model
 {
-    public function airportConstructions()
-    {
-        return $this->hasMany(AirportConstruction::class);
-    }
-
     public function equipment()
 {
     return $this->hasMany(Equipment::class);

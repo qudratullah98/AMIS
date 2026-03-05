@@ -42,4 +42,9 @@ class Airport extends Model
     {
         return $this->hasMany(Flyte::class);
     }
+
+    public function equipment()
+{
+    return $this->hasMany(Equipment::class);
+}
 }

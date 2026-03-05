@@ -20,4 +20,9 @@ class ApprovelStatus extends Model
     {
         return $this->hasMany(SGHA_Service::class);
     }
+
+    public function equipment()
+    {
+        return $this->hasMany(Equipment::class);
+    }
 }
