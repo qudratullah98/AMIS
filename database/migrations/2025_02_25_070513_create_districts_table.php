@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('district_dr');
             $table->string('district_ps');
             $table->string('district_en');
-             $table->string('code');
             $table->timestamps();
         });
     }

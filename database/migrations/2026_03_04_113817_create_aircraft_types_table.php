@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approvel_statuses', function (Blueprint $table) {
+        Schema::create('aircraft_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ps');
-            $table->string('name_dr');
-            $table->string('name_en');
+            $table->string('name');
             $table->string('code');
             $table->timestamps();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('approvel_statuses');
+        Schema::dropIfExists('aircraft_types');
     }
 };

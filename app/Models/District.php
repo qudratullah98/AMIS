@@ -15,10 +15,11 @@ class District extends Model
         "district_ps",
         "district_en",
     ];
-    public function verify()
+
+    // Get all airports in this district
+    public function airports()
     {
-        $this->is_approved = true;
-        $this->save();
+        return $this->hasMany(Airport::class);
     }
 
 }

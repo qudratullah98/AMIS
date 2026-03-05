@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approvel_statuses', function (Blueprint $table) {
+        Schema::create('sgha_service_units', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ps');
-            $table->string('name_dr');
-            $table->string('name_en');
-            $table->string('code');
+            $table->string('service_name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('approvel_statuses');
+        Schema::dropIfExists('s_g_h_a_service_units');
     }
 };

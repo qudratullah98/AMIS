@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
             $table->string('province');
-            $table->string('code');
-            $table->bigInteger('provincial_bank_account');
-            $table->integer('provincial_income_percentage');
+            $table->string('province_en');
             $table->timestamps();
         });
     }

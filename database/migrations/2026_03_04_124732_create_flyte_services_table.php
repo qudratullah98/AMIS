@@ -11,12 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approvel_statuses', function (Blueprint $table) {
+        Schema::create('flyte_services', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ps');
-            $table->string('name_dr');
-            $table->string('name_en');
-            $table->string('code');
+
+            $table->foreignId('flyte_id')
+                ->constrained('flytes')
+                ->cascadeOnDelete();
+
+            $table->foreignId('sgha_service_id')
+                ->constrained('sgha_services')
+                ->cascadeOnDelete();
+
+            $table->integer('count');
+
             $table->timestamps();
         });
     }
@@ -26,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('approvel_statuses');
+        Schema::dropIfExists('flyte_services');
     }
 };

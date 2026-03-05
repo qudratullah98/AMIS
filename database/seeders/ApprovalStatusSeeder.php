@@ -1,9 +1,7 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\ApprovelStatus;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ApprovalStatusSeeder extends Seeder
@@ -13,10 +11,24 @@ class ApprovalStatusSeeder extends Seeder
      */
     public function run(): void
     {
-       $data = [
-            ['id' => 1, 'status_fa' => 'در حال اجرا', 'status_en' => 'Pending', 'code' => 'PEN'],
-            ['id' => 2, 'status_fa' => 'مسترد شده', 'status_en' => 'Denied', 'code' => 'DEN'],
-            ['id' => 3, 'status_fa' => 'تائید شده', 'status_en' => 'Approved', 'code' => 'APR'],
+
+        $data = [
+
+            [
+                'id'      => 1,
+                'name_ps' => 'فعال',
+                'name_dr' => 'فعال',
+                'name_en' => 'Active',
+                'code'    => 'active',
+            ],
+            [
+                'id'      => 2,
+                'name_ps' => 'غیر فعال',
+                'name_dr' => 'غیرفعال',
+                'name_en' => 'Inactive',
+                'code'    => 'inactive',
+            ],
+
         ];
 
         foreach ($data as $row) {

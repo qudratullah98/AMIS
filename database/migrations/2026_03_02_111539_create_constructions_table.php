@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approvel_statuses', function (Blueprint $table) {
+        Schema::create('constructions', function (Blueprint $table) {
             $table->id();
             $table->string('name_ps');
             $table->string('name_dr');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('approvel_statuses');
+        Schema::dropIfExists('constructions');
     }
 };

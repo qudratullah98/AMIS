@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('activity_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('status_en');
+            $table->string('status_dr');
+            $table->string('status_ps');
             $table->string('code');
             $table->timestamps();
         });
