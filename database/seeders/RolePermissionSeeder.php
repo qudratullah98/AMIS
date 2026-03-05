@@ -19,6 +19,8 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'viewUserMenu', 'guard_name' => 'sanctum'],
             ['name' => 'viewLogMenu', 'guard_name' => 'sanctum'],
 
+            ['name' => 'manageActivityLog', 'guard_name' => 'sanctum'],
+
             // ROLES PERMISSIONS
             ['name' => 'manageUsers', 'guard_name' => 'sanctum'],
             ['name' => 'viewUsers', 'guard_name' => 'sanctum'],
@@ -32,7 +34,9 @@ class RolePermissionSeeder extends Seeder
         }
 
         $adminRole = Role::create(['name' => 'Super Admin']);
+
         $adminRole->givePermissionTo(Permission::all());
+
         $user = User::where('email', 'admin@gmail.com')->first();
         if ($user) {
             $user->assignRole($adminRole);

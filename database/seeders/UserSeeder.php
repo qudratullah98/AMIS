@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
             'position_title' => 'Airport Manager',
             'airport_id' => 1,
             'general_department_id' => 1, 
-
         ]);
     }
 }
