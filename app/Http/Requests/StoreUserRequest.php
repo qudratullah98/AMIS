@@ -39,31 +39,7 @@ class StoreUserRequest extends FormRequest
                 'confirmed',
                  Password::min(8)
         ->mixedCase()   // must contain upper and lower case letters
-        ->symbols(),
-
-            ],
-            'role_id' => ['required', 'exists:roles,id'],
-            'user_type' => ['required'],
-            'province_id' => [
-                'required_if:user_type,genral_user,Report_user',
-                'nullable', // Allow empty value if not required
-                'exists:provinces,id'
-            ],
-            'terminal_id' => [
-                'required_if:user_type,Transport_user',
-                'nullable',
-                'exists:terminals,id'
-            ],
-            'bander_id' => [
-                'required_if:user_type,Bander_user',
-                'nullable',
-                'exists:banders,id'
-            ],
-            'company_id' => [
-                'required_if:user_type,Company_user',
-                'nullable',
-                'exists:companies,id'
-            ],
+        ->symbols(),],
         ];
     }
 }

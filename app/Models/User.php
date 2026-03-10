@@ -65,10 +65,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function userTypes()
-    {
-        return $this->hasOne(UserType::class);
-    }
+  
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->when($search, function ($query, $search) {

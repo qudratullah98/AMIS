@@ -1,17 +1,15 @@
-import BackButton from "@/Components/BackButton";
+ 
 import CreateHeader from "@/Components/CreateHeader";
 import CustomSelect from "@/Components/CustomSelect";
 import FileUpload from "@/Components/FileUpload";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
-import SubHeader from "@/Components/SubHeader";
-import TextArea from "@/Components/TextArea";
+import SubHeader from "@/Components/SubHeader"; 
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useForm } from "@inertiajs/react";
-import { Loader } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useForm } from "@inertiajs/react"; 
+import React from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -23,23 +21,11 @@ function EditUser({ roles ,user,user_roles}) {
         email: user.email,
         password:"",
         password_confirmation: "",
-        photo: user.photo,
-        user_type: user?.user_types?.user_type,
-        role_id: roles.find(role=> role.name === user_roles[0])?.id || null,
-        province_id: user.user_types?.province_id,
-        terminal_id: user.user_types?.terminal_id, 
-        company_id: user.user_types?.company_id, 
-        bander_id: user.user_types?.bander_id, 
+        photo: user.photo, 
+        role_id: roles.find(role=> role.name === user_roles[0])?.id || null, 
     });
-
-    const user_types = [
-        { lable: "Admin", value: "Admin" },
-        { lable: "Transport user", value: "Transport_user" },
-        { lable: "Bander User", value: "Bander_user" },
-        { lable: "Report User", value: "Report_user" },
-        { lable: "Genral User", value: "genral_user" },
-        { lable: "Company user", value: "Company_user" },
-    ];
+ 
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("user.update"), {
@@ -54,62 +40,9 @@ function EditUser({ roles ,user,user_roles}) {
                 );
             },
         });
-    };
-    const [loader, setLoader] = useState(false);
-    const [provinces, setprovinces] = useState([]);
-    const [terminals, setterminals] = useState([]);
-    const [banders, setbanders] = useState([]);
-    const [companies, setcompanies] = useState([]);
-    const handTypeSelector = async (type) => {
-        setData("user_type", type);
-        setLoader(true);
-
-        if (type === "genral_user" || type === "Report_user" || type === "Admin") {
-            try {
-                const response = await axios.get(route("provinces"));
-                setprovinces(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-        if (type === "Transport_user"|| type === "Admin") {
-            try {
-                const response = await axios.get(
-                    route("setting.all_terminals")
-                );
-                setterminals(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-        if (type === "Bander_user" || type === "Admin") {
-            try {
-                const response = await axios.get(
-                    route("setting.allbanders")
-                );
-                setbanders(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-        if (type === "Company_user" || type === "Admin") {
-            try {
-                const response = await axios.get(
-                    route("setting.getAllCompny")
-                );
-                setcompanies(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-
-        setLoader(false);
-    };
-    useEffect(() => {
-        if (data.user_type) {
-            handTypeSelector(data.user_type);
-        }
-    }, []);
+    }; 
+ 
+ 
 
     return (
         <AuthenticatedLayout header={<SubHeader title="کارمند جدید" />}>
@@ -242,153 +175,12 @@ function EditUser({ roles ,user,user_roles}) {
                             ></InputError>
                         </div>
 
-                        {/* user _type */}
-                        <div>
-                            <InputLabel htmlFor="user_type">
-                                {t('userType')}
-                            </InputLabel>
-                            <CustomSelect
-                                id="user_type"
-                                options={user_types.map((item) => {
-                                    return {
-                                        value: item.value,
-                                        label: item.lable,
-                                    };
-                                })}
-                                onChange={(e) => {
-                                    handTypeSelector(e);
-                                }}
-                                value={data.user_type}
-                            ></CustomSelect>
-                        </div>
+                  
 
-                        {/* dynamic input */}
-                        {(data.user_type === "genral_user" || data.user_type === "Report_user" || data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="province">
-                                            province
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="province"
-                                            options={provinces.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.province,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("province_id", e);
-                                            }}
-                                            value={data.province_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.province_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
-
-                        {/* terminals  */}
-                        {(data.user_type === "Transport_user" || data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="terminal">
-                                            terminal
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="terminal"
-                                            options={terminals.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.terminal_name,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("terminal_id", e);
-                                            }}
-                                            value={data.terminal_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.terminal_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
-
-                         {/* banders  */}
-                         {(data.user_type === "Bander_user"|| data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="bander">
-                                            bander
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="bander"
-                                            options={banders.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.bandar_name,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("bander_id", e);
-                                            }}
-                                            value={data.bander_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.bander_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
-
-                          {/* Company  */}
-                          {(data.user_type === "Company_user"|| data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="company">
-                                            company
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="company"
-                                            options={companies.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.company_name,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("company_id", e);
-                                            }}
-                                            value={data.company_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.company_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
+                       
                         {/* Buttons */}
                         <div className="flex space-x-4 col-span-2">
                             <PrimaryButton
-                                className="mx-4"
                                 disabled={processing}
                             >
                                 Store

@@ -22,21 +22,13 @@ function CreateUser({ roles }) {
         email: "",
         password: "",
         password_confirmation: "",
-        photo: "",
-        user_type: "",
+        photo: "", 
         role_id: "",
         province_id: "",
         terminal_id: "",
     });
 
-    const user_types = [
-        { lable: "Admin", value: "Admin" },
-        { lable: "Transport user", value: "Transport_user" },
-        { lable: "Bander User", value: "Bander_user" },
-        { lable: "Report User", value: "Report_user" },
-        { lable: "Genral User", value: "genral_user" },
-        { lable: "Company user", value: "Company_user" },
-    ];
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("user.store"), {
@@ -51,57 +43,8 @@ function CreateUser({ roles }) {
                 );
             },
         });
-    };
-    const [loader, setLoader] = useState(false);
-    const [provinces, setprovinces] = useState([]);
-    const [terminals, setterminals] = useState([]);
-    const [banders, setbanders] = useState([]);
-    const [companies, setcompanies] = useState([]);
-    const handTypeSelector = async (type) => {
-        setData("user_type", type);
-        setLoader(true);
-
-        if (type === "genral_user" || type === "Report_user" || type === "Admin") {
-            try {
-                const response = await axios.get(route("provinces"));
-                setprovinces(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-        if (type === "Transport_user" || type === "Admin") {
-            try {
-                const response = await axios.get(
-                    route("setting.all_terminals")
-                );
-                setterminals(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-        if (type === "Bander_user" || type === "Admin") {
-            try {
-                const response = await axios.get(
-                    route("setting.allbanders")
-                );
-                setbanders(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-        if (type === "Company_user" || type === "Admin") {
-            try {
-                const response = await axios.get(
-                    route("setting.getAllCompny")
-                );
-                setcompanies(response.data);
-            } catch (error) {
-                console.error("Error fetching provinces:", error);
-            }
-        }
-
-        setLoader(false);
-    };
+    }; 
+   
 
     return (
         <AuthenticatedLayout header={<SubHeader title="کارمند جدید" />}>
@@ -233,153 +176,10 @@ function CreateUser({ roles }) {
                             ></InputError>
                         </div>
 
-                        {/* user _type */}
-                        <div>
-                            <InputLabel htmlFor="user_type">
-                                {t('userType')}
-                            </InputLabel>
-                            <CustomSelect
-                                id="user_type"
-                                options={user_types.map((item) => {
-                                    return {
-                                        value: item.value,
-                                        label: item.lable,
-                                    };
-                                })}
-                                onChange={(e) => {
-                                    handTypeSelector(e);
-                                }}
-                                value={data.user_type}
-                            ></CustomSelect>
-                        </div>
-
-                        {/* dynamic input */}
-                        {(data.user_type === "genral_user" || data.user_type === "Report_user" || data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="province">
-                                            province
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="province"
-                                            options={provinces.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.province,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("province_id", e);
-                                            }}
-                                            value={data.province_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.province_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
-
-                        {/* terminals  */}
-                        {(data.user_type === "Transport_user" || data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="terminal">
-                                            terminal
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="terminal"
-                                            options={terminals.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.terminal_name,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("terminal_id", e);
-                                            }}
-                                            value={data.terminal_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.terminal_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
-
-                         {/* banders  */}
-                         {(data.user_type === "Bander_user" || data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="bander">
-                                            bander
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="bander"
-                                            options={banders.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.bandar_name,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("bander_id", e);
-                                            }}
-                                            value={data.bander_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.bander_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
-
-                          {/* Company  */}
-                          {(data.user_type === "Company_user" || data.user_type==="Admin") && (
-                            <div>
-                                {loader ? (
-                                    <Loader className="m-6"></Loader>
-                                ) : (
-                                    <>
-                                        <InputLabel htmlFor="company">
-                                            company
-                                        </InputLabel>
-                                        <CustomSelect
-                                            id="company"
-                                            options={companies.map((item) => {
-                                                return {
-                                                    value: item.id,
-                                                    label: item.company_name,
-                                                };
-                                            })}
-                                            onChange={(e) => {
-                                                setData("company_id", e);
-                                            }}
-                                            value={data.company_id}
-                                        ></CustomSelect>
-                                        <InputError
-                                            message={errors.company_id}
-                                        ></InputError>
-                                    </>
-                                )}
-                            </div>
-                        )}
+                    
                         {/* Buttons */}
                         <div className="flex space-x-4 col-span-2">
                             <PrimaryButton
-                                className="mx-4"
                                 disabled={processing}
                             >
                                 Store
