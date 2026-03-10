@@ -19,9 +19,7 @@ function VehicleType({ users }) {console.log(users)
         { label: t("id") },
         { label: t("name") },
         { label: t("email") },
-        { label: t("roles") },
-        { label: t("userType") },
-        { label: t("details") },
+        { label: t("roles") },  
         { label: t("status") },
         { label: t("action") },
     ];
@@ -106,13 +104,8 @@ function VehicleType({ users }) {console.log(users)
                                                 </span>
                                             ))}
                                         </td>
-                                        <td className="p-2 text-center"> 
-                                            {item?.user_types?.user_type}
-                                        </td>
-                                        <td className="p-2 text-center" dir="ltr">
-                                            <span className="inline-block px-2 py-1 text-xs font-semibold text-indigo-700 bg-indigo-200 rounded-full">{ item.details ?? '—'}</span>
-
-                                        </td>
+                                       
+                                      
                                         <td className="p-2 text-center">
                                             <StatusBadge
                                                 status={

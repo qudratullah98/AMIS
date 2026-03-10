@@ -46,9 +46,10 @@ function EditUser({ roles ,user,user_roles}) {
 
     return (
         <AuthenticatedLayout header={<SubHeader title="کارمند جدید" />}>
+                 <SubHeader title={t("changeUserInfo")} />
+
             <main className="flex-grow w-full max-w-3xl py-8 mx-auto sm:px-6 lg:px-8">
                 <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
-                    <CreateHeader title={t('changeUserInfo')}></CreateHeader>
                     <form
                         onSubmit={handleSubmit}
                         className="grid grid-cols-1 sm:grid-cols-2 gap-6"
