@@ -37,9 +37,15 @@ class StoreUserRequest extends FormRequest
                 'string',
                 'min:4',
                 'confirmed',
-                 Password::min(8)
-        ->mixedCase()   // must contain upper and lower case letters
-        ->symbols(),],
+        //          Password::min(8)
+        // ->mixedCase()    
+        // ->symbols(),
+            ],
+             'role_id' => ['required', 'array'],
+             'role_id.*' => ['exists:roles,id'],
+             'airport_id' => ['required', 'exists:airports,id'],
+             'general_department_id' => ['nullable', 'exists:general_departments,id'],
+             'position_title' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -34,8 +34,20 @@ class RolePermissionSeeder extends Seeder
         }
 
         $adminRole = Role::create(['name' => 'Super Admin']);
+        $managerRole = Role::create(['name' => 'Manager']); 
+        $viewerRole = Role::create(['name' => 'Viewer']);
 
         $adminRole->givePermissionTo(Permission::all());
+        $managerRole->givePermissionTo([
+            'viewDashboardMenu',
+            'viewUserMenu',
+            'viewLogMenu',
+            'viewUsers',
+        ]);
+        $viewerRole->givePermissionTo([
+            'viewDashboardMenu',
+            'viewLogMenu',
+        ]);
 
         $user = User::where('email', 'admin@gmail.com')->first();
         if ($user) {

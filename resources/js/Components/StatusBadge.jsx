@@ -38,6 +38,12 @@ const statusStyles = {
         bgClass: "",
         textClass: "text-gray-700",
     },
+    blocked: {
+        icon: <Ban className="text-red-500" />,
+        label: "Blocked",
+        bgClass: "",
+        textClass: "text-red-700",
+    },
 };
 
 const StatusBadge = ({ status }) => {

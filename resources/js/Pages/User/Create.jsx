@@ -1,21 +1,18 @@
-import BackButton from "@/Components/BackButton";
-import CreateHeader from "@/Components/CreateHeader";
+
 import CustomSelect from "@/Components/CustomSelect";
 import FileUpload from "@/Components/FileUpload";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SubHeader from "@/Components/SubHeader";
-import TextArea from "@/Components/TextArea";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useForm } from "@inertiajs/react";
-import { Loader } from "lucide-react";
-import React, { useState } from "react";
+import { useForm } from "@inertiajs/react"; 
+import React  from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
-function CreateUser({ roles }) {
+function CreateUser({ roles, airports, general_departments }) {
     const { t } = useTranslation();
     const { data, setData, post, reset, errors, processing } = useForm({
         name: "",
@@ -23,9 +20,10 @@ function CreateUser({ roles }) {
         password: "",
         password_confirmation: "",
         photo: "", 
-        role_id: "",
-        province_id: "",
-        terminal_id: "",
+        role_id: [],
+        airport_id: "",
+        general_department_id: "",
+        position_title: "",
     });
 
    
@@ -88,6 +86,7 @@ function CreateUser({ roles }) {
                                         ? "border-red-500"
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
+                                autoComplete="email"
                             />
                             <InputError message={errors.email}></InputError>
                         </div>
@@ -102,6 +101,7 @@ function CreateUser({ roles }) {
                                 onChange={(e) =>
                                     setData("password", e.target.value)
                                 }
+                                autoComplete="new-password"
                                 className={` ${
                                     errors.password
                                         ? "border-red-500"
@@ -131,27 +131,37 @@ function CreateUser({ roles }) {
                                         ? "border-red-500"
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
+                                autoComplete="new-password"
                             />
                             <InputError
                                 message={errors.password_confirmation}
                             ></InputError>
                         </div>
-
-                        {/* photo */}
+                        {/* Position Title */}
                         <div>
-                            <InputLabel htmlFor="license_start_date">
-                                {t('image')}
+                            <InputLabel htmlFor="position_title">
+                                {t('positionTitle')}
                             </InputLabel>
-                            <FileUpload
-                                id="photo"
+                            <TextInput
+                                id="position_title"
+                                value={data.position_title}
+                                type="text"
                                 onChange={(e) =>
-                                    setData("photo", e.target.value)
+                                    setData("position_title", e.target.value)
                                 }
+                                className={` ${
+                                    errors.position_title
+                                        ? "border-red-500"
+                                        : "border-gray-300"
+                                } transition duration-200 ease-in-out`}
                             />
                             <InputError
-                                message={errors.license_start_date}
+                                message={errors.position_title}
                             ></InputError>
                         </div>
+
+
+                      
 
                         {/* صلاحیت */}
                         <div>
@@ -170,13 +180,72 @@ function CreateUser({ roles }) {
                                     setData("role_id", e);
                                 }}
                                 value={data.role_id}
+                                multiple={true}
                             ></CustomSelect>
                              <InputError
                                 message={errors.role_id}
                             ></InputError>
                         </div>
+                        {/* Airport */}
+                        <div>
+                            <InputLabel htmlFor="airport_id">
+                                {t('airport')}
+                            </InputLabel>
+                            <CustomSelect
+                                id="airport_id"
+                                options={airports.map((item) => {
+                                    return {
+                                        value: item.id,
+                                        label: item.name_ps,
+                                    };
+                                })}
+                                onChange={(e) => {
+                                    setData("airport_id", e);
+                                }}
+                                value={data.airport_id}
+                            ></CustomSelect>
+                            <InputError
+                                message={errors.airport_id}
+                            ></InputError>
+                        </div>
 
-                    
+                        {/* General Department */}
+                        <div>
+                            <InputLabel htmlFor="general_department_id">
+                                {t('generalDepartment')}
+                            </InputLabel>
+                            <CustomSelect
+                                id="general_department_id"
+                                options={general_departments.map((item) => {
+                                    return {
+                                        value: item.id,
+                                        label: item.name_ps,
+                                    };
+                                })}
+                                onChange={(e) => {
+                                    setData("general_department_id", e);
+                                }}
+                                value={data.general_department_id}
+                            ></CustomSelect>
+                            <InputError
+                                message={errors.general_department_id}
+                            ></InputError>
+                        </div>
+  {/* photo */}
+                        <div>
+                            <InputLabel htmlFor="license_start_date">
+                                {t('image')}
+                            </InputLabel>
+                            <FileUpload
+                                id="photo"
+                                onChange={(e) =>
+                                    setData("photo", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.license_start_date}
+                            ></InputError>
+                        </div>
                         {/* Buttons */}
                         <div className="flex space-x-4 col-span-2">
                             <PrimaryButton

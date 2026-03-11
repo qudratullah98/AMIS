@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
   
 //END MOBILE API ROUTES
 
-Route::post('login', [OutgoingVehicleController::class, 'apiLogin'])->name('api_login');
+// Route::post('login', [OutgoingVehicleController::class, 'apiLogin'])->name('api_login');
 
 Route::get('test', function () {
     return response()->json([

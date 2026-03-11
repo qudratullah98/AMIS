@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,10 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConstructionTypeSeeder::class);
 
         $this->call(GeneralDepartmentSeeder::class);
-$this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(RolePermissionSeeder::class);
-
-
-
     }
 }

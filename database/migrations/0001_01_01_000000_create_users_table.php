@@ -21,12 +21,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->string('position_title');
-
-            $table->foreignIdFor(Airport::class)->nullable();
-
+            $table->foreignIdFor(Airport::class);
             $table->foreignIdFor(GeneralDepartment::class)->nullable();
-            
-
+            $table->boolean('is_blocked')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

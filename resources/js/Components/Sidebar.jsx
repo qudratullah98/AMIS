@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import {
-    ChartColumn,
     ChartColumnBig,
     Settings2,
-    DoorOpen,
-    Monitor,
     Package,
     Users,
     History,
@@ -69,18 +66,7 @@ const Sidebar = () => {
                     icon: <Users className="w-4 h-4" />,
                     keyword: "",
                 },
-                {
-                    href: "/setting/vehicle",
-                    label: t("vehicles"),
-                    icon: <Package className="w-4 h-4" />,
-                    keyword: "",
-                },
-                {
-                    href: "/setting/company",
-                    label: t("company"),
-                    icon: <Users className="w-4 h-4" />,
-                    keyword: "",
-                },
+             
             ],
         },
 

@@ -40,6 +40,7 @@ class User extends Authenticatable
         'position_title',
         'airport_id',
         'general_department_id',
+        'is_blocked',
     ];
 
     /**

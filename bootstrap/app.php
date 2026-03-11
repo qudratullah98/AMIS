@@ -14,11 +14,13 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
-
+            \App\Http\Middleware\CheckBlockedUser::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
-        ]);
+        ]); 
 
-        //
+         $middleware->alias([
+        'blocked' => \App\Http\Middleware\CheckBlockedUser::class,
+    ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

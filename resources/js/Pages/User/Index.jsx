@@ -20,6 +20,9 @@ function VehicleType({ users }) {console.log(users)
         { label: t("name") },
         { label: t("email") },
         { label: t("roles") },  
+        { label: t("position") }, 
+        { label: t("airport") },
+        { label: t("generalDepartment") },
         { label: t("status") },
         { label: t("action") },
     ];
@@ -104,14 +107,29 @@ function VehicleType({ users }) {console.log(users)
                                                 </span>
                                             ))}
                                         </td>
+                                        <td className="p-2 text-center">
+                                            {item.position_title
+                                                ? item.position_title
+                                                : "-"}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {item.airport
+                                                ? item.airport.name_ps
+                                                : "-"}
+                                        </td>   
+                                        <td className="p-2 text-center">
+                                            {item.general_department
+                                                ? item.general_department.name_ps
+                                                : "-"}
+                                        </td>
                                        
                                       
                                         <td className="p-2 text-center">
                                             <StatusBadge
                                                 status={
-                                                    true
-                                                        ? "approved"
-                                                        : "notApproved"
+                                                    item.is_blocked
+                                                        ? "blocked"
+                                                        : "active"
                                                 }
                                             ></StatusBadge>
                                             {}
