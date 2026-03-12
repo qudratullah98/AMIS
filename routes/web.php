@@ -80,3 +80,4 @@ Route::get('test', function () {
 require __DIR__ . '/auth.php';
 
 require __DIR__ . '/log.php';
+require __DIR__ . '/airport.php';

@@ -25,6 +25,11 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'manageUsers', 'guard_name' => 'sanctum'],
             ['name' => 'viewUsers', 'guard_name' => 'sanctum'],
 
+            // AIRPORTS PERMISSIONS
+            ['name' => 'viewAirportMenu', 'guard_name' => 'sanctum'],
+            ['name' => 'manageAirports', 'guard_name' => 'sanctum'],
+            ['name' => 'viewAirports', 'guard_name' => 'sanctum'],
+
         ];
 
         // Create permissions in the database

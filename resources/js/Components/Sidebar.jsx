@@ -52,7 +52,13 @@ const Sidebar = () => {
             keyword: "dashboard",
             can: permissions.includes("viewDashboardMenu"),
         },
-
+        {
+            href:route("airports.index"),
+            label: t("airports"),
+            icon: <Package className="w-5 h-5" />,
+            keyword: "airport",
+            can: permissions.includes("viewAirportMenu") || true,
+        },
         {
             href: "/setting",
             label: t("setting"),

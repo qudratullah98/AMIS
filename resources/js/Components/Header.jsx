@@ -8,6 +8,7 @@ import {
     Monitor,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import LogoutComponent from "./LogoutComponent";
 
 export default function Header() {
     const { permissions } = usePage().props.auth;
@@ -78,6 +79,9 @@ export default function Header() {
         links.map(
             (item, idx) =>
                 item.can && (
+                    item.href === "/logout" ? (
+                        <LogoutComponent key={idx} />
+                    ) : (   
                     <Link
                         key={idx}
                         href={item.href}
@@ -89,7 +93,7 @@ export default function Header() {
                     >
                         {item.icon}
                         <span>{item.title}</span>
-                    </Link>
+                    </Link>)
                 ),
         );
 

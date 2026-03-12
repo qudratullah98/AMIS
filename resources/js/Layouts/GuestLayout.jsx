@@ -4,7 +4,7 @@ export default function GuestLayout({ children }) {
         <div
             className="flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat"
             style={{
-                backgroundImage: `url('/images/bus.png')`,
+                backgroundImage: `url('/images/background2.png')`,
                 
             }}
         >
