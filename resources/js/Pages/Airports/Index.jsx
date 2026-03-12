@@ -1,128 +1,143 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, router } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
 import DataTable from "@/Components/Datatable";
-import CustomModal from "@/Components/CustomModal";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
 import SubHeader from "@/Components/SubHeader";
-import { Edit2, Verified, VerifiedIcon } from "lucide-react";
-import toast from "react-hot-toast";
+import { Edit2, Verified } from "lucide-react";
 import StatusBadge from "@/Components/StatusBadge";
 import { useTranslation } from "react-i18next";
+import CustomModal from "@/Components/CustomModal";
+import CreateAndEdit from "./CreateAndEdit";
 
 function AirportsIndex({ airports }) {
-    const tr = airports?.data || [];
     const { t } = useTranslation();
+    const airportData = airports?.data || [];
     const paginationLinks = airports?.links || [];
 
     const columns = [
-        { label: t("id") },
-        { label: t("name") },
-        { label: t("code") },
-        { label: t("city") },
-        { label: t("country") },
-        { label: t("status") },
-        { label: t("actions") },
-
-
+        { label: t("ID") },
+        { label: t("Name (PS)") },
+        { label: t("Name (DR)") },
+        { label: t("Name (EN)") },
+        { label: t("IATA") },
+        { label: t("ICAO") },
+        { label: t("Type") },
+        { label: t("Province") },
+        { label: t("District") },
+        { label: t("AMSL") },
+        { label: t("Area") },
+        { label: t("Status") },
+        { label: t("Actions") },
     ];
 
-    const [modalOpen, setModalOpen] = useState(false);
-    const [airportsList, setAirports] = useState(tr);
+    const verification = (type, id) => {
+        console.log(`Verify ${type} with id ${id}`);
+    };
 
-    const [loading, setLoading] = useState(false);
-   
+    const [CreateModel, setCreateModel] = useState(false);
 
     return (
-        <AuthenticatedLayout header={<SubHeader title="لیست کاربران" />}>
-            {modalOpen && (
+        <AuthenticatedLayout header={<SubHeader title={t("Airports List")} />}>
+            {CreateModel && (
                 <CustomModal
-                    show={modalOpen}
-                    handleClose={() => setModalOpen(false)}
+                    show={CreateModel}
+                    handleClose={() => setCreateModel(false)}
                     title="My Modal"
                     size="large"
                     stopPropagation={false}
                 >
-                    <p>This is the content of the modal.</p>
+                    <CreateAndEdit></CreateAndEdit>
                 </CustomModal>
             )}
-
-                        <SubHeader title={t("usersList")} />
-
             <div className="py-12">
-                <div className="mx-auto  sm:px-6 lg:px-8">
+                <div className="mx-auto sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
                             <DataTable
                                 columns={columns}
                                 links={paginationLinks}
-                                AddButtonPath={route('user.create')}
-                                header={t("usersList")}
-                                buttonLabel={t("addNewUser")}
+                                header={t("Airports List")}
+                                buttonLabel={t("Add New Airport")}
+                                enableButton={true}
+                                onButtonClick={() => {
+                                    setCreateModel(true);
+                                }}
                             >
-                                {airportsList.map((item, i) => (
-                                    <tr className="hover:bg-slate-100" key={i}>
+                                {airportData.map((airport) => (
+                                    <tr
+                                        key={airport.id}
+                                        className="hover:bg-slate-100"
+                                    >
                                         <td className="p-2 text-center">
-                                            {item.id}
+                                            {airport.id}
                                         </td>
                                         <td className="p-2 text-center">
-                                            {item.name}
+                                            {airport.name_ps}
                                         </td>
                                         <td className="p-2 text-center">
-                                            {item.code}
+                                            {airport.name_dr}
                                         </td>
                                         <td className="p-2 text-center">
-                                            {item.city}
+                                            {airport.name_en}
                                         </td>
                                         <td className="p-2 text-center">
-                                            {item.country}
-                                        </td>  
-                                       
-                                      
+                                            {airport.IATA_code}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {airport.ICAO_code}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {t(airport.type)}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {airport.province.province}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {airport.district.district_dr}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {airport.amsl}{" "}
+                                            {airport.amsl_unit_name}
+                                        </td>
+                                        <td className="p-2 text-center">
+                                            {airport.area}{" "}
+                                            {airport.area_unit_name}
+                                        </td>
                                         <td className="p-2 text-center">
                                             <StatusBadge
                                                 status={
-                                                    item.is_blocked
-                                                        ? "blocked"
-                                                        : "active"
+                                                    airport.status_id === 1
+                                                        ? "active"
+                                                        : "blocked"
                                                 }
-                                            ></StatusBadge>
-                                            {}
+                                            />
                                         </td>
-
                                         <td className="p-2 text-center">
                                             <ThreeDotMenu>
-                                                <div
-                                                    className="py-1"
-                                                    role="menu"
-                                                    aria-orientation="vertical"
-                                                    aria-labelledby="options-menu"
-                                                >
-                                                    {/* Confirm button */}
+                                                <div className="py-1">
                                                     <button
-                                                        className="flex items-center w-full  text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                         onClick={() =>
                                                             verification(
-                                                                "terminal",
-                                                                item.id
+                                                                "airport",
+                                                                airport.id,
                                                             )
                                                         }
-                                                        disabled={loading}
                                                     >
-                                                        <span className="ml-2 text-xl">
-                                                            <Verified />
-                                                        </span>
-                                                        {t('approve')}
+                                                        <Verified className="ml-2 text-xl" />
+                                                        {t("approve")}
                                                     </button>
 
-                                                    {/* Edit button */}
-
-                                                    <Link href={route('user.edit',{"id":item.id})} className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                        <span className="ml-2 text-xl">
-                                                            <Edit2 />{" "}
-                                                            {/* View icon */}
-                                                        </span>
-                                                        {t('editInfo')}
+                                                    <Link
+                                                        href={route(
+                                                            "airport.edit",
+                                                            { id: airport.id },
+                                                        )}
+                                                        className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    >
+                                                        <Edit2 className="ml-2 text-xl" />
+                                                        {t("editInfo")}
                                                     </Link>
                                                 </div>
                                             </ThreeDotMenu>

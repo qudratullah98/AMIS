@@ -1,10 +1,30 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Airport extends Model
 {
+     
+      protected $fillable = [
+        'name_ps',        
+        'name_dr',        
+        'name_en',        
+        'IATA_code',      
+        'ICAO_code',     
+        'type',          
+        'status_id',      
+        'province_id',   
+        'district_id',   
+        'latitude',       
+        'longitude',     
+        'amsl',           
+        'amsl_unit_id',    
+        'area',            
+        'area_unit_id',   
+        'description',     
+    ];
     // Relationship to Province
     public function province()
     {
@@ -51,5 +71,13 @@ class Airport extends Model
     public function user()
     {
         return $this->hasMany(User::class);
+    }
+
+
+     public function scopeSearch(Builder $query, ?string $search): Builder
+    {
+        return $query->when($search, function ($query, $search) {
+            $query->where('name_ps', 'LIKE', '%' . $search . '%');
+        });
     }
 }
