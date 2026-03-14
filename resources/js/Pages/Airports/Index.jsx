@@ -12,7 +12,7 @@ import CreateAndEdit from "./CreateAndEdit";
 
 function AirportsIndex({ airports }) {
     const { t } = useTranslation();
-    const airportData = airports?.data || [];
+    const [airportData,setAirportsData] = useState(airports?.data || []);
     const paginationLinks = airports?.links || [];
 
     const columns = [
@@ -46,8 +46,14 @@ function AirportsIndex({ airports }) {
                     title="My Modal"
                     size="large"
                     stopPropagation={false}
-                >
-                    <CreateAndEdit></CreateAndEdit>
+                    footer={false}
+                ><CreateAndEdit
+    onSubmitSuccess={(airport) => {
+        // Example: add new airport to list
+        setAirportsData((prev) => [airport, ...prev]);
+        setCreateModel(false);
+    }}
+/>
                 </CustomModal>
             )}
             <div className="py-12">
@@ -91,10 +97,10 @@ function AirportsIndex({ airports }) {
                                             {t(airport.type)}
                                         </td>
                                         <td className="p-2 text-center">
-                                            {airport.province.province}
+                                            {airport?.province?.province}
                                         </td>
                                         <td className="p-2 text-center">
-                                            {airport.district.district_dr}
+                                            {airport?.district?.district_dr}
                                         </td>
                                         <td className="p-2 text-center">
                                             {airport.amsl}{" "}
@@ -130,10 +136,7 @@ function AirportsIndex({ airports }) {
                                                     </button>
 
                                                     <Link
-                                                        href={route(
-                                                            "airport.edit",
-                                                            { id: airport.id },
-                                                        )}
+                                                        
                                                         className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                     >
                                                         <Edit2 className="ml-2 text-xl" />
