@@ -5,7 +5,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { EarthIcon, Eye, EyeOff,Loader} from "lucide-react";
+import { EarthIcon, Eye, EyeOff, Loader } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -35,21 +35,26 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Log in" />
 
             {/* Language switcher at top right */}
-            <div className="flex justify-end mb-2" dir={i18n.language === 'en' ? 'rtl' : 'ltr'}>
+            <div
+                className="flex justify-end mb-2"
+                dir={i18n.language === "en" ? "rtl" : "ltr"}
+            >
                 <button
                     onClick={toggleLanguage}
                     className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-indigo-700 bg-sky-200 hover:bg-indigo-200 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700 rounded-full transition-all duration-200"
                 >
                     <EarthIcon size={16} />
                     <span>
-                        {i18n.language === "dr" ? t("pashto") : t("persion")}
+                        {i18n.language === "dr" ? t("pashto") : t("dari")}
                     </span>
                 </button>
             </div>
 
             <div className="text-center mb-6">
                 {/* <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t('loginToYourAcount')}</p>  */}
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{t('welcomBack')}</h2>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                    {t("amis")}
+                </h2>
             </div>
 
             {status && (
@@ -60,7 +65,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit} className="space-y-2">
                 <div>
-                    <InputLabel htmlFor="email" value={t("email")} />
+                    <InputLabel htmlFor="email" value={t("login.email")} />
 
                     <TextInput
                         id="email"
@@ -71,14 +76,17 @@ export default function Login({ status, canResetPassword }) {
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData("email", e.target.value)}
-                        placeholder={t("enterEmailHere")}
+                        placeholder={t("login.enterEmail")}
                     />
 
                     <InputError message={t(errors.email)} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value={t("password")} />
+                    <InputLabel
+                        htmlFor="password"
+                        value={t("login.password")}
+                    />
 
                     <div className="relative">
                         <TextInput
@@ -91,7 +99,7 @@ export default function Login({ status, canResetPassword }) {
                             onChange={(e) =>
                                 setData("password", e.target.value)
                             }
-                            placeholder={t("enterPasswordHere")}
+                            placeholder={t("login.enterPassword")}
                         />
                         <button
                             type="button"
@@ -120,7 +128,7 @@ export default function Login({ status, canResetPassword }) {
                             }
                         />
                         <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
-                            {t("rememberMe")}
+                            {t("login.rememberMe")}
                         </span>
                     </label>
 
@@ -129,7 +137,7 @@ export default function Login({ status, canResetPassword }) {
                             href={route("password.request")}
                             className="text-sm text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                         >
-                            {t("forgotPassword")}
+                            {t("login.forgotPassword")}
                         </Link>
                     )}
                 </div>
@@ -141,7 +149,7 @@ export default function Login({ status, canResetPassword }) {
                         {processing && (
                             <Loader className="animate-spin" size={16} />
                         )}
-                        {processing ? t("loading") : t("login")}
+                        {processing ? t("common.loading") : t("login.enter")}
                     </PrimaryButton>
                 </div>
 

@@ -1,8 +1,134 @@
 // src/locales/pashto.js
 const pashto = {
-    welcomeMessage:
-        "د هوایي ډګرونو د مدیریت سیستم ته ښه راغلاست",
-   
+    amis: "د هوایي ډګرونو د مدیریت سیستم",
+
+    dari: "دري",
+    pashto: "پښتو",
+
+    login: {
+        email: "برېښنالیک",
+        enterEmail: "خپل برېښنالیک دلته دننه کړئ",
+        password: "پټنوم",
+        enterPassword: "خپل پټنوم دننه کړئ",
+        rememberMe: "ما په یاد وساته",
+        forgotPassword: "پټنوم مو هېر کړی؟",
+        enter: "سیستم ته ننوتل",
+    },
+
+    emailIsNeeded: "برېښنالیک اړین دی",
+    emailIsInvalid: "برېښنالیک سم نه دی",
+    passwordIsNeeded: "پټنوم اړین دی",
+    credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
+
+    common: {
+        dashboard: "ډشبورډ",
+        loading: "مهرباني وکړئ لږ صبر وکړئ...",
+        name: "نوم",
+        namePashto: "نوم (پښتو)",
+        nameDari: "نوم (دري)",
+        nameEnglish: "نوم (انګلیسي)",
+        province: "ولایت",
+        district: "ولسوالي",
+        selectProvince: "ولایت وټاکئ",
+        selectDistrict: "ولسوالي وټاکئ",
+        activityStatus: "فعالیت حالت",
+        approvalStatus: "د تایید حالت",
+        action: "عمل",
+        approve: "تایید",
+        disApprove: "ردول",
+        NO: "نمبر",
+        date: "نېټه",
+        time: "وخت",
+        edit: "سمول",
+        editInfo: "معلومات سمول",
+        updating: "اوسمهال تازه کېږي...",
+        saveChanges: "بدلونونه خوندي کړئ",
+        add: "اضافه کول",
+        storInfo: "معلومات خوندي کول",
+        storingInfo: "معلومات خوندي کېږي...",
+        next: "بل",
+        previous: "مخکینی",
+        descriptions: "تشریحات",
+        search: "لټون",
+        searching: "لټون روان دی...",
+        delete: "حذف",
+        clear: "پاکول",
+        goBack: "بېرته لاړ شئ",
+        type: "ډول",
+    },
+
+    measurement: {
+        area: "ساحه",
+        meter: "متر",
+        kilometer: "کیلومتر",
+        squareMeter: "مربع متر",
+        hectare: "هکتار",
+        kilogram: "کیلوګرام",
+        gram: "ګرام",
+        liter: "لیتر",
+        ton: "ټن",
+        foot: "فټ",
+        mile: "مایل",
+    },
+
+    airport: {
+        airport: "هوایي ډګر",
+        airports: "هوایي ډګرونه",
+        addNewAirport: "نوی هوایي ډګر اضافه کړئ",
+        airportInfo: "د هوایي ډګر معلومات",
+        airportCode: "د هوایي ډګر کوډ",
+        runwayLength: "د رنوې اوږدوالی",
+        runwayWidth: "د رنوې پلنوالی",
+        airportType: "د هوایي ډګر ډول",
+    },
+
+    flight: {
+        flight: "الوتنه",
+        flights: "الوتنې",
+        flightNumber: "د الوتنې نمبر",
+        airline: "هوايي شرکت",
+        departure: "روانېدل",
+        arrival: "رسېدل",
+        departureTime: "د روانېدو وخت",
+        arrivalTime: "د رسېدو وخت",
+        origin: "مبدا",
+        destination: "مقصد",
+    },
+
+    passenger: {
+        passenger: "مسافر",
+        passengers: "مسافرین",
+        passportNumber: "د پاسپورټ نمبر",
+        nationality: "تابعیت",
+        gender: "جنس",
+        male: "نارینه",
+        female: "ښځینه",
+    },
+
+    airline: {
+        airline: "هوايي شرکت",
+        airlines: "هوايي شرکتونه",
+        airlineName: "د هوايي شرکت نوم",
+        country: "هیواد",
+    },
+
+    report: {
+        reports: "راپورونه",
+        dailyReport: "ورځنی راپور",
+        monthlyReport: "میاشتنی راپور",
+        yearlyReport: "کلنی راپور",
+        generateReport: "راپور جوړول",
+    },
+
+    user: {
+        users: "کاروونکي",
+        addUser: "نوی کاروونکی اضافه کړئ",
+        username: "کارن نوم",
+        email: "برېښنالیک",
+        password: "پټنوم",
+        role: "رول",
+        permissions: "اجازې",
+    },
 };
 
 export default pashto;
