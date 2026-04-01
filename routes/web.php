@@ -21,7 +21,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
     // return redirect('/setting');
 
-})->middleware(['auth', 'verified' , 'blocked'])->name('dashboard');
+})->middleware(['auth', 'verified', 'blocked'])->name('dashboard');
 
 Route::middleware(['auth', 'blocked'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,11 +31,13 @@ Route::middleware(['auth', 'blocked'])->group(function () {
     // Users
     Route::get('user/layout', [UserController::class, 'layout'])
         ->middleware('can:viewUsers')->name('user.UserLayout');
+
     Route::get('users', [UserController::class, 'index'])->middleware('can:viewUsers')->name('user.index');
-    Route::get('user/create', [UserController::class, 'create'])
+
+    Route::get('users/create', [UserController::class, 'create'])
         ->middleware('can:manageUsers')->name('user.create');
 
-    Route::get('user/{id}/edit', [UserController::class, 'Edit'])
+    Route::get('users/{id}/edit', [UserController::class, 'Edit'])
         ->middleware('can:manageUsers')->name('user.edit');
 
     Route::post('user', [UserController::class, 'store'])
@@ -53,7 +55,7 @@ Route::middleware(['auth', 'blocked'])->group(function () {
         ->middleware('can:manageUsers')->name('role.store');
     Route::post('role/update', [RoleController::class, 'update'])
         ->middleware('can:manageUsers')->name('role.update');
-    Route::get('role/{roleId}', [RoleController::class, 'Edit'])
+    Route::get('roles/{roleId}', [RoleController::class, 'Edit'])
         ->middleware('can:manageUsers')->name('role.edit');
 });
 

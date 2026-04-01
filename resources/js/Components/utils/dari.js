@@ -15,11 +15,6 @@ const dari = {
         enter: "ورود به سیستم",
     },
 
-    emailIsNeeded: "ایمیل ضروری است",
-    emailIsInvalid: "ایمیل معتبر نیست",
-    passwordIsNeeded: "رمز عبور ضروری است",
-    credentialInvalid: "ایمیل یا رمز عبور نادرست است",
-
     common: {
         dashboard: "داشبورد",
         loading: "لطفاً صبر کنید...",
@@ -31,11 +26,8 @@ const dari = {
         district: "ولسوالی",
         selectProvince: "ولایت را انتخاب کنید",
         selectDistrict: "ولسوالی را انتخاب کنید",
-        activityStatus: "وضعیت فعالیت",
-        approvalStatus: "وضعیت تأیید",
+
         action: "عملیات",
-        approve: "تأیید",
-        disApprove: "رد",
         NO: "شماره",
         date: "تاریخ",
         time: "زمان",
@@ -55,6 +47,73 @@ const dari = {
         clear: "پاک کردن",
         goBack: "بازگشت",
         type: "نوع",
+        image: "عکس",
+        log: "لاگ",
+        profile: "پروفایل",
+        isBlocked: "آیا مسدود شده",
+        inoformationtStoredSuccessfully: "معلومات موفقانه ذخیره ګردید",
+        inoformationtUpdatedSuccessfully: "معلومات موفقانه تغییر ګردید",
+    },
+
+    input: {
+        enterName: "نام را وارد کنید",
+        enterUserEmail: "ایمیل کاربر را وارد کنید",
+        enterUserPassword: "رمز عبور را وارد کنید",
+        enterPasswordConfirmation: "تایید رمز عبور را وارد کنید",
+        enterPositionTitle: "عنوان وظیفه را وارد کنید",
+        enterRoleName: "اسم صلاحیت را اینجا وارد کنید",
+
+        selectRole: "صلاحیت را انتخاب کنید",
+        selectAirport: "میدان هوایی را انتخاب کنید",
+        selectGeneralBranch: "دیپارتمنت عمومی را انتخاب کنید",
+        selectFile: "فایل را انتخاب کنید",
+        selectActivityState: "حالت فعالیت را انتخاب نمایید",
+    },
+
+    error: {
+        general:
+            "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
+        credentialInvalid: "ایمیل یا رمز عبور نادرست است",
+
+        nameIsNeeded: "اسم ضروری میباشد",
+        emailIsNeeded: "ایمیل ضروری است",
+        emailIsInvalid: "ایمیل معتبر نیست",
+        emailAlreadyExists: "این ایمیل قبلاً ثبت شده است",
+
+        passwordIsNeeded: "رمز عبور ضروری است",
+        passwordTooShort: "رمز عبور خیلی کوتاه است",
+        passwordNotMatch: "رمز عبور مطابقت ندارد",
+
+        nameAlreadyExists: "این اسم قبلا ثبت شده",
+        permissionIsNeeded: "انتخاب اجازه ضروری میباشد",
+        permissionBeList: "لیست اجازه ها باید معتبر باشد.",
+
+        roleIsNeeded: "انتخاب صلاحیت ضروری است",
+        roleInvalid: "صلاحیت نامعتبر است",
+        roleNotFound: "صلاحیت یافت نشد",
+
+        airportIsNeeded: " انتخاب میدان هوایی ضروری است",
+        airportInvalid: "میدان هوایی نامعتبر است",
+
+        generalDepartmentInvalid: "دیپارتمنت عمومی نامعتبر است",
+
+        positionTitleIsNeeded: "عنوان وظیفه ضروری است",
+    },
+
+    state: {
+
+        approve: "تأیید کردن",
+        disApprove: "رد کردن",
+        active: "فعال",
+        blocked: "مسدود شده",
+        notBlocked: "مسدود نشده",
+        approved: "تایید شده",
+        notApproved: "تایید نشده",
+        disApproved: "رد شده",
+        deActive: "غیرفعال",
+        expired: "منقضی شده",
+        activityStatus: "وضعیت فعالیت",
+        approvalStatus: "وضعیت تأیید",
     },
 
     measurement: {
@@ -72,14 +131,24 @@ const dari = {
     },
 
     airport: {
+        airportList: "لیست میادین هوایی",
         airport: "میدان هوایی",
-        airports: "میدان‌های هوایی",
+        airports: "میادین هوایی",
         addNewAirport: "افزودن میدان هوایی جدید",
+        addingNewAirport:"اضافه نمودن میدان هوایی جدید",
         airportInfo: "معلومات میدان هوایی",
         airportCode: "کود میدان هوایی",
         runwayLength: "طول باند",
         runwayWidth: "عرض باند",
-        airportType: "نوع میدان هوایی",
+        airportType: "نوعیت میدان هوایی",
+        type: {
+            international: "بین‌المللی",
+            domestic: "داخلی",
+            military: "نظامی",
+            cargo: "باربری",
+            regional: "منطقوی",
+            private: "شخصی",
+        },
     },
 
     flight: {
@@ -121,13 +190,27 @@ const dari = {
     },
 
     user: {
+        list: "لیست کارمندان",
         users: "کاربران",
         addUser: "افزودن کاربر جدید",
         username: "نام کاربری",
         email: "ایمیل",
         password: "رمز عبور",
-        role: "نقش",
+        role: "صلاحیت",
+        roles: "صلاحیت ها",
+        addNewRole: "اضافه نمودن صلاحیت جدید",
+
         permissions: "اجازه‌ها",
+
+        permissionsList: "لیست اجازه ها",
+        searchByRoleName: "به اساس نام صلاحیت جستجو نمایید",
+
+        positionTitle: "عنوان بست",
+        generalDepartment: "دیپارتمنت عمومی",
+
+        confirmPassword: "تأیید رمز عبور",
+        addingNewUser: "افزودن کاربر جدید",
+        reset: "تنظیم مجدد",
     },
 };
 

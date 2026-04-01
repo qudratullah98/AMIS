@@ -1,18 +1,25 @@
 import React from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import GoBackButton from "./GoBackButton";
+import { useTranslation } from "react-i18next";
 
-function SubHeader({ title }) {
+function SubHeader({ links = [] }) {
+    const { t } = useTranslation();
+
+    // ✅ Default link
+    const defaultLink = {
+        name: t("common.dashboard"),
+        href: "/",
+    };
+
+    // ✅ Merge default with incoming links
+    const finalLinks = [defaultLink, ...links];
+
     return (
-        <div className="flex items-center justify-between mx-3 my-4 p-3 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+        <div className="flex items-center justify-between mx-0 my-0 pb-2">
             {/* Left: Breadcrumbs */}
             <div className="flex items-center gap-3">
-                <Breadcrumbs
-                    links={[
-                        { name: "صفحه اصلی", href: "/setting" },
-                        { name: title },
-                    ]}
-                />
+                <Breadcrumbs links={finalLinks} />
             </div>
 
             {/* Right: Go Back Button */}

@@ -79,7 +79,7 @@ export default function Login({ status, canResetPassword }) {
                         placeholder={t("login.enterEmail")}
                     />
 
-                    <InputError message={t(errors.email)} className="mt-2" />
+                    <InputError message={errors.email ? t(`error.${errors.email}`) : ""} className="mt-2" />
                 </div>
 
                 <div>
@@ -115,7 +115,7 @@ export default function Login({ status, canResetPassword }) {
                         </button>
                     </div>
 
-                    <InputError message={t(errors.password)} className="mt-2" />
+                    <InputError message={errors.password ? t(`error.${errors.password}`) : ""} className="mt-2" />
                 </div>
 
                 <div className="flex items-center justify-between">

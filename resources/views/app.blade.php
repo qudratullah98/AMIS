@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'د ټرانسپورټي وسائطو د احصایې او عوائدو سیستم') }}</title>
+    <title inertia>{{ config('app.name', 'د هوایي ډګرونو د مدیریت سیستم') }}</title>
     <link rel="icon" type="image/png" href="/images/logo.jpeg">
 
     <!-- Fonts -->

@@ -15,11 +15,6 @@ const pashto = {
         enter: "سیستم ته ننوتل",
     },
 
-    emailIsNeeded: "برېښنالیک اړین دی",
-    emailIsInvalid: "برېښنالیک سم نه دی",
-    passwordIsNeeded: "پټنوم اړین دی",
-    credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
-
     common: {
         dashboard: "ډشبورډ",
         loading: "مهرباني وکړئ لږ صبر وکړئ...",
@@ -31,30 +26,96 @@ const pashto = {
         district: "ولسوالي",
         selectProvince: "ولایت وټاکئ",
         selectDistrict: "ولسوالي وټاکئ",
-        activityStatus: "فعالیت حالت",
-        approvalStatus: "د تایید حالت",
-        action: "عمل",
-        approve: "تایید",
-        disApprove: "ردول",
-        NO: "نمبر",
+        action: "عملیات",
+
+        NO: "شمیره",
         date: "نېټه",
         time: "وخت",
         edit: "سمول",
         editInfo: "معلومات سمول",
-        updating: "اوسمهال تازه کېږي...",
-        saveChanges: "بدلونونه خوندي کړئ",
+        updating: "د معلوماتو تازه کول...",
+        saveChanges: "بدلونونه خوندي کول",
         add: "اضافه کول",
-        storInfo: "معلومات خوندي کول",
+        storInfo: "معلومات ثبتول",
         storingInfo: "معلومات خوندي کېږي...",
-        next: "بل",
+        next: "وروستنی",
         previous: "مخکینی",
         descriptions: "تشریحات",
         search: "لټون",
         searching: "لټون روان دی...",
         delete: "حذف",
         clear: "پاکول",
-        goBack: "بېرته لاړ شئ",
+        goBack: "شاته تګ",
         type: "ډول",
+        image: "انځور",
+        log: "لاګ",
+        profile: "پروفایل",
+        isBlocked: "آیا بند شوی",
+        inoformationtStoredSuccessfully: "معلومات په بریالیتوب سره ثبت شول",
+        inoformationtUpdatedSuccessfully: "معلومات په بریالیتوب سره بدل شول",
+    },
+
+    input: {
+        enterName: "نوم دننه کړئ",
+        enterUserEmail: "د کارونکي ایمیل دننه کړئ",
+        enterUserPassword: "پټنوم دننه کړئ",
+        enterPasswordConfirmation: "د پټنوم تایید دننه کړئ",
+        enterPositionTitle: "د دندې سرلیک دننه کړئ",
+        enterRoleName: "د صلاحیت نوم دلته دننه کړئ",
+
+        selectRole: "صلاحیت وټاکئ",
+        selectAirport: "هوایي ډګر وټاکئ",
+        selectGeneralBranch: "عمومي څانګه وټاکئ",
+        selectFile: "فایل وټاکئ",
+        selectActivityState: "د فعالیت حالت وټاکئ",
+    },
+
+    error: {
+        general:
+            "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
+
+        credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
+
+        nameIsNeeded: "نوم اړین دی",
+        emailIsNeeded: "برېښنالیک اړین دی",
+        emailIsInvalid: "برېښنالیک سم نه دی",
+        emailAlreadyExists: "دا برېښنالیک مخکې ثبت شوی",
+
+        passwordIsNeeded: "پټنوم اړین دی",
+        passwordTooShort: "پټنوم ډېر لنډ دی",
+        passwordNotMatch: "پټنوم سره برابر نه دی",
+
+        roleIsNeeded: "صلاحیت ټاکل اړین دی",
+        roleInvalid: "صلاحیت ناسم دی",
+        roleNotFound: "صلاحیت ونه موندل شو",
+
+        nameAlreadyExists: "دا نوم مخکې ثبت شوی",
+        permissionIsNeeded: "اجازې ټاکل اړین دي",
+        permissionBeList: "اجازې باید یو باوري لیست وي.",
+
+        airportIsNeeded: "هوایي ډګر ټاکل اړین دی",
+        airportInvalid: "هوایي ډګر ناسم دی",
+
+        generalDepartmentInvalid: "عمومي څانګه ناسمه دی",
+
+        positionTitleIsNeeded: "د دندې سرلیک اړین دی",
+    },
+
+    state: {
+        approve: "منل",
+        disApprove: "ردول",
+
+        active: "فعال",
+        blocked: "بند شوی",
+        notBlocked: "ندی بند شوی",
+        approved: "منل شوی",
+        notApproved: "ندی منل شوی ",
+        disApproved: "رد شوی",
+        deActive: "غیرفعال",
+        expired: "موده پای ته رسېدلې",
+
+        activityStatus: "فعالیت حالت",
+        approvalStatus: "د تایید حالت",
     },
 
     measurement: {
@@ -72,14 +133,25 @@ const pashto = {
     },
 
     airport: {
+        airportList: "د هواي ډګرونو لیست",
         airport: "هوایي ډګر",
         airports: "هوایي ډګرونه",
         addNewAirport: "نوی هوایي ډګر اضافه کړئ",
+        addingNewAirport:"د نوي هوایي دګر اضافه کول",
         airportInfo: "د هوایي ډګر معلومات",
         airportCode: "د هوایي ډګر کوډ",
         runwayLength: "د رنوې اوږدوالی",
         runwayWidth: "د رنوې پلنوالی",
-        airportType: "د هوایي ډګر ډول",
+        airportType: " هوایي ډګر ډول",
+
+        type: {
+            international: "نړیوال",
+            domestic: "کورنی",
+            military: "پوځي",
+            cargo: "باربري",
+            regional: "سیمه‌ییز",
+            private: "شخصي",
+        },
     },
 
     flight: {
@@ -121,13 +193,25 @@ const pashto = {
     },
 
     user: {
+        list: "د کاروونکو لیست",
         users: "کاروونکي",
         addUser: "نوی کاروونکی اضافه کړئ",
         username: "کارن نوم",
         email: "برېښنالیک",
         password: "پټنوم",
-        role: "رول",
+        role: "صلاحیت",
+        roles: "صلاحیتونه",
+        addNewRole: "د نوي صلاحیت زیاتول",
+
         permissions: "اجازې",
+        permissionsList: "د اجازو لیست",
+        searchByRoleName: "د صلاحیت په نوم سره لټون وکړئ",
+        positionTitle: "د بست عنوان",
+        generalDepartment: "عمومي څانګه",
+
+        confirmPassword: "د پټنوم تایید",
+        addingNewUser: "د نوي کاروونکي زیاتول",
+        reset: "بیا تنظیمول",
     },
 };
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAirportRequest;
@@ -11,9 +10,9 @@ class AirportsController extends Controller
 {
     public function index()
     {
-        $search = request()->input('query');
-        $perPage = request()->input('perPage', 10);
-        $airports = Airport::with(['province:id,province', 'district:id,district_dr'])->when($search, function ($query, $search) {
+        $search   = request()->input('query');
+        $perPage  = request()->input('perPage', 10);
+        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->when($search, function ($query, $search) {
             return $query->search($search);
         })->latest()->paginate($perPage);
         return Inertia::render('Airports/Index', ['airports' => $airports]);

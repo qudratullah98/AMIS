@@ -63,21 +63,21 @@ function TableSearchInput({ searchPlaceHolder }) {
                 type="text"
                 value={searchTerm}
                 onChange={handleChange}
-                placeholder={searchPlaceHolder || t("search")}
+                placeholder={searchPlaceHolder || t("common.search")}
                 ref={inputRef}
                 autoComplete="off"
                 className="
-                    h-7 px-3 pr-7
-                    rounded-full
+                     py-3 px-5
+                    rounded-lg
                     border border-gray-200/60
                     bg-white/70 backdrop-blur-md
-                    text-xs text-gray-700
+                    text-sm text-gray-600
                     placeholder:text-gray-400
-                    hover:border-indigo-300/60
-                    focus:border-indigo-400
-                    focus:ring-2 focus:ring-indigo-400/20
+                    hover:border-gray-200
+                    focus:border-gray-200
+                    focus:ring-1 focus:ring-gray-100
                     outline-none
-                    transition-all duration-200
+                    transition-all duration-200 ease-in-out
                 "
             />
 

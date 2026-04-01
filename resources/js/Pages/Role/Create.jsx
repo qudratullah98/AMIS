@@ -6,93 +6,104 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import SubHeader from "@/Components/SubHeader";
 import PrimaryButton from "@/Components/PrimaryButton";
 import toast from "react-hot-toast";
-import CreateHeader from "@/Components/CreateHeader";
 import { useTranslation } from "react-i18next";
-
-  
+import { ListRestart, Loader } from "lucide-react";
 
 function CreateRole({ permission }) {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
+
     const [selectedPermissions, setSelectedPermissions] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const { data, setData, post, reset, errors, processing } = useForm({
-        name: "", 
+        name: "",
         permissions: selectedPermissions,
     });
 
-const  handleSelect=(data) => {
-        // Check if the permission is already selected
-        if (!selectedPermissions.includes(data)) {
-            // Update the permissions in the form data
-            setData("permissions", [...selectedPermissions, data]);
-            // Update the selected permissions state
-            setSelectedPermissions([...selectedPermissions, data]);
+    const handleSelect = (id) => {
+        if (!selectedPermissions.includes(id)) {
+            const updated = [...selectedPermissions, id];
+            setSelectedPermissions(updated);
+            setData("permissions", updated);
         } else {
-            // If already selected, remove it from the list
-            const updatedPermissions = selectedPermissions.filter((perm) => perm !== data);
-            setData("permissions", updatedPermissions);
-            setSelectedPermissions(updatedPermissions);
+            const updated = selectedPermissions.filter((perm) => perm !== id);
+            setSelectedPermissions(updated);
+            setData("permissions", updated);
         }
-    }
-      
-    
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("role.store"), {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Role created successfully");
+                toast.success(t("common.inoformationtStoredSuccessfully"));
                 reset();
+                setSelectedPermissions([]);
+                setSearchTerm("");
             },
-            onError: (error) => {
-                toast.error("Something went wrong! Please check your input fields.");
+            onError: () => {
+                toast.error(t("error.general"));
             },
         });
     };
-   
 
     return (
-        <AuthenticatedLayout header={<SubHeader title="صلاحیت جدید" />}>
-           <main className="flex-grow w-full max-w-3xl py-8 mx-auto sm:px-6 lg:px-8">
-    <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
-        <CreateHeader title={t('addNewRole')} />
-        <form
-            onSubmit={handleSubmit}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-        >
-            {/* Role Form */}
-            <div className="col-span-1">
-                <RoleForm data={data} setData={setData} errors={errors} />
-            </div>
+        <AuthenticatedLayout header={<SubHeader title="نوی صلاحیت" />}>
+            <SubHeader
+                links={[
+                    { name: t("user.roles"), href:"/user/roles" },
+                    { name: t("user.addNewRole") },
+                ]}
+            />
 
-            {/* Permissions Form */}
-            <div className="col-span-1">
-                <PermissionsForm
-                    permissions={permission}
-                    selectedPermissions={selectedPermissions}
-                    setSelectedPermissions={(data)=>{handleSelect(data)}}
-                    errors={errors}
-                />
-            </div>
+            <div className="bg-white p-6 rounded-lg ">
+                <form onSubmit={handleSubmit} className="space-y-2">
+                    {/* First row: Role input */}
+                    <RoleForm data={data} setData={setData} errors={errors} />
 
-            {/* Buttons */}
-            <div className="flex space-x-4 col-span-2 mt-6">
-                <PrimaryButton
-                    className="mx-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-200"
-                    disabled={processing}
-                >
-                    Store
-                </PrimaryButton>
-                <button
-                    type="button"
-                    className="mx-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded transition duration-200"
-                    onClick={() => reset()}
-                >
-                    Reset
-                </button>
+                    {/* Second row: Permissions */}
+                    <PermissionsForm
+                        permissions={permission}
+                        selectedPermissions={selectedPermissions}
+                        setSelectedPermissions={handleSelect}
+                        errors={errors}
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                    />
+
+                    {/* Buttons */}
+                    <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                reset();
+                                setSelectedPermissions([]);
+                                setSearchTerm("");
+                            }}
+                            className="w-52 px-5 py-2.5 rounded-lg bg-gray-100 text-primary-color-dark border border-gray-200 hover:bg-gray-200 transition-all duration-500 flex items-center justify-center gap-2"
+                        >
+                            <ListRestart size={16} />
+                            {t("user.reset")}
+                        </button>
+
+                        <PrimaryButton
+                            disabled={processing}
+                            className="w-52 px-5 py-2.5 rounded-lg bg-gray-100 text-primary-color-dark border border-gray-200 hover:bg-gray-200 transition-all duration-500 flex items-center justify-center gap-2"
+                        >
+                            {processing && (
+                                <Loader className="animate-spin" size={16} />
+                            )}
+
+                            <span>
+                                {processing
+                                    ? t("common.storingInfo")
+                                    : t("common.storInfo")}
+                            </span>
+                        </PrimaryButton>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</main>
         </AuthenticatedLayout>
     );
 }

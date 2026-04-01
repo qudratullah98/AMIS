@@ -6,8 +6,7 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
 import i18n from "./Components/utils/i18";
 
-const appName =
-    import.meta.env.VITE_APP_NAME || "سیستم مدیریت ترمینال باربری حیرتان";
+const appName = import.meta.env.VITE_APP_NAME || "د هوایي ډګرونو د مدیریت سیستم";
 
 // ✅ Inject custom styles for NProgress bar
 const style = document.createElement("style");
@@ -31,7 +30,7 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 createInertiaApp({
-    title: () => "سیستم مدیریت ترمینل باربری حیرتان",
+    title: () => "د هوایي ډګرونو د مدیریت سیستم",
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.jsx`,

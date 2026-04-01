@@ -10,6 +10,8 @@ import {
     ChevronRight,
     ChevronDown,
     ChevronRight as ChevronRightIcon,
+    Languages as EarthIcon,
+    Plane,
 } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
@@ -22,9 +24,10 @@ const Sidebar = () => {
     const [openItems, setOpenItems] = useState({});
     const [collapsed, setCollapsed] = useState(false);
     const [hoveredItem, setHoveredItem] = useState(null);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { permissions } = usePage().props.auth;
     const currentPath = window.location.pathname;
+
     // Auto collapse on small screens
     useEffect(() => {
         const handleResize = () => {
@@ -32,11 +35,14 @@ const Sidebar = () => {
                 setCollapsed(true);
             }
         };
-
         handleResize();
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        document.documentElement.dir = i18n.language === "pa" ? "rtl" : "ltr";
+    }, [i18n.language]);
 
     const toggleSubMenu = (keyword, e) => {
         e.preventDefault();
@@ -47,15 +53,15 @@ const Sidebar = () => {
     const links = [
         {
             href: "/dashboard",
-            label: t("dashboard"),
+            label: t("common.dashboard"),
             icon: <ChartColumnBig className="w-5 h-5" />,
             keyword: "dashboard",
             can: permissions.includes("viewDashboardMenu"),
         },
         {
-            href:route("airports.index"),
-            label: t("airports"),
-            icon: <Package className="w-5 h-5" />,
+            href: route("airports.index"),
+            label: t("airport.airports"),
+            icon: <Plane className="w-5 h-5" />,
             keyword: "airport",
             can: permissions.includes("viewAirportMenu") || true,
         },
@@ -64,7 +70,7 @@ const Sidebar = () => {
             label: t("setting"),
             icon: <Settings2 className="w-5 h-5" />,
             keyword: "setting",
-            can: permissions.includes("viewDashboardMenu")|| true,
+            can: permissions.includes("viewDashboardMenu") || true,
             subItems: [
                 {
                     href: "",
@@ -72,27 +78,25 @@ const Sidebar = () => {
                     icon: <Users className="w-4 h-4" />,
                     keyword: "",
                 },
-             
             ],
         },
-
         {
             href: "/users",
-            label: t("users"),
+            label: t("user.users"),
             icon: <Users className="w-5 h-5" />,
             keyword: "user",
             can: permissions.includes("viewUserMenu") || true,
         },
         {
             href: "/log",
-            label: t("log"),
+            label: t("common.log"),
             icon: <History className="w-5 h-5" />,
             keyword: "log",
             can: permissions.includes("viewLogMenu"),
         },
         {
             href: "/profile",
-            label: t("profile"),
+            label: t("common.profile"),
             icon: <UserMinusIcon className="w-5 h-5" />,
             keyword: "profile",
             can: true,
@@ -105,24 +109,24 @@ const Sidebar = () => {
 
     return (
         <div
-            className={`h-screen bg-white dark:bg-gray-900  flex flex-col transition-all duration-500 ease-in-out  border-r border-gray-200 dark:border-gray-800 ${
+            className={`h-screen bg-white dark:bg-gray-900 flex flex-col transition-all duration-500 ease-in-out border-r border-gray-200 dark:border-gray-800 shadow-md ${
                 collapsed ? "w-20" : "w-64"
             }`}
         >
             {/* Header */}
-            <div className="relative flex items-center py-6  border-gray-200 dark:border-gray-800">
-                {/* Centered Logo */}
+            <div className="relative flex items-center py-6 border-gray-200 dark:border-gray-800">
                 <div className="absolute left-1/2 -translate-x-1/2 transform transition-all duration-500 ease-in-out">
                     <Link href="/" className="hover:cursor-pointer">
                         <ApplicationLogo
-                            className={`h-auto transition-all duration-500
-          ${collapsed ? "w-10 opacity-90" : "w-20 opacity-100"}
-        `}
+                            className={`h-auto transition-all duration-500 ${
+                                collapsed
+                                    ? "w-10 opacity-90"
+                                    : "w-20 opacity-100"
+                            }`}
                         />
                     </Link>
                 </div>
 
-                {/* Collapse Button — RIGHT */}
                 <button
                     onClick={() => setCollapsed(!collapsed)}
                     className="mr-auto z-10 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
@@ -140,7 +144,7 @@ const Sidebar = () => {
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 overflow-y-auto overflow-x-hidden py-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
+            <nav className="flex-1 overflow-y-auto overflow-x-hidden py-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 ">
                 {links.map((link) => {
                     if (!link.can) return null;
 
@@ -151,9 +155,8 @@ const Sidebar = () => {
 
                     return (
                         <div key={link.keyword} className="relative">
-                            {/* Main menu item */}
                             <div
-                                className={`relative group`}
+                                className="relative group"
                                 onMouseEnter={() =>
                                     setHoveredItem(link.keyword)
                                 }
@@ -181,7 +184,6 @@ const Sidebar = () => {
                                         {link.icon}
                                     </span>
 
-                                    {/* Label with transition */}
                                     <span
                                         className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${
                                             collapsed
@@ -213,7 +215,6 @@ const Sidebar = () => {
                                     )}
                                 </Link>
 
-                                {/* Tooltip for collapsed mode */}
                                 {collapsed && hoveredItem === link.keyword && (
                                     <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-2xl text-white rounded-md whitespace-nowrap z-50 shadow-lg">
                                         {link.label}
@@ -221,7 +222,6 @@ const Sidebar = () => {
                                 )}
                             </div>
 
-                            {/* Subitems with transition */}
                             {hasSubItems && (
                                 <div
                                     className={`ml-4 pl-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ${
@@ -259,7 +259,6 @@ const Sidebar = () => {
                                                 {sub.label}
                                             </span>
 
-                                            {/* Active indicator dot */}
                                             {isActive(sub.href) && (
                                                 <span className="w-1.5 h-1.5 rounded-full bg-gray-900 dark:bg-gray-100 ml-auto" />
                                             )}
@@ -270,32 +269,69 @@ const Sidebar = () => {
                         </div>
                     );
                 })}
+
+                <div className="relative">
+                    <div
+                        className="relative group"
+                        onMouseEnter={() => setHoveredItem("language")}
+                        onMouseLeave={() => setHoveredItem(null)}
+                    >
+                        <button
+                            onClick={() =>
+                                i18n.changeLanguage(
+                                    i18n.language === "dr" ? "pa" : "dr",
+                                )
+                            }
+                            className={`flex items-center gap-3 mx-2 mb-0.5 px-3 py-1.5 rounded-lg transition-all duration-500 ${
+                                collapsed ? "justify-center" : "justify-start"
+                            } text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200`}
+                        >
+                            <span className="text-gray-500 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300">
+                                <EarthIcon className="w-5 h-5" />
+                            </span>
+
+                            <span
+                                className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${
+                                    collapsed
+                                        ? "opacity-0 w-0 ml-0"
+                                        : "opacity-100 w-auto ml-2"
+                                }`}
+                            >
+                                {i18n.language === "dr"
+                                    ? t("pashto")
+                                    : t("dari")}
+                            </span>
+                        </button>
+
+                        {collapsed && hoveredItem === "language" && (
+                            <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-2xl text-white rounded-md whitespace-nowrap z-50 shadow-lg">
+                                {i18n.language === "dr"
+                                    ? t("pashto")
+                                    : t("dari")}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </nav>
 
-
-
             {/* Footer */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-800">
+            <div className="p-2 border-t border-gray-200 dark:border-gray-800">
                 <div
                     className={`flex items-center ${collapsed ? "justify-center" : "gap-3"}`}
                 >
-                    {/* Avatar */}
                     <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
                         <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                             {user?.name.charAt(0)}
                         </span>
                     </div>
 
-                    {/* Name + Email with Role badge to the right */}
                     {!collapsed && (
                         <div className="flex-1 min-w-0 flex flex-col">
                             <div className="flex items-center gap-2 truncate">
-                                {/* User name */}
                                 <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                                     {user?.name}
                                 </p>
 
-                                {/* Role badge on the right of name */}
                                 <span className="text-xs font-semibold text-white bg-green-500 px-2 py-0.5 rounded-full whitespace-nowrap">
                                     {user?.roles
                                         ?.map((role) => role.name)
@@ -303,7 +339,6 @@ const Sidebar = () => {
                                 </span>
                             </div>
 
-                            {/* Email below */}
                             <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-1">
                                 {user?.email}
                             </p>

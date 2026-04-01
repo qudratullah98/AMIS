@@ -1,4 +1,3 @@
-
 import CustomSelect from "@/Components/CustomSelect";
 import FileUpload from "@/Components/FileUpload";
 import InputError from "@/Components/InputError";
@@ -7,8 +6,9 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SubHeader from "@/Components/SubHeader";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useForm } from "@inertiajs/react"; 
-import React  from "react";
+import { useForm } from "@inertiajs/react";
+import { Loader } from "lucide-react";
+import React from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -19,43 +19,49 @@ function CreateUser({ roles, airports, general_departments }) {
         email: "",
         password: "",
         password_confirmation: "",
-        photo: "", 
+        photo: "",
         role_id: [],
         airport_id: "",
         general_department_id: "",
         position_title: "",
     });
 
-   
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("user.store"), {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Company created successfully");
+                toast.success(t("common.inoformationtStoredSuccessfully"));
                 reset();
             },
             onError: (error) => {
                 toast.error(
-                    "Something went wrong! Please check your input fild ."
+                    t("error.general"),
                 );
             },
         });
-    }; 
-   
+    };
 
     return (
-        <AuthenticatedLayout header={<SubHeader title="کارمند جدید" />}>
-                 <SubHeader title={t("addNewUser")} />
+        <AuthenticatedLayout>
+            <SubHeader
+                links={[
+                    { name: t("user.users"), href: "/users" },
+                    { name: t("user.addingNewUser") },
+                ]}
+            />
+
             <main className="flex-grow w-full max-w-3xl py-8 mx-auto sm:px-6 lg:px-8">
-                <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200"> 
+                <div className="bg-white p-4 rounded-lg shadow-none border border-gray-200">
                     <form
                         onSubmit={handleSubmit}
                         className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                     >
                         {/* Company Name */}
                         <div>
-                            <InputLabel htmlFor="name">{t('name')}</InputLabel>
+                            <InputLabel htmlFor="name">
+                                {t("common.name")}
+                            </InputLabel>
                             <TextInput
                                 id="name"
                                 onChange={(e) =>
@@ -67,13 +73,16 @@ function CreateUser({ roles, airports, general_departments }) {
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
                                 value={data.name}
+                                placeholder={t("input.enterName")}
                             />
-                            <InputError message={errors.name}></InputError>
+                            <InputError message={errors.name ? t(`error.${errors.name}`) : ""}  />
                         </div>
 
                         {/* email */}
                         <div>
-                            <InputLabel htmlFor="email">{t('email')}</InputLabel>
+                            <InputLabel htmlFor="email">
+                                {t("user.email")}
+                            </InputLabel>
                             <TextInput
                                 id="email"
                                 value={data.email}
@@ -87,13 +96,16 @@ function CreateUser({ roles, airports, general_departments }) {
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
                                 autoComplete="email"
+                                placeholder={t("input.enterUserEmail")}
                             />
-                            <InputError message={errors.email}></InputError>
+                            <InputError message={errors.email ? t(`error.${errors.email}`) : ""}></InputError>
                         </div>
 
                         {/* Passwrod */}
                         <div>
-                            <InputLabel htmlFor="password">{t('password')}</InputLabel>
+                            <InputLabel htmlFor="password">
+                                {t("user.password")}
+                            </InputLabel>
                             <TextInput
                                 id="password"
                                 value={data.password}
@@ -107,14 +119,15 @@ function CreateUser({ roles, airports, general_departments }) {
                                         ? "border-red-500"
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
+                                placeholder={t("input.enterUserPassword")}
                             />
-                            <InputError message={errors.password}></InputError>
+                            <InputError message={errors.password ? t(`error.${errors.password}`) : ""}></InputError>
                         </div>
 
                         {/* Confirm Password */}
                         <div>
                             <InputLabel htmlFor="password">
-                                {t('confirmPassword')}
+                                {t("user.confirmPassword")}
                             </InputLabel>
                             <TextInput
                                 id="password_confirmation"
@@ -123,7 +136,7 @@ function CreateUser({ roles, airports, general_departments }) {
                                 onChange={(e) =>
                                     setData(
                                         "password_confirmation",
-                                        e.target.value
+                                        e.target.value,
                                     )
                                 }
                                 className={` ${
@@ -132,15 +145,18 @@ function CreateUser({ roles, airports, general_departments }) {
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
                                 autoComplete="new-password"
+                                placeholder={t(
+                                    "input.enterPasswordConfirmation",
+                                )}
                             />
                             <InputError
-                                message={errors.password_confirmation}
+                                message={errors.password == "passwordNotMatch" ? t(`error.passwordNotMatch`) : ""}
                             ></InputError>
                         </div>
                         {/* Position Title */}
                         <div>
                             <InputLabel htmlFor="position_title">
-                                {t('positionTitle')}
+                                {t("user.positionTitle")}
                             </InputLabel>
                             <TextInput
                                 id="position_title"
@@ -154,19 +170,17 @@ function CreateUser({ roles, airports, general_departments }) {
                                         ? "border-red-500"
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
+                                placeholder={t("input.enterPositionTitle")}
                             />
                             <InputError
-                                message={errors.position_title}
+                                message={errors.position_title ? t(`error.${errors.position_title}`) : ""}
                             ></InputError>
                         </div>
-
-
-                      
 
                         {/* صلاحیت */}
                         <div>
                             <InputLabel htmlFor="license_end_date">
-                                {t('role')}
+                                {t("user.role")}
                             </InputLabel>
                             <CustomSelect
                                 id="role_id"
@@ -181,15 +195,15 @@ function CreateUser({ roles, airports, general_departments }) {
                                 }}
                                 value={data.role_id}
                                 multiple={true}
+                                placeholder={t("input.selectRole")}
                             ></CustomSelect>
-                             <InputError
-                                message={errors.role_id}
-                            ></InputError>
+                            <InputError
+                            message={errors.role_id ? t(`error.${errors.role_id}`) : ""}></InputError>
                         </div>
                         {/* Airport */}
                         <div>
                             <InputLabel htmlFor="airport_id">
-                                {t('airport')}
+                                {t("airport.airport")}
                             </InputLabel>
                             <CustomSelect
                                 id="airport_id"
@@ -203,16 +217,17 @@ function CreateUser({ roles, airports, general_departments }) {
                                     setData("airport_id", e);
                                 }}
                                 value={data.airport_id}
+                                placeholder={t("input.selectAirport")}
                             ></CustomSelect>
                             <InputError
-                                message={errors.airport_id}
+                                message={errors.airport_id ? t(`error.${errors.airport_id}`) : ""}
                             ></InputError>
                         </div>
 
                         {/* General Department */}
                         <div>
                             <InputLabel htmlFor="general_department_id">
-                                {t('generalDepartment')}
+                                {t("user.generalDepartment")}
                             </InputLabel>
                             <CustomSelect
                                 id="general_department_id"
@@ -226,15 +241,16 @@ function CreateUser({ roles, airports, general_departments }) {
                                     setData("general_department_id", e);
                                 }}
                                 value={data.general_department_id}
+                                placeholder={t("input.selectGeneralBranch")}
                             ></CustomSelect>
                             <InputError
-                                message={errors.general_department_id}
+                                message={errors.general_department_id ? t(`error.${errors.general_department_id}`) : ""}
                             ></InputError>
                         </div>
-  {/* photo */}
+                        {/* photo */}
                         <div>
                             <InputLabel htmlFor="license_start_date">
-                                {t('image')}
+                                {t("common.image")}
                             </InputLabel>
                             <FileUpload
                                 id="photo"
@@ -242,16 +258,28 @@ function CreateUser({ roles, airports, general_departments }) {
                                     setData("photo", e.target.value)
                                 }
                             />
-                            <InputError
-                                message={errors.license_start_date}
-                            ></InputError>
+                            {/* <InputError
+                                message={errors.file ? t(`error.${errors.file}`) : ""}
+                            ></InputError> */}
                         </div>
                         {/* Buttons */}
                         <div className="flex space-x-4 col-span-2">
                             <PrimaryButton
                                 disabled={processing}
+                                className="w-52 px-5 py-2.5 rounded-lg bg-gray-100 text-primary-color-dark border border-gray-200 hover:bg-gray-200 transition-all duration-500 flex items-center justify-center gap-2"
                             >
-                                Store
+                                {processing && (
+                                    <Loader
+                                        className="animate-spin"
+                                        size={16}
+                                    />
+                                )}
+
+                                <span>
+                                    {processing
+                                        ? t("common.storingInfo")
+                                        : t("common.storInfo")}
+                                </span>
                             </PrimaryButton>
                         </div>
                     </form>

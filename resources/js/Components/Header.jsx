@@ -1,12 +1,6 @@
 import React from "react";
 import { Link, usePage } from "@inertiajs/react";
-import {
-    Truck,
-    Users,
-    LogOut,
-    ShieldUser,
-    Monitor,
-} from "lucide-react";
+import { Truck, Users, LogOut, ShieldUser, Monitor, PlaneTakeoff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "./LogoutComponent";
 
@@ -17,7 +11,6 @@ export default function Header() {
 
     // Menu groups
     const menuGroups = {
-
         dashboard: [
             {
                 title: t("summary"),
@@ -41,16 +34,25 @@ export default function Header() {
 
         users: [
             {
-                title: t("usersList"),
+                title: t("user.users"),
                 href: "/users",
                 icon: <Users className="w-5 h-5" />,
                 can: permissions.includes("viewUsers"),
             },
             {
-                title: t("roles"),
+                title: t("user.roles"),
                 href: "/user/roles",
                 icon: <ShieldUser className="w-5 h-5" />,
                 can: permissions.includes("manageUsers"),
+            },
+        ],
+
+        airport: [
+            {
+                title: t("airport.airports"),
+                href: "/airports",
+                icon: <PlaneTakeoff className="w-5 h-5" />,
+                can: true, //permissions.includes("veiwAirports"),
             },
         ],
 
@@ -68,8 +70,17 @@ export default function Header() {
     const getActiveGroup = () => {
         if (location === "/dashboard") return menuGroups.dashboard;
 
-        if (location.startsWith("/users") || location.startsWith("/user/roles"))
+        if (
+            location.startsWith("/users") ||
+            location.startsWith("/user") ||
+            location.startsWith("/role")
+        )
             return menuGroups.users;
+        if (
+            location.startsWith("/airports") ||
+            location.startsWith("/airport")
+        )
+            return menuGroups.airport;
         if (location === "/logout" || location === "/profile")
             return menuGroups.profile;
         return [];
@@ -78,23 +89,31 @@ export default function Header() {
     const renderLinks = (links) =>
         links.map(
             (item, idx) =>
-                item.can && (
-                    item.href === "/logout" ? (
-                        <LogoutComponent key={idx} />
-                    ) : (   
+                item.can &&
+                (item.href === "/logout" ? (
+                    <LogoutComponent key={idx} />
+                ) : (
                     <Link
                         key={idx}
                         href={item.href}
                         className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                            location === item.href
+                            item.href
+                                .split("/")
+                                .filter(Boolean)
+                                .some((part) =>
+                                    location
+                                        .split("/")
+                                        .filter(Boolean)
+                                        .includes(part),
+                                )
                                 ? "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white"
                                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                         }`}
                     >
                         {item.icon}
                         <span>{item.title}</span>
-                    </Link>)
-                ),
+                    </Link>
+                )),
         );
 
     return (

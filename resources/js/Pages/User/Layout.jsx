@@ -9,7 +9,7 @@ function Index() {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 500); 
+        }, 500);
     }, []);
 
     const cardData = [

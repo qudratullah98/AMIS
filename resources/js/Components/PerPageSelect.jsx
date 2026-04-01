@@ -31,26 +31,25 @@ function PerPageSelect() {
     }, [perPage]);
 
     return (
-        <div className="relative">
+        <div className="relative ">
             <select
                 value={perPage}
                 onChange={(e) => setPerPage(parseInt(e.target.value))}
                 className="
-    h-8
-    pl-3 pr-8
-    rounded-full
+    py-3
+    rounded-lg
     border border-gray-200/60
     bg-white/80 backdrop-blur-md
-    text-xs font-medium text-gray-800
-    hover:border-indigo-300/60
-    focus:border-indigo-400
-    focus:ring-2 focus:ring-indigo-400/20
+    text-sm font-medium text-gray-800
+     hover:border-gray-200
+                    focus:border-gray-200
+    focus:ring-1 focus:ring-gray-100
     outline-none
     transition-all duration-200
     cursor-pointer
   "
             >
-                <option value={10}>10</option>
+                <option  value={10}>10</option>
                 <option value={20}>20</option>
                 <option value={50}>50</option>
                 <option value={100}>100</option>

@@ -8,6 +8,7 @@ import SubHeader from "@/Components/SubHeader";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useForm } from "@inertiajs/react";
+import { Loader } from "lucide-react";
 import React from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -33,7 +34,7 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
             general_departments.find(
                 (gd) => gd.id === user.general_department_id,
             )?.id || "",
-        is_blocked: user.is_blocked || false,
+        is_blocked: user.is_blocked || 0,
     });
 
     const handleSubmit = (e) => {
@@ -41,30 +42,30 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
         post(route("user.update"), {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success("Company created successfully");
+                toast.success(t("common.inoformationtUpdatedSuccessfully"));
                 reset();
             },
             onError: (error) => {
-                toast.error(
-                    "Something went wrong! Please check your input fild .",
-                );
+                toast.error(t("error.general"));
             },
         });
     };
 
     return (
         <AuthenticatedLayout header={<SubHeader title="کارمند جدید" />}>
-            <SubHeader title={t("changeUserInfo")} />
+            <SubHeader links={[{ name: t("common.editInfo") }]} />
 
             <main className="flex-grow w-full max-w-3xl py-8 mx-auto sm:px-6 lg:px-8">
-                <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
+                <div className="bg-white p-4 rounded-lg shadow-none border border-gray-200">
                     <form
                         onSubmit={handleSubmit}
                         className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                     >
                         {/* Company Name */}
                         <div>
-                            <InputLabel htmlFor="name">{t("name")}</InputLabel>
+                            <InputLabel htmlFor="name">
+                                {t("common.name")}
+                            </InputLabel>
                             <TextInput
                                 id="name"
                                 onChange={(e) =>
@@ -77,13 +78,17 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                 } transition duration-200 ease-in-out`}
                                 value={data.name}
                             />
-                            <InputError message={errors.name}></InputError>
+                            <InputError
+                                message={
+                                    errors.name ? t(`error.${errors.name}`) : ""
+                                }
+                            ></InputError>
                         </div>
 
                         {/* email */}
                         <div>
                             <InputLabel htmlFor="email">
-                                {t("email")}
+                                {t("user.email")}
                             </InputLabel>
                             <TextInput
                                 id="email"
@@ -98,13 +103,19 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
                             />
-                            <InputError message={errors.email}></InputError>
+                            <InputError
+                                message={
+                                    errors.email
+                                        ? t(`error.${errors.email}`)
+                                        : ""
+                                }
+                            ></InputError>
                         </div>
 
                         {/* Passwrod */}
                         <div>
                             <InputLabel htmlFor="password">
-                                {t("password")}
+                                {t("user.password")}
                             </InputLabel>
                             <TextInput
                                 id="password"
@@ -119,13 +130,19 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                         : "border-gray-300"
                                 } transition duration-200 ease-in-out`}
                             />
-                            <InputError message={errors.password}></InputError>
+                            <InputError
+                                message={
+                                    errors.password
+                                        ? t(`error.${errors.password}`)
+                                        : ""
+                                }
+                            ></InputError>
                         </div>
 
                         {/* Confirm Password */}
                         <div>
                             <InputLabel htmlFor="password">
-                                {t("confirmPassword")}
+                                {t("user.confirmPassword")}
                             </InputLabel>
                             <TextInput
                                 id="password_confirmation"
@@ -144,13 +161,17 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                 } transition duration-200 ease-in-out`}
                             />
                             <InputError
-                                message={errors.password_confirmation}
+                                message={
+                                    errors.password == "passwordNotMatch"
+                                        ? t(`error.passwordNotMatch`)
+                                        : ""
+                                }
                             ></InputError>
                         </div>
                         {/* Airport */}
                         <div>
                             <InputLabel htmlFor="airport_id">
-                                {t("airport")}
+                                {t("airport.airport")}
                             </InputLabel>
                             <CustomSelect
                                 id="airport_id"
@@ -166,14 +187,18 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                 value={data.airport_id}
                             ></CustomSelect>
                             <InputError
-                                message={errors.airport_id}
+                                message={
+                                    errors.airport_id
+                                        ? t(`error.${errors.airport_id}`)
+                                        : ""
+                                }
                             ></InputError>
                         </div>
 
                         {/* General Department */}
                         <div>
                             <InputLabel htmlFor="general_department_id">
-                                {t("generalDepartment")}
+                                {t("user.generalDepartment")}
                             </InputLabel>
                             <CustomSelect
                                 id="general_department_id"
@@ -189,13 +214,19 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                 value={data.general_department_id}
                             ></CustomSelect>
                             <InputError
-                                message={errors.general_department_id}
+                                message={
+                                    errors.general_department_id
+                                        ? t(
+                                              `error.${errors.general_department_id}`,
+                                          )
+                                        : ""
+                                }
                             ></InputError>
                         </div>
                         {/* Position Title */}
                         <div>
                             <InputLabel htmlFor="position_title">
-                                {t("positionTitle")}
+                                {t("user.positionTitle")}
                             </InputLabel>
                             <TextInput
                                 id="position_title"
@@ -210,13 +241,17 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                 } transition duration-200 ease-in-out`}
                             />
                             <InputError
-                                message={errors.position_title}
+                                message={
+                                    errors.position_title
+                                        ? t(`error.${errors.position_title}`)
+                                        : ""
+                                }
                             ></InputError>
                         </div>
                         {/* صلاحیت */}
                         <div>
                             <InputLabel htmlFor="license_end_date">
-                                {t("role")}
+                                {t("user.role")}
                             </InputLabel>
                             <CustomSelect
                                 id="role_id"
@@ -232,12 +267,18 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                 value={data.role_id}
                                 multiple={true}
                             ></CustomSelect>
-                            <InputError message={errors.role_id}></InputError>
+                            <InputError
+                                message={
+                                    errors.role_id
+                                        ? t(`error.${errors.role_id}`)
+                                        : ""
+                                }
+                            ></InputError>
                         </div>
                         {/* photo */}
                         <div>
                             <InputLabel htmlFor="license_start_date">
-                                {t("image")}
+                                {t("common.image")}
                             </InputLabel>
                             <FileUpload
                                 id="photo"
@@ -245,36 +286,54 @@ function EditUser({ roles, airports, general_departments, user, user_roles }) {
                                     setData("photo", e.target.value)
                                 }
                             />
-                            <InputError
+                            {/* <InputError
                                 message={errors.license_start_date}
-                            ></InputError>
+                            ></InputError> */}
                         </div>
                         {/* Blocked */}
                         <div>
                             <InputLabel htmlFor="is_blocked">
-                                {t("isBlocked")}
+                                {t("common.isBlocked")}
                             </InputLabel>
-                           <CustomSelect
+                            <CustomSelect
                                 id="is_blocked"
                                 options={[
-                                    { value: true, label: t("blocked") },
-                                    { value: false, label: t("notBlocked") }
+                                    { value: 1, label: t("state.blocked") },
+                                    {
+                                        value: 0,
+                                        label: t("state.notBlocked"),
+                                    },
                                 ]}
                                 onChange={(e) => {
                                     setData("is_blocked", e);
                                 }}
                                 value={data.is_blocked}
+                                placeholder={t("input.selectActivityState")}
                             />
+
                             <InputError
                                 message={errors.is_blocked}
                             ></InputError>
                         </div>
 
-
                         {/* Buttons */}
                         <div className="flex space-x-4 col-span-2">
-                            <PrimaryButton disabled={processing}>
-                                Store
+                            <PrimaryButton
+                                disabled={processing}
+                                className="w-52 px-5 py-2.5 rounded-lg bg-gray-100 text-primary-color-dark border border-gray-200 hover:bg-gray-200 transition-all duration-500 flex items-center justify-center gap-2"
+                            >
+                                {processing && (
+                                    <Loader
+                                        className="animate-spin"
+                                        size={16}
+                                    />
+                                )}
+
+                                <span>
+                                    {processing
+                                        ? t("common.updating")
+                                        : t("common.saveChanges")}
+                                </span>
                             </PrimaryButton>
                         </div>
                     </form>

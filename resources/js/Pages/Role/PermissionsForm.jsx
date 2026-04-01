@@ -1,60 +1,64 @@
-// PermissionsForm.js
-import React, { useState } from "react";
+import React from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
+import { useTranslation } from "react-i18next";
+import TextInput from "@/Components/TextInput";
 
-function PermissionsForm({ permissions, selectedPermissions, setSelectedPermissions, errors }) {
-    const [searchTerm, setSearchTerm] = useState("");
-    
-    // Grouping permissions by type (or any other criteria)
-    const groupedPermissions = permissions?.reduce((acc, permission) => {
-        const group = permission.type || "Others"; // Assuming permission has a 'type' property
-        if (!acc[group]) {
-            acc[group] = [];
-        }
-        acc[group].push(permission);
-        return acc;
-    }, {});
+function PermissionsForm({
+    permissions,
+    selectedPermissions,
+    setSelectedPermissions,
+    errors,
+    searchTerm,
+    setSearchTerm,
+}) {
+    const { t } = useTranslation();
 
-   
+    // Filter permissions by searchTerm
+    const filteredPermissions =
+        permissions?.filter((perm) =>
+            perm.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        ) || [];
 
     return (
-        <div className="mt-4">
-            <InputLabel>مجوزها</InputLabel>
-            <input
-                type="text"
-                placeholder="جستجوی مجوزها..."
+        <div className="mt-0">
+            <InputLabel>{t("user.permissionsList")}</InputLabel>
+            {/* Search Input */}
+            <TextInput
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="mt-2 p-2 border rounded-lg w-full"
+                className="mt-1"
+                value={searchTerm}
+                placeholder={t("user.searchByRoleName")}
+                autoComplete="off"
             />
-            <div className="mt-2 max-h-60 overflow-y-auto">
-                {Object.entries(groupedPermissions).map(([group, perms]) => (
-                    <div key={group} className="mb-4">
-                        <h3 className="font-semibold text-lg mt-4">{group}</h3>
-                        <div className="flex flex-col space-y-2 mt-2">
-                            {perms
-                                .filter((permission) =>
-                                    permission.name.toLowerCase().includes(searchTerm.toLowerCase())
-                                )
-                                .map((permission) => (
-                                    <label
-                                        key={permission.id}
-                                        className="flex items-center p-2 border rounded-lg hover:bg-gray-100 transition duration-200 cursor-pointer"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedPermissions.includes(permission.id)}
-                                            onChange={() => setSelectedPermissions(permission.id)}
-                                            className="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out"
-                                        />
-                                        <span className="ml-2 text-gray-700 mr-4">{permission.name}</span>
-                                    </label>
-                                ))}
-                        </div>
-                    </div>
-                ))}
+
+
+            {/* Permissions Grid */}
+            <div className="mt-4 max-h-96 overflow-y-auto">
+                <div
+                    dir="ltr"
+                    className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3"
+                >
+                    {filteredPermissions.map((perm) => (
+                        <label
+                            key={perm.id}
+                            className="flex items-center p-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                checked={selectedPermissions.includes(perm.id)}
+                                onChange={() => setSelectedPermissions(perm.id)}
+                                className="h-4 w-4 text-blue-600"
+                            />
+                            <span className="ml-2 text-gray-700 text-sm">
+                                {perm.name}
+                            </span>
+                        </label>
+                    ))}
+                </div>
             </div>
-            <InputError message={errors.permissions} />
+
+            <InputError message={errors.permissions ? t(`error.${errors.permissions}`) : ""} />
         </div>
     );
 }

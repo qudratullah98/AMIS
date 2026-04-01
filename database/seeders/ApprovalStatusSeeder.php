@@ -16,17 +16,17 @@ class ApprovalStatusSeeder extends Seeder
 
             [
                 'id'      => 1,
-                'name_ps' => 'فعال',
-                'name_dr' => 'فعال',
-                'name_en' => 'Active',
-                'code'    => 'active',
+                'name_ps' => 'منل شوی',
+                'name_dr' => 'تائید شده',
+                'name_en' => 'Approved',
+                'code'    => 'approved',
             ],
             [
                 'id'      => 2,
-                'name_ps' => 'غیر فعال',
-                'name_dr' => 'غیرفعال',
-                'name_en' => 'Inactive',
-                'code'    => 'inactive',
+                'name_ps' => 'نده منل شوی',
+                'name_dr' => 'تائید نشده',
+                'name_en' => 'Not Approved',
+                'code'    => 'notApproved',
             ],
 
         ];

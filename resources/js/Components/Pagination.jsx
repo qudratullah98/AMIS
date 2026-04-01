@@ -105,7 +105,6 @@
 
 // export default Pagination;
 
-
 // export default Pagination;
 import { Link } from "@inertiajs/react";
 import React from "react";
@@ -130,14 +129,18 @@ const Pagination = ({ links }) => {
         return newUrl.pathname + "?" + newUrl.searchParams.toString();
     };
 
-    const currentLink = links.find(link => link.active && /^\d+$/.test(link.label));
+    const currentLink = links.find(
+        (link) => link.active && /^\d+$/.test(link.label),
+    );
     const currentPage = currentLink ? Number(currentLink.label) : 1;
 
-    const lastPageLink = [...links].reverse().find(link => /^\d+$/.test(link.label));
+    const lastPageLink = [...links]
+        .reverse()
+        .find((link) => /^\d+$/.test(link.label));
     const lastPage = lastPageLink ? Number(lastPageLink.label) : 1;
 
-    const prevLink = links.find(link => link.label.includes("Previous"));
-    const nextLink = links.find(link => link.label.includes("Next"));
+    const prevLink = links.find((link) => link.label.includes("Previous"));
+    const nextLink = links.find((link) => link.label.includes("Next"));
 
     const pagesToShow = new Set();
     pagesToShow.add(1);
@@ -158,7 +161,7 @@ const Pagination = ({ links }) => {
         pagesToShow.add(i);
     }
 
-    const numberedLinks = links.filter(link => /^\d+$/.test(link.label));
+    const numberedLinks = links.filter((link) => /^\d+$/.test(link.label));
     const finalLinks = [];
 
     let previousPage = 0;
@@ -174,7 +177,7 @@ const Pagination = ({ links }) => {
     });
 
     return (
-        <div className="flex justify-center mt-5 flex-wrap gap-2">
+        <div className="flex justify-center mt-0 flex-wrap gap-2">
             {/* Previous */}
             {prevLink && (
                 <Link
@@ -187,7 +190,7 @@ const Pagination = ({ links }) => {
                     }`}
                     style={{ pointerEvents: prevLink.url ? "auto" : "none" }}
                 >
-                    {t("previous")}
+                    {t("common.previous")}
                 </Link>
             )}
 
@@ -207,8 +210,10 @@ const Pagination = ({ links }) => {
                         {link.label}
                     </Link>
                 ) : (
-                    <span key={index} className="px-4 py-2 text-gray-400">...</span>
-                )
+                    <span key={index} className="px-4 py-2 text-gray-400">
+                        ...
+                    </span>
+                ),
             )}
 
             {/* Next */}
@@ -223,7 +228,7 @@ const Pagination = ({ links }) => {
                     }`}
                     style={{ pointerEvents: nextLink.url ? "auto" : "none" }}
                 >
-                    {t("next")}
+                    {t("common.next")}
                 </Link>
             )}
         </div>
@@ -231,4 +236,3 @@ const Pagination = ({ links }) => {
 };
 
 export default Pagination;
-

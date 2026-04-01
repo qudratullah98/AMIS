@@ -16,7 +16,7 @@ function FileUpload({
     const [hasDefault, setHasDefault] = useState(!!defaultImage);
     const [error, setError] = useState("");
     const fileref = useRef();
-    const {t}=useTranslation()
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (defaultImage && !file) {
@@ -97,19 +97,24 @@ function FileUpload({
     return (
         <div className="w-full">
             {!file && !hasDefault && (
-                <>
+                <div className="relative">
                     <input
                         type="file"
                         id={name}
                         accept={accept}
-                        className="mt-1 block w-full text-sm border rounded-md focus:ring-2 focus:ring-blue-500"
+                        className="block w-full p-2 text-sm border rounded-md opacity-0 absolute inset-0 cursor-pointer"
                         onChange={handleFileChange}
                         ref={fileref}
                     />
+
+                    <div className="w-full p-2 text-sm border rounded-md bg-white text-gray-400">
+                        {t("input.selectFile")}
+                    </div>
+
                     {error && (
                         <p className="text-sm text-red-600 mt-1">{error}</p>
                     )}
-                </>
+                </div>
             )}
 
             {(file || hasDefault) && (

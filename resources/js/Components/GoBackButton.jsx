@@ -17,13 +17,14 @@ export default function GoBackButton({
       variant="ghost"
       onClick={goBack}
       className={`
-        h-7 px-2.5 
-        rounded-full
+        px-2.5
+        rounded-md
         flex items-center gap-1.5
         text-xs font-medium
         text-gray-600
-        hover:text-indigo-600
-        hover:bg-indigo-500/10
+        bg-gray-100
+        hover:text-gray-700
+        hover:bg-gray-200
         active:scale-95
         transition-all duration-200
         ${className}
@@ -31,7 +32,7 @@ export default function GoBackButton({
     >
       <ArrowLeft className="h-3 w-3" />
       <span className="hidden sm:inline">
-        {label || t("goBack")}
+        {label || t("common.goBack")}
       </span>
     </Button>
   );

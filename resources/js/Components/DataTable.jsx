@@ -18,18 +18,17 @@ const DataTable = ({
     children,
     header = null,
     addButton = true,
-    buttonClass = "bg-gray-800 text-white hover:bg-gray-700",
+    buttonClass = "px-5 py-2.5  rounded-lg bg-gray-100 text-primary-color-dark  border border-gray-200 hover:bg-gray-200 transition-all duration-500",
     searchPlaceHolder,
 }) => {
     return (
-        <div className="p-2  rounded-lg h-">
+        <div className="p-0  rounded-lg h-auto">
             {/* Header Section */}
             {/* Header Section */}
             <div
-                className="relative flex items-center justify-between mb-4 px-2 py-3
+                className="relative flex items-center justify-between mb-2 px-0 py-3
                             bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
-    rounded-md border border-gray-200/60 dark:border-gray-700/50
-    shadow-[0_6px_18px_rgba(0,0,0,0.04)]"
+                                "
             >
                 {/* Left Controls (Buttons) */}
                 <div className="flex items-center gap-3 z-10">
@@ -37,7 +36,7 @@ const DataTable = ({
                         (enableButton ? (
                             <PrimaryButton
                                 onClick={onButtonClick}
-                                className={`h-8 px-4 rounded-full text-sm font-medium ${buttonClass}`}
+                                className={` ${buttonClass}`}
                             >
                                 {buttonLabel}
                             </PrimaryButton>
@@ -45,10 +44,7 @@ const DataTable = ({
                             <Link
                                 id="addBtn"
                                 href={AddButtonPath}
-                                className="h-8 px-4 inline-flex items-center rounded-full text-sm font-medium text-white
-            bg-gradient-to-r from-indigo-500 to-blue-500
-            hover:from-indigo-600 hover:to-blue-600
-            active:scale-95 transition-all duration-200"
+                                className="px-5 py-2.5  rounded-lg bg-gray-100 text-primary-color-dark  border border-gray-200 hover:bg-gray-200 transition-all duration-500"
                             >
                                 {buttonLabel}
                             </Link>
@@ -57,7 +53,7 @@ const DataTable = ({
 
                 {/* Center Header */}
                 {header && (
-                    <h2 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 tracking-tight">
+                    <h2 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-base md:text-xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">
                         {header}
                     </h2>
                 )}
@@ -65,7 +61,7 @@ const DataTable = ({
                 {/* Right Controls (Search + PerPage) */}
                 <div className="flex items-center gap-2 z-10">
                     {enableSearch && (
-                        <div className="h-8">
+                        <div className="">
                             <TableSearchInput
                                 searchPlaceHolder={searchPlaceHolder}
                             />
@@ -76,26 +72,26 @@ const DataTable = ({
             </div>
 
             {/* Table Container */}
-            <div className=" border border-gray-300 rounded-lg">
+            <div className="border border-gray-300">
                 <div
-                    className=" "
                     style={{
                         scrollbarWidth: "none",
                     }}
                 >
-                    <table className="min-w-full border-collapse">
+                    <table className="min-w-full ">
                         <thead className="sticky top-0 bg-gray-100 shadow-sm z-10">
                             <tr>
                                 {columns?.map((column, index) => (
                                     <th
                                         key={index}
-                                        className="p-3 text-center text-sm font-semibold text-gray-600 border-b border-gray-300 uppercase"
+                                        className="p-3 text-center text-sm font-semibold text-gray-600 border-b border-gray-200 uppercase"
                                     >
                                         {column.label}
                                     </th>
                                 ))}
                             </tr>
                         </thead>
+
                         <tbody className="divide-y divide-gray-200 bg-white">
                             {children}
                         </tbody>
@@ -104,9 +100,10 @@ const DataTable = ({
             </div>
 
             {/* Pagination */}
-            <div className="mt-4">
+            <div className="mt-3">
                 <Pagination links={links} />
             </div>
+
         </div>
     );
 };
