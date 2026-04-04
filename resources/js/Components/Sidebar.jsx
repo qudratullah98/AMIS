@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
     ChartColumnBig,
     Settings2,
-    Package,
+
     Users,
     History,
     UserMinusIcon,
@@ -12,6 +12,17 @@ import {
     ChevronRight as ChevronRightIcon,
     Languages as EarthIcon,
     Plane,
+    Building2,
+    Menu,
+    Box,
+    Layers,
+    Clock,
+    PlaneLanding,
+    Wrench,
+    Building,
+    MapPinHouse,
+    Layers2,
+    PlaneTakeoff,
 } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
@@ -65,21 +76,89 @@ const Sidebar = () => {
             keyword: "airport",
             can: permissions.includes("viewAirportMenu") || true,
         },
+        // Airlines
         {
-            href: "/setting",
-            label: t("setting"),
-            icon: <Settings2 className="w-5 h-5" />,
-            keyword: "setting",
-            can: permissions.includes("viewDashboardMenu") || true,
+            href: route("airline.index"),
+            label: t("airline.airlines"),
+            icon: <Building2 className="w-5 h-5" />,
+            keyword: "airlines",
+            can: permissions.includes("viewAirlinesMenu") || true,
+        },
+        // Aircraf types
+        {
+            href: route("airCraftType.index"),
+            label: t("airport.aircraftTypes") ,
+            icon: "🚁",
+            keyword: "aircraftTypes",
+            can: permissions.includes("viewAirCraftsMenu") || true,
+        },
+
+        //SGHA part
+        {
+            href: "/sgha",
+            label: t("sgha.SGHAPart"),
+            icon: <Menu className="w-5 h-5" />,
+            keyword: "sgha",
+            can: permissions.includes("viewSGHAMenu") || true,
             subItems: [
                 {
                     href: "",
-                    label: t("vehiclesOwners"),
-                    icon: <Users className="w-4 h-4" />,
-                    keyword: "",
+                    label: t("sgha.sghaServiceUnite"),
+                    icon: <Box className="w-4 h-4" />,
+                    keyword: "sghaServinceUnite",
+                },
+                {
+                    href: "",
+                    label: t("sgha.sghaServices"),
+                    icon: <Layers className="w-4 h-4" />,
+                    keyword: "sghaServices",
+                },
+
+                {
+                    href: "",
+                    label: t("flight.flyteServices"),
+                    icon: <Wrench className="w-4 h-4" />,
+                    keyword: "flyteServices",
+                },
+                {
+                    href: "",
+                    label: t("flight.flights"),
+                    icon: <PlaneTakeoff className="w-4 h-4" />,
+                    keyword: "flytes",
                 },
             ],
         },
+
+        //Constructions
+        {
+            href: "/constructions",
+            label: t("construction.constructionsPart"),
+            icon: <Layers className="w-5 h-5" />,
+            keyword: "constructions",
+            can: permissions.includes("viewConstructionMenu") || true,
+            subItems: [
+                {
+                    href: "",
+                    label: t("construction.constructions"),
+                    icon: <Building2 className="w-4 h-4" />,
+                    keyword: "constructions",
+                },
+                {
+                    href: "",
+                    label: t("construction.airportConstructions"),
+                    icon: <MapPinHouse className="w-4 h-4" />,
+                    keyword: "airportConstructions",
+                },
+
+                {
+                    href: "",
+                    label: t("construction.constructionTypes"),
+                    icon: <Layers2 className="w-4 h-4" />,
+                    keyword: "constructionTypes",
+                },
+            ],
+        },
+        //Users
         {
             href: "/users",
             label: t("user.users"),

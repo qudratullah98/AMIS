@@ -1,3 +1,5 @@
+import { Construction } from "lucide-react";
+
 // src/locales/pashto.js
 const pashto = {
     amis: "د هوایي ډګرونو د مدیریت سیستم",
@@ -137,12 +139,13 @@ const pashto = {
         airport: "هوایي ډګر",
         airports: "هوایي ډګرونه",
         addNewAirport: "نوی هوایي ډګر اضافه کړئ",
-        addingNewAirport:"د نوي هوایي دګر اضافه کول",
+        addingNewAirport: "د نوي هوایي دګر اضافه کول",
         airportInfo: "د هوایي ډګر معلومات",
         airportCode: "د هوایي ډګر کوډ",
         runwayLength: "د رنوې اوږدوالی",
         runwayWidth: "د رنوې پلنوالی",
         airportType: " هوایي ډګر ډول",
+        aircraftTypes: "د الوتکو ډولونه",
 
         type: {
             international: "نړیوال",
@@ -165,6 +168,13 @@ const pashto = {
         arrivalTime: "د رسېدو وخت",
         origin: "مبدا",
         destination: "مقصد",
+        flyteServices: "د الوتنو چوپړتیاوې",
+    },
+
+    sgha: {
+        SGHAPart: "د SGHA برخه",
+        sghaServiceUnite: "د SGHA خدماتي واحد",
+        sghaServices: "د SGHA خدمات",
     },
 
     passenger: {
@@ -212,6 +222,13 @@ const pashto = {
         confirmPassword: "د پټنوم تایید",
         addingNewUser: "د نوي کاروونکي زیاتول",
         reset: "بیا تنظیمول",
+    },
+
+    construction: {
+        constructionsPart: "د ودانیو برخه",
+        airportConstructions: "د هوايي ډګر ودانۍ",
+        constructions: "ودانۍ",
+        constructionTypes: "د ودانیو د جوړښت ډولونه",
     },
 };
 

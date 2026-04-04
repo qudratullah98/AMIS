@@ -1,6 +1,13 @@
 import React from "react";
 import { Link, usePage } from "@inertiajs/react";
-import { Truck, Users, LogOut, ShieldUser, Monitor, PlaneTakeoff } from "lucide-react";
+import {
+    Truck,
+    Users,
+    LogOut,
+    ShieldUser,
+    Monitor,
+    PlaneTakeoff,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "./LogoutComponent";
 
@@ -56,6 +63,15 @@ export default function Header() {
             },
         ],
 
+        constructions: [
+            {
+                title: t("construction.constructionsPart"),
+                href: "/constructions",
+                icon: <PlaneTakeoff className="w-5 h-5" />,
+                can: true, //permissions.includes("veiwAirports"),
+            },
+        ],
+
         profile: [
             {
                 title: t("logout"),
@@ -76,11 +92,11 @@ export default function Header() {
             location.startsWith("/role")
         )
             return menuGroups.users;
-        if (
-            location.startsWith("/airports") ||
-            location.startsWith("/airport")
-        )
+        if (location.startsWith("/airports") || location.startsWith("/airport"))
             return menuGroups.airport;
+        if (location.startsWith("/constructions") || location.startsWith("/construction"))
+            return menuGroups.constructions;
+
         if (location === "/logout" || location === "/profile")
             return menuGroups.profile;
         return [];

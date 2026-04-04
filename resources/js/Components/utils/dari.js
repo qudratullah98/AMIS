@@ -101,7 +101,6 @@ const dari = {
     },
 
     state: {
-
         approve: "تأیید کردن",
         disApprove: "رد کردن",
         active: "فعال",
@@ -135,12 +134,13 @@ const dari = {
         airport: "میدان هوایی",
         airports: "میادین هوایی",
         addNewAirport: "افزودن میدان هوایی جدید",
-        addingNewAirport:"اضافه نمودن میدان هوایی جدید",
+        addingNewAirport: "اضافه نمودن میدان هوایی جدید",
         airportInfo: "معلومات میدان هوایی",
         airportCode: "کود میدان هوایی",
         runwayLength: "طول باند",
         runwayWidth: "عرض باند",
         airportType: "نوعیت میدان هوایی",
+        aircraftTypes: "انواع هواپیما",
         type: {
             international: "بین‌المللی",
             domestic: "داخلی",
@@ -162,6 +162,13 @@ const dari = {
         arrivalTime: "زمان رسیدن",
         origin: "مبدأ",
         destination: "مقصد",
+        flyteServices: "خدمات پروازی",
+    },
+
+    sgha: {
+        SGHAPart: "بخش SGHA",
+        sghaServiceUnite: "واحد خدمات SGHA",
+        sghaServices: "خدمات SGHA",
     },
 
     passenger: {
@@ -211,6 +218,13 @@ const dari = {
         confirmPassword: "تأیید رمز عبور",
         addingNewUser: "افزودن کاربر جدید",
         reset: "تنظیم مجدد",
+    },
+
+    construction: {
+        constructionsPart: "بخش ساختمانی",
+        airportConstructions: "ساخت‌وساز میدان هوایی",
+        constructions: "ساخت‌وسازها",
+        constructionTypes: "نوعیت های ساخت‌وساز",
     },
 };
 
