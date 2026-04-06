@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
          $middleware->alias([
         'blocked' => \App\Http\Middleware\CheckBlockedUser::class,
+        'check_airport' => \App\Http\Middleware\CheckAirport::class,
     ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

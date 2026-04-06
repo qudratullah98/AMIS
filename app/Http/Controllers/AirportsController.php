@@ -2,8 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAirportRequest;
-use App\Models\Airport;
-use Illuminate\Http\Request;
+use App\Models\Airport; 
 use Inertia\Inertia;
 
 class AirportsController extends Controller
@@ -12,7 +11,7 @@ class AirportsController extends Controller
     {
         $search   = request()->input('query');
         $perPage  = request()->input('perPage', 10);
-        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->when($search, function ($query, $search) {
+        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->where('id', auth()->user()->airport_id)->when($search, function ($query, $search) {
             return $query->search($search);
         })->latest()->paginate($perPage);
         return Inertia::render('Airports/Index', ['airports' => $airports]);

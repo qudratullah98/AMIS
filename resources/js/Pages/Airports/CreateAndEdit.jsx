@@ -103,10 +103,11 @@ export default function CreateAndEdit({ airport = {}, onSubmitSuccess }) {
         }
     };
 
-    if (pageLoading) return <FullPageLoader message={t("common.loading")} />;
+    // if (pageLoading) return <FullPageLoader message={t("common.loading")} />;
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8">
+      <>  {pageLoading ?(<FullPageLoader message={t("common.loading")} />) : (
+         <form onSubmit={handleSubmit} className="space-y-8">
             {/* Grid Form Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
                 {/* Name PS */}
@@ -327,5 +328,6 @@ export default function CreateAndEdit({ airport = {}, onSubmitSuccess }) {
                 </button>
             </div>
         </form>
+        )}</>
     );
 }

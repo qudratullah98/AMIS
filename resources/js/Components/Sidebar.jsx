@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import {
     ChartColumnBig,
     Settings2,
-
     Users,
     History,
     UserMinusIcon,
@@ -87,7 +86,7 @@ const Sidebar = () => {
         // Aircraf types
         {
             href: route("airCraftType.index"),
-            label: t("airport.aircraftTypes") ,
+            label: t("airport.aircraftTypes"),
             icon: "🚁",
             keyword: "aircraftTypes",
             can: permissions.includes("viewAirCraftsMenu") || true,
@@ -394,37 +393,101 @@ const Sidebar = () => {
             </nav>
 
             {/* Footer */}
-            <div className="p-2 border-t border-gray-200 dark:border-gray-800">
+            <div className="relative p-4 border-t border-gray-200/60 dark:border-gray-800/60 bg-gradient-to-r from-white via-white to-gray-50/50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800/50 backdrop-blur-sm">
+                {/* Decorative gradient line at top */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+
                 <div
-                    className={`flex items-center ${collapsed ? "justify-center" : "gap-3"}`}
+                    className={`flex items-center transition-all duration-300 ${
+                        collapsed ? "justify-center" : "gap-3"
+                    }`}
                 >
-                    <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            {user?.name.charAt(0)}
-                        </span>
+                    {/* Avatar with enhanced gradient and glow effect */}
+                    <div className="relative group">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 flex items-center justify-center flex-shrink-0 shadow-lg ring-2 ring-white/20 dark:ring-gray-700/50 group-hover:scale-105 transition-transform duration-300">
+                            <span className="text-sm font-bold text-white">
+                                {user?.name?.charAt(0)?.toUpperCase()}
+                            </span>
+                        </div>
+                        {/* Online status indicator */}
+                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
                     </div>
 
+                    {/* User Info */}
                     {!collapsed && (
-                        <div className="flex-1 min-w-0 flex flex-col">
-                            <div className="flex items-center gap-2 truncate">
-                                <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                        <div className="flex-1 min-w-0 animate-fadeIn">
+                            {/* Name + Role */}
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <p className="text-sm font-bold text-gray-900 dark:text-gray-100 truncate bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
                                     {user?.name}
                                 </p>
 
-                                <span className="text-xs font-semibold text-white bg-green-500 px-2 py-0.5 rounded-full whitespace-nowrap">
-                                    {user?.roles
-                                        ?.map((role) => role.name)
-                                        .join(", ") || "No Role"}
-                                </span>
+                                {/* Enhanced role badges */}
+                                <div className="flex gap-1">
+                                    {user?.roles?.map((role, idx) => (
+                                        <span
+                                            key={idx}
+                                            className="text-[10px] font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 px-2 py-0.5 rounded-full shadow-sm whitespace-nowrap"
+                                        >
+                                            {role.name}
+                                        </span>
+                                    ))}
+                                    {(!user?.roles ||
+                                        user?.roles.length === 0) && (
+                                        <span className="text-[10px] font-bold text-white bg-gradient-to-r from-gray-500 to-gray-600 px-2 py-0.5 rounded-full shadow-sm whitespace-nowrap">
+                                            No Role
+                                        </span>
+                                    )}
+                                </div>
                             </div>
 
-                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-1">
-                                {user?.email}
-                            </p>
+                            {/* Email with icon */}
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                                <svg
+                                    className="w-3 h-3 text-gray-400 dark:text-gray-500"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                    />
+                                </svg>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                                    {user?.email}
+                                </p>
+                            </div>
+
+                            {/* Enhanced Airport Name with better styling */}
+                            <div className="flex items-center gap-1.5 mt-1.5 group/airport">
+                                <svg
+                                    className="w-3 h-3 text-blue-500 dark:text-blue-400 group-hover/airport:rotate-12 transition-transform"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                                    />
+                                </svg>
+                                <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 truncate bg-blue-50 dark:bg-blue-950/30 px-2 py-0.5 rounded-md">
+                                    {user?.airport?.name_ps ||
+                                        "No Airport Assigned"}
+                                </p>
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
+ 
+            
         </div>
     );
 };
