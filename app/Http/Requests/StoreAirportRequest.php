@@ -19,8 +19,8 @@ class StoreAirportRequest extends FormRequest
             'name_dr' => ['required', 'string', 'max:255'],
             'name_en' => ['nullable', 'string', 'max:255'],
 
-            'IATA_code' => ['nullable', 'string', 'size:3', 'unique:airports,IATA_code'],
-            'ICAO_code' => ['nullable', 'string', 'size:4', 'unique:airports,ICAO_code'],
+     'IATA_code' => ['nullable', 'string', 'size:3', 'unique:airports,IATA_code,' . $this->id],
+'ICAO_code' => ['nullable', 'string', 'size:4', 'unique:airports,ICAO_code,' . $this->id],
 
             'type' => [
                 'required',

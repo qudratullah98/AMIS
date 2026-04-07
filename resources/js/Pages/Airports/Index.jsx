@@ -9,6 +9,7 @@ import StatusBadge from "@/Components/StatusBadge";
 import { useTranslation } from "react-i18next";
 import CustomModal from "@/Components/CustomModal";
 import CreateAndEdit from "./CreateAndEdit";
+import SmallLoader from "@/Components/SmallLoader";
 
 function AirportsIndex({ airports }) {
     const { t } = useTranslation();
@@ -29,11 +30,29 @@ function AirportsIndex({ airports }) {
         { label: t("common.action") },
     ];
 
-    const verification = (type, id) => {
-        console.log(`Verify ${type} with id ${id}`);
+    const [loading, setLoading] = useState(false);
+    const activation = (id) => {
+        setLoading(true);
+        axios
+            .post(route("airport.activate", { airport: id }))
+            .then((response) => {
+                // Update the airport status in the local state
+                setAirportsData((prev) =>
+                    prev.map((airport) =>
+                        airport.id === id ? response.data.airport : airport,
+                    ),
+                );
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error activating airport:", error);
+                setLoading(false);
+            });
     };
 
     const [CreateModel, setCreateModel] = useState(false);
+    const [EditModel, setEditModel] = useState(false);
+    const [editableData, setEditableData] = useState(null);
 
     return (
         <AuthenticatedLayout header={<SubHeader title={t("Airports List")} />}>
@@ -52,6 +71,30 @@ function AirportsIndex({ airports }) {
                             setAirportsData((prev) => [airport, ...prev]);
                             setCreateModel(false);
                         }}
+                    />
+                </CustomModal>
+            )}
+            {EditModel && (
+                <CustomModal
+                    show={EditModel}
+                    handleClose={() => setEditModel(false)}
+                    title={t("airport.editingAirport")}
+                    size="large"
+                    stopPropagation={false}
+                    footer={false}
+                >
+                    <CreateAndEdit
+                        onEditSuccess={(airport) => {
+                            // Example: add new airport to list
+                            setAirportsData((prev) =>
+                                prev.map((a) =>
+                                    a.id === airport.id ? airport : a,
+                                ),
+                            );
+                            setEditModel(false);
+                        }}
+                        editable={true}
+                        airport={editableData} // Pass the first airport as an example, you should pass the selected airport for editing
                     />
                 </CustomModal>
             )}
@@ -103,33 +146,48 @@ function AirportsIndex({ airports }) {
                                     </td>
                                     <td className="p-2 text-center">
                                         <StatusBadge
-                                            status={
-                                                airport?.status?.code
-                                            }
-
+                                            status={airport?.status?.code}
                                         />
                                     </td>
 
                                     <td className=" text-center">
                                         <ThreeDotMenu>
                                             <div className="py-0">
+                                                {airport?.status?.code !==
+                                                    "active" && (
+                                                    <button
+                                                        className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        onClick={() =>
+                                                            activation(
+                                                                airport.id,
+                                                            )
+                                                        }
+                                                    >
+                                                        {loading ? (
+                                                            <SmallLoader />
+                                                        ) : (
+                                                            <>
+                                                                <Verified className="ml-2 text-xl" />
+                                                                {t(
+                                                                    "state.approve",
+                                                                )}
+                                                            </>
+                                                        )}
+                                                    </button>
+                                                )}
                                                 <button
                                                     className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                    onClick={() =>
-                                                        verification(
-                                                            "airport",
-                                                            airport.id,
-                                                        )
-                                                    }
+                                                    onClick={() => {
+                                                        setEditModel(true);
+                                                        setEditableData(
+                                                            airport,
+                                                        );
+                                                    }}
                                                 >
-                                                    <Verified className="ml-2 text-xl" />
-                                                    {t("state.approve")}
-                                                </button>
-
-                                                <Link className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                                    <Edit2 className="ml-2 text-xl" />
+                                                    {" "}
+                                                    <Edit2 className="ml-2 text-xl" />{" "}
                                                     {t("common.editInfo")}
-                                                </Link>
+                                                </button>
                                             </div>
                                         </ThreeDotMenu>
                                     </td>

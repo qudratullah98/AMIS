@@ -82,5 +82,12 @@ class Airport extends Model
             $query->where('name_ps', 'LIKE', '%' . $search . '%');
         });
     }
+    // activation of airport
+    public function activate()
+    {        $this->status_id = 1; // Assuming 1 is the ID for 'active' status
+        $this->save();
+        return $this;
+    }
+
  
 }
