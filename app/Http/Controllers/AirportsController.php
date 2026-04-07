@@ -12,7 +12,7 @@ class AirportsController extends Controller
     {
         $search   = request()->input('query');
         $perPage  = request()->input('perPage', 10);
-        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->where('id', auth()->user()->airport_id)->when($search, function ($query, $search) {
+        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->whereUserAirport()->when($search, function ($query, $search) {
             return $query->search($search);
         })->latest()->paginate($perPage);
         return Inertia::render('Airports/Index', ['airports' => $airports]);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Airport extends Model
-{ 
+{
     protected $fillable = [
         'name_ps',
         'name_dr',
@@ -84,10 +84,15 @@ class Airport extends Model
     }
     // activation of airport
     public function activate()
-    {        $this->status_id = 1; // Assuming 1 is the ID for 'active' status
+    {
+        $this->status_id = 1;
         $this->save();
         return $this;
     }
 
- 
+
+    public function scopeWhereUserAirport($query)
+    {
+        return $query->where('id', auth()->user()->airport_id);
+    }
 }
