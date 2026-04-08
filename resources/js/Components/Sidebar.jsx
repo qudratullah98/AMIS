@@ -172,13 +172,13 @@ const Sidebar = () => {
             keyword: "log",
             can: permissions.includes("viewLogMenu"),
         },
-        {
-            href: "/profile",
-            label: t("common.profile"),
-            icon: <UserMinusIcon className="w-5 h-5" />,
-            keyword: "profile",
-            can: true,
-        },
+        // {
+        //     href: "/profile",
+        //     label: t("common.profile"),
+        //     icon: <UserMinusIcon className="w-5 h-5" />,
+        //     keyword: "profile",
+        //     can: true,
+        // },
     ];
 
     const isActive = (href) => currentPath === href;
@@ -393,7 +393,7 @@ const Sidebar = () => {
             </nav>
 
             {/* Footer */}
-            <div className="relative p-4 border-t border-gray-200/60 dark:border-gray-800/60 bg-gradient-to-r from-white via-white to-gray-50/50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800/50 backdrop-blur-sm">
+            <div className="relative px-4 py-2 border-t border-gray-200/60 dark:border-gray-800/60 bg-gradient-to-r from-white via-white to-gray-50/50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800/50 backdrop-blur-sm">
                 {/* Decorative gradient line at top */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
 
@@ -405,11 +405,13 @@ const Sidebar = () => {
                     {/* Avatar with enhanced gradient and glow effect */}
                     <div className="relative group">
                         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 flex items-center justify-center flex-shrink-0 shadow-lg ring-2 ring-white/20 dark:ring-gray-700/50 group-hover:scale-105 transition-transform duration-300">
-                            <span className="text-sm font-bold text-white">
-                                {user?.name?.charAt(0)?.toUpperCase()}
-                            </span>
-                        </div>
+                        <Link href="/profile">
+                            <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 flex items-center justify-center flex-shrink-0 shadow-lg ring-2 ring-white/20 dark:ring-gray-700/50 group-hover:scale-105 transition-transform duration-300 cursor-pointer">
+                                <span className="text-sm font-bold text-white">
+                                    {user?.name?.charAt(0)?.toUpperCase()}
+                                </span>
+                            </div>
+                        </Link>
                         {/* Online status indicator */}
                         <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
                     </div>
@@ -443,7 +445,7 @@ const Sidebar = () => {
                             </div>
 
                             {/* Email with icon */}
-                            <div className="flex items-center gap-1.5 mt-0.5">
+                            {/* <div className="flex items-center gap-1.5 mt-0.5">
                                 <svg
                                     className="w-3 h-3 text-gray-400 dark:text-gray-500"
                                     fill="none"
@@ -460,7 +462,7 @@ const Sidebar = () => {
                                 <p className="text-xs text-gray-500 dark:text-gray-400 truncate hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
                                     {user?.email}
                                 </p>
-                            </div>
+                            </div> */}
 
                             {/* Enhanced Airport Name with better styling */}
                             <div className="flex items-center gap-1.5 mt-1.5 group/airport">
@@ -486,8 +488,6 @@ const Sidebar = () => {
                     )}
                 </div>
             </div>
- 
-            
         </div>
     );
 };

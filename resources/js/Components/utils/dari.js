@@ -80,9 +80,9 @@ const dari = {
         emailIsInvalid: "ایمیل معتبر نیست",
         emailAlreadyExists: "این ایمیل قبلاً ثبت شده است",
 
-        passwordIsNeeded: "رمز عبور ضروری است",
         passwordTooShort: "رمز عبور خیلی کوتاه است",
         passwordNotMatch: "رمز عبور مطابقت ندارد",
+        passwordInvalid: "رمز عبور نامعتبر است",
 
         nameAlreadyExists: "این اسم قبلا ثبت شده",
         permissionIsNeeded: "انتخاب اجازه ضروری میباشد",
@@ -98,6 +98,16 @@ const dari = {
         generalDepartmentInvalid: "دیپارتمنت عمومی نامعتبر است",
 
         positionTitleIsNeeded: "عنوان وظیفه ضروری است",
+
+        passwordIsNeeded: "لطفاً رمز عبور را وارد کنید.",
+        passwordInvalid: "رمز فعلی نادرست است.",
+        confirmPasswordInvalid: "تأیید رمز مطابقت ندارد.",
+        passwordMin: "رمز باید حداقل ۸ حرف داشته باشد.",
+
+        passwordLetters: "رمز باید حداقل یک حرف داشته باشد.",
+        passwordMixedCase: "رمز باید شامل حروف بزرگ و کوچک باشد.",
+        passwordNumbers: "رمز باید حداقل یک عدد داشته باشد.",
+        passwordSymbols: "رمز باید حداقل یک سمبول داشته باشد.",
     },
 
     state: {
@@ -229,6 +239,11 @@ const dari = {
         confirmPassword: "تأیید رمز عبور",
         addingNewUser: "افزودن کاربر جدید",
         reset: "تنظیم مجدد",
+
+        currentPassword: "رمز عبور فعلی",
+        newPassword: "رمز عبور جدید",
+        logout:"بیرون شدن از سیستم",
+        loggingOut:"در حال بیرون شدن از سیستم",
     },
 
     construction: {

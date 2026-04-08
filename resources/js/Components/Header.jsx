@@ -75,7 +75,7 @@ export default function Header() {
 
         profile: [
             {
-                title: t("logout"),
+                title: t("user.logout"),
                 href: "/logout",
                 icon: <LogOut className="w-5 h-5" />,
                 can: true,
