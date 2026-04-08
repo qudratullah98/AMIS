@@ -233,6 +233,8 @@ const pashto = {
 
         currentPassword: "اوسنی پټ نوم",
         newPassword: "نوی پټ نوم",
+        logout:"له سیستم څخه وتل",
+        loggingOut:"له سیستم څخه د وتلو په حال کې",
     },
 
     construction: {

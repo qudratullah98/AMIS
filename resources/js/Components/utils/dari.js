@@ -231,6 +231,8 @@ const dari = {
 
         currentPassword: "رمز عبور فعلی",
         newPassword: "رمز عبور جدید",
+        logout:"بیرون شدن از سیستم",
+        loggingOut:"در حال بیرون شدن از سیستم",
     },
 
     construction: {
