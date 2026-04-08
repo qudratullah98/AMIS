@@ -18,9 +18,7 @@ Route::middleware(['auth', 'blocked', 'check_airport'])->group(function () {
 
 
 
-
-    //Airlines
-    Route::get('airlines', [AirlineController::class, 'index'])->name('airline.index');
+ 
 
 
     //AirCraft Types

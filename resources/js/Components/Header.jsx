@@ -7,6 +7,7 @@ import {
     ShieldUser,
     Monitor,
     PlaneTakeoff,
+    Building2,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "./LogoutComponent";
@@ -80,6 +81,15 @@ export default function Header() {
                 can: true,
             },
         ],
+
+        airline:[
+            {
+                title: t("airline.airlines"),
+                href: "/airline",
+                icon: <Building2 className="w-5 h-5" />,
+                can: true, //permissions.includes("veiwAirports"),
+            },
+        ]
     };
 
     // Determine which menu group to show based on current path
@@ -94,6 +104,8 @@ export default function Header() {
             return menuGroups.users;
         if (location.startsWith("/airports") || location.startsWith("/airport"))
             return menuGroups.airport;
+        if (location.startsWith("/airlines") || location.startsWith("/airline"))
+            return menuGroups.airline;
         if (location.startsWith("/constructions") || location.startsWith("/construction"))
             return menuGroups.constructions;
 

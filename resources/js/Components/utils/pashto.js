@@ -156,6 +156,17 @@ const pashto = {
             private: "شخصي",
         },
     },
+    airline: {
+        airlineList: "د هوايي شرکتونو لیست",
+        airline: "هوايي شرکت",
+        airlines: "هوايي شرکتونه",
+        addNewAirline: "نوی هوايي شرکت اضافه کړئ",
+        addingNewAirline: "د نوي هوايي شرکت اضافه کول",
+        airlineInfo: "د هوايي شرکت معلومات",
+        airlineCode: "د هوايي شرکت کوډ",
+        airlineType: "د هوايي شرکت ډول",
+    },
+
 
     flight: {
         flight: "الوتنه",

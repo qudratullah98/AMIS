@@ -73,7 +73,7 @@ const Sidebar = () => {
             label: t("airport.airports"),
             icon: <Plane className="w-5 h-5" />,
             keyword: "airport",
-            can: permissions.includes("viewAirportMenu") || true,
+            can: permissions.includes("viewAirlineMenu") || true,
         },
         // Airlines
         {

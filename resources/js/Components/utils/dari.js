@@ -150,6 +150,17 @@ const dari = {
             private: "شخصی",
         },
     },
+    airline: {
+        airlineList: "لیست شرکت‌های هوایی",
+        airline: "شرکت هوایی",
+        airlines: "شرکت‌های هوایی",
+        addNewAirline: "افزودن شرکت هوایی جدید",
+        addingNewAirline: "اضافه نمودن شرکت هوایی جدید",
+        airlineInfo: "معلومات شرکت هوایی",
+        airlineCode: "کود شرکت هوایی",
+        airlineType: "نوعیت شرکت هوایی", 
+       
+    },
 
     flight: {
         flight: "پرواز",
