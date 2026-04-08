@@ -49,7 +49,7 @@ export default function UpdatePasswordForm({ className = "" }) {
 
     return (
         <section className={className}>
-            <header>
+            {/* <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {t("pass.title")}
                 </h2>
@@ -57,13 +57,13 @@ export default function UpdatePasswordForm({ className = "" }) {
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                     {t("pass.description")}
                 </p>
-            </header>
+            </header> */}
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
                     <InputLabel
                         htmlFor="current_password"
-                        value={t("pass.current")}
+                        value={t("user.currentPassword")}
                     />
 
                     <TextInput
@@ -79,13 +79,20 @@ export default function UpdatePasswordForm({ className = "" }) {
                     />
 
                     <InputError
-                        message={errors.current_password}
+                        message={
+                            errors.current_password
+                                ? t(`error.${errors.current_password}`)
+                                : ""
+                        }
                         className="mt-2"
                     />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value={t("pass.new")} />
+                    <InputLabel
+                        htmlFor="password"
+                        value={t("user.newPassword")}
+                    />
 
                     <TextInput
                         id="password"
@@ -97,13 +104,18 @@ export default function UpdatePasswordForm({ className = "" }) {
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError
+                        message={
+                            errors.password ? t(`error.${errors.password}`) : ""
+                        }
+                        className="mt-2"
+                    />
                 </div>
 
                 <div>
                     <InputLabel
                         htmlFor="password_confirmation"
-                        value={t("pass.confirm")}
+                        value={t("user.confirmPassword")}
                     />
 
                     <TextInput
@@ -118,15 +130,19 @@ export default function UpdatePasswordForm({ className = "" }) {
                     />
 
                     <InputError
-                        message={errors.password_confirmation}
+                        message={
+                            errors.password_confirmation
+                                ? t(`error.${errors.password_confirmation}`)
+                                : ""
+                        }
                         className="mt-2"
                     />
                 </div>
-                <div><span>{t('passwordNote')}</span></div>
+                {/* <div><span>{t('passwordNote')}</span></div> */}
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>
-                        {t("pass.save")}
+                        {t("common.storInfo")}
                     </PrimaryButton>
 
                     <Transition
@@ -137,12 +153,11 @@ export default function UpdatePasswordForm({ className = "" }) {
                         leaveTo="opacity-0"
                     >
                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {t("pass.saved")}
+                            {t("common.inoformationtStoredSuccessfully")}
                         </p>
                     </Transition>
                 </div>
             </form>
-
         </section>
     );
 }

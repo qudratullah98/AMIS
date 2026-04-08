@@ -83,9 +83,9 @@ const pashto = {
         emailIsInvalid: "برېښنالیک سم نه دی",
         emailAlreadyExists: "دا برېښنالیک مخکې ثبت شوی",
 
-        passwordIsNeeded: "پټنوم اړین دی",
         passwordTooShort: "پټنوم ډېر لنډ دی",
         passwordNotMatch: "پټنوم سره برابر نه دی",
+        passwordInvalid: "پټنوم ناسم دی",
 
         roleIsNeeded: "صلاحیت ټاکل اړین دی",
         roleInvalid: "صلاحیت ناسم دی",
@@ -97,10 +97,18 @@ const pashto = {
 
         airportIsNeeded: "هوایي ډګر ټاکل اړین دی",
         airportInvalid: "هوایي ډګر ناسم دی",
-
         generalDepartmentInvalid: "عمومي څانګه ناسمه دی",
-
         positionTitleIsNeeded: "د دندې سرلیک اړین دی",
+
+        passwordIsNeeded: "مهرباني وکړئ پټنوم داخل کړئ.",
+        passwordInvalid: "اوسنی پټنوم ناسم دی.",
+        confirmPasswordInvalid: "د پټنوم تایید سم نه دی.",
+        passwordMin: "پټنوم باید لږ تر لږه ۸ توري ولري.",
+
+        passwordLetters: "پټنوم باید لږ تر لږه یو حرف ولري.",
+        passwordMixedCase: "پټنوم باید لوی او کوچني حروف ولري.",
+        passwordNumbers: "پټنوم باید لږ تر لږه یو عدد ولري.",
+        passwordSymbols: "پټنوم باید لږ تر لږه یو ځانګړی نښه ولري.",
     },
 
     state: {
@@ -219,9 +227,12 @@ const pashto = {
         positionTitle: "د بست عنوان",
         generalDepartment: "عمومي څانګه",
 
-        confirmPassword: "د پټنوم تایید",
+        confirmPassword: "د پټ نوم تایید",
         addingNewUser: "د نوي کاروونکي زیاتول",
         reset: "بیا تنظیمول",
+
+        currentPassword: "اوسنی پټ نوم",
+        newPassword: "نوی پټ نوم",
     },
 
     construction: {

@@ -14,21 +14,32 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-        // $validated = $request->validate([
-        //     'current_password' => ['required', 'current_password'],
-        //     'password' => ['required', Password::defaults(), 'confirmed'],
-        // ]);
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password'         => [
                 'required',
                 'confirmed',
                 Password::min(8)
-                    ->letters()    // must contain letters
-                    ->numbers()    // must contain numbers
-                    ->symbols()    // must contain special characters
-                    ->mixedCase(), // optional: requires both uppercase & lowercase letters
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                    ->mixedCase(),
             ],
+        ], [
+            // Current password
+            'current_password.required'         => "passwordIsNeeded",
+            'current_password.current_password' => "passwordInvalid",
+
+            // Basic password
+            'password.required'                 => "passwordIsNeeded",
+            'password.confirmed'                => "confirmPasswordInvalid",
+            'password.min'                      => "passwordMin", // for min(8)
+
+            // 🔥 Advanced password rules
+            'password.letters'                  => "passwordLetters",
+            'password.mixed'                    => "passwordMixedCase",
+            'password.numbers'                  => "passwordNumbers",
+            'password.symbols'                  => "passwordSymbols",
         ]);
 
         $request->user()->update([
