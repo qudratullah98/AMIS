@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'blocked', 'check_airport'])->group(function () {
     Route::get('airports', [AirportsController::class, 'index'])->middleware('can:viewAirports')->name('airports.index');
     Route::get('airport/create', [AirportsController::class, 'create'])->middleware('can:manageAirports')->name('airport.create');
-    Route::post('/airports', [AirportsController::class, 'store'])->middleware('can:manageAirports')->name('airport.store')->name('airports.store');
+    Route::post('/airports', [AirportsController::class, 'store'])->middleware('can:manageAirports')->name('airport.store');
     Route::get('airport/{id}/edit', [AirportsController::class, 'edit'])->middleware('can:manageAirports')->name('airport.edit');
     Route::post('airport/update', [AirportsController::class, 'update'])->middleware('can:manageAirports')->name('airport.update');
     Route::post('airport/activate', [AirportsController::class, 'activate'])->middleware('can:manageAirports')->name('airport.activate');

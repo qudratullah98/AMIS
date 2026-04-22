@@ -84,3 +84,4 @@ require __DIR__ . '/log.php';
 require __DIR__ . '/airport.php';
 require __DIR__ . '/airline.php';
 require __DIR__ . '/constructions.php';
+require __DIR__ . '/sgha.php';
