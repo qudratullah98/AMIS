@@ -99,6 +99,15 @@ export default function Header() {
                 can: true,
             },
         ],
+
+        airline:[
+            {
+                title: t("airline.airlines"),
+                href: "/airline",
+                icon: <Building2 className="w-5 h-5" />,
+                can: true, //permissions.includes("veiwAirports"),
+            },
+        ]
     };
 
     // Determine which menu group to show based on current path
@@ -115,8 +124,11 @@ export default function Header() {
             return menuGroups.airport;
         if (location.startsWith("/airlines") || location.startsWith("/airline"))
             return menuGroups.airline;
+<<<<<<< HEAD
          if (location.startsWith("/aircraft") || location.startsWith("/airCraftTypes"))
             return menuGroups.aircraft;
+=======
+>>>>>>> ecfe4ff1eb063c8d12fc42777753752492068f28
         if (location.startsWith("/constructions") || location.startsWith("/construction"))
             return menuGroups.constructions;
 

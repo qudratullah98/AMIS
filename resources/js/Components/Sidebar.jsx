@@ -73,7 +73,7 @@ const Sidebar = () => {
             label: t("airport.airports"),
             icon: <Plane className="w-5 h-5" />,
             keyword: "airport",
-            can: permissions.includes("viewAirportMenu") || true,
+            can: permissions.includes("viewAirlineMenu") || true,
         },
         // Airlines
         {
@@ -96,11 +96,11 @@ const Sidebar = () => {
 
         //SGHA part
         {
-            href: "/sgha",
+            href: route("sgha.index"),
             label: t("sgha.SGHAPart"),
             icon: <Menu className="w-5 h-5" />,
             keyword: "sgha",
-            can: permissions.includes("viewSGHAMenu") || true,
+            can: permissions.includes("viewSghaMenu") || true,
             subItems: [
                 {
                     href: "",
@@ -183,7 +183,7 @@ const Sidebar = () => {
         // },
     ];
 
-    const isActive = (href) => currentPath === href;
+    const isActive = (href) => href.includes(currentPath);
     const isChildActive = (subItems) =>
         subItems?.some((sub) => isActive(sub.href));
 

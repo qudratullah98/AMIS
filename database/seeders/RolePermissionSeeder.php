@@ -30,6 +30,17 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'manageAirports', 'guard_name' => 'sanctum'],
             ['name' => 'viewAirports', 'guard_name' => 'sanctum'],
 
+
+            // AIRLINE PERMISSIONS
+            ['name' => 'viewAirlineMenu', 'guard_name' => 'sanctum'],
+            ['name' => 'manageAirLine', 'guard_name' => 'sanctum'],
+            ['name' => 'viewairLine', 'guard_name' => 'sanctum'],
+
+            // SGHA PERMISSIONS
+            ['name' => 'viewSghaMenu', 'guard_name' => 'sanctum'],
+            ['name' => 'manageSgha', 'guard_name' => 'sanctum'],
+            ['name' => 'viewSgha', 'guard_name' => 'sanctum'],
+
         ];
 
         // Create permissions in the database

@@ -27,7 +27,7 @@ export default function CreateAndEdit({
 }) {
     const { t } = useTranslation();
 
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData,  processing, errors, reset,setError } = useForm({
         id: airport.id || "",
         name_ps: airport.name_ps || "",
         name_dr: airport.name_dr || "",
@@ -127,6 +127,7 @@ export default function CreateAndEdit({
                 reset();
                 if (onSubmitSuccess) onSubmitSuccess(response.data.airport);
             } catch (err) {
+                setError(err.response.data.errors || {});
                 console.error("Error submitting form:", err);
             } finally {
                 setSmallLoading(false);
