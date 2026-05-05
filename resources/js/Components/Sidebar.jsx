@@ -69,7 +69,7 @@ const Sidebar = () => {
             can: permissions.includes("viewDashboardMenu"),
         },
         {
-            href: route("airports.index"),
+            href: "/airports",
             label: t("airport.airports"),
             icon: <Plane className="w-5 h-5" />,
             keyword: "airport",
@@ -77,15 +77,17 @@ const Sidebar = () => {
         },
         // Airlines
         {
-            href: route("airline.index"),
+            href: "/airlines",
             label: t("airline.airlines"),
             icon: <Building2 className="w-5 h-5" />,
             keyword: "airlines",
             can: permissions.includes("viewAirlinesMenu") || true,
         },
+
+
         // Aircraf types
         {
-            href: route("airCraftType.index"),
+            href: "/airCraftTypes",
             label: t("airport.aircraftTypes"),
             icon: "🚁",
             keyword: "aircraftTypes",

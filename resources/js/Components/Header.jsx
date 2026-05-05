@@ -7,6 +7,7 @@ import {
     ShieldUser,
     Monitor,
     PlaneTakeoff,
+    Building2,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "./LogoutComponent";
@@ -63,6 +64,24 @@ export default function Header() {
             },
         ],
 
+        airline: [
+            {
+                title: t("airline.airlines"),
+                href: "/airlines",
+                icon: <Building2 className="w-5 h-5" />,
+                can: true, //permissions.includes("veiwAirports"),
+            },
+        ],
+
+        aircraft: [
+            {
+                title: t("airport.aircraftTypes"),
+                href: "/airCraftTypes",
+                icon: "🚁",
+                can: true, //permissions.includes("veiwAirports"),
+            },
+        ],
+
         constructions: [
             {
                 title: t("construction.constructionsPart"),
@@ -94,6 +113,10 @@ export default function Header() {
             return menuGroups.users;
         if (location.startsWith("/airports") || location.startsWith("/airport"))
             return menuGroups.airport;
+        if (location.startsWith("/airlines") || location.startsWith("/airline"))
+            return menuGroups.airline;
+         if (location.startsWith("/aircraft") || location.startsWith("/airCraftTypes"))
+            return menuGroups.aircraft;
         if (location.startsWith("/constructions") || location.startsWith("/construction"))
             return menuGroups.constructions;
 

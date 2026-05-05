@@ -150,7 +150,10 @@ const dari = {
         runwayLength: "طول باند",
         runwayWidth: "عرض باند",
         airportType: "نوعیت میدان هوایی",
-        aircraftTypes: "انواع هواپیما",
+        aircraftTypes: "انواع هواپیما ها",
+                aircraftType: "انواع هواپیما",
+
+        aircraftCode:"کود هواپیما",
         type: {
             international: "بین‌المللی",
             domestic: "داخلی",

@@ -154,6 +154,9 @@ const pashto = {
         runwayWidth: "د رنوې پلنوالی",
         airportType: " هوایي ډګر ډول",
         aircraftTypes: "د الوتکو ډولونه",
+        aircraftType: "د الوتکې ډول",
+
+        aircraftCode: " د الوتکې کوډ",
 
         type: {
             international: "نړیوال",
@@ -233,8 +236,8 @@ const pashto = {
 
         currentPassword: "اوسنی پټ نوم",
         newPassword: "نوی پټ نوم",
-        logout:"له سیستم څخه وتل",
-        loggingOut:"له سیستم څخه د وتلو په حال کې",
+        logout: "له سیستم څخه وتل",
+        loggingOut: "له سیستم څخه د وتلو په حال کې",
     },
 
     construction: {

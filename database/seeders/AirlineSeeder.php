@@ -14,7 +14,7 @@ class AirlineSeeder extends Seeder
             // ===== Afghan Airlines =====
             [
                 'name_ps' => 'آریانا افغان هوایی شرکت',
-                'name_dr' => 'آریانا افغان شرکت هوایی',
+                'name_dr' => 'شرکت هوایی آریانا افغان ',
                 'name_en' => 'Ariana Afghan Airlines',
             ],
             [

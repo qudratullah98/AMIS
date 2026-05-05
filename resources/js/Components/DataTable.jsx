@@ -72,7 +72,7 @@ const DataTable = ({
             </div>
 
             {/* Table Container */}
-            <div className="border border-gray-300">
+            {/* <div className="border border-gray-300">
                 <div
                     style={{
                         scrollbarWidth: "none",
@@ -97,13 +97,34 @@ const DataTable = ({
                         </tbody>
                     </table>
                 </div>
+            </div> */}
+            <div className="border border-gray-300">
+                <div className="max-h-[580px] overflow-y-auto">
+                    <table className="min-w-full table-fixed">
+                        <thead className="sticky top-0 bg-gray-100 shadow-sm z-10">
+                            <tr>
+                                {columns?.map((column, index) => (
+                                    <th
+                                        key={index}
+                                        className="p-3 text-center text-sm font-semibold text-gray-600 border-b border-gray-200 uppercase"
+                                    >
+                                        {column.label}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+
+                        <tbody className="divide-y divide-gray-200 bg-white">
+                            {children}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             {/* Pagination */}
             <div className="mt-3">
                 <Pagination links={links} />
             </div>
-
         </div>
     );
 };
