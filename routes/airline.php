@@ -7,6 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth', 'blocked', 'check_airport'])->group(function () {
-    Route::get('airlines', [AirlineController::class, 'index'])->middleware('can:manageAirLine')->name('airline.index');
+    Route::get('airlines', [AirlineController::class, 'index'])->name('airline.index');
 
 });

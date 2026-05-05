@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Airline extends Model
 {
-<<<<<<< HEAD
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
@@ -21,26 +20,6 @@ class Airline extends Model
         });
     }
 
-=======
-    protected $fillable = [
-        'name_ps',
-        'name_dr',
-        'name_en',
-        'IATA_code',
-        'ICAO_code',
-        'type',
-        'status_id',
-        'province_id',
-        'district_id',
-        'latitude',
-        'longitude',
-        'amsl',
-        'amsl_unit_id',
-        'area',
-        'area_unit_id',
-        'description',
-    ];
->>>>>>> ecfe4ff1eb063c8d12fc42777753752492068f28
     public function sghaServices()
     {
         return $this->hasMany(SGHA_Service::class);

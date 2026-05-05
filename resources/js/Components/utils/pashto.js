@@ -168,7 +168,7 @@ const pashto = {
         },
     },
     airline: {
-        airlineList: "د هوايي شرکتونو لیست",
+        airlinesList: "د هوايي شرکتونو لیست",
         airline: "هوايي شرکت",
         airlines: "هوايي شرکتونه",
         addNewAirline: "نوی هوايي شرکت اضافه کړئ",
