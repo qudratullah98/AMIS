@@ -151,9 +151,9 @@ const dari = {
         runwayWidth: "عرض باند",
         airportType: "نوعیت میدان هوایی",
         aircraftTypes: "انواع هواپیما ها",
-                aircraftType: "انواع هواپیما",
+        aircraftType: "انواع هواپیما",
 
-        aircraftCode:"کود هواپیما",
+        aircraftCode: "کود هواپیما",
         type: {
             international: "بین‌المللی",
             domestic: "داخلی",
@@ -171,8 +171,9 @@ const dari = {
         addingNewAirline: "اضافه نمودن شرکت هوایی جدید",
         airlineInfo: "معلومات شرکت هوایی",
         airlineCode: "کود شرکت هوایی",
-        airlineType: "نوعیت شرکت هوایی",
-
+        airlineType: "نوعیت شرکت هوایی",  
+        airlineName: "نام شرکت هوایی",
+        country: "کشور",
     },
 
     flight: {
@@ -193,6 +194,7 @@ const dari = {
         SGHAPart: "بخش SGHA",
         sghaServiceUnite: "واحد خدمات SGHA",
         sghaServices: "خدمات SGHA",
+        sghaServicesList: "لیست خدمات SGHA",
     },
 
     passenger: {
@@ -203,13 +205,6 @@ const dari = {
         gender: "جنسیت",
         male: "مرد",
         female: "زن",
-    },
-
-    airline: {
-        airline: "شرکت هوایی",
-        airlines: "شرکت‌های هوایی",
-        airlineName: "نام شرکت هوایی",
-        country: "کشور",
     },
 
     report: {
@@ -245,8 +240,8 @@ const dari = {
 
         currentPassword: "رمز عبور فعلی",
         newPassword: "رمز عبور جدید",
-        logout:"بیرون شدن از سیستم",
-        loggingOut:"در حال بیرون شدن از سیستم",
+        logout: "بیرون شدن از سیستم",
+        loggingOut: "در حال بیرون شدن از سیستم",
     },
 
     construction: {
@@ -255,6 +250,8 @@ const dari = {
         constructions: "ساخت‌وسازها",
         constructionTypes: "نوعیت های ساخت‌وساز",
     },
+ 
+
 };
 
 export default dari;

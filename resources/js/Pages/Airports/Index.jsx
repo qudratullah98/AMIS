@@ -8,8 +8,9 @@ import { Edit2, Verified } from "lucide-react";
 import StatusBadge from "@/Components/StatusBadge";
 import { useTranslation } from "react-i18next";
 import CustomModal from "@/Components/CustomModal";
-import CreateAndEdit from "./CreateAndEdit";
 import SmallLoader from "@/Components/SmallLoader";
+import CreateAirport from "./Create";
+import EditAirport from "./Edit";
 
 function AirportsIndex({ airports }) {
     const { t } = useTranslation();
@@ -65,9 +66,8 @@ function AirportsIndex({ airports }) {
                     stopPropagation={false}
                     footer={false}
                 >
-                    <CreateAndEdit
+                    <CreateAirport
                         onSubmitSuccess={(airport) => {
-                            // Example: add new airport to list
                             setAirportsData((prev) => [airport, ...prev]);
                             setCreateModel(false);
                         }}
@@ -83,9 +83,9 @@ function AirportsIndex({ airports }) {
                     stopPropagation={false}
                     footer={false}
                 >
-                    <CreateAndEdit
+                    <EditAirport
+                        airport={editableData}
                         onEditSuccess={(airport) => {
-                            // Example: add new airport to list
                             setAirportsData((prev) =>
                                 prev.map((a) =>
                                     a.id === airport.id ? airport : a,
@@ -93,8 +93,6 @@ function AirportsIndex({ airports }) {
                             );
                             setEditModel(false);
                         }}
-                        editable={true}
-                        airport={editableData} // Pass the first airport as an example, you should pass the selected airport for editing
                     />
                 </CustomModal>
             )}
@@ -110,9 +108,7 @@ function AirportsIndex({ airports }) {
                             header={t("airport.airportList")}
                             buttonLabel={t("airport.addNewAirport")}
                             enableButton={true}
-                            onButtonClick={() => {
-                                setCreateModel(true);
-                            }}
+                            onButtonClick={() => setCreateModel(true)}
                         >
                             {airportData.map((airport, a) => (
                                 <tr

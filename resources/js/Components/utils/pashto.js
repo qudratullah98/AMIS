@@ -168,16 +168,17 @@ const pashto = {
         },
     },
     airline: {
-        airlinesList: "د هوايي شرکتونو لیست",
-        airline: "هوايي شرکت",
-        airlines: "هوايي شرکتونه",
+        airlinesList: "د هوايي شرکتونو لیست", 
         addNewAirline: "نوی هوايي شرکت اضافه کړئ",
         addingNewAirline: "د نوي هوايي شرکت اضافه کول",
         airlineInfo: "د هوايي شرکت معلومات",
         airlineCode: "د هوايي شرکت کوډ",
-        airlineType: "د هوايي شرکت ډول",
+        airlineType: "د هوايي شرکت ډول", 
+        airline: "هوايي شرکت",
+        airlines: "هوايي شرکتونه",
+        airlineName: "د هوايي شرکت نوم",
+        country: "هیواد",
     },
-
 
     flight: {
         flight: "الوتنه",
@@ -197,6 +198,8 @@ const pashto = {
         SGHAPart: "د SGHA برخه",
         sghaServiceUnite: "د SGHA خدماتي واحد",
         sghaServices: "د SGHA خدمات",
+        sghaServicesList: "د SGHA خدماتو لیست",
+        
     },
 
     passenger: {
@@ -207,13 +210,6 @@ const pashto = {
         gender: "جنس",
         male: "نارینه",
         female: "ښځینه",
-    },
-
-    airline: {
-        airline: "هوايي شرکت",
-        airlines: "هوايي شرکتونه",
-        airlineName: "د هوايي شرکت نوم",
-        country: "هیواد",
     },
 
     report: {
