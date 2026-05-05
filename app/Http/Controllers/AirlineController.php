@@ -20,7 +20,7 @@ class AirlineController extends Controller
             return $query->search($search);
         })->latest()->paginate($perPage);
 
-        return Inertia::render('Airports/Airlines/Index',['airlines'=>$airlines]);
+        return Inertia::render('Airlines/Index',['airlines'=>$airlines]);
     }
 
     // AirCraft Types part
@@ -34,7 +34,7 @@ class AirlineController extends Controller
         })->latest()->paginate($perPage);
 
 
-        return Inertia::render('Airports/AircraftTypes/Index',['aircraftTypes'=>$aircraftTypes]);
+        return Inertia::render('AircraftTypes/Index',['aircraftTypes'=>$aircraftTypes]);
 
     }
 

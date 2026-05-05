@@ -14,7 +14,6 @@ function AirportsIndex({ aircraftTypes }) {
         { label: t("airport.aircraftType") },
         { label: t("airport.aircraftCode") },
     ];
-    console.log(aircraftTypes)
 
 
     return (
