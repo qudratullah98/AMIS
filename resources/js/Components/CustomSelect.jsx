@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-const CustomSelect = ({ id, options, onChange, value, multiple = false, placeholder ,disabled=false,filterOption }) => {
+const CustomSelect = ({ id, options, onChange, value, multiple = false, placeholder ,disabled=false,filterOption ,onBlur }) => {
     const handleChange = (selectedOptions) => {
         if (multiple) {
             onChange(selectedOptions.map(option => option.value));
@@ -33,6 +33,7 @@ const CustomSelect = ({ id, options, onChange, value, multiple = false, placehol
             }}
             isDisabled={disabled}
             filterOption={filterOption}
+            onBlur={onBlur}
         />
     );
 };

@@ -26,4 +26,12 @@ class SGHAServiceController extends Controller
         $perPage = request()->input('perPage', 10);
         $sghaServiceUnit = SGHAServiceUnit::latest()->paginate($perPage);
         return inertia('SGHA/SGHAServiceUnit/Index', compact('sghaServiceUnit'));
-}}
+}
+
+// Json Data 
+    public function getSGHAServiceUnit()
+    {
+        $sghaServiceUnit = SGHAServiceUnit::select('id', 'service_name')->get();
+        return response()->json($sghaServiceUnit);
+    }
+}

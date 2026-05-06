@@ -13,4 +13,9 @@ Route::middleware(['auth', 'blocked'])->group(function () {
    // sgha Mesurements unit
    Route::get('sgha/services_units', [SGHAServiceController::class, 'SGHAServiceUnit'])->name('sgha.services_units.index');
 
+
+
+   // Json Data for sgha services units
+   Route::get('sgha/services_units/json', [SGHAServiceController::class, 'getSGHAServiceUnit'])->name('sgha.services_units.json');
+
 });

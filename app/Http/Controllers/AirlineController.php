@@ -38,4 +38,12 @@ class AirlineController extends Controller
 
     }
 
+
+    // Json Data 
+    public function getAirlines()
+    {
+        $airlines = Airline::all();
+        return response()->json($airlines);
+    }
+
 }
