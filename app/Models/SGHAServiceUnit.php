@@ -8,10 +8,10 @@ class SGHAServiceUnit extends Model
 {
     protected $table ='sgha_service_units';
     protected $fillable = [
-        'service_name', 
+        'service_name',
     ];
-    public function sghaServices()
+    public function sghaServicesRate()
     {
-        return $this->hasMany(SGHA_Service::class);
+        return $this->hasMany(SGHAServiceRate::class);
     }
 }

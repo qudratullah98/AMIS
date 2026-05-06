@@ -16,22 +16,6 @@ return new class extends Migration
             $table->string('name_en')->unique();
             $table->string('name_ps')->nullable();
             $table->string('name_dr')->nullable();
-
-            $table->foreignId('sgha_service_unit_id')
-                ->constrained('sgha_service_units')
-                ->cascadeOnDelete();
-
-            $table->foreignId('airline_id')
-                ->constrained('airlines')
-                ->cascadeOnDelete();
-
-            $table->decimal('complation_rate',6,2);
-
-            $table->foreignId('approval_status_id')
-                ->nullable()
-                ->constrained('approval_statuses')
-                ->nullOnDelete();
-
             $table->timestamps();
         });
     }

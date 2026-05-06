@@ -11,29 +11,11 @@ class SGHA_Service extends Model
         'name_en',
         'name_ps',
         'name_dr',
-        'sgha_service_unit_id',
-        'airline_id',
-        'complation_rate',
-        'approval_status_id',
     ];
-    public function sghaServiceUnit()
-    {
-        return $this->belongsTo(SGHAServiceUnit::class);
-    }
 
-    public function airline()
+    public function sghaServicesRate()
     {
-        return $this->belongsTo(Airline::class);
-    }
-
-    public function flyteServices()
-    {
-        return $this->hasMany(FlyteService::class);
-    }
-
-    public function approvalStatus()
-    {
-        return $this->belongsTo(ApprovelStatus::class);
+        return $this->hasMany(SGHAServiceRate::class);
     }
 
 }

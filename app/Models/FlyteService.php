@@ -11,8 +11,8 @@ class FlyteService extends Model
         return $this->belongsTo(Flyte::class);
     }
 
-    public function sghaService()
+    public function sghaServicesRate()
     {
-        return $this->belongsTo(SGHA_Service::class);
+        return $this->belongsTo(SGHAServiceRate::class);
     }
 }

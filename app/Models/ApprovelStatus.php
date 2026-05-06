@@ -17,9 +17,9 @@ class ApprovelStatus extends Model
         return $this->hasMany(AirportConstruction::class);
     }
 
-    public function sghaServices()
+    public function sghaServicesRate()
     {
-        return $this->hasMany(SGHA_Service::class);
+        return $this->hasMany(SGHAServiceRate::class);
     }
 
     public function equipment()
