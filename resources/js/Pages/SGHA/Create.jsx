@@ -101,11 +101,11 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                     }
                 });
 
-                console.log(data);
-            onSubmitSuccess?.(res.data.sgha_service);
+                console.log(res);
+            onSubmitSuccess?.(res.sgha_service);
             reset();
         } catch (error) {
-            console.error(error.response.data.message);
+            console.error(error);
         } finally {
             setSubmitting(false);
         }
