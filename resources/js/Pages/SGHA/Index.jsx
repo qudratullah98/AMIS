@@ -114,7 +114,7 @@ function Index({ sgha_services }) {
                                         {service.name_dr}
                                     </td>
                                     <td className="p-2 text-center">
-                                        {service.sgha_service_unit?.name_en ||
+                                        {service.sgha_service_unit?.service_name ||
                                             "-"}
                                     </td>
                                     <td className="p-2 text-center">

@@ -13,7 +13,7 @@ class SGHAServiceController extends Controller
     public function index()
     {
         $perPage = request()->input('perPage', 10);
-        $sgha_services = SGHA_Service::latest()->paginate($perPage);
+        $sgha_services = SGHA_Service::with(['sghaServiceUnit:id,service_name', 'airline:id,name_en'])->latest()->paginate($perPage);
         return inertia('SGHA/Index', compact('sgha_services'));
     }
     public function SGHAServiceUnit()
@@ -33,10 +33,12 @@ class SGHAServiceController extends Controller
     {
         $data = $request->validated();
 
-        SGHA_Service::create($data);
+        $service = SGHA_Service::create($data);
+        $service->load(['sghaServiceUnit:id,service_name', 'airline:id,name_en']);
 
         return response()->json([
             'message' => 'Created successfully',
+            'sgha_service' => $service
         ]);
     }
 
@@ -45,9 +47,10 @@ class SGHAServiceController extends Controller
         $service = SGHA_Service::findOrFail($id);
 
         $service->update($request->validated());
-
+        $service->load(['sghaServiceUnit:id,service_name', 'airline:id,name_en']);
         return response()->json([
             'message' => 'Updated successfully',
+            'sgha_service' => $service
         ]);
     }
 

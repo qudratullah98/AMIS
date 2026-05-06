@@ -14,7 +14,10 @@ import { max, min, required } from "@/lib/validation/rules";
 
 // IconLabel
 const IconLabel = ({ htmlFor, icon, text }) => (
-    <label htmlFor={htmlFor} className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+    <label
+        htmlFor={htmlFor}
+        className="flex items-center gap-2 text-sm font-semibold text-gray-700"
+    >
         {icon && <span className="text-blue-600">{icon}</span>}
         {text}
     </label>
@@ -36,7 +39,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
     const { validateOnBlur, validateAll } = useValidation(
         data,
         setError,
-        clearErrors
+        clearErrors,
     );
 
     const [airlines, setAirlines] = useState([]);
@@ -51,10 +54,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
         name_dr: [required("Dari name is required")],
         sgha_service_unit_id: [required("Service unit is required")],
         airline_id: [required("Airline is required")],
-        complation_rate: [
-            required("Rate is required"),
-            min(0), 
-        ],
+        complation_rate: [required("Rate is required"), min(0)],
     };
 
     // ---------------- FETCH DATA ----------------
@@ -93,16 +93,16 @@ export default function CreateSghaService({ onSubmitSuccess }) {
         setSubmitting(true);
 
         try {
-            const { data: res } = await axios.post(
-                route("sgha.services_units.store"),
-                data
-            ).catch((err) => {
-                if (err.response.status === 422) {
-                    setError(err.response.data.errors);
-                }
-            });
+            const { data: res } = await axios
+                .post(route("sgha.services_units.store"), data)
+                .catch((err) => {
+                    if (err.response.status === 422) {
+                        setError(err.response.data.errors);
+                    }
+                });
 
-            onSubmitSuccess?.(res);
+                console.log(data);
+            onSubmitSuccess?.(res.data.sgha_service);
             reset();
         } catch (error) {
             console.error(error.response.data.message);
@@ -116,16 +116,20 @@ export default function CreateSghaService({ onSubmitSuccess }) {
     // ---------------- UI ----------------
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
-
                 {/* NAME EN */}
                 <div>
-                    <IconLabel htmlFor="name_en" icon="✈️" text="English Name" />
+                    <IconLabel
+                        htmlFor="name_en"
+                        icon="✈️"
+                        text="English Name"
+                    />
                     <TextInput
                         id="name_en"
                         value={data.name_en}
-                        onChange={(e) => handleChange("name_en", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("name_en", e.target.value)
+                        }
                         onBlur={validateOnBlur("name_en", rules.name_en)}
                     />
                     <InputError message={errors.name_en} />
@@ -137,7 +141,9 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                     <TextInput
                         id="name_ps"
                         value={data.name_ps}
-                        onChange={(e) => handleChange("name_ps", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("name_ps", e.target.value)
+                        }
                         onBlur={validateOnBlur("name_ps", rules.name_ps)}
                     />
                     <InputError message={errors.name_ps} />
@@ -149,7 +155,9 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                     <TextInput
                         id="name_dr"
                         value={data.name_dr}
-                        onChange={(e) => handleChange("name_dr", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("name_dr", e.target.value)
+                        }
                         onBlur={validateOnBlur("name_dr", rules.name_dr)}
                     />
                     <InputError message={errors.name_dr} />
@@ -169,7 +177,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }
                         onBlur={validateOnBlur(
                             "sgha_service_unit_id",
-                            rules.sgha_service_unit_id
+                            rules.sgha_service_unit_id,
                         )}
                     />
                     <InputError message={errors.sgha_service_unit_id} />
@@ -185,10 +193,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                             label: a.name_en,
                         }))}
                         onChange={(val) => handleChange("airline_id", val)}
-                        onBlur={validateOnBlur(
-                            "airline_id",
-                            rules.airline_id
-                        )}
+                        onBlur={validateOnBlur("airline_id", rules.airline_id)}
                     />
                     <InputError message={errors.airline_id} />
                 </div>
@@ -205,7 +210,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }
                         onBlur={validateOnBlur(
                             "complation_rate",
-                            rules.complation_rate
+                            rules.complation_rate,
                         )}
                     />
                     <InputError message={errors.complation_rate} />

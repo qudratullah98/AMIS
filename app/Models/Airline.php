@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Airline extends Model
 {
+    protected $fillable = [
+        'name_en',
+        'name_ps',
+        'name_dr',
+    ];
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
