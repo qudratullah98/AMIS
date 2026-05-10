@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name_en')->unique();
             $table->string('name_ps')->nullable();
             $table->string('name_dr')->nullable();
+            $table->foreignId('sgha_service_unit_id')->constrained('sgha_service_units')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('s_g_h_a__services');
+        Schema::dropIfExists('sgha_services');
     }
 };

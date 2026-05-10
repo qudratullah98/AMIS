@@ -5,6 +5,9 @@ import SubHeader from "@/Components/SubHeader";
 import { useTranslation } from "react-i18next"; 
 import CreateSghaService from "./Create";
 import CustomModal from "@/Components/CustomModal";
+import ThreeDotMenu from "@/Components/ThreeDotMenu";
+import SmallLoader from "@/Components/SmallLoader";
+import { Edit2, Verified } from "lucide-react";
 // import EditSghaService from "./EditSghaService";
 
 function Index({ sgha_services }) {
@@ -23,8 +26,7 @@ function Index({ sgha_services }) {
         { label: t("common.namePashto") },
         { label: t("common.nameDari") },
         { label: t("sgha.serviceUnit") },
-        { label: t("sgha.airline") },
-        { label: t("sgha.completionRate") },
+        { label: t("sgha.airline") }, 
         { label: t("common.actions") },
     ];
 
@@ -114,39 +116,79 @@ function Index({ sgha_services }) {
                                         {service.name_dr}
                                     </td>
                                     <td className="p-2 text-center">
-                                        {service.sgha_service_unit?.service_name ||
-                                            "-"}
-                                    </td>
-                                    <td className="p-2 text-center">
-                                        {service.airline?.name_en || "-"}
-                                    </td>
-                                    <td className="p-2 text-center">
-                                        {service.complation_rate}%
-                                    </td>
-                                    <td className="p-2 text-center">
-                                        <button
-                                            onClick={() => handleEdit(service)}
-                                            className="text-blue-600 hover:text-blue-800 mr-2"
-                                        >
-                                            {t("common.edit")}
-                                        </button>
-                                        <button
-                                            onClick={() => {
-                                                // Add delete functionality
-                                                if (
-                                                    confirm(
-                                                        t(
-                                                            "common.confirmDelete",
-                                                        ),
-                                                    )
-                                                ) {
-                                                    // Handle delete
-                                                }
-                                            }}
-                                            className="text-red-600 hover:text-red-800"
-                                        >
-                                            {t("common.delete")}
-                                        </button>
+                                        {service.service_unit?.service_name  }
+                                        </td>
+                               <td className="p-4">
+<td className="p-2 min-w-[260px]">
+    <div className="flex flex-col gap-2">
+        {service.sgha_services_rate?.map((rate) => (
+            <div
+                key={rate.id}
+                className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-1 shadow-sm"
+            >
+                {/* Airline Name */}
+                <div className="w-24 truncate text-xs font-medium text-gray-700">
+                    ✈️ {rate.airline?.name_en}
+                </div>
+
+                {/* Progress Bar */}
+                <div className="flex-1">
+                    <div className="h-2 overflow-hidden rounded-full bg-gray-200">
+                        <div
+                            className="h-full rounded-full bg-gradient-to-r from-blue-500 to-green-400 transition-all duration-300"
+                            style={{
+                                width: `${rate.complation_rate}%`,
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* Percentage */}
+                <div className="w-10 text-right text-xs font-bold text-blue-700">
+                    {rate.complation_rate}%
+                </div>
+            </div>
+        ))}
+    </div>
+</td>
+</td>
+                                  <td className=" text-center">
+                                        <ThreeDotMenu>
+                                            <div className="py-0">
+                                               
+                                                    <button
+                                                        className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        onClick={() =>
+                                                            activation(
+                                                                service.id,
+                                                            )
+                                                        }
+                                                    >
+                                                       
+                                                      
+                                                                <Verified className="ml-2 text-xl" />
+                                                                {t(
+                                                                    "state.approve",
+                                                                )}
+                                                             
+                                                         
+                                                    </button>
+                                                
+                                                <button
+                                                    className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    onClick={() => {
+                                                        setEditModel(true);
+                                                        setEditableData(
+                                                            service,
+                                                        );
+                                                    }}
+                                                >
+                                                    {" "}
+                                                    <Edit2 className="ml-2 text-xl" />{" "}
+                                                    {t("common.editInfo")}
+                                                </button>
+                                            </div>
+                                        </ThreeDotMenu>
                                     </td>
                                 </tr>
                             ))}

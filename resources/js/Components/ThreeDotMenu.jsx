@@ -22,7 +22,7 @@ const ThreeDotMenu = ({ children }) => {
     }, [isOpen]);
 
     return (
-        <div className="relative inline-block text-left">
+        <div className="  inline-block text-left ">
             <button
                 onClick={toggleDropdown}
                 className={`flex items-center justify-center w-7 ${isOpen ? "bg-gray-200" : ""} rounded-full hover:bg-gray-200 focus:outline-none`}

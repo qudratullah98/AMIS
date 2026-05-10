@@ -19,9 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
 
-            $table->foreignId('sgha_service_unit_id')
-                ->constrained('sgha_service_units')
-                ->cascadeOnDelete();
+          
 
             $table->foreignId('airline_id')
                 ->constrained('airlines')

@@ -10,9 +10,8 @@ import SmallLoader from "@/Components/SmallLoader";
 import FullPageLoader from "@/Components/FullPageLoader";
 
 import useValidation from "@/lib/validation/useValidation";
-import { max, min, required } from "@/lib/validation/rules";
+import { min, required } from "@/lib/validation/rules";
 
-// IconLabel
 const IconLabel = ({ htmlFor, icon, text }) => (
     <label
         htmlFor={htmlFor}
@@ -32,8 +31,13 @@ export default function CreateSghaService({ onSubmitSuccess }) {
             name_dr: "",
             name_en: "",
             sgha_service_unit_id: "",
-            airline_id: "",
-            complation_rate: "",
+
+            airline_rates: [
+                {
+                    airline_id: "",
+                    complation_rate: "",
+                },
+            ],
         });
 
     const { validateOnBlur, validateAll } = useValidation(
@@ -47,17 +51,13 @@ export default function CreateSghaService({ onSubmitSuccess }) {
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
-    // ---------------- RULES ----------------
     const rules = {
         name_en: [required("English name is required")],
         name_ps: [required("Pashto name is required")],
         name_dr: [required("Dari name is required")],
         sgha_service_unit_id: [required("Service unit is required")],
-        airline_id: [required("Airline is required")],
-        complation_rate: [required("Rate is required"), min(0)],
     };
 
-    // ---------------- FETCH DATA ----------------
     useEffect(() => {
         const load = async () => {
             try {
@@ -78,10 +78,37 @@ export default function CreateSghaService({ onSubmitSuccess }) {
         load();
     }, []);
 
-    // ---------------- CHANGE HANDLER ----------------
     const handleChange = (field, value) => {
         setData(field, value);
+
         if (errors[field]) clearErrors(field);
+    };
+
+    // ---------------- AIRLINE RATE CHANGE ----------------
+    const handleAirlineRateChange = (index, field, value) => {
+        const updated = [...data.airline_rates];
+
+        updated[index][field] = value;
+
+        setData("airline_rates", updated);
+    };
+
+    // ---------------- ADD ROW ----------------
+    const addAirlineRate = () => {
+        setData("airline_rates", [
+            ...data.airline_rates,
+            {
+                airline_id: "",
+                complation_rate: "",
+            },
+        ]);
+    };
+
+    // ---------------- REMOVE ROW ----------------
+    const removeAirlineRate = (index) => {
+        const updated = data.airline_rates.filter((_, i) => i !== index);
+
+        setData("airline_rates", updated);
     };
 
     // ---------------- SUBMIT ----------------
@@ -93,19 +120,20 @@ export default function CreateSghaService({ onSubmitSuccess }) {
         setSubmitting(true);
 
         try {
-            const { data: res } = await axios
-                .post(route("sgha.services_units.store"), data)
-                .catch((err) => {
-                    if (err.response.status === 422) {
-                        setError(err.response.data.errors);
-                    }
-                });
+            const { data: res } = await axios.post(
+                route("sgha.services_units.store"),
+                data,
+            );
 
-                console.log(res);
             onSubmitSuccess?.(res.sgha_service);
+
             reset();
         } catch (error) {
             console.error(error);
+
+            if (error.response?.status === 422) {
+                setError(error.response.data.errors);
+            }
         } finally {
             setSubmitting(false);
         }
@@ -113,7 +141,6 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
     if (loading) return <FullPageLoader message={t("common.loading")} />;
 
-    // ---------------- UI ----------------
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
@@ -124,48 +151,60 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         icon="✈️"
                         text="English Name"
                     />
+
                     <TextInput
                         id="name_en"
                         value={data.name_en}
                         onChange={(e) =>
                             handleChange("name_en", e.target.value)
                         }
-                        onBlur={validateOnBlur("name_en", rules.name_en)}
                     />
+
                     <InputError message={errors.name_en} />
                 </div>
 
                 {/* NAME PS */}
                 <div>
-                    <IconLabel htmlFor="name_ps" icon="🛫" text="Pashto Name" />
+                    <IconLabel
+                        htmlFor="name_ps"
+                        icon="🛫"
+                        text="Pashto Name"
+                    />
+
                     <TextInput
                         id="name_ps"
                         value={data.name_ps}
                         onChange={(e) =>
                             handleChange("name_ps", e.target.value)
                         }
-                        onBlur={validateOnBlur("name_ps", rules.name_ps)}
                     />
+
                     <InputError message={errors.name_ps} />
                 </div>
 
                 {/* NAME DR */}
                 <div>
                     <IconLabel htmlFor="name_dr" icon="🛫" text="Dari Name" />
+
                     <TextInput
                         id="name_dr"
                         value={data.name_dr}
                         onChange={(e) =>
                             handleChange("name_dr", e.target.value)
                         }
-                        onBlur={validateOnBlur("name_dr", rules.name_dr)}
                     />
+
                     <InputError message={errors.name_dr} />
                 </div>
 
                 {/* UNIT */}
                 <div>
-                    <IconLabel htmlFor="unit" icon="📦" text="Service Unit" />
+                    <IconLabel
+                        htmlFor="unit"
+                        icon="📦"
+                        text="Service Unit"
+                    />
+
                     <CustomSelect
                         value={data.sgha_service_unit_id}
                         options={units.map((u) => ({
@@ -175,46 +214,94 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         onChange={(val) =>
                             handleChange("sgha_service_unit_id", val)
                         }
-                        onBlur={validateOnBlur(
-                            "sgha_service_unit_id",
-                            rules.sgha_service_unit_id,
-                        )}
                     />
+
                     <InputError message={errors.sgha_service_unit_id} />
                 </div>
+            </div>
 
-                {/* AIRLINE */}
-                <div>
-                    <IconLabel htmlFor="airline" icon="🏢" text="Airline" />
-                    <CustomSelect
-                        value={data.airline_id}
-                        options={airlines.map((a) => ({
-                            value: a.id,
-                            label: a.name_en,
-                        }))}
-                        onChange={(val) => handleChange("airline_id", val)}
-                        onBlur={validateOnBlur("airline_id", rules.airline_id)}
-                    />
-                    <InputError message={errors.airline_id} />
+            {/* AIRLINES + RATES */}
+            <div className="bg-white p-6 rounded-xl shadow-sm space-y-4">
+                <div className="flex items-center justify-between">
+                    <h3 className="font-semibold text-lg">
+                        Airlines & Completion Rates
+                    </h3>
+
+                    <button
+                        type="button"
+                        onClick={addAirlineRate}
+                        className="px-3 py-1 bg-green-600 text-white rounded"
+                    >
+                        + Add
+                    </button>
                 </div>
 
-                {/* RATE */}
-                <div>
-                    <IconLabel htmlFor="rate" icon="📊" text="Rate" />
-                    <TextInput
-                        id="complation_rate"
-                        type="number"
-                        value={data.complation_rate}
-                        onChange={(e) =>
-                            handleChange("complation_rate", e.target.value)
-                        }
-                        onBlur={validateOnBlur(
-                            "complation_rate",
-                            rules.complation_rate,
-                        )}
-                    />
-                    <InputError message={errors.complation_rate} />
-                </div>
+                {data.airline_rates.map((item, index) => (
+                    <div
+                        key={index}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-4 border p-4 rounded-lg"
+                    >
+                        {/* AIRLINE */}
+                        <div>
+                            <IconLabel
+                                htmlFor={`airline_${index}`}
+                                icon="🏢"
+                                text="Airline"
+                            />
+
+                            <CustomSelect
+                                value={item.airline_id}
+                                options={airlines.map((a) => ({
+                                    value: a.id,
+                                    label: a.name_en,
+                                }))}
+                                onChange={(val) =>
+                                    handleAirlineRateChange(
+                                        index,
+                                        "airline_id",
+                                        val,
+                                    )
+                                }
+                            />
+                        </div>
+
+                        {/* RATE */}
+                        <div>
+                            <IconLabel
+                                htmlFor={`rate_${index}`}
+                                icon="📊"
+                                text="Completion Rate"
+                            />
+
+                            <TextInput
+                                type="number"
+                                value={item.complation_rate}
+                                onChange={(e) =>
+                                    handleAirlineRateChange(
+                                        index,
+                                        "complation_rate",
+                                        e.target.value,
+                                    )
+                                }
+                            />
+                        </div>
+
+                        {/* REMOVE */}
+                        <div className="flex items-end">
+                            {data.airline_rates.length > 1 && (
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        removeAirlineRate(index)
+                                    }
+                                    className="px-3 py-2 bg-red-600 text-white rounded"
+                                >
+                                    Remove
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                ))}
             </div>
 
             {/* SUBMIT */}
@@ -224,7 +311,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                     disabled={processing || submitting}
                     className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
                 >
-                    📦 Save Service
+                    Save Service
                     {submitting && <SmallLoader />}
                 </button>
             </div>
