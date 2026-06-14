@@ -166,7 +166,7 @@ export default function Header() {
 
     return (
         <header
-            className="w-full sticky top-0 z-50 bg-white dark:bg-gray-900 px-6 py-3 shadow-md flex items-center justify-between"
+            className="w-full sticky top-0 z-50 bg-white dark:bg-gray-900 px-2 py-3 shadow-md flex items-center justify-between"
             dir="ltr"
         >
             {/* Left-aligned links */}
