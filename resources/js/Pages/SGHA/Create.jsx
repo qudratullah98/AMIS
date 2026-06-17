@@ -8,7 +8,7 @@ import InputError from "@/Components/InputError";
 import CustomSelect from "@/Components/CustomSelect";
 import SmallLoader from "@/Components/SmallLoader";
 import FullPageLoader from "@/Components/FullPageLoader";
-
+import toast from "react-hot-toast";
 import useValidation from "@/lib/validation/useValidation";
 import { min, required } from "@/lib/validation/rules";
 
@@ -86,6 +86,10 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
     // ---------------- AIRLINE RATE CHANGE ----------------
     const handleAirlineRateChange = (index, field, value) => {
+        if(data.airline_rates.filter((_, i) => i !== index).some(rate => rate.airline_id === value && field === 'airline_id')) {
+            toast.error("This airline is already added.");
+            return;
+        }
         const updated = [...data.airline_rates];
 
         updated[index][field] = value;

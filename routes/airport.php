@@ -24,4 +24,8 @@ Route::middleware(['auth', 'blocked'])->group(function () {
     //AirCraft Types
     Route::get('airCraftTypes', [AirlineController::class, 'airCraftTypeindex'])->name('airCraftType.index');
 
+
+     // Json Data
+    Route::get('airports/json', [AirportsController::class, 'getAirports'])->name('airports.json');
+
 });

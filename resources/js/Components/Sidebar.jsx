@@ -120,10 +120,10 @@ const Sidebar = () => {
                     keyword: "flyteServices",
                 },
                 {
-                    href: "",
+                    href: route("flight.index"),
                     label: t("flight.flights"),
                     icon: <PlaneTakeoff className="w-4 h-4" />,
-                    keyword: "flytes",
+                    keyword: "flights",
                 },
             ],
         },

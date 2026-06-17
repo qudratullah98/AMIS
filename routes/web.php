@@ -85,3 +85,5 @@ require __DIR__ . '/airport.php';
 require __DIR__ . '/airline.php';
 require __DIR__ . '/constructions.php';
 require __DIR__ . '/sgha.php';
+require __DIR__ . '/flight.php';
+require __DIR__ . '/aircraft_type.php';

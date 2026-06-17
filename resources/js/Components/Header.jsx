@@ -91,6 +91,14 @@ export default function Header() {
                 can: true, //permissions.includes("veiwAirports"),
             },
         ],
+        flight: [
+            {
+                title: t("flight.flights"),
+                href: "/flights",
+                icon: <PlaneTakeoff className="w-5 h-5" />,
+                can: true, //permissions.includes("veiwAirports"),
+            },
+        ],
 
         profile: [
             {
@@ -101,14 +109,7 @@ export default function Header() {
             },
         ],
 
-        airline:[
-            {
-                title: t("airline.airlines"),
-                href: "/airlines",
-                icon: <Building2 className="w-5 h-5" />,
-                can: true, //permissions.includes("veiwAirports"),
-            },
-        ]
+    
     };
 
     // Determine which menu group to show based on current path
@@ -129,6 +130,8 @@ export default function Header() {
             return menuGroups.aircraft;
         if (location.startsWith("/constructions") || location.startsWith("/construction"))
             return menuGroups.constructions;
+        if (location.startsWith("/flights") || location.startsWith("/flight"))
+            return menuGroups.flight;
 
         if (location === "/logout" || location === "/profile")
             return menuGroups.profile;

@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('flytes', function (Blueprint $table) {
+        Schema::create('flights', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('airport_id')
                 ->constrained('airports')
                 ->cascadeOnDelete();
 
-            $table->string('flyte_number')->unique();
+            $table->string('flight_number')->unique();
             $table->enum('pmt_methode', ['CREDIT']);
             $table->enum('flt', ['FAX']);
             $table->string('work_order');
@@ -47,6 +47,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('flytes');
+        Schema::dropIfExists('flights');
     }
 };

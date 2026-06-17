@@ -180,6 +180,7 @@ const dari = {
         flight: "پرواز",
         flights: "پروازها",
         flightNumber: "شماره پرواز",
+        createFlight: "ایجاد پرواز جدید",
         airline: "شرکت هوایی",
         departure: "حرکت",
         arrival: "رسیدن",
