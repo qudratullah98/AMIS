@@ -23,20 +23,7 @@ class AirlineController extends Controller
         return Inertia::render('Airlines/Index',['airlines'=>$airlines]);
     }
 
-    // AirCraft Types part
-    public function airCraftTypeindex()
-    {
-        $search   = request()->input('query');
-        $perPage  = request()->input('perPage', 13);
-
-        $aircraftTypes  = AircraftType::when($search, function ($query, $search) {
-            return $query->search($search);
-        })->latest()->paginate($perPage);
-
-
-        return Inertia::render('AircraftTypes/Index',['aircraftTypes'=>$aircraftTypes]);
-
-    }
+ 
 
 
     // Json Data 

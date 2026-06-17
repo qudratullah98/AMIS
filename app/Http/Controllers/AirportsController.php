@@ -49,4 +49,12 @@ class AirportsController extends Controller
             'airport' => $airport->load('province:id,province', 'district:id,district_dr', 'status:id,code'),
         ], 200);
     }
+
+
+      // Json Data 
+    public function getAirports()
+    {
+        $airports = Airport::all();
+        return response()->json($airports);
+    }
 }

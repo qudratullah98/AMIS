@@ -184,6 +184,7 @@ const pashto = {
         flight: "الوتنه",
         flights: "الوتنې",
         flightNumber: "د الوتنې نمبر",
+        createFlight: "نوی الوتنه",
         airline: "هوايي شرکت",
         departure: "روانېدل",
         arrival: "رسېدل",
@@ -191,7 +192,7 @@ const pashto = {
         arrivalTime: "د رسېدو وخت",
         origin: "مبدا",
         destination: "مقصد",
-        flyteServices: "د الوتنو چوپړتیاوې",
+        flightServices: "د الوتنو چوپړتیاوې",
     },
 
     sgha: {

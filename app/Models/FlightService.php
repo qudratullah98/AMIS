@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FlyteService extends Model
+class FlightService extends Model
 {
-    public function flyte()
+    public function flight()
     {
-        return $this->belongsTo(Flyte::class);
+        return $this->belongsTo(Flight::class);
     }
 
     public function sghaServicesRate()

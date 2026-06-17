@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Flyte extends Model
+class Flight extends Model
 {
     protected $fillable = [
         'airport_id',
-        'flyte_number',
+        'flight_number',
         'pmt_methode',
         'flt',
         'work_order',
@@ -36,8 +36,8 @@ class Flyte extends Model
         return $this->belongsTo(AircraftType::class);
     }
 
-    public function flyteServices()
+    public function flightServices()
     {
-        return $this->hasMany(FlyteService::class);
+        return $this->hasMany(FlightService::class);
     }
 }
