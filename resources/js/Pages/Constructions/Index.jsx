@@ -17,6 +17,8 @@ import {
     Flag,
     MapPinned,
     DollarSignIcon,
+    Layers2,
+    MapPinHouse,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
@@ -29,33 +31,21 @@ function Index() {
     const cards = [
         {
             key: "vehicle_type",
-            title: t("vehiclesTypes"),
-            href: "",
-            icon: <Truck className="w-8 h-8 text-slate-700" />,
-        },
-        {
-            key: "owner",
-            title: t("vehiclesOwners"),
-            href: "",
-            icon: <Users className="w-8 h-8 text-slate-700" />,
-        },
-        {
-            key: "companie",
-            title: t("companies"),
+            title: t("construction.constructions"),
             href: "",
             icon: <Building2 className="w-8 h-8 text-slate-700" />,
         },
         {
-            key: "large_vehicle",
-            title: t("largeVehicles"),
+            key: "owner",
+            title: t("construction.airportConstructions"),
             href: "",
-            icon: <Bus className="w-8 h-8 text-slate-700" />,
+            icon: <MapPinHouse className="w-8 h-8 text-slate-700" />,
         },
         {
-            key: "route",
-            title: t("routes"),
+            key: "companie",
+            title: t("construction.constructionTypes"),
             href: "",
-            icon: <Route className="w-8 h-8 text-slate-700" />,
+            icon: <Layers2 className="w-8 h-8 text-slate-700" />,
         },
     ];
 

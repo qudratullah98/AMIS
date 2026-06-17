@@ -23,7 +23,7 @@ export default function Dashboard({data}) {
                     <div className="w-full pb-0 rounded-lg ">
                         <div className="  bg-gray-200  rounded-lg ">
                             <h2 className="text-lg font-semibold text-gray-900 text-center">
-                                {t("todayOutgoingVehicles")}
+                                {/* {t("todayOutgoingVehicles")} */}
                             </h2>
                             <div className="chart-container ">
                                 {/* <OutCarsMultiLevelBarChart data={data} /> */}
@@ -57,7 +57,7 @@ export default function Dashboard({data}) {
             </div>
             <div className="w-full md:w-2/3 bg-gray-200 mb-4 mr-5  rounded-lg ">
                 <h2 className="text-lg font-semibold text-gray-900 text-center">
-                    {t("last30DaysIncome")}
+                    {/* {t("last30DaysIncome")} */}
                 </h2>
                 <div className="chart-container">
                     {/* <MultiLevelBarChart data={data} /> */}

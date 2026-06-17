@@ -168,12 +168,12 @@ const pashto = {
         },
     },
     airline: {
-        airlinesList: "د هوايي شرکتونو لیست", 
+        airlinesList: "د هوايي شرکتونو لیست",
         addNewAirline: "نوی هوايي شرکت اضافه کړئ",
         addingNewAirline: "د نوي هوايي شرکت اضافه کول",
         airlineInfo: "د هوايي شرکت معلومات",
         airlineCode: "د هوايي شرکت کوډ",
-        airlineType: "د هوايي شرکت ډول", 
+        airlineType: "د هوايي شرکت ډول",
         airline: "هوايي شرکت",
         airlines: "هوايي شرکتونه",
         airlineName: "د هوايي شرکت نوم",
@@ -199,7 +199,6 @@ const pashto = {
         sghaServiceUnite: "د SGHA خدماتي واحد",
         sghaServices: "د SGHA خدمات",
         sghaServicesList: "د SGHA خدماتو لیست",
-        
     },
 
     passenger: {
@@ -248,10 +247,12 @@ const pashto = {
     },
 
     construction: {
+        constructionsList: "د ودانیو لیست ",
         constructionsPart: "د ودانیو برخه",
         airportConstructions: "د هوايي ډګر ودانۍ",
         constructions: "ودانۍ",
         constructionTypes: "د ودانیو د جوړښت ډولونه",
+        constructionCode: "د ودانۍ کوډ",
     },
 };
 

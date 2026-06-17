@@ -171,7 +171,7 @@ const dari = {
         addingNewAirline: "اضافه نمودن شرکت هوایی جدید",
         airlineInfo: "معلومات شرکت هوایی",
         airlineCode: "کود شرکت هوایی",
-        airlineType: "نوعیت شرکت هوایی",  
+        airlineType: "نوعیت شرکت هوایی",
         airlineName: "نام شرکت هوایی",
         country: "کشور",
     },
@@ -245,13 +245,14 @@ const dari = {
     },
 
     construction: {
+        constructionsList: " لیست ساخت و سازها ",
+
         constructionsPart: "بخش ساختمانی",
         airportConstructions: "ساخت‌وساز میدان هوایی",
         constructions: "ساخت‌وسازها",
         constructionTypes: "نوعیت های ساخت‌وساز",
+        constructionCode: "کود ساختمان",
     },
- 
-
 };
 
 export default dari;

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use App\Models\Construction;
+use App\Models\ConstructionType;
+
+
 class AirportConstructionController extends Controller
 {
     public function index()
@@ -22,4 +26,34 @@ class AirportConstructionController extends Controller
             'terminal'       => 22,
         ]);
     }
+
+
+    public function constructionsIndex()
+    {
+        $search   = request()->input('query');
+        $perPage  = request()->input('perPage', 13);
+
+        $constructions  = Construction::when($search, function ($query, $search) {
+            return $query->search($search);
+        })->latest()->paginate($perPage);
+
+
+        return Inertia::render('Constructions/Constructions/Index',['constructions'=>$constructions]);
+
+    }
+
+public function constructionsTypeIndex()
+    {
+        $search   = request()->input('query');
+        $perPage  = request()->input('perPage', 13);
+
+        $constructionsType  = ConstructionType::when($search, function ($query, $search) {
+            return $query->search($search);
+        })->latest()->paginate($perPage);
+
+
+        return Inertia::render('Constructions/ConstructionTypes/Index',['constructionsType'=>$constructionsType]);
+
+    }
+
 }

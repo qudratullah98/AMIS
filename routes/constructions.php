@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'blocked'])->group(function () {
     Route::get('constructions', [AirportConstructionController::class, 'index'])->name('constructions.index');
+
+    //constructions
+    Route::get('constructions-index', [AirportConstructionController::class, 'constructionsIndex'])->name('constructions');
+    //constructions types
+    Route::get('constructionsType', [AirportConstructionController::class, 'constructionsTypeIndex'])->name('constructionsType');
 });
 
 

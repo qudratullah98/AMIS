@@ -8,6 +8,7 @@ import {
     Monitor,
     PlaneTakeoff,
     Building2,
+    ChartColumnBig,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "./LogoutComponent";
@@ -21,21 +22,21 @@ export default function Header() {
     const menuGroups = {
         dashboard: [
             {
-                title: t("summary"),
+                title: t("Dashboard 1"),
                 href: "/dashboard",
-                icon: <Truck className="w-5 h-5" />,
+                icon: <ChartColumnBig className="w-5 h-5" />,
                 can: permissions.includes("viewDashboardMenu"),
             },
             {
-                title: t("monthlyRevenue"),
+                title: t("Dashboard 2"),
                 href: "/monthlyRevenue",
-                icon: <Monitor className="w-5 h-5" />,
+                icon: <ChartColumnBig className="w-5 h-5" />,
                 can: permissions.includes("viewDashboardMenu"),
             },
             {
-                title: t("largeVehiclesRevenueGraph"),
+                title: t("Dashboard 3"),
                 href: "/largeVehiclesRevenueGraph",
-                icon: <Truck className="w-5 h-5" />,
+                icon: <ChartColumnBig className="w-5 h-5" />,
                 can: permissions.includes("viewDashboardMenu"),
             },
         ],

@@ -71,7 +71,7 @@ const Sidebar = () => {
         {
             href: route("airports.index"),
             label: t("airport.airports"),
-            icon: <Plane className="w-5 h-5" />,
+            icon: <PlaneLanding className="w-5 h-5" />,
             keyword: "airport",
             can: permissions.includes("viewAirlineMenu") || true,
         },
@@ -87,7 +87,7 @@ const Sidebar = () => {
         {
             href: route("airCraftType.index"),
             label: t("airport.aircraftTypes"),
-            icon: "🚁",
+            icon: <Plane className="w-5 h-5" />,
             keyword: "aircraftTypes",
             can: permissions.includes("viewAirCraftsMenu") || true,
         },
@@ -137,10 +137,16 @@ const Sidebar = () => {
             can: permissions.includes("viewConstructionMenu") || true,
             subItems: [
                 {
-                    href: "",
+                    href: route("constructions"),
                     label: t("construction.constructions"),
                     icon: <Building2 className="w-4 h-4" />,
                     keyword: "constructions",
+                },
+                {
+                    href: route("constructionsType"),
+                    label: t("construction.constructionTypes"),
+                    icon: <Layers2 className="w-4 h-4" />,
+                    keyword: "constructionTypes",
                 },
                 {
                     href: "",
@@ -149,12 +155,7 @@ const Sidebar = () => {
                     keyword: "airportConstructions",
                 },
 
-                {
-                    href: "",
-                    label: t("construction.constructionTypes"),
-                    icon: <Layers2 className="w-4 h-4" />,
-                    keyword: "constructionTypes",
-                },
+
             ],
         },
         //Users
@@ -181,9 +182,21 @@ const Sidebar = () => {
         // },
     ];
 
-    const isActive = (href) => href.includes(currentPath);
-    const isChildActive = (subItems) =>
-        subItems?.some((sub) => isActive(sub.href));
+    const isActive = (href) => {
+        if (!href) return false;
+
+        try {
+            const path = href.startsWith("http")
+                ? new URL(href).pathname
+                : href;
+
+            return currentPath.startsWith(path);
+        } catch {
+            return currentPath.startsWith(href);
+        }
+    };
+    const isChildActive = (subItems = []) =>
+        subItems.some((sub) => isActive(sub.href));
 
     return (
         <div
@@ -284,7 +297,8 @@ const Sidebar = () => {
                                                     : "Expand submenu"
                                             }
                                         >
-                                            {openItems[link.keyword] ? (
+                                            {openItems[link.keyword] ||
+                                            isChildActive(link.subItems) ? (
                                                 <ChevronDown className="w-4 h-4 transition-transform duration-500" />
                                             ) : (
                                                 <ChevronRightIcon className="w-4 h-4 transition-transform duration-500" />
@@ -303,7 +317,9 @@ const Sidebar = () => {
                             {hasSubItems && (
                                 <div
                                     className={`ml-4 pl-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ${
-                                        openItems[link.keyword] && !collapsed
+                                        (openItems[link.keyword] ||
+                                            isChildActive(link.subItems)) &&
+                                        !collapsed
                                             ? "max-h-96 opacity-100 mt-1 mb-1"
                                             : "max-h-0 opacity-0 mt-0 mb-0"
                                     }`}
@@ -338,7 +354,7 @@ const Sidebar = () => {
                                             </span>
 
                                             {isActive(sub.href) && (
-                                                <span className="w-1.5 h-1.5 rounded-full bg-gray-900 dark:bg-gray-100 ml-auto" />
+                                                <span className="w-1.5 h-1.5 rounded-full bg-green-400 dark:bg-gray-100 ml-auto" />
                                             )}
                                         </Link>
                                     ))}
