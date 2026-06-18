@@ -11,48 +11,39 @@ import FullPageLoader from "@/Components/FullPageLoader";
 import toast from "react-hot-toast";
 import useValidation from "@/lib/validation/useValidation";
 import { min, required } from "@/lib/validation/rules";
-
-const IconLabel = ({ htmlFor, icon, text }) => (
-    <label
-        htmlFor={htmlFor}
-        className="flex items-center gap-2 text-sm font-semibold text-gray-700"
-    >
-        {icon && <span className="text-blue-600">{icon}</span>}
-        {text}
-    </label>
-);
+import CustomDatePicker from "@/Components/CustomDatePicker";
+import convertTimestamp from "@/Components/utils/ConvertDate";
+import InputLabel from "@/Components/InputLabel";
 
 export default function CreateSghaService({ onSubmitSuccess }) {
     const { t } = useTranslation();
 
     const { data, setData, processing, errors, reset, setError, clearErrors } =
         useForm({
-            name_ps: "",
-            name_dr: "",
-            name_en: "",
-            sgha_service_unit_id: "",
+            airport_id: "",
             airline_id: "",
             aircraft_type_id: "",
+            aircraft_registration: "",
+            flight_number: "",
+            work_order: "",
+            charge_note: "",
+            arrival_date: "",
+            approximate_time_arrival: "",
+            departure_date: "",
+            approximate_time_departure: "",
         });
 
-    const { validateOnBlur, validateAll } = useValidation(
-        data,
-        setError,
-        clearErrors,
-    );
+    const { validateAll } = useValidation(data, setError, clearErrors);
 
     const [airlines, setAirlines] = useState([]);
-    const [units, setUnits] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [submitting, setSubmitting] = useState(false);
     const [airports, setAirports] = useState([]);
     const [aircraftTypes, setAircraftTypes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
 
-    const rules = { 
-        sgha_service_unit_id: [required("Service unit is required")],
+    const rules = {
+        airport_id: [required("Airport is required")],
         airline_id: [required("Airline is required")],
-        aircraft_type_id: [required("Aircraft type is required")],
-        aircraft_registration: [required("Aircraft registration is required")],
     };
 
     useEffect(() => {
@@ -60,14 +51,12 @@ export default function CreateSghaService({ onSubmitSuccess }) {
             try {
                 setLoading(true);
 
-                const [u, a, ap, at] = await Promise.all([
-                    axios.get(route("sgha.services_units.json")),
+                const [a, ap, at] = await Promise.all([
                     axios.get(route("airlines.json")),
                     axios.get(route("airports.json")),
                     axios.get(route("aircraft_types.json")),
                 ]);
 
-                setUnits(u.data);
                 setAirlines(a.data);
                 setAirports(ap.data);
                 setAircraftTypes(at.data);
@@ -81,48 +70,53 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
     const handleChange = (field, value) => {
         setData(field, value);
-
         if (errors[field]) clearErrors(field);
     };
 
-   
-    // ---------------- SUBMIT ----------------
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if (!validateAll(rules)) return;
+    console.log("STEP 1: submit clicked");
 
-        setSubmitting(true);
+    const isValid = validateAll(rules);
+    console.log("STEP 2: validation:", isValid);
 
-        try {
-            const { data: res } = await axios.post(
-                route("flight.store"),
-                data,
-            );
+    if (!isValid) return;
 
-            onSubmitSuccess?.(res.flight);
+    setSubmitting(true);
 
-            reset();
-        } catch (error) {
-            console.error(error);
+    try {
+        console.log("STEP 3: sending request", route("flight.store"));
+        console.log("DATA:", data);
 
-            if (error.response?.status === 422) {
-                setError(error.response.data.errors);
-            }
-        } finally {
-            setSubmitting(false);
+        const res = await axios.post(route("flight.store"), data);
+
+        console.log("STEP 4: response received", res);
+
+        onSubmitSuccess?.(res.data.flight);
+        reset();
+    } catch (error) {
+        console.log("STEP ERROR:", error);
+
+        if (error.response?.status === 422) {
+            setError(error.response.data.errors);
         }
-    };
+    } finally {
+        setSubmitting(false);
+    }
+};const formatTime = (value) => {
+    return new Date(value).toTimeString().slice(0, 8);
+};
 
     if (loading) return <FullPageLoader message={t("common.loading")} />;
 
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
+          { submitting &&  <FullPageLoader show={submitting} message={t("common.saving")} /> }
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
                 {/* AIRPORT */}
                 <div>
-                    <IconLabel htmlFor="airport" icon="✈️" text="Airport" />
-
+                    <InputLabel htmlFor="airport_id">Airport 🛩️</InputLabel>
                     <CustomSelect
                         value={data.airport_id}
                         options={airports.map((a) => ({
@@ -131,14 +125,12 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }))}
                         onChange={(val) => handleChange("airport_id", val)}
                     />
-
                     <InputError message={errors.airport_id} />
                 </div>
 
                 {/* AIRLINE */}
                 <div>
-                    <IconLabel htmlFor="unit" icon="📦" text="Service Unit" />
-
+                    <InputLabel htmlFor="airline_id">Airline 🛩️</InputLabel>
                     <CustomSelect
                         value={data.airline_id}
                         options={airlines.map((u) => ({
@@ -147,43 +139,141 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }))}
                         onChange={(val) => handleChange("airline_id", val)}
                     />
-
                     <InputError message={errors.airline_id} />
                 </div>
+
                 {/* AIRCRAFT TYPE */}
                 <div>
-                    <IconLabel htmlFor="aircraft_type" icon="✈️" text="Aircraft Type" />
-
+                    <InputLabel htmlFor="aircraft_type_id">
+                        Aircraft Type 🛩️
+                    </InputLabel>
                     <CustomSelect
                         value={data.aircraft_type_id}
                         options={aircraftTypes.map((at) => ({
                             value: at.id,
                             label: at.name,
                         }))}
-                        onChange={(val) => handleChange("aircraft_type_id", val)}
+                        onChange={(val) =>
+                            handleChange("aircraft_type_id", val)
+                        }
                     />
-
                     <InputError message={errors.aircraft_type_id} />
                 </div>
-                {/* AirCraft registration */}
+
+                {/* AIRCRAFT REGISTRATION */}
                 <div>
-                    <IconLabel
-                        htmlFor="aircraft_registration"
-                        icon="🛩️"
-                        text="Aircraft Registration"
-                    />
+                    <InputLabel htmlFor="aircraft_registration">
+                        Aircraft Registration 🛩️
+                    </InputLabel>
                     <TextInput
                         id="aircraft_registration"
                         value={data.aircraft_registration}
                         onChange={(e) =>
-                            handleChange("aircraft_registration", e.target.value)
+                            handleChange(
+                                "aircraft_registration",
+                                e.target.value,
+                            )
                         }
                     />
                     <InputError message={errors.aircraft_registration} />
                 </div>
 
+                {/* FLIGHT NUMBER */}
+                <div>
+                    <InputLabel htmlFor="flight_number">
+                        Flight Number 🛩️
+                    </InputLabel>
+                    <TextInput
+                        id="flight_number"
+                        value={data.flight_number}
+                        onChange={(e) =>
+                            handleChange("flight_number", e.target.value)
+                        }
+                    />
+                    <InputError message={errors.flight_number} />
+                </div>
+
+                {/* WORK ORDER */}
+                <div>
+                    <InputLabel htmlFor="work_order">Work Order 🛩️</InputLabel>
+                    <TextInput
+                        id="work_order"
+                        value={data.work_order}
+                        onChange={(e) =>
+                            handleChange("work_order", e.target.value)
+                        }
+                    />
+                    <InputError message={errors.work_order} />
+                </div>
+
+                {/* CHARGE NOTE */}
+                <div>
+                    <InputLabel htmlFor="charge_note">
+                        Charge Note 🛩️
+                    </InputLabel>
+                    <TextInput
+                        id="charge_note"
+                        value={data.charge_note}
+                        onChange={(e) =>
+                            handleChange("charge_note", e.target.value)
+                        }
+                    />
+                    <InputError message={errors.charge_note} />
+                </div>
+
+                {/* ARRIVAL DATE */}
+                <div>
+                    <InputLabel htmlFor="arrival_date">
+                        {t("arrival_date")} 🛩️
+                    </InputLabel>
+                    <CustomDatePicker
+                        handelChange={(e) =>
+                            handleChange("arrival_date", convertTimestamp(e))
+                        }
+                        error={errors.arrival_date}
+                        placeholder={t("arrival_date")}
+                    />
+                </div>
+
+                {/* ARRIVAL TIME */}
+                <div>
+                    <InputLabel htmlFor="approximate_time_arrival">
+                        {t("approximate_time_arrival")} 🛩️
+                    </InputLabel>
+                    <CustomDatePicker
+                        handelChange={(e) =>
+                            handleChange(
+                                "approximate_time_arrival",
+                                convertTimestamp(e),
+                            )
+                        }
+                        error={errors.approximate_time_arrival}
+                        placeholder={t("approximate_time_arrival")}
+                    />
+                </div>
+
+             
+
           
- 
+ <CustomDatePicker
+    handelChange={(e) =>
+        handleChange(
+            "approximate_time_arrival",
+            formatTime(e)
+        )
+    }
+    error={errors.approximate_time_arrival}
+    placeholder={t("approximate_time_arrival")}
+/><CustomDatePicker
+    handelChange={(e) =>
+        handleChange(
+            "approximate_time_departure",
+            formatTime(e)
+        )
+    }
+    error={errors.approximate_time_departure}
+    placeholder={t("approximate_time_departure")}
+/>
             </div>
 
             {/* SUBMIT */}
@@ -191,7 +281,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                 <button
                     type="submit"
                     disabled={processing || submitting}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                    className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
                 >
                     Save Service
                     {submitting && <SmallLoader />}

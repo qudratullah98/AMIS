@@ -13,7 +13,7 @@ class AirportsController extends Controller
         $search   = request()->input('query');
         $perPage  = request()->input('perPage', 13);
 
-        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->whereUserAirport()->when($search, function ($query, $search) {
+        $airports = Airport::with(['province:id,province', 'district:id,district_dr', 'status:id,code'])->when($search, function ($query, $search) {
             return $query->search($search);
         })->latest()->paginate($perPage);
 
