@@ -27,7 +27,6 @@
         "echarts": "^5.6.0",
         "lucide-react": "^0.477.0",
         "num2persian": "^4.2.0",
-        "react-chartjs-2": "^5.3.0",
         "react-hot-toast": "^2.5.2",
         "react-i18next": "^15.4.1",
         "react-multi-date-picker": "^4.5.2",
