@@ -46,6 +46,15 @@ export default function CreateSghaService({ onSubmitSuccess }) {
         airline_id: [required("Airline is required")],
     };
 
+    const formattime = (value) => {
+        if (!value) return "";
+
+        const date = new Date(value);
+
+        if (isNaN(date)) return value;
+
+        return date.toTimeString().slice(0, 5);
+    };
     useEffect(() => {
         const load = async () => {
             try {
@@ -73,46 +82,52 @@ export default function CreateSghaService({ onSubmitSuccess }) {
         if (errors[field]) clearErrors(field);
     };
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    console.log("STEP 1: submit clicked");
+        console.log("STEP 1: submit clicked");
 
-    const isValid = validateAll(rules);
-    console.log("STEP 2: validation:", isValid);
+        const isValid = validateAll(rules);
+        console.log("STEP 2: validation:", isValid);
 
-    if (!isValid) return;
+        if (!isValid) return;
 
-    setSubmitting(true);
+        setSubmitting(true);
 
-    try {
-        console.log("STEP 3: sending request", route("flight.store"));
-        console.log("DATA:", data);
+        try {
+            console.log("STEP 3: sending request", route("flight.store"));
+            console.log("DATA:", data);
 
-        const res = await axios.post(route("flight.store"), data);
+            const res = await axios.post(route("flight.store"), data);
 
-        console.log("STEP 4: response received", res);
+            console.log("STEP 4: response received", res);
 
-        onSubmitSuccess?.(res.data.flight);
-        reset();
-    } catch (error) {
-        console.log("STEP ERROR:", error);
+            onSubmitSuccess?.(res.data.flight);
+            reset();
+        } catch (error) {
+            console.log("STEP ERROR:", error);
 
-        if (error.response?.status === 422) {
-            setError(error.response.data.errors);
+            if (error.response?.status === 422) {
+                setError(error.response.data.errors);
+            }
+        } finally {
+            setSubmitting(false);
         }
-    } finally {
-        setSubmitting(false);
-    }
-};const formatTime = (value) => {
-    return new Date(value).toTimeString().slice(0, 8);
-};
+    };
+    const formatTime = (value) => {
+        return new Date(value).toTimeString().slice(0, 8);
+    };
 
     if (loading) return <FullPageLoader message={t("common.loading")} />;
 
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
-          { submitting &&  <FullPageLoader show={submitting} message={t("common.saving")} /> }
+            {submitting && (
+                <FullPageLoader
+                    show={submitting}
+                    message={t("common.saving")}
+                />
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
                 {/* AIRPORT */}
                 <div>
@@ -234,46 +249,59 @@ const handleSubmit = async (e) => {
                         placeholder={t("arrival_date")}
                     />
                 </div>
+                {/* DEPARTURE DATE */}
+                <div>
+                    <InputLabel htmlFor="departure_date">
+                        {t("departure_date")} 🛩️
+                    </InputLabel>
+                    <CustomDatePicker
+                        handelChange={(e) =>
+                            handleChange("departure_date", convertTimestamp(e))
+                        }
+                        error={errors.departure_date}
+                        placeholder={t("departure_date")}
+                    />
+                </div>
 
                 {/* ARRIVAL TIME */}
                 <div>
                     <InputLabel htmlFor="approximate_time_arrival">
                         {t("approximate_time_arrival")} 🛩️
                     </InputLabel>
-                    <CustomDatePicker
-                        handelChange={(e) =>
+                    <input
+                        type="time"
+                        id="approximate_time_arrival"
+                        value={data.approximate_time_arrival}
+                        onChange={(e) =>
                             handleChange(
                                 "approximate_time_arrival",
-                                convertTimestamp(e),
+                                e.target.value,
                             )
                         }
-                        error={errors.approximate_time_arrival}
-                        placeholder={t("approximate_time_arrival")}
+                        className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
+
+                    <InputError message={errors.approximate_time_arrival} />
                 </div>
-
-             
-
-          
- <CustomDatePicker
-    handelChange={(e) =>
-        handleChange(
-            "approximate_time_arrival",
-            formatTime(e)
-        )
-    }
-    error={errors.approximate_time_arrival}
-    placeholder={t("approximate_time_arrival")}
-/><CustomDatePicker
-    handelChange={(e) =>
-        handleChange(
-            "approximate_time_departure",
-            formatTime(e)
-        )
-    }
-    error={errors.approximate_time_departure}
-    placeholder={t("approximate_time_departure")}
-/>
+            </div>
+            {/* DEPARTURE TIME */}
+            <div>
+                <InputLabel htmlFor="approximate_time_departure">
+                    {t("approximate_time_departure")} 🛩️
+                </InputLabel>
+                <input
+                    type="time"
+                    id="approximate_time_departure"
+                    value={data.approximate_time_departure}
+                    onChange={(e) =>
+                        handleChange(
+                            "approximate_time_departure",
+                            e.target.value,
+                        )
+                    }
+                    className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <InputError message={errors.approximate_time_departure} />
             </div>
 
             {/* SUBMIT */}

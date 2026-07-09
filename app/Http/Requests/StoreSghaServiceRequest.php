@@ -61,8 +61,7 @@ class StoreSghaServiceRequest extends FormRequest
         'airline_rates.*.complation_rate' => [
             'required',
             'numeric',
-            'min:0',
-            'max:100',
+            'min:0', 
         ],
 
     ];

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth', 'blocked'])->group(function () {
-   Route::get('sgha', [SGHAServiceController::class, 'index'])->name('sgha.index');
+   Route::get('sgha_services', [SGHAServiceController::class, 'index'])->name('sgha.services.index');
 
 
    // sgha Mesurements unit

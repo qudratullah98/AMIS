@@ -94,7 +94,7 @@ const Sidebar = () => {
 
         //SGHA part
         {
-            href: route("sgha.index"),
+            href: route("sgha.services.index"),
             label: t("sgha.SGHAPart"),
             icon: <Menu className="w-5 h-5" />,
             keyword: "sgha",
@@ -107,7 +107,7 @@ const Sidebar = () => {
                     keyword: "sghaServinceUnite",
                 },
                 {
-                    href: "",
+                    href: route("sgha.services.index"),
                     label: t("sgha.sghaServices"),
                     icon: <Layers className="w-4 h-4" />,
                     keyword: "sghaServices",
