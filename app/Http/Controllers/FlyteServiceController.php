@@ -52,10 +52,7 @@ class FlyteServiceController extends Controller
                 'min:1'
             ],
 
-            'approval_status_id' => [
-                'required',
-                'exists:approval_statuses,id'
-            ],
+          
 
         ]);
 

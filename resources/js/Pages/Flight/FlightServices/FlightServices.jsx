@@ -8,7 +8,7 @@ import Create from "./Create";
 
 function FlightServices({ flightServices }) {
     const { t } = useTranslation();
-    const [services] = useState(flightServices?.data || []);
+    const [services, setServices] = useState(flightServices?.data || []);
     const [isCreateModalOpen, setCreateModal] = useState(false);
 
     const columns = [
@@ -36,7 +36,10 @@ function FlightServices({ flightServices }) {
                 stopPropagation={false}
                 footer={false}
             >
-                <Create></Create>
+                <Create onSubmitSuccess={(data) => {
+                    setCreateModal(false);
+                    setServices((prev) => [ data,...prev]);
+                }}></Create>
             </CustomModal>
 
             <div className="mx-auto">
@@ -72,7 +75,7 @@ function FlightServices({ flightServices }) {
                                     </td>
 
                                     <td className="p-3 text-center">
-                                        {service.sgha_service?.name}
+                                        {service.sgha_service?.name_en}
                                     </td>
 
                                     <td className="p-3 text-center">

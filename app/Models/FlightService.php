@@ -23,4 +23,8 @@ class FlightService extends Model
     {
         return $this->belongsTo(SGHA_Service::class);
     }
+    public function approvalStatus()
+    {
+        return $this->belongsTo(ApprovelStatus::class, 'approval_status_id');
+    }
 }

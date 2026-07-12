@@ -91,4 +91,10 @@ class SGHAServiceController extends Controller
         $sghaServiceUnit = SGHAServiceUnit::select('id', 'service_name')->get();
         return response()->json($sghaServiceUnit);
     }
+public function getSGHAServices()
+{
+    $sghaServices = SGHA_Service::all();
+
+    return response()->json($sghaServices);
+}
 }

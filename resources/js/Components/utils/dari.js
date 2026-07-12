@@ -188,7 +188,7 @@ const dari = {
         arrivalTime: "زمان رسیدن",
         origin: "مبدأ",
         destination: "مقصد",
-        flyteServices: "خدمات پروازی",
+        flightServices: "خدمات پروازی",
     },
 
     sgha: {

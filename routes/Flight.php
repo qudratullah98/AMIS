@@ -12,9 +12,10 @@ Route::middleware(['auth', 'blocked'])->group(function () {
    Route::post('/flights', [FlightController::class, 'store'])
       ->name('flight.store');
    Route::get('/flight/services', [FlyteServiceController::class, 'getFlightServices'])->name('flight.services.index');
-   Route::post('/flight-services',[FlyteServiceController::class, 'store'])->name('flight-services.store');
+   Route::post('/flight-services', [FlyteServiceController::class, 'store'])->name('flight-services.store');
 
- 
+
    // Json Data
-    Route::get('flights/json', [FlightController::class, 'getFlights'])->name('flights.json');  
+   Route::get('/flights/json', [FlightController::class, 'getFlights'])
+      ->name('flights.json');
 });

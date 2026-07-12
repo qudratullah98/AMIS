@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useForm } from "@inertiajs/react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
+import AsyncSelect from "@/Components/AsyncSelect";
 import CustomSelect from "@/Components/CustomSelect";
-import TextInput from "@/Components/TextInput";
+import FullPageLoader from "@/Components/FullPageLoader";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import SmallLoader from "@/Components/SmallLoader";
-import FullPageLoader from "@/Components/FullPageLoader";
-import toast from "react-hot-toast";
+import TextInput from "@/Components/TextInput";
 
 import useValidation from "@/lib/validation/useValidation";
 import { required, min } from "@/lib/validation/rules";
@@ -17,59 +18,65 @@ import { required, min } from "@/lib/validation/rules";
 export default function CreateFlightService({ onSubmitSuccess }) {
     const { t } = useTranslation();
 
-    const { data, setData, errors, reset, setError, clearErrors } = useForm({
+    const [loading, setLoading] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [sghaServices, setSghaServices] = useState([]);
+
+    const {
+        data,
+        setData,
+        reset,
+        errors,
+        setError,
+        clearErrors,
+    } = useForm({
         flight_id: "",
         sgha_service_id: "",
         count: 1,
-        approval_status_id: "",
     });
 
     const { validateAll } = useValidation(data, setError, clearErrors);
 
-    const [flights, setFlights] = useState([]);
-    const [sghaServices, setSghaServices] = useState([]);
-    const [approvalStatuses, setApprovalStatuses] = useState([]);
-
-    const [loading, setLoading] = useState(true);
-    const [submitting, setSubmitting] = useState(false);
-
     const rules = {
-        flight_id: [required("Flight is required")],
-
-        sgha_service_id: [required("SGHA Service is required")],
-
+        flight_id: [
+            required("Flight is required"),
+        ],
+        sgha_service_id: [
+            required("SGHA Service is required"),
+        ],
         count: [
             required("Count is required"),
             min(1, "Count must be greater than zero"),
         ],
-
-        approval_status_id: [required("Approval status is required")],
     };
 
-    useEffect(() => {
-        const load = async () => {
-            try {
-                setLoading(true);
+    /**
+     * Load dropdown data
+     */
+    const loadData = useCallback(async () => {
+        try {
+            setLoading(true);
 
-                const [flight, service, status] = await Promise.all([
-                    axios.get(route("flights.json")),
- 
- 
-                ]);
+            const [servicesRes] = await Promise.all([
+                axios.get(route("sgha_services.json")),
+            ]);
 
-                setFlights(flight.data);
-
-                setSghaServices(service.data);
-
-                setApprovalStatuses(status.data);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        load();
+            setSghaServices(servicesRes.data);
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to load data.");
+        } finally {
+            setLoading(false);
+        }
     }, []);
 
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
+
+    /**
+     * Generic field update
+     */
     const handleChange = (field, value) => {
         setData(field, value);
 
@@ -78,26 +85,42 @@ export default function CreateFlightService({ onSubmitSuccess }) {
         }
     };
 
+    /**
+     * Flight selected
+     */
+    const handleFlightSelect = (flight) => {
+        handleChange("flight_id", flight.id);
+    };
+
+    /**
+     * Submit
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const valid = validateAll(rules);
-
-        if (!valid) return;
-
-        setSubmitting(true);
+        if (!validateAll(rules)) {
+            return;
+        }
 
         try {
-            const res = await axios.post(route("flight-services.store"), data);
+            setSubmitting(true);
 
-            toast.success("Flight service created successfully");
+            const { data: response } = await axios.post(
+                route("flight-services.store"),
+                data
+            );
 
-            onSubmitSuccess?.(res.data.data);
+            toast.success("Flight service created successfully.");
+
+            onSubmitSuccess?.(response.data);
 
             reset();
         } catch (error) {
             if (error.response?.status === 422) {
                 setError(error.response.data.errors);
+            } else {
+                toast.error("Something went wrong.");
+                console.error(error);
             }
         } finally {
             setSubmitting(false);
@@ -109,115 +132,83 @@ export default function CreateFlightService({ onSubmitSuccess }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
+
             {submitting && (
                 <FullPageLoader
-                    show={submitting}
+                    show
                     message={t("common.saving")}
                 />
             )}
 
-            <div
-                className="
-grid 
-grid-cols-1 
-md:grid-cols-2 
-gap-6 
-bg-white 
-p-6 
-rounded-xl 
-shadow-sm
-"
-            >
-                {/* FLIGHT */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-xl shadow-sm p-6">
+
+                {/* Flight */}
 
                 <div>
-                    <InputLabel>Flight 🛩️</InputLabel>
+                    <InputLabel>Flight</InputLabel>
 
-                    <CustomSelect
-                        value={data.flight_id}
-                        options={flights.map((f) => ({
-                            value: f.id,
-                            label: f.flight_number,
-                        }))}
-                        onChange={(val) => handleChange("flight_id", val)}
+                    <AsyncSelect
+                        apiEndpoint={route("flights.json")}
+                        onSelect={handleFlightSelect}
+                        formatOption={(flight) =>
+                            `${flight.flight_number} - ${flight.aircraft_registration}`
+                        }
+                        placeholder={t("platePlaceholder")}
                     />
 
                     <InputError message={errors.flight_id} />
                 </div>
 
-                {/* SGHA SERVICE */}
+                {/* SGHA Service */}
 
                 <div>
-                    <InputLabel>SGHA Service 🛩️</InputLabel>
+                    <InputLabel>SGHA Service</InputLabel>
 
                     <CustomSelect
                         value={data.sgha_service_id}
-                        options={sghaServices.map((s) => ({
-                            value: s.id,
-                            label: s.name,
+                        options={sghaServices.map((service) => ({
+                            value: service.id,
+                            label: service.name_en,
                         }))}
-                        onChange={(val) => handleChange("sgha_service_id", val)}
+                        onChange={(value) =>
+                            handleChange("sgha_service_id", value)
+                        }
                     />
 
                     <InputError message={errors.sgha_service_id} />
                 </div>
 
-                {/* COUNT */}
+                {/* Count */}
 
                 <div>
-                    <InputLabel>Count 🛩️</InputLabel>
+                    <InputLabel>Count</InputLabel>
 
                     <TextInput
                         type="number"
+                        min={1}
                         value={data.count}
-                        onChange={(e) => handleChange("count", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("count", e.target.value)
+                        }
                     />
 
                     <InputError message={errors.count} />
                 </div>
 
-                {/* APPROVAL STATUS */}
-
-                <div>
-                    <InputLabel>Approval Status 🛩️</InputLabel>
-
-                    <CustomSelect
-                        value={data.approval_status_id}
-                        options={approvalStatuses.map((status) => ({
-                            value: status.id,
-                            label: status.name,
-                        }))}
-                        onChange={(val) =>
-                            handleChange("approval_status_id", val)
-                        }
-                    />
-
-                    <InputError message={errors.approval_status_id} />
-                </div>
             </div>
 
             <div className="flex justify-end">
                 <button
                     type="submit"
                     disabled={submitting}
-                    className="
-px-5
-py-2
-bg-blue-600
-text-white
-rounded-lg
-hover:bg-blue-700
-disabled:opacity-50
-flex
-items-center
-gap-2
-"
+                    className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-2 rounded-md flex items-center gap-2"
                 >
                     Save Flight Service
                     {submitting && <SmallLoader />}
                 </button>
             </div>
+
         </form>
     );
 }

@@ -35,10 +35,17 @@ class FlightController extends Controller
 
 
     // Json Data 
-    public function getFlights()
-    {
-        $flights = Flight::with('serviceUnit', 'sghaServicesRate.airline')->latest()->get();
-        return response()->json($flights);
-    }
+  public function getFlights(Request $request)
+{
+    $query = $request->query('query');
+
+    $flights = Flight::when($query, function ($q) use ($query) {
+            $q->where('flight_number', 'like', "%{$query}%");
+        })
+        ->latest()
+        ->get();
+
+    return response()->json($flights);
+}
    
 }
