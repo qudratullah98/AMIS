@@ -26,4 +26,8 @@ class SGHA_Service extends Model
     {
         return $this->hasMany(SGHAServiceRate::class, 'sgha_service_id');
     }
+       public function flightServices()
+    {
+        return $this->hasMany(FlightService::class);
+    }
 }

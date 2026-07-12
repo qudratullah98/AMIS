@@ -114,16 +114,16 @@ const Sidebar = () => {
                 },
 
                 {
-                    href: "",
-                    label: t("flight.flyteServices"),
-                    icon: <Wrench className="w-4 h-4" />,
-                    keyword: "flyteServices",
-                },
-                {
                     href: route("flight.index"),
                     label: t("flight.flights"),
                     icon: <PlaneTakeoff className="w-4 h-4" />,
                     keyword: "flights",
+                },
+                {
+                    href: route("flight.services.index"),
+                    label: t("flight.flightServices"),
+                    icon: <PlaneTakeoff className="w-4 h-4" />,
+                    keyword: "flightServices",
                 },
             ],
         },
@@ -154,8 +154,6 @@ const Sidebar = () => {
                     icon: <MapPinHouse className="w-4 h-4" />,
                     keyword: "airportConstructions",
                 },
-
-
             ],
         },
         //Users

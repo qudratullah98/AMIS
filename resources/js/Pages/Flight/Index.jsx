@@ -44,8 +44,8 @@ function Index({ flights }) {
                             columns={columns}
                             links={paginationLinks}
                             header={t("flight.flights")}
-                            enableButton={true}
                             buttonLabel={t("flight.createFlight")}
+                            enableButton={true}
                             onButtonClick={() => setCreateModal(true)}
                         >
                             {flightData.map((flight, a) => (
