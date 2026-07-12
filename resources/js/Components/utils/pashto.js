@@ -251,9 +251,14 @@ const pashto = {
         constructionsList: "د ودانیو لیست ",
         constructionsPart: "د ودانیو برخه",
         airportConstructions: "د هوايي ډګر ودانۍ",
+        airportConstructionsList: "د هوايي ډګر د ودانیو لیست",
+
         constructions: "ودانۍ",
         constructionTypes: "د ودانیو د جوړښت ډولونه",
         constructionCode: "د ودانۍ کوډ",
+        newConstruction: "نوې ودانۍ",
+        construction: "ودانۍ",
+        constructionType: "د ودانۍ ډول",
     },
 };
 

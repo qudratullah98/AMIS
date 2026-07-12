@@ -247,12 +247,16 @@ const dari = {
 
     construction: {
         constructionsList: " لیست ساخت و سازها ",
-
         constructionsPart: "بخش ساختمانی",
         airportConstructions: "ساخت‌وساز میدان هوایی",
+        airportConstructionsList: "لیست ساخت‌وساز میدان هوایی",
         constructions: "ساخت‌وسازها",
         constructionTypes: "نوعیت های ساخت‌وساز",
         constructionCode: "کود ساختمان",
+        newConstruction:"ساختمان جدید",
+        construction:"ساختمان",
+        constructionType:"نوعیت ساختمان",
+
     },
 };
 

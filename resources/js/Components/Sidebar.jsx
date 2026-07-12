@@ -149,7 +149,7 @@ const Sidebar = () => {
                     keyword: "constructionTypes",
                 },
                 {
-                    href: "",
+                    href: route("airportConstructions"),
                     label: t("construction.airportConstructions"),
                     icon: <MapPinHouse className="w-4 h-4" />,
                     keyword: "airportConstructions",
