@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth', 'blocked'])->group(function () {
-    Route::get('airlines', [AirlineController::class, 'index'])->name('airline.index');
+    Route::get('airlines', [AirlineController::class, 'index'])->name('airline.index'); 
+    Route::post('airlines', [AirlineController::class, 'store'])->name('airline.store'); 
 
 
 

@@ -15,7 +15,7 @@ class SGHAServiceController extends Controller
     {
         $perPage = request()->input('perPage', 10);
         $sgha_services = SGHA_Service::with('serviceUnit', 'sghaServicesRate.airline')->latest()->paginate($perPage);
-        return inertia('SGHA/Index', compact('sgha_services'));
+        return inertia('SGHA/SGHAService/Index', compact('sgha_services'));
     }
     public function SGHAServiceUnit()
     {
@@ -32,46 +32,49 @@ class SGHAServiceController extends Controller
     }
     public function store(StoreSghaServiceRequest $request)
     {
-        $data = $request->validated();
-
-        DB::beginTransaction();
         try {
-            // ---------------- CREATE SERVICE ----------------
-            $service = SGHA_Service::create([
-                'name_en' => $data['name_en'],
-                'name_ps' => $data['name_ps'] ?? null,
-                'name_dr' => $data['name_dr'] ?? null,
-                'sgha_service_unit_id' => $data['sgha_service_unit_id'],
-            ]);
 
-            // ---------------- CREATE AIRLINE RATES ----------------
-            foreach ($data['airline_rates'] as $item) {
+            $service = DB::transaction(function () use ($request) {
 
-                $service->sghaServicesRate()->create([
-                    'airline_id' => $item['airline_id'],
-                    'complation_rate' => $item['complation_rate'],
-                    'approval_status_id' => $data['approval_status_id'] ?? null,
+                $data = $request->validated();
+
+                $service = SGHA_Service::create([
+                    'name_en' => $data['name_en'],
+                    'name_ps' => $data['name_ps'] ?? null,
+                    'name_dr' => $data['name_dr'] ?? null,
+                    'sgha_service_unit_id' => $data['sgha_service_unit_id'],
                 ]);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['message' => 'Failed to create service', 'error' => $e->getMessage()], 500);
+
+                $rates = collect($data['airline_rates'])->map(function ($item) use ($data) {
+                    return [
+                        'airline_id' => $item['airline_id'],
+                        'complation_rate' => $item['complation_rate'],
+                        'approval_status_id' => $data['approval_status_id'] ?? null,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                });
+
+                $service->sghaServicesRate()->createMany($rates->toArray());
+
+                return $service;
+            });
+
+            return response()->json([
+                'message' => 'Created successfully.',
+                'sgha_service' => $service->load([
+                    'serviceUnit',
+                    'sghaServicesRate.airline',
+                ]),
+            ], 201);
+        } catch (\Throwable $e) {
+
+            report($e);
+
+            return response()->json([
+                'message' => 'Failed to create service.',
+            ], 500);
         }
-
-      
-
-
-
-
-        return response()->json([
-            'message' => 'Created successfully',
-
-            'sgha_service' => $service->load([
-                'serviceUnit',
-                'sghaServicesRate.airline',
-            ]),
-        ]);
     }
 
     public function update(UpdateSghaServiceRequest $request, $id)
@@ -91,10 +94,10 @@ class SGHAServiceController extends Controller
         $sghaServiceUnit = SGHAServiceUnit::select('id', 'service_name')->get();
         return response()->json($sghaServiceUnit);
     }
-public function getSGHAServices()
-{
-    $sghaServices = SGHA_Service::all();
+    public function getSGHAServices()
+    {
+        $sghaServices = SGHA_Service::all();
 
-    return response()->json($sghaServices);
-}
+        return response()->json($sghaServices);
+    }
 }

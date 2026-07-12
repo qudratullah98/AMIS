@@ -108,6 +108,34 @@ const dari = {
         passwordMixedCase: "رمز باید شامل حروف بزرگ و کوچک باشد.",
         passwordNumbers: "رمز باید حداقل یک عدد داشته باشد.",
         passwordSymbols: "رمز باید حداقل یک سمبول داشته باشد.",
+        airline: {
+            name_en_required: "نام انگلیسی شرکت هوایی ضروری است.",
+            name_en_unique: "این نام انگلیسی قبلاً ثبت شده است.",
+            name_dr_required: "نام دری شرکت هوایی ضروری است.",
+            name_dr_unique: "این نام دری قبلاً ثبت شده است.",
+            name_ps_required: "نام پښتو شرکت هوایی ضروری است.",
+            name_ps_unique: "این نام پښتو قبلاً ثبت شده است.",
+        },
+        sgha_service: {
+            name_en_required: "نام انگلیسی خدمت الزامی است.",
+            name_en_unique: "این نام انگلیسی قبلاً ثبت شده است.",
+
+            unit_required: "انتخاب واحد خدمت الزامی است.",
+            unit_invalid: "واحد خدمت انتخاب‌شده معتبر نیست.",
+
+            airline_rates_required:
+                "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
+            airline_rates_invalid: "اطلاعات نرخ‌های شرکت‌های هوایی معتبر نیست.",
+            airline_rates_min: "حداقل یک شرکت هوایی باید اضافه شود.",
+
+            airline_required: "انتخاب شرکت هوایی الزامی است.",
+            airline_invalid: "شرکت هوایی انتخاب‌شده معتبر نیست.",
+            airline_duplicate: "هر شرکت هوایی فقط یک بار می‌تواند اضافه شود.",
+
+            rate_required: "نرخ خدمت الزامی است.",
+            rate_numeric: "نرخ خدمت باید عددی باشد.",
+            rate_min: "نرخ خدمت نباید کمتر از صفر باشد.",
+        },
     },
 
     state: {
@@ -253,10 +281,9 @@ const dari = {
         constructions: "ساخت‌وسازها",
         constructionTypes: "نوعیت های ساخت‌وساز",
         constructionCode: "کود ساختمان",
-        newConstruction:"ساختمان جدید",
-        construction:"ساختمان",
-        constructionType:"نوعیت ساختمان",
-
+        newConstruction: "ساختمان جدید",
+        construction: "ساختمان",
+        constructionType: "نوعیت ساختمان",
     },
 };
 

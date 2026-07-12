@@ -109,6 +109,33 @@ const pashto = {
         passwordMixedCase: "پټنوم باید لوی او کوچني حروف ولري.",
         passwordNumbers: "پټنوم باید لږ تر لږه یو عدد ولري.",
         passwordSymbols: "پټنوم باید لږ تر لږه یو ځانګړی نښه ولري.",
+        airline: {
+            name_en_required: "د هوايي شرکت انګلیسي نوم اړین دی.",
+            name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
+            name_dr_required: "د هوايي شرکت دري نوم اړین دی.",
+            name_dr_unique: "دا دري نوم مخکې ثبت شوی دی.",
+            name_ps_required: "د هوايي شرکت پښتو نوم اړین دی.",
+            name_ps_unique: "دا پښتو نوم مخکې ثبت شوی دی.",
+        },
+        sgha_service: {
+            name_en_required: "د خدمت انګلیسي نوم اړین دی.",
+            name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
+
+            unit_required: "د خدمت واحد ټاکل اړین دي.",
+            unit_invalid: "ټاکل شوی د خدمت واحد سم نه دی.",
+
+            airline_rates_required:"لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
+            airline_rates_invalid: "د هوايي شرکتونو د نرخونو معلومات سم نه دي.",
+            airline_rates_min: "لږ تر لږه یو هوايي شرکت باید اضافه شي.",
+
+            airline_required: "د هوايي شرکت ټاکل اړین دي.",
+            airline_invalid: "ټاکل شوی هوايي شرکت سم نه دی.",
+            airline_duplicate: "یو هوايي شرکت یوازې یو ځل اضافه کېدای شي.",
+
+            rate_required: "د خدمت نرخ اړین دی.",
+            rate_numeric: "د خدمت نرخ باید عددي وي.",
+            rate_min: "د خدمت نرخ باید له صفر څخه کم نه وي.",
+        },
     },
 
     state: {
