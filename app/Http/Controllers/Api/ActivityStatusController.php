@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ActivityStatusController extends Controller
 {
-      public function getStatuses()
+      public function getActivityStatuses()
     {
         $statuses = ActivityStatus::get(['id', 'status_ps']);
         return response()->json($statuses);

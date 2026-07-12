@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class AirportConstruction extends Model
 {
@@ -22,6 +23,11 @@ class AirportConstruction extends Model
         'requirements',
         'image',
     ];
+
+
+
+
+    
 
     // Relationship to Airport
     public function airport()

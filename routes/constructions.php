@@ -11,8 +11,12 @@ Route::middleware(['auth', 'blocked'])->group(function () {
 
     //constructions
     Route::get('constructions-index', [AirportConstructionController::class, 'constructionsIndex'])->name('constructions');
+
     //constructions types
     Route::get('constructionsType', [AirportConstructionController::class, 'constructionsTypeIndex'])->name('constructionsType');
+
+    //airportConstructions types
+    Route::get('constructions-airport', [AirportConstructionController::class, 'airportConstructionsIndex'])->name('airportConstructions');
 });
 
 
