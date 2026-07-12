@@ -13,27 +13,27 @@ function Index({ flights }) {
     const [isCreateModalOpen, setCreateModal] = useState(false);
 
     const columns = [
-        { label: t("common.NO") }, 
-        { label: t("flight.name") },
-        { label: t("flight.description") },
-        { label: t("flight.type") },
-        { label: t("flight.status") },
-        { label: t("common.actions") },
+        { label: t("common.NO") },
+        { label: t("flight.flight_number") },
+        { label: t("flight.airport") },
+        { label: t("flight.airline") },
+        { label: t("airport.aircraftTypes") },
+        { label: t("flight.registration") },
+        { label: t("flight.arrival_date") },
     ];
 
     return (
         <AuthenticatedLayout header={<SubHeader title={t("flight.flights")} />}>
-          <CustomModal
-                    show={isCreateModalOpen}
-                    handleClose={() => setCreateModal(false)}
-                    title={t("flight.createFlight")}
-                    size="xxlarge"
-                    stopPropagation={false}
-                    footer={false}
-                >
-            <Create></Create>
-        </CustomModal>
-
+            <CustomModal
+                show={isCreateModalOpen}
+                handleClose={() => setCreateModal(false)}
+                title={t("flight.createFlight")}
+                size="xxlarge"
+                stopPropagation={false}
+                footer={false}
+            >
+                <Create></Create>
+            </CustomModal>
 
             <SubHeader links={[{ name: t("flight.flights") }]} />
 
@@ -45,7 +45,7 @@ function Index({ flights }) {
                             links={paginationLinks}
                             header={t("flight.flights")}
                             enableButton={true}
-                            buttonLabel={t("flight.createFlight")} 
+                            buttonLabel={t("flight.createFlight")}
                             onButtonClick={() => setCreateModal(true)}
                         >
                             {flightData.map((flight, a) => (
@@ -53,15 +53,38 @@ function Index({ flights }) {
                                     key={flight.id}
                                     className="hover:bg-slate-100"
                                 >
-                                    <td className="p-2 text-center">{a + 1}</td> 
-                                    <td className="p-2">{flight.name}</td>
-                                    <td className="p-2">{flight.description}</td>
-                                    <td className="p-2">{flight.type}</td>
-                                    <td className="p-2">{flight.status}</td>
-                                    <td className="p-2">
-                                        {/* Actions like Edit/Delete can be added here */}
+                                    {/* NO */}
+                                    <td className="p-2 text-center">{a + 1}</td>
+
+                                    {/* FLIGHT NUMBER */}
+                                    <td className="p-2 text-center">
+                                        {flight.flight_number}
                                     </td>
 
+                                    {/* AIRPORT */}
+                                    <td className="p-2 text-center">
+                                        {flight.airport?.name_en}
+                                    </td>
+
+                                    {/* AIRLINE */}
+                                    <td className="p-2 text-center">
+                                        {flight.airline?.name_en}
+                                    </td>
+
+                                    {/* AIRCRAFT TYPE */}
+                                    <td className="p-2 text-center">
+                                        {flight.aircraftType?.name}
+                                    </td>
+
+                                    {/* REGISTRATION */}
+                                    <td className="p-2 text-center">
+                                        {flight.aircraft_registration}
+                                    </td>
+
+                                    {/* ARRIVAL DATE */}
+                                    <td className="p-2 text-center">
+                                        {flight.arrival_date}
+                                    </td>
                                 </tr>
                             ))}
                         </DataTable>
