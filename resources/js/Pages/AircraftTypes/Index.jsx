@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import DataTable from "@/Components/Datatable";
 import SubHeader from "@/Components/SubHeader";
 import { useTranslation } from "react-i18next";
+import CustomModal from "@/Components/CustomModal";
+import Create from "./Create";
 
 function AirportsIndex({ aircraftTypes }) {
     const { t } = useTranslation();
     const [aircraftTypesData, setAircraftTypesData] = useState(aircraftTypes?.data || []);
     const paginationLinks = aircraftTypes?.links || [];
+    const [createModel, setCreateModel] = useState(false);
+    
 
     const columns = [
         { label: t("common.NO") },
@@ -21,6 +25,19 @@ function AirportsIndex({ aircraftTypes }) {
 
 
             <SubHeader links={[{ name: t("airport.aircraftTypes") }]} />
+                 <CustomModal
+                    show={createModel}
+                    handleClose={() => setCreateModel(false)}
+                    title={t("sgha.creatingSghaService")}
+                    size="large"
+                    stopPropagation={false}
+                    footer={false}
+                >
+                    <Create onSubmitSuccess={(newAircraftType) => {
+                        setAircraftTypesData((prevData) => [newAircraftType, ...prevData]);
+                        setCreateModel(false);
+                    }} />
+                </CustomModal>
 
             <div className="mx-auto">
                 <div className="overflow-hidden bg-white shadow-none sm:rounded-lg border border-gray-100 dark:bg-gray-800">
@@ -28,9 +45,11 @@ function AirportsIndex({ aircraftTypes }) {
                         <DataTable
                             columns={columns}
                             links={paginationLinks}
-                            header={t("airport.aircraftTypes")}
-                            enableButton={false}
-                            addButton={false}
+                            header={t("airport.aircraftTypes")} 
+                             enableButton={true}
+                            buttonLabel={t("CreateNewSgha")} 
+                            onButtonClick={() => setCreateModel(true)}
+
                         >
                             {aircraftTypesData.map((aircraftType, a) => (
                                 <tr

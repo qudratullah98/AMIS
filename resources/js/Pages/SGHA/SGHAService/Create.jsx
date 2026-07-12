@@ -259,13 +259,17 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                                     )
                                 }
                             />
-                          <InputError
-    message={
-        errors[`airline_rates.${index}.airline_id`]
-            ? t(errors[`airline_rates.${index}.airline_id`])
-            : ""
-    }
-/>
+                            <InputError
+                                message={
+                                    errors[`airline_rates.${index}.airline_id`]
+                                        ? t(
+                                              errors[
+                                                  `airline_rates.${index}.airline_id`
+                                              ],
+                                          )
+                                        : ""
+                                }
+                            />
                         </div>
 
                         {/* RATE */}
