@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\EmployeeAssignment;
+use App\Observers\EmployeeAssignmentObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,20 +25,23 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Inertia::share([
-        'auth' => function () {
-            $user = Auth::user();
+            'auth' => function () {
+                $user = Auth::user();
 
-            return [
-                'user' => $user
-                    ? [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'roles' => $user->getRoleNames(),
-                    ]
-                    : null,
-            ];
-        },
-    ]);
+                return [
+                    'user' => $user
+                        ? [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'roles' => $user->getRoleNames(),
+                        ]
+                        : null,
+                ];
+            },
+        ]);
+        EmployeeAssignment::observe(
+            EmployeeAssignmentObserver::class
+        );
     }
 }

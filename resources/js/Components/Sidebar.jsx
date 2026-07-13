@@ -1,27 +1,25 @@
 import { useState, useEffect } from "react";
 import {
-    ChartColumnBig,
-    Settings2,
+    ChartColumnBig, 
     Users,
-    History,
-    UserMinusIcon,
+    History, 
     ChevronLeft,
     ChevronRight,
     ChevronDown,
     ChevronRight as ChevronRightIcon,
     Languages as EarthIcon,
-    Plane,
-    Building2,
+    Plane, 
     Menu,
     Box,
-    Layers,
-    Clock,
-    PlaneLanding,
-    Wrench,
-    Building,
+    Layers, 
+    PlaneLanding, 
     MapPinHouse,
     Layers2,
-    PlaneTakeoff,
+    PlaneTakeoff, 
+    UsersRound,
+    UserCheck,
+    Building2, 
+    Network,
 } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
@@ -124,6 +122,52 @@ const Sidebar = () => {
                     label: t("flight.flightServices"),
                     icon: <PlaneTakeoff className="w-4 h-4" />,
                     keyword: "flightServices",
+                },
+            ],
+        },
+        // Tashkilat Part
+        {
+            href: route("Tashkilat.dashboard"),
+            label: t("tashkilat.TashkilatPart"),
+            icon: <Users className="w-5 h-5" />,
+            keyword: "tashkilat",
+
+            can: permissions.includes("viewTashkilatMenu") || true,
+
+            subItems: [
+                {
+                    href: route("departments.index"),
+                    label: t("tashkilat.departments"),
+                    icon: <Building2 className="w-4 h-4" />,
+                    keyword: "departments",
+                },
+
+                {
+                    href: route("position-types.index"),
+                    label: t("tashkilat.positionTypes"),
+                    icon: <Layers className="w-4 h-4" />,
+                    keyword: "positionTypes",
+                },
+
+                {
+                    href: route("department-positions.index"),
+                    label: t("tashkilat.departmentPositions"),
+                    icon: <Network className="w-4 h-4" />,
+                    keyword: "departmentPositions",
+                },
+
+                {
+                    href: route("employees.index"),
+                    label: t("tashkilat.employees"),
+                    icon: <UsersRound className="w-4 h-4" />,
+                    keyword: "employees",
+                },
+
+                {
+                    href: route("employee-assignments.index"),
+                    label: t("tashkilat.employeeAssignments"),
+                    icon: <UserCheck className="w-4 h-4" />,
+                    keyword: "employeeAssignments",
                 },
             ],
         },

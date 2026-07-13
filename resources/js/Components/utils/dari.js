@@ -285,6 +285,17 @@ const dari = {
         construction: "ساختمان",
         constructionType: "نوعیت ساختمان",
     },
+    tashkilat: {
+        TashkilatPart: "تشکیلات",
+        dashboard: "داشبورد",
+
+        departments: "ریاست‌ها",
+        positionTypes: "انواع بست‌ها",
+        departmentPositions: "بست‌های ریاست",
+
+        employees: "کارمندان",
+        employeeAssignments: "تقرر کارمندان",
+    },
 };
 
 export default dari;

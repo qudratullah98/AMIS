@@ -124,7 +124,8 @@ const pashto = {
             unit_required: "د خدمت واحد ټاکل اړین دي.",
             unit_invalid: "ټاکل شوی د خدمت واحد سم نه دی.",
 
-            airline_rates_required:"لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
+            airline_rates_required:
+                "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
             airline_rates_invalid: "د هوايي شرکتونو د نرخونو معلومات سم نه دي.",
             airline_rates_min: "لږ تر لږه یو هوايي شرکت باید اضافه شي.",
 
@@ -286,6 +287,16 @@ const pashto = {
         newConstruction: "نوې ودانۍ",
         construction: "ودانۍ",
         constructionType: "د ودانۍ ډول",
+    },
+
+    tashkilat: {
+        TashkilatPart: "تشکیلات",
+        dashboard: "ډشبورډ",
+        departments: "ریاستونه",
+        positionTypes: "د بست ډولونه",
+        departmentPositions: "د ریاست بستونه",
+        employees: "کارکوونکي",
+        employeeAssignments: "د کارکوونکو مقررۍ",
     },
 };
 
