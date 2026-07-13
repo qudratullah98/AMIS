@@ -297,6 +297,12 @@ const pashto = {
         departmentPositions: "د ریاست بستونه",
         employees: "کارکوونکي",
         employeeAssignments: "د کارکوونکو مقررۍ",
+        tashkil: "تشکیل",
+        createDepartment: "د څانګې جوړول",
+        departmentsList: "د څانګو لست",  
+        departmentName: "د څانګې نوم",
+        parentDepartment: "اصلي څانګه",
+        noParent: "اصلي څانګه نشته",
     },
 };
 

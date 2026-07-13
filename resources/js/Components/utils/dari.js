@@ -288,13 +288,17 @@ const dari = {
     tashkilat: {
         TashkilatPart: "تشکیلات",
         dashboard: "داشبورد",
-
         departments: "ریاست‌ها",
         positionTypes: "انواع بست‌ها",
-        departmentPositions: "بست‌های ریاست",
-
+        departmentPositions: "بست‌های ریاست‌ها",
         employees: "کارمندان",
-        employeeAssignments: "تقرر کارمندان",
+        employeeAssignments: "تقررهای کارمندان",
+        tashkil: "تشکیل",
+        createDepartment: "ایجاد ریاست",
+        departmentsList: "لیست ریاست‌ها",
+        departmentName: "نام ریاست",
+        parentDepartment: "ریاست اصلی",
+        noParent: "بدون ریاست اصلی",
     },
 };
 
