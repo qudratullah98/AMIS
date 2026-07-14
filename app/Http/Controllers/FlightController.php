@@ -5,37 +5,47 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFlightRequest;
 use App\Models\Flight;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FlightController extends Controller
 {
-     public function index()
+    public function index()
     {
         $perPage = request()->input('perPage', 10);
         $flights = Flight::with([
-    'airport',
-    'airline',
-    'aircraftType'
-])
-->latest()
-->paginate($perPage);
+            'airport',
+            'airline',
+            'aircraftType'
+        ])
+            ->latest()
+            ->paginate($perPage);
 
-return inertia('Flight/Index', compact('flights'));
+        return inertia('Flight/Index', compact('flights'));
     }
 
-public function store(StoreFlightRequest $request)
+    public function store(StoreFlightRequest $request)
+    {
+        $flight = Flight::create($request->validated());
+
+        return response()->json([
+            'flight' => $flight,
+            'message' => 'Flight created successfully'
+        ]);
+    }
+
+
+    // Json Data 
+  public function getFlights(Request $request)
 {
-    $flight = Flight::create($request->validated());
+    $query = $request->query('query');
 
-    return response()->json([
-        'flight' => $flight,
-        'message' => 'Flight created successfully'
-    ]);
+    $flights = Flight::when($query, function ($q) use ($query) {
+            $q->where('flight_number', 'like', "%{$query}%");
+        })
+        ->latest()
+        ->get();
+
+    return response()->json($flights);
 }
-
-      // Json Data 
-    // public function getFlights()
-    // {
-    //     $flights = Flight::with('serviceUnit', 'sghaServicesRate.airline')->latest()->get();
-    //     return response()->json($flights);
-    // }
+   
 }

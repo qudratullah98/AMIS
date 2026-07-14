@@ -11,16 +11,7 @@ import FullPageLoader from "@/Components/FullPageLoader";
 import toast from "react-hot-toast";
 import useValidation from "@/lib/validation/useValidation";
 import { min, required } from "@/lib/validation/rules";
-
-const IconLabel = ({ htmlFor, icon, text }) => (
-    <label
-        htmlFor={htmlFor}
-        className="flex items-center gap-2 text-sm font-semibold text-gray-700"
-    >
-        {icon && <span className="text-blue-600">{icon}</span>}
-        {text}
-    </label>
-);
+import IconLabel from "@/Components/IconLabel";
 
 export default function CreateSghaService({ onSubmitSuccess }) {
     const { t } = useTranslation();
@@ -52,10 +43,12 @@ export default function CreateSghaService({ onSubmitSuccess }) {
     const [submitting, setSubmitting] = useState(false);
 
     const rules = {
-        name_en: [required("English name is required")],
-        name_ps: [required("Pashto name is required")],
-        name_dr: [required("Dari name is required")],
-        sgha_service_unit_id: [required("Service unit is required")],
+        name_en: [required(t("error.sgha_service.name_en_unique"))],
+        name_ps: [required(t("error.sgha_service.name_ps_required"))],
+        name_dr: [required(t("error.sgha_service.name_dr_required"))],
+        sgha_service_unit_id: [
+            required(t("error.sgha_service.sgha_service_unit_id_required")),
+        ],
     };
 
     useEffect(() => {
@@ -86,7 +79,14 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
     // ---------------- AIRLINE RATE CHANGE ----------------
     const handleAirlineRateChange = (index, field, value) => {
-        if(data.airline_rates.filter((_, i) => i !== index).some(rate => rate.airline_id === value && field === 'airline_id')) {
+        if (
+            data.airline_rates
+                .filter((_, i) => i !== index)
+                .some(
+                    (rate) =>
+                        rate.airline_id === value && field === "airline_id",
+                )
+        ) {
             toast.error("This airline is already added.");
             return;
         }
@@ -164,16 +164,12 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }
                     />
 
-                    <InputError message={errors.name_en} />
+                    <InputError message={t(errors.name_en)} />
                 </div>
 
                 {/* NAME PS */}
                 <div>
-                    <IconLabel
-                        htmlFor="name_ps"
-                        icon="🛫"
-                        text="Pashto Name"
-                    />
+                    <IconLabel htmlFor="name_ps" icon="🛫" text="Pashto Name" />
 
                     <TextInput
                         id="name_ps"
@@ -183,7 +179,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }
                     />
 
-                    <InputError message={errors.name_ps} />
+                    <InputError message={t(errors.name_ps)} />
                 </div>
 
                 {/* NAME DR */}
@@ -198,16 +194,12 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }
                     />
 
-                    <InputError message={errors.name_dr} />
+                    <InputError message={t(errors.name_dr)} />
                 </div>
 
                 {/* UNIT */}
                 <div>
-                    <IconLabel
-                        htmlFor="unit"
-                        icon="📦"
-                        text="Service Unit"
-                    />
+                    <IconLabel htmlFor="unit" icon="📦" text="Service Unit" />
 
                     <CustomSelect
                         value={data.sgha_service_unit_id}
@@ -220,7 +212,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         }
                     />
 
-                    <InputError message={errors.sgha_service_unit_id} />
+                    <InputError message={t(errors.sgha_service_unit_id)} />
                 </div>
             </div>
 
@@ -267,6 +259,17 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                                     )
                                 }
                             />
+                            <InputError
+                                message={
+                                    errors[`airline_rates.${index}.airline_id`]
+                                        ? t(
+                                              errors[
+                                                  `airline_rates.${index}.airline_id`
+                                              ],
+                                          )
+                                        : ""
+                                }
+                            />
                         </div>
 
                         {/* RATE */}
@@ -288,6 +291,19 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                                     )
                                 }
                             />
+                            <InputError
+                                message={
+                                    errors[
+                                        `airline_rates.${index}.complation_rate`
+                                    ]
+                                        ? t(
+                                              errors[
+                                                  `airline_rates.${index}.complation_rate`
+                                              ],
+                                          )
+                                        : ""
+                                }
+                            />
                         </div>
 
                         {/* REMOVE */}
@@ -295,9 +311,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                             {data.airline_rates.length > 1 && (
                                 <button
                                     type="button"
-                                    onClick={() =>
-                                        removeAirlineRate(index)
-                                    }
+                                    onClick={() => removeAirlineRate(index)}
                                     className="px-3 py-2 bg-red-600 text-white rounded"
                                 >
                                     Remove

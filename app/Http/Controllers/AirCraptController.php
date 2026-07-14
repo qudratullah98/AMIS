@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAircraftTypeRequest;
 use App\Models\AircraftType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AirCraptController extends Controller
 {
-       // AirCraft Types part
+    // AirCraft Types part
     public function airCraftTypeindex()
     {
         $search   = request()->input('query');
@@ -19,11 +20,21 @@ class AirCraptController extends Controller
         })->latest()->paginate($perPage);
 
 
-        return Inertia::render('AircraftTypes/Index',['aircraftTypes'=>$aircraftTypes]);
+        return Inertia::render('AircraftTypes/Index', ['aircraftTypes' => $aircraftTypes]);
+    }
+    public function store(StoreAircraftTypeRequest $request)
+    {
+        $aircraftType = AircraftType::create(
+            $request->validated()
+        );
 
+        return response()->json([
+            'message' => 'Created successfully.',
+            'aircraftType' => $aircraftType,
+        ]);
     }
 
-      // Json Data 
+    // Json Data 
     public function getAirCraftTypes()
     {
         $aircraftTypes = AircraftType::all();

@@ -90,5 +90,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(GeneralDepartment::class);
     }
- 
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

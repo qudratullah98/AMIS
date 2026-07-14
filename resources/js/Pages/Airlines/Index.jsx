@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import DataTable from "@/Components/Datatable";
 import SubHeader from "@/Components/SubHeader";
 import { useTranslation } from "react-i18next";
+import CustomModal from "@/Components/CustomModal";
+import Create from "./Create";
 
 function AirlinesIndex({ airlines }) {
     const { t } = useTranslation();
     const [airlineData, setAirlinesData] = useState(airlines?.data || []);
     const paginationLinks = airlines?.links || [];
+    const [createModal, setCreateModal] = useState(false);
 
     const columns = [
         { label: t("common.NO") },
@@ -17,11 +20,23 @@ function AirlinesIndex({ airlines }) {
     ];
 
     return (
-        <AuthenticatedLayout header={<SubHeader title={t("airline.airlines")} />}>
-
-
-
+        <AuthenticatedLayout
+            header={<SubHeader title={t("airline.airlines")} />}
+        >
             <SubHeader links={[{ name: t("airline.airlines") }]} />
+            <CustomModal
+                show={createModal}
+                handleClose={() => setCreateModal(false)}
+                title={t("airline.createAirline")}
+                size="xlarge"
+                stopPropagation={false}
+                footer={false}
+            >
+               <Create onSubmitSuccess={(airline) => {
+                    setAirlinesData((prev) => [...prev, airline]);
+                    setCreateModal(false);
+                }}></Create>
+            </CustomModal>
 
             <div className="mx-auto">
                 <div className="overflow-hidden bg-white shadow-none sm:rounded-lg border border-gray-100 dark:bg-gray-800">
@@ -30,7 +45,9 @@ function AirlinesIndex({ airlines }) {
                             columns={columns}
                             links={paginationLinks}
                             header={t("airline.airlinesList")}
-                            addButton={false}
+                            buttonLabel={t("airline.addNewAirline")}
+                            enableButton={true}
+                            onButtonClick={() => setCreateModal(true)}
                         >
                             {airlineData.map((airline, a) => (
                                 <tr
@@ -47,7 +64,6 @@ function AirlinesIndex({ airlines }) {
                                     <td className="p-2 text-center">
                                         {airline.name_en}
                                     </td>
-
                                 </tr>
                             ))}
                         </DataTable>

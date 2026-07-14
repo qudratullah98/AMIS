@@ -5,19 +5,12 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import CustomSelect from "@/Components/CustomSelect";
 import SmallLoader from "@/Components/SmallLoader";
+import IconLabel from "@/Components/IconLabel";
 import FullPageLoader from "@/Components/FullPageLoader";
 import axios from "axios";
 
 // IconLabel Component
-const IconLabel = ({ htmlFor, icon, text, className = "" }) => (
-    <label
-        htmlFor={htmlFor}
-        className={`flex items-center gap-2 text-sm font-semibold text-gray-700 ${className}`}
-    >
-        {icon && <span className="text-blue-600">{icon}</span>}
-        {text}
-    </label>
-);
+
 
 export default function CreateAirport({ onSubmitSuccess }) {
     const { t } = useTranslation();

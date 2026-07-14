@@ -25,6 +25,7 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "echarts": "^5.6.0",
+        "formik": "^2.4.9",
         "lucide-react": "^0.477.0",
         "num2persian": "^4.2.0",
         "react-hot-toast": "^2.5.2",
@@ -33,6 +34,7 @@
         "react-qr-code": "^2.0.15",
         "react-select": "^5.10.1",
         "tailwind-merge": "^3.3.0",
-        "tailwindcss-animate": "^1.0.7"
+        "tailwindcss-animate": "^1.0.7",
+        "yup": "^1.7.1"
     }
 }

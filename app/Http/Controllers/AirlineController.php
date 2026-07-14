@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AirlineRequest;
 use App\Models\AircraftType;
 use App\Models\Airline;
 use Inertia\Inertia;
@@ -21,6 +22,14 @@ class AirlineController extends Controller
         })->latest()->paginate($perPage);
 
         return Inertia::render('Airlines/Index',['airlines'=>$airlines]);
+    }
+    public function store(AirlineRequest $request)
+    {
+        $data = $request->validated();
+    
+        $airline = Airline::create($data);
+
+        return response()->json(['message' => 'Airline created successfully', 'airline' => $airline], 201);
     }
 
  

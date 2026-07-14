@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sgha_services', function (Blueprint $table) {
             $table->id();
             $table->string('name_en')->unique();
-            $table->string('name_ps')->nullable();
-            $table->string('name_dr')->nullable();
+            $table->string('name_ps');
+            $table->string('name_dr') ;
             $table->foreignId('sgha_service_unit_id')->constrained('sgha_service_units')->onDelete('cascade');
             $table->timestamps();
         });

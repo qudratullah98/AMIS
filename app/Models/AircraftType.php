@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AircraftType extends Model
 {
+    protected $fillable = [
+        'name',
+        'code',
+    ];
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         $search = trim($search ?? '');

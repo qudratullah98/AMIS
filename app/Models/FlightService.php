@@ -6,13 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class FlightService extends Model
 {
+    protected $fillable = [
+        'flight_id',
+        'sgha_service_id',
+        'count',
+    ];
+
+
     public function flight()
     {
         return $this->belongsTo(Flight::class);
     }
 
-    public function sghaServicesRate()
+
+    public function sghaService()
     {
-        return $this->belongsTo(SGHAServiceRate::class);
+        return $this->belongsTo(SGHA_Service::class);
+    }
+    public function approvalStatus()
+    {
+        return $this->belongsTo(ApprovelStatus::class, 'approval_status_id');
     }
 }
