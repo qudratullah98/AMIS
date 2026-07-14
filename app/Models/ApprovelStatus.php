@@ -26,4 +26,14 @@ class ApprovelStatus extends Model
     {
         return $this->hasMany(Equipment::class);
     }
+
+    public function construction()
+    {
+        return $this->hasMany(Construction::class);
+    }
+
+    public function constructionType()
+    {
+        return $this->hasMany(ConstructionType::class);
+    }
 }

@@ -30,23 +30,24 @@ function Index() {
 
     const cards = [
         {
-            key: "vehicle_type",
-            title: t("construction.constructions"),
+            key: "constructions",
+            title: t("construction.constructionsTypes"),
             href: "",
             icon: <Building2 className="w-8 h-8 text-slate-700" />,
         },
         {
-            key: "owner",
-            title: t("construction.airportConstructions"),
-            href: "",
-            icon: <MapPinHouse className="w-8 h-8 text-slate-700" />,
-        },
-        {
-            key: "companie",
+            key: "constructionsType",
             title: t("construction.constructionTypes"),
             href: "",
             icon: <Layers2 className="w-8 h-8 text-slate-700" />,
         },
+        {
+            key: "airportConstructions",
+            title: t("construction.airportConstructions"),
+            href: "",
+            icon: <MapPinHouse className="w-8 h-8 text-slate-700" />,
+        },
+
     ];
 
     useEffect(() => {

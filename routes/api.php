@@ -3,6 +3,9 @@
 use App\Http\Controllers\Api\ActivityStatusController;
 use App\Http\Controllers\Api\ProvinceController as ApiProvinceController;
 use App\Http\Controllers\Api\UnitController as ApiUnitController;
+use App\Http\Controllers\Api\constructionsController as constructionsController;
+use App\Http\Controllers\Api\constructionTypesController as constructionTypesController;
+
 use Illuminate\Support\Facades\Route;
 
 // END MOBILE API ROUTES
@@ -17,6 +20,9 @@ Route::get('provinces', [ApiProvinceController::class, 'getProvinces'])->name('a
 Route::get('province_districts/{province_id}', [ApiProvinceController::class, 'getProvinceDistricts'])->name('api_districts_by_province');
 Route::get('units', [ApiUnitController::class, 'getUnits'])->name('api_units');
 Route::get('statuses', [ActivityStatusController::class, 'getActivityStatuses'])->name('api_statuses');
+Route::get('constructions', [constructionsController::class, 'constructions'])->name('api_constructions');
+Route::get('constructionTypes', [constructionTypesController::class, 'constructionTypes'])->name('api_constructionTypes');
+
 
 /*
 |--------------------------------------------------------------------------

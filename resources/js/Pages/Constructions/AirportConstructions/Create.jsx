@@ -36,24 +36,33 @@ export default function CreateConstruction({ onSubmitSuccess }) {
         requirements: "",
         image: "",
     });
-
-    const [units, setUnits] = useState([]);
-    const [activityStatuses, setActivityStatuses] = useState([]);
-
     const [smallLoading, setSmallLoading] = useState(false);
     const [pageLoading, setPageLoading] = useState(true);
+
+    const [units, setUnits] = useState([]);
+    const [constructions, setConstructions] = useState([]);
+    const [constructionType, setConstructionType] = useState([]);
+
+
+
 
     // Fetch dropdown data
     useEffect(() => {
         const fetchDropdowns = async () => {
             try {
-                const [unitsRes, statusRes] = await Promise.all([
+                const [unitsRes, constructionsRes, constructionTypeRes] = await Promise.all([
                     axios.get(route("api_units")),
-                    axios.get(route("api_statuses")),
+                    axios.get(route("api_constructions")),
+                    axios.get(route("api_constructionTypes")),
+
                 ]);
 
                 setUnits(unitsRes.data);
-                setActivityStatuses(statusRes.data);
+                setConstructions(constructionsRes.data);
+                setConstructionType(constructionTypeRes.data);
+
+
+
             } catch (err) {
                 console.error("Error fetching dropdowns:", err);
             } finally {
@@ -62,8 +71,6 @@ export default function CreateConstruction({ onSubmitSuccess }) {
         };
         fetchDropdowns();
     }, []);
-
-
 
     // Form submission
     const handleSubmit = async (e) => {
@@ -86,7 +93,46 @@ export default function CreateConstruction({ onSubmitSuccess }) {
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
             {/* Grid Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-0 rounded-xl shadow-none">
+
+                {/* CONSTRUCTIONS   */}
+                <div>
+                    <IconLabel
+                        htmlFor="construction_id"
+                        text={t("construction.constructions")}
+                    />
+                    <CustomSelect
+                        id="construction_id"
+                        value={data.construction_id}
+                        options={constructions.map((c) => ({
+                            value: c.id,
+                            label: c.name_ps+ "  -  " +c.name_en,
+                        }))}
+                        onChange={(e) => setData("construction_id", e)}
+                    />
+                    <InputError message={errors.construction_id} />
+                </div>
+
+                {/* CONSTRUCTIONS  TYPE  */}
+                <div>
+                    <IconLabel
+                        htmlFor="construction_type_id"
+                        text={t("construction.constructionType")}
+                    />
+                    <CustomSelect
+                        id="construction_type_id"
+                        value={data.construction_type_id}
+                        options={constructionType.map((c) => ({
+                            value: c.id,
+                            label: c.type_ps+ "  -  " +c.type_en,
+                        }))}
+                        onChange={(e) => setData("construction_type_id", e)}
+                    />
+                    <InputError message={errors.construction_type_id} />
+                </div>
+
+
+
                 {/* Name PS */}
                 <div>
                     <IconLabel
@@ -102,38 +148,8 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                     <InputError message={errors.name_ps} />
                 </div>
 
-                {/* Name DR */}
-                <div>
-                    <IconLabel
-                        htmlFor="name_dr"
-                        icon="🛫"
-                        text={t("Name (Dari)")}
-                    />
-                    <TextInput
-                        id="name_dr"
-                        value={data.name_dr}
-                        onChange={(e) => setData("name_dr", e.target.value)}
-                    />
-                    <InputError message={errors.name_dr} />
-                </div>
-
-                {/* Name EN */}
-                <div>
-                    <IconLabel
-                        htmlFor="name_en"
-                        icon="✈️"
-                        text={t("Name (English)")}
-                    />
-                    <TextInput
-                        id="name_en"
-                        value={data.name_en}
-                        onChange={(e) => setData("name_en", e.target.value)}
-                    />
-                    <InputError message={errors.name_en} />
-                </div>
-
                 {/* IATA */}
-                <div>
+                {/* <div>
                     <IconLabel htmlFor="IATA_code" icon="🏷️" text="IATA Code" />
                     <TextInput
                         id="IATA_code"
@@ -141,138 +157,8 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         onChange={(e) => setData("IATA_code", e.target.value)}
                     />
                     <InputError message={errors.IATA_code} />
-                </div>
+                </div> */}
 
-                {/* ICAO */}
-                <div>
-                    <IconLabel htmlFor="ICAO_code" icon="🏷️" text="ICAO Code" />
-                    <TextInput
-                        id="ICAO_code"
-                        value={data.ICAO_code}
-                        onChange={(e) => setData("ICAO_code", e.target.value)}
-                    />
-                    <InputError message={errors.ICAO_code} />
-                </div>
-
-                {/* Province */}
-                <div>
-                    <IconLabel
-                        htmlFor="province_id"
-                        icon="📍"
-                        text={t("Province")}
-                    />
-                    <CustomSelect
-                        id="province_id"
-                        options={provinces.map((p) => ({
-                            value: p.id,
-                            label: p.province,
-                        }))}
-                        value={data.province_id}
-                        onChange={(e) => handleProvinceChange(e)}
-                    />
-                    <InputError message={errors.province_id} />
-                </div>
-
-               
-
-                {/* Latitude */}
-                <div>
-                    <IconLabel htmlFor="latitude" icon="🌐" text="Latitude" />
-                    <TextInput
-                        id="latitude"
-                        value={data.latitude}
-                        onChange={(e) => setData("latitude", e.target.value)}
-                    />
-                    <InputError message={errors.latitude} />
-                </div>
-
-                {/* Longitude */}
-                <div>
-                    <IconLabel htmlFor="longitude" icon="🌐" text="Longitude" />
-                    <TextInput
-                        id="longitude"
-                        value={data.longitude}
-                        onChange={(e) => setData("longitude", e.target.value)}
-                    />
-                    <InputError message={errors.longitude} />
-                </div>
-
-                {/* AMSL */}
-                <div>
-                    <IconLabel htmlFor="amsl" icon="⛰️" text="AMSL" />
-                    <TextInput
-                        id="amsl"
-                        value={data.amsl}
-                        onChange={(e) => setData("amsl", e.target.value)}
-                    />
-                    <InputError message={errors.amsl} />
-                </div>
-
-                {/* AMSL Unit */}
-                <div>
-                    <IconLabel
-                        htmlFor="amsl_unit_id"
-                        icon="📏"
-                        text="AMSL Unit"
-                    />
-                    <CustomSelect
-                        id="amsl_unit_id"
-                        value={data.amsl_unit_id}
-                        options={units.map((u) => ({
-                            value: u.id,
-                            label: u.unit_ps,
-                        }))}
-                        onChange={(e) => setData("amsl_unit_id", e)}
-                    />
-                    <InputError message={errors.amsl_unit_id} />
-                </div>
-
-                {/* Area */}
-                <div>
-                    <IconLabel htmlFor="area" icon="📐" text="Area" />
-                    <TextInput
-                        id="area"
-                        value={data.area}
-                        onChange={(e) => setData("area", e.target.value)}
-                    />
-                    <InputError message={errors.area} />
-                </div>
-
-                {/* Area Unit */}
-                <div>
-                    <IconLabel
-                        htmlFor="area_unit_id"
-                        icon="📐"
-                        text="Area Unit"
-                    />
-                    <CustomSelect
-                        id="area_unit_id"
-                        value={data.area_unit_id}
-                        options={units.map((u) => ({
-                            value: u.id,
-                            label: u.unit_ps,
-                        }))}
-                        onChange={(e) => setData("area_unit_id", e)}
-                    />
-                    <InputError message={errors.area_unit_id} />
-                </div>
-            </div>
-
-            {/* Description */}
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-                <IconLabel
-                    htmlFor="description"
-                    icon="📝"
-                    text={t("Description")}
-                />
-                <textarea
-                    id="description"
-                    value={data.description}
-                    onChange={(e) => setData("description", e.target.value)}
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500"
-                    rows="4"
-                />
-                <InputError message={errors.description} />
             </div>
 
             {/* Submit Button */}
@@ -282,7 +168,7 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                     disabled={processing || smallLoading}
                     className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow"
                 >
-                    ✈️ {t("Save Airport")}
+                    {t("common.storInfo")}
                     {smallLoading && <SmallLoader />}
                 </button>
             </div>

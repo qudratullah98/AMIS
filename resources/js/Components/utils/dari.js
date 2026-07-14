@@ -36,7 +36,7 @@ const dari = {
         updating: "در حال بروزرسانی...",
         saveChanges: "ذخیره تغییرات",
         add: "افزودن",
-        storInfo: "ذخیره معلومات",
+        storInfo: "معلومات را ذخیره نمائید",
         storingInfo: "در حال ذخیره معلومات...",
         next: "بعدی",
         previous: "قبلی",
@@ -47,12 +47,17 @@ const dari = {
         clear: "پاک کردن",
         goBack: "بازگشت",
         type: "نوع",
+
+
+
         image: "عکس",
         log: "لاگ",
         profile: "پروفایل",
         isBlocked: "آیا مسدود شده",
-        inoformationtStoredSuccessfully: "معلومات موفقانه ذخیره ګردید",
-        inoformationtUpdatedSuccessfully: "معلومات موفقانه تغییر ګردید",
+        informationtStoredSuccessfully: "معلومات موفقانه ذخیره ګردید",
+        informationtUpdatedSuccessfully: "معلومات موفقانه تغییر ګردید",
+        informationtApprovedSuccessfully: "معلومات موفقانه تائید ګردید",
+
     },
 
     input: {
@@ -74,6 +79,10 @@ const dari = {
         general:
             "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
         credentialInvalid: "ایمیل یا رمز عبور نادرست است",
+
+        fieldIsNeeded: "این بخش ضروری میباشد!",
+        upperCase:"باید حروف کلان انګلیسی باشد!",
+        englishString:"حروف باید انګلیسی باشد",
 
         nameIsNeeded: "اسم ضروری میباشد",
         emailIsNeeded: "ایمیل ضروری است",
@@ -251,11 +260,23 @@ const dari = {
         airportConstructions: "ساخت‌وساز میدان هوایی",
         airportConstructionsList: "لیست ساخت‌وساز میدان هوایی",
         constructions: "ساخت‌وسازها",
+                constructionsTypes: "نوعیت های ساخت‌وساز",
+
+
         constructionTypes: "نوعیت های ساخت‌وساز",
         constructionCode: "کود ساختمان",
         newConstruction:"ساختمان جدید",
         construction:"ساختمان",
         constructionType:"نوعیت ساختمان",
+        addingNewConstruction:"اضافه نمودن ساختمان جدید",
+        addNewConstruction:"ساختمان جدید را اضافه نمایید",
+
+        addingNewConstructionType:"اضافه نمودن نوعیت ساخت و ساز ",
+        addNewConstructionType:"نوعیت ساخت و ساز را اضافه نمایید",
+
+        constructionTypePashto:"نوعیت ساخت و ساز (پښتو)",
+        constructionTypeDari:"نوعیت ساخت و ساز (دری)",
+        constructionTypeEnglish:"نوعیت ساخت و ساز (انګلیسی)",
 
     },
 };

@@ -18,6 +18,7 @@ class ConstructionSeeder extends Seeder
                 'name_dr' => 'باند پرواز (رنوی)',
                 'name_en' => 'Runway',
                 'code'    => 'RWY',
+                
             ],
 
             [

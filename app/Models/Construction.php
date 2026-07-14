@@ -11,6 +11,7 @@ class Construction extends Model
         'name_dr',
         'name_en',
         'code',
+        'status_id',
     ];
 
     protected $table= 'constructions';
@@ -42,5 +43,17 @@ class Construction extends Model
     public function properties()
     {
         return $this->hasMany(ConstructionProperty::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ApprovelStatus::class);
+    }
+
+    public function activate()
+    {
+        $this->status_id = 1;
+        $this->save();
+        return $this;
     }
 }

@@ -55,6 +55,7 @@ export default forwardRef(function TextInput(
                 "dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600 " +
                 (props.disabled ? " bg-gray-100 cursor-not-allowed " : "") + // 👈 add gray background if disabled
                 className
+
             }
             ref={localRef}
         />

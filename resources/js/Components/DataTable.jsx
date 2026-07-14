@@ -99,7 +99,7 @@ const DataTable = ({
                 </div>
             </div> */}
             <div className="border border-gray-300">
-                <div className="max-h-[580px] overflow-y-auto">
+                <div className="max-h-[600px] overflow-y-auto">
                     <table className="min-w-full table-fixed">
                         <thead className="sticky top-0 bg-gray-100 shadow-sm z-10">
                             <tr>

@@ -108,8 +108,6 @@ export default function Header() {
                 can: true,
             },
         ],
-
-    
     };
 
     // Determine which menu group to show based on current path
@@ -126,9 +124,15 @@ export default function Header() {
             return menuGroups.airport;
         if (location.startsWith("/airlines") || location.startsWith("/airline"))
             return menuGroups.airline;
-         if (location.startsWith("/aircraft") || location.startsWith("/airCraftTypes"))
+        if (
+            location.startsWith("/aircraft") ||
+            location.startsWith("/airCraftTypes")
+        )
             return menuGroups.aircraft;
-        if (location.startsWith("/constructions") || location.startsWith("/construction"))
+        if (
+            location.startsWith("/constructions") ||
+            location.startsWith("/construction")
+        )
             return menuGroups.constructions;
         if (location.startsWith("/flights") || location.startsWith("/flight"))
             return menuGroups.flight;

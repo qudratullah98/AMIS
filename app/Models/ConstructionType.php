@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class ConstructionType extends Model
 {
 
+protected $fillable = [
+        'type_ps',
+        'type_dr',
+        'type_en',
+        'status_id',
+
+    ];
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         $search = trim($search ?? '');
@@ -23,5 +31,17 @@ class ConstructionType extends Model
     public function airportConstructionType()
     {
         return $this->hasMany(AirportConstruction::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ApprovelStatus::class);
+    }
+
+    public function activate()
+    {
+        $this->status_id = 1;
+        $this->save();
+        return $this;
     }
 }

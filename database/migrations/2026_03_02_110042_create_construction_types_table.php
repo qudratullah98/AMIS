@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ApprovelStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,8 @@ return new class extends Migration
             $table->string('type_ps');
             $table->string('type_dr');
             $table->string('type_en');
+            $table->foreignIdFor(ApprovelStatus::class,'status_id')->default(2);
+
             $table->timestamps();
         });
     }

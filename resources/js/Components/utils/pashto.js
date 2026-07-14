@@ -38,7 +38,7 @@ const pashto = {
         updating: "د معلوماتو تازه کول...",
         saveChanges: "بدلونونه خوندي کول",
         add: "اضافه کول",
-        storInfo: "معلومات ثبتول",
+        storInfo: "معلومات ثبت کړئ",
         storingInfo: "معلومات خوندي کېږي...",
         next: "وروستنی",
         previous: "مخکینی",
@@ -49,12 +49,16 @@ const pashto = {
         clear: "پاکول",
         goBack: "شاته تګ",
         type: "ډول",
+
+
         image: "انځور",
         log: "لاګ",
         profile: "پروفایل",
         isBlocked: "آیا بند شوی",
-        inoformationtStoredSuccessfully: "معلومات په بریالیتوب سره ثبت شول",
-        inoformationtUpdatedSuccessfully: "معلومات په بریالیتوب سره بدل شول",
+        informationtStoredSuccessfully: "معلومات په بریالیتوب سره ثبت شول",
+        informationtUpdatedSuccessfully: "معلومات په بریالیتوب سره بدل شول",
+        informationtApprovedSuccessfully: "معلومات په بریالیتوب سره ومنل شول",
+
     },
 
     input: {
@@ -77,6 +81,13 @@ const pashto = {
             "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
 
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
+
+        fieldIsNeeded: "دا برخه اړینه ده!",
+                upperCase:"لوی انګلیسي حروف اړین دي!",
+                        englishString:"اړینه ده چې حروف انګلیسي واوسي!",
+
+
+
 
         nameIsNeeded: "نوم اړین دی",
         emailIsNeeded: "برېښنالیک اړین دی",
@@ -249,16 +260,32 @@ const pashto = {
 
     construction: {
         constructionsList: "د ودانیو لیست ",
+                constructionsTypeList: "د ودانیو د ډولونو لیست ",
+
         constructionsPart: "د ودانیو برخه",
         airportConstructions: "د هوايي ډګر ودانۍ",
         airportConstructionsList: "د هوايي ډګر د ودانیو لیست",
 
         constructions: "ودانۍ",
+        constructionsTypes: "د ودانیو ډولونه",
+
         constructionTypes: "د ودانیو د جوړښت ډولونه",
         constructionCode: "د ودانۍ کوډ",
         newConstruction: "نوې ودانۍ",
         construction: "ودانۍ",
         constructionType: "د ودانۍ ډول",
+        addingNewConstruction:"د نوې ودانۍ اضافه کول",
+        addNewConstruction:"نوې ودانۍ اضافه کړئ",
+
+        addingNewConstructionType:"د نوی ودانیز جوړښت اضافه کول",
+        addNewConstructionType:"نوی ودانیز جوړښت اضافه کړئ",
+
+        constructionTypePashto:"د جوړښت ډول (پښتو)",
+        constructionTypeDari:"د جوړښت ډول (دري)",
+        constructionTypeEnglish:"د جوړښت ډول (انګلیسی)",
+
+
+
     },
 };
 

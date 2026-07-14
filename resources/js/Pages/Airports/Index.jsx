@@ -32,6 +32,7 @@ function AirportsIndex({ airports }) {
     ];
 
     const [loading, setLoading] = useState(false);
+
     const activation = (id) => {
         setLoading(true);
         axios
