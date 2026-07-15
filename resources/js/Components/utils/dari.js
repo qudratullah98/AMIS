@@ -67,6 +67,13 @@ const dari = {
         requirements: "ضروریات",
         details: "چزئیات",
         viewInfo: "نمایش معلومات",
+
+        addMoreProperties: "افزودن مشخصات بیشتر",
+        moreProperties: " مشخصات بیشتر",
+propertyName: "نام مشخصه",
+propertyValue: "مقدار مشخصه",
+remove: "حذف",
+unit: "واحد",
     },
 
     input: {
@@ -96,6 +103,9 @@ const dari = {
         selectionIsInvalid: "مقدار انتخاب‌شده معتبر نیست.",
         shouldBeDecimal: "مقدار باید حداکثر دارای دو رقم اعشار باشد.",
         shouldBeNumber: "مقدار باید یک عدد معتبر باشد.",
+        shouldBeString: "این فیلد باید متن باشد.",
+        max255Characters: "حداکثر ۲۵۵ کاراکتر مجاز است.",
+
         latitudeOutOfRange: "عرض جغرافیایی باید بین 90- و 90 باشد.",
         longitudeOutOfRange: "طول جغرافیایی باید بین 180- و 180 باشد.",
 

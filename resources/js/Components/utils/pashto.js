@@ -69,6 +69,13 @@ const pashto = {
         requirements: "اړتیاوې",
         details: "تفصیلات",
         viewInfo: "معلومات وګورئ",
+
+        addMoreProperties: "نورې ځانګړتیاوې اضافه کړئ",
+        moreProperties:"نورې ځانګړتیاوې",
+propertyName: "د ځانګړتیا نوم",
+propertyValue: "د ځانګړتیا مقدار",
+remove: "لرې کړئ",
+unit: "واحد",
     },
 
     input: {
@@ -101,6 +108,8 @@ const pashto = {
         shouldBeNumber: " باید یوه معتبره شمېره وي.",
         latitudeOutOfRange: "عرض البلد باید د -90 او 90 ترمنځ وي.",
         longitudeOutOfRange: "طول البلد باید د -180 او 180 ترمنځ وي.",
+        shouldBeString: "دا باید متن وي.",
+    max255Characters: "اعظمي ۲۵۵ توري اجازه لري.",
 
         upperCase: "لوی انګلیسي حروف اړین دي!",
         englishString: "اړینه ده چې حروف انګلیسي واوسي!",

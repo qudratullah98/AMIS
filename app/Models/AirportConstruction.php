@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class AirportConstruction extends Model
 {
@@ -23,11 +21,6 @@ class AirportConstruction extends Model
         'requirements',
         'image',
     ];
-
-
-
-
-
 
     // Relationship to Airport
     public function airport()
@@ -69,6 +62,11 @@ class AirportConstruction extends Model
     public function activityStatus()
     {
         return $this->belongsTo(ActivityStatus::class);
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(ConstructionProperty::class, 'construction_id');
     }
 
     public function activate()

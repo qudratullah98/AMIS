@@ -37,6 +37,8 @@ export default function CreateConstruction({ onSubmitSuccess }) {
         weaknesses: "",
         requirements: "",
         image: "",
+
+        constructionProperty: [],
     });
 
     const [smallLoading, setSmallLoading] = useState(false);
@@ -46,6 +48,34 @@ export default function CreateConstruction({ onSubmitSuccess }) {
     const [constructions, setConstructions] = useState([]);
     const [constructionType, setConstructionType] = useState([]);
     const [statuses, setStatuses] = useState([]);
+
+    // ---------------- ADD ROW ----------------
+
+    const addConstructionProperty = () => {
+        setData("constructionProperty", [
+            ...data.constructionProperty,
+            {
+                property_name: "",
+                property_value: "",
+                unit_id: "",
+            },
+        ]);
+    };
+
+    // ---------------- REMOVE ROW ----------------
+    const removeConstructionProperty = (index) => {
+        const updated = data.constructionProperty.filter((_, i) => i !== index);
+
+        setData("constructionProperty", updated);
+    };
+
+    const updateConstructionProperty = (index, field, value) => {
+        const updated = [...data.constructionProperty];
+
+        updated[index][field] = value;
+
+        setData("constructionProperty", updated);
+    };
 
     // Fetch dropdown data
     useEffect(() => {
@@ -248,8 +278,7 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         type="number"
                         min={-90}
                         max={90}
-                                                step="any"
-
+                        step="any"
                         value={data.latitude}
                         onChange={(e) => setData("latitude", e.target.value)}
                         placeholder="e.g., 41.40338"
@@ -272,8 +301,7 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         type="number"
                         min={-180}
                         max={180}
-                                                step="any"
-
+                        step="any"
                         value={data.longitude}
                         onChange={(e) => setData("longitude", e.target.value)}
                         placeholder="e.g., 2.17403"
@@ -360,6 +388,142 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                                 : ""
                         }
                     ></InputError>
+                </div>
+
+                {/* Constructions property */}
+                <div className="col-span-full bg-white p-0 rounded-xl shadow-sm space-y-4">
+                    <div className="flex items-center justify-between">
+                        <h3 className="font-semibold text-lg">{t("common.addMoreProperties")}</h3>
+
+                        <button
+                            type="button"
+                            onClick={addConstructionProperty}
+                            className="px-3 py-1 bg-green-600 text-white rounded"
+                        >
+                            + {t("common.add")}
+                        </button>
+                    </div>
+
+                    {data.constructionProperty.map((item, index) => (
+                        <div
+                            key={index}
+                            className="grid grid-cols-1 md:grid-cols-3 gap-1 border p-2 rounded-lg"
+                        >
+                            {/* Property Name */}
+                            <div>
+                                <IconLabel
+                                    htmlFor={`property_name_${index}`}
+                                    text={t("common.propertyName")}
+                                />
+
+                                <TextInput
+                                    id={`property_name_${index}`}
+                                    value={item.property_name || ""}
+                                    onChange={(e) =>
+                                        updateConstructionProperty(
+                                            index,
+                                            "property_name",
+                                            e.target.value,
+                                        )
+                                    }
+                                    placeholder={t("common.propertyName")}
+                                />
+                                <InputError
+                                    message={
+                                        errors[
+                                            `constructionProperty.${index}.property_name`
+                                        ]
+                                            ? t(
+                                                  `error.${errors[`constructionProperty.${index}.property_name`]}`,
+                                              )
+                                            : ""
+                                    }
+                                />
+                            </div>
+
+                            {/* Property Value */}
+                            <div>
+                                <IconLabel
+                                    htmlFor={`property_value_${index}`}
+                                    text={t("common.propertyValue")}
+                                />
+
+                                <TextInput
+                                    id={`property_value_${index}`}
+                                    type="number"
+                                    value={item.property_value || ""}
+                                    onChange={(e) =>
+                                        updateConstructionProperty(
+                                            index,
+                                            "property_value",
+                                            e.target.value,
+                                        )
+                                    }
+                                    placeholder={t("common.propertyValue")}
+                                />
+                                <InputError
+                                    message={
+                                        errors[
+                                            `constructionProperty.${index}.property_value`
+                                        ]
+                                            ? t(
+                                                  `error.${errors[`constructionProperty.${index}.property_value`]}`,
+                                              )
+                                            : ""
+                                    }
+                                />
+                            </div>
+                            {/* UNIT */}
+                            <div>
+                                <IconLabel
+                                    htmlFor={`unit_id_${index}`}
+                                    text={t("common.unit")}
+                                />
+
+                                <CustomSelect
+                                    id={`unit_id_${index}`}
+                                    value={item.unit_id}
+                                    options={units.map((u) => ({
+                                        value: u.id,
+                                        label: u.unit_ps + " - " + u.unit_en,
+                                    }))}
+                                    onChange={(e) =>
+                                        updateConstructionProperty(
+                                            index,
+                                            "unit_id",
+                                            e,
+                                        )
+                                    }
+                                    placeholder={t("input.selectUnit")}
+                                />
+
+                                <InputError
+                                    message={
+                                        errors[
+                                            `constructionProperty.${index}.unit_id`
+                                        ]
+                                            ? t(
+                                                  `error.${errors[`constructionProperty.${index}.unit_id`]}`,
+                                              )
+                                            : ""
+                                    }
+                                />
+                            </div>
+
+                            {/* Remove */}
+                            <div className="flex items-end">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        removeConstructionProperty(index)
+                                    }
+                                    className="px-3 py-2 bg-red-600 text-white rounded"
+                                >
+                                    {t("common.remove")}
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 

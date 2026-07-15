@@ -94,6 +94,53 @@ export default function ViewConstruction({ construction }) {
                     value={construction?.requirements}
                 />
             </div>
+
+            {/* Construction Properties */}
+            {construction?.properties?.length > 0 && (
+                <div className="mt-6">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                        {t("common.moreProperties")}
+                    </h3>
+
+                    <div className="overflow-x-auto rounded-lg border border-gray-200">
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th className="px-4 py-3 text-right text-xs font-semibold uppercase text-gray-600">
+                                        {t("common.propertyName")}
+                                    </th>
+
+                                    <th className="px-4 py-3 text-right text-xs font-semibold uppercase text-gray-600">
+                                        {t("common.propertyValue")}
+                                    </th>
+
+                                    <th className="px-4 py-3 text-right text-xs font-semibold uppercase text-gray-600">
+                                        {t("common.unit")}
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody className="divide-y divide-gray-100 bg-white">
+                                {construction.properties.map((property) => (
+                                    <tr key={property.id}>
+                                        <td className="px-4 py-3">
+                                            {property.property_name}
+                                        </td>
+
+                                        <td className="px-4 py-3">
+                                            {property.property_value}
+                                        </td>
+
+                                        <td className="px-4 py-3">
+                                            {property.unit?.unit_ps ?? "-"}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
