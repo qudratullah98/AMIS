@@ -48,7 +48,6 @@ function Index({ airportConstructions }) {
             )
             .then((response) => {
                 // Update the airport status in the local state
-console.log(response.data);
 
                 setConstructionsData((prev) =>
                     prev.map((airportConstruction) =>

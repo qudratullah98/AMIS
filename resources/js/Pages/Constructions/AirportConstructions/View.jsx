@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Calendar, Ruler, Package, Layers, CheckCircle } from "lucide-react";
 import { convertToShamsi } from "@/Components/utils/ConvertDate";
 
-export default function ViewConstruction({ construction }) {console.log(construction)
+export default function ViewConstruction({ construction }) {
     const { t } = useTranslation();
 
     const Item = ({ label, value }) => (
@@ -19,7 +19,6 @@ export default function ViewConstruction({ construction }) {console.log(construc
 
     return (
         <div className="space-y-6">
-
             {/* Header */}
             <div className="border-b pb-2">
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -33,7 +32,6 @@ export default function ViewConstruction({ construction }) {console.log(construc
 
             {/* Details */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
-
                 {/* <Item
                     label={t("construction.construction")}
                     value={construction?.construction?.name_ps}
@@ -46,14 +44,21 @@ export default function ViewConstruction({ construction }) {console.log(construc
 
                 <Item
                     label={t("common.width")}
-                    value={construction?.width +" "+ construction?.width_unit?.unit_ps}
+                    value={
+                        construction?.width +
+                        " " +
+                        construction?.width_unit?.unit_ps
+                    }
                 />
 
                 <Item
                     label={t("common.length")}
-                    value={construction?.length   +" "+ construction?.length_unit?.unit_ps }
+                    value={
+                        construction?.length +
+                        " " +
+                        construction?.length_unit?.unit_ps
+                    }
                 />
-
 
                 <Item
                     label={t("state.activityStatus")}
@@ -65,8 +70,7 @@ export default function ViewConstruction({ construction }) {console.log(construc
                     value={construction?.approval_status?.name_ps}
                 />
 
-
-                 <Item
+                <Item
                     label={t("common.longitude")}
                     value={construction?.longitude}
                 />
@@ -89,7 +93,6 @@ export default function ViewConstruction({ construction }) {console.log(construc
                     label={t("common.requirements")}
                     value={construction?.requirements}
                 />
-
             </div>
         </div>
     );

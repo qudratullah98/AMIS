@@ -38,38 +38,42 @@ class StoreAirportConstructionsRequest extends FormRequest
                 'numeric',
                 'between:-180,180',
             ],
+            'weaknesses'           => ['nullable'],
+
+            'requirements'         => ['nullable'],
+
         ];
     }
 
     public function messages(): array
-{
-    return [
-        'construction_id.required'      => 'fieldIsNeeded',
-        'construction_id.exists'        => 'selectionIsInvalid',
+    {
+        return [
+            'construction_id.required'      => 'fieldIsNeeded',
+            'construction_id.exists'        => 'selectionIsInvalid',
 
-        'construction_type_id.required' => 'fieldIsNeeded',
-        'construction_type_id.exists'   => 'selectionIsInvalid',
+            'construction_type_id.required' => 'fieldIsNeeded',
+            'construction_type_id.exists'   => 'selectionIsInvalid',
 
-        'width.required'                => 'fieldIsNeeded',
-        'width.decimal'                 => 'shouldBeDecimal',
-        'width_unit_id.required'        => 'fieldIsNeeded',
-        'width_unit_id.exists'          => 'selectionIsInvalid',
+            'width.required'                => 'fieldIsNeeded',
+            'width.decimal'                 => 'shouldBeDecimal',
+            'width_unit_id.required'        => 'fieldIsNeeded',
+            'width_unit_id.exists'          => 'selectionIsInvalid',
 
-        'length.required'               => 'fieldIsNeeded',
-        'length.decimal'                => 'shouldBeDecimal',
-        'length_unit_id.required'       => 'fieldIsNeeded',
-        'length_unit_id.exists'         => 'selectionIsInvalid',
+            'length.required'               => 'fieldIsNeeded',
+            'length.decimal'                => 'shouldBeDecimal',
+            'length_unit_id.required'       => 'fieldIsNeeded',
+            'length_unit_id.exists'         => 'selectionIsInvalid',
 
-        'activity_status_id.required'   => 'fieldIsNeeded',
-        'activity_status_id.exists'     => 'selectionIsInvalid',
+            'activity_status_id.required'   => 'fieldIsNeeded',
+            'activity_status_id.exists'     => 'selectionIsInvalid',
 
-        'latitude.required'             => 'fieldIsNeeded',
-        'latitude.numeric'              => 'shouldBeNumber',
-        'latitude.between'              => 'latitudeOutOfRange',
+            'latitude.required'             => 'fieldIsNeeded',
+            'latitude.numeric'              => 'shouldBeNumber',
+            'latitude.between'              => 'latitudeOutOfRange',
 
-        'longitude.required'            => 'fieldIsNeeded',
-        'longitude.numeric'             => 'shouldBeNumber',
-        'longitude.between'             => 'longitudeOutOfRange',
-    ];
-}
+            'longitude.required'            => 'fieldIsNeeded',
+            'longitude.numeric'             => 'shouldBeNumber',
+            'longitude.between'             => 'longitudeOutOfRange',
+        ];
+    }
 }

@@ -161,8 +161,7 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         id="width"
                         type="number"
                         min="0"
-                        // step="any"
-                        step="0.01"
+                        step="any"
                         value={data.width}
                         onChange={(e) => setData("width", e.target.value)}
                         placeholder={t("common.width")}
@@ -204,8 +203,7 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         id="length"
                         type="number"
                         min="0"
-                        // step="any"
-                        step="0.01"
+                        step="any"
                         value={data.length}
                         onChange={(e) => setData("length", e.target.value)}
                         placeholder={t("common.length")}
@@ -250,6 +248,8 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         type="number"
                         min={-90}
                         max={90}
+                                                step="any"
+
                         value={data.latitude}
                         onChange={(e) => setData("latitude", e.target.value)}
                         placeholder="e.g., 41.40338"
@@ -272,6 +272,8 @@ export default function CreateConstruction({ onSubmitSuccess }) {
                         type="number"
                         min={-180}
                         max={180}
+                                                step="any"
+
                         value={data.longitude}
                         onChange={(e) => setData("longitude", e.target.value)}
                         placeholder="e.g., 2.17403"

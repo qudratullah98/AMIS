@@ -129,12 +129,14 @@ class AirportConstructionController extends Controller
         $data = $request->validated();
 
         $data['airport_id'] = auth()->user()->airport_id;
+        $data['approval_status_id'] = 2;
+
 
         $airportConstruction = AirportConstruction::create($data);
 
         return response()->json([
             'message'             => 'Airport construction stored successfully',
-            'airportConstruction' => $airportConstruction->load('activityStatus:id,status_ps', 'approvalStatus:id,code', 'construction:id,name_ps', 'constructionType:id,type_ps'),
+            'airportConstruction' => $airportConstruction->load('activityStatus:id,status_ps', 'approvalStatus:id,code,name_ps', 'construction:id,name_ps', 'constructionType:id,type_ps'),
         ], 201);
     }
 
