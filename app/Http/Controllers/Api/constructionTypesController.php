@@ -10,7 +10,7 @@ class constructionTypesController extends Controller
 {
     public function constructionTypes()
     {
-        $constructionTypes = ConstructionType::where('status_id','1')->get(['id', 'type_ps', 'type_dr']);
+        $constructionTypes = ConstructionType::where('approval_status_id','1')->get(['id', 'type_ps', 'type_en']);
         return response()->json($constructionTypes);
     }
 }

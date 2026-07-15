@@ -120,7 +120,7 @@ function constructionsType({ constructionsType }) {
                                         <td className="p-2 text-center">
                                             <StatusBadge
                                                 status={
-                                                    constructionType?.status
+                                                    constructionType?.approval_status
                                                         ?.code
                                                 }
                                             />
@@ -129,7 +129,7 @@ function constructionsType({ constructionsType }) {
                                         <td className="p-0 text-center">
                                             <ThreeDotMenu>
                                                 <div className="py-0">
-                                                    {constructionType?.status
+                                                    {constructionType?.approval_status
                                                         ?.code !==
                                                         "approved" && (
                                                         <button

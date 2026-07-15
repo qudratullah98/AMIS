@@ -23,7 +23,10 @@ Route::middleware(['auth', 'blocked'])->group(function () {
 
 
     //airportConstructions types
-    Route::get('constructions-airport', [AirportConstructionController::class, 'airportConstructionsIndex'])->name('airportConstructions');
+    Route::get('constructions/airport', [AirportConstructionController::class, 'airportConstructionsIndex'])->name('airportConstructions');
+    Route::post('airportConstructions-store', [AirportConstructionController::class, 'airportConstructionsStore'])->name('airportConstructions.store');
+    Route::post('airportConstruction/activate', [AirportConstructionController::class, 'airportConstructionActivate'])->name('airportConstruction.activate');
+
 });
 
 

@@ -115,14 +115,14 @@ function ConstrunctionsIndex({ constructions }) {
                                     </td>
                                     <td className="p-2 text-center">
                                         <StatusBadge
-                                            status={construction?.status?.code}
+                                            status={construction?.approval_status?.code}
                                         />
                                     </td>
 
                                     <td className=" text-center">
                                         <ThreeDotMenu>
                                             <div className="py-0">
-                                                {construction?.status?.code !==
+                                                {construction?.approval_status?.code !==
                                                     "approved" && (
                                                     <button
                                                         className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

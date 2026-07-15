@@ -43,6 +43,7 @@ return new class extends Migration
             $table->foreignId('approval_status_id')
                 ->nullable()
                 ->constrained('approval_statuses')
+                ->default(2)
                 ->nullOnDelete();
 
             $table->foreignId('activity_status_id')

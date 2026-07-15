@@ -30,6 +30,7 @@ const dari = {
         action: "عملیات",
         NO: "شماره",
         date: "تاریخ",
+        storedDate: "تاریخ ثبت",
         time: "زمان",
         edit: "ویرایش",
         editInfo: "ویرایش معلومات",
@@ -48,8 +49,6 @@ const dari = {
         goBack: "بازگشت",
         type: "نوع",
 
-
-
         image: "عکس",
         log: "لاگ",
         profile: "پروفایل",
@@ -58,6 +57,16 @@ const dari = {
         informationtUpdatedSuccessfully: "معلومات موفقانه تغییر ګردید",
         informationtApprovedSuccessfully: "معلومات موفقانه تائید ګردید",
 
+        width: "عرض",
+        widthUnit: "واحد اندازه گیری عرض",
+        length: "طول",
+        lengthUnit: "واحد اندازه گیری طول",
+        latitude: "عرض البلد",
+        longitude: "طول البلد",
+        weaknesses: "نقاط ضعف",
+        requirements: "ضروریات",
+        details: "چزئیات",
+        viewInfo: "نمایش معلومات",
     },
 
     input: {
@@ -73,6 +82,9 @@ const dari = {
         selectGeneralBranch: "دیپارتمنت عمومی را انتخاب کنید",
         selectFile: "فایل را انتخاب کنید",
         selectActivityState: "حالت فعالیت را انتخاب نمایید",
+        selectConstruction: "ساخت و ساز مورد نظر را انتخاب نمائید",
+        selectConstructionType: "نوعیت ساخت را انتخاب نمائید",
+        selectUnit: "واحد اندازه گیری را انتخاب نمائید",
     },
 
     error: {
@@ -80,9 +92,15 @@ const dari = {
             "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
         credentialInvalid: "ایمیل یا رمز عبور نادرست است",
 
-        fieldIsNeeded: "این بخش ضروری میباشد!",
-        upperCase:"باید حروف کلان انګلیسی باشد!",
-        englishString:"حروف باید انګلیسی باشد",
+        fieldIsNeeded: "پر کردن این بخش الزامی است.",
+        selectionIsInvalid: "مقدار انتخاب‌شده معتبر نیست.",
+        shouldBeDecimal: "مقدار باید حداکثر دارای دو رقم اعشار باشد.",
+        shouldBeNumber: "مقدار باید یک عدد معتبر باشد.",
+        latitudeOutOfRange: "عرض جغرافیایی باید بین 90- و 90 باشد.",
+        longitudeOutOfRange: "طول جغرافیایی باید بین 180- و 180 باشد.",
+
+        upperCase: "باید حروف کلان انګلیسی باشد!",
+        englishString: "حروف باید انګلیسی باشد",
 
         nameIsNeeded: "اسم ضروری میباشد",
         emailIsNeeded: "ایمیل ضروری است",
@@ -288,24 +306,22 @@ const dari = {
         airportConstructions: "ساخت‌وساز میدان هوایی",
         airportConstructionsList: "لیست ساخت‌وساز میدان هوایی",
         constructions: "ساخت‌وسازها",
-                constructionsTypes: "نوعیت های ساخت‌وساز",
-
+        constructionsTypes: "نوعیت های ساخت‌وساز",
 
         constructionTypes: "نوعیت های ساخت‌وساز",
         constructionCode: "کود ساختمان",
-        newConstruction:"ساختمان جدید",
-        construction:"ساختمان",
-        constructionType:"نوعیت ساختمان",
-        addingNewConstruction:"اضافه نمودن ساختمان جدید",
-        addNewConstruction:"ساختمان جدید را اضافه نمایید",
+        newConstruction: "ساختمان جدید",
+        construction: "ساختمان",
+        constructionType: "نوعیت ساختمان",
+        addingNewConstruction: "اضافه نمودن ساختمان جدید",
+        addNewConstruction: "ساختمان جدید را اضافه نمایید",
 
-        addingNewConstructionType:"اضافه نمودن نوعیت ساخت و ساز ",
-        addNewConstructionType:"نوعیت ساخت و ساز را اضافه نمایید",
+        addingNewConstructionType: "اضافه نمودن نوعیت ساخت و ساز ",
+        addNewConstructionType: "نوعیت ساخت و ساز را اضافه نمایید",
 
-        constructionTypePashto:"نوعیت ساخت و ساز (پښتو)",
-        constructionTypeDari:"نوعیت ساخت و ساز (دری)",
-        constructionTypeEnglish:"نوعیت ساخت و ساز (انګلیسی)",
-
+        constructionTypePashto: "نوعیت ساخت و ساز (پښتو)",
+        constructionTypeDari: "نوعیت ساخت و ساز (دری)",
+        constructionTypeEnglish: "نوعیت ساخت و ساز (انګلیسی)",
     },
 };
 

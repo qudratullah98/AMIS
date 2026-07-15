@@ -32,6 +32,7 @@ const pashto = {
 
         NO: "شمیره",
         date: "نېټه",
+        storedDate: "د ثبت نیټه",
         time: "وخت",
         edit: "سمول",
         editInfo: "معلومات سمول",
@@ -50,7 +51,6 @@ const pashto = {
         goBack: "شاته تګ",
         type: "ډول",
 
-
         image: "انځور",
         log: "لاګ",
         profile: "پروفایل",
@@ -59,6 +59,16 @@ const pashto = {
         informationtUpdatedSuccessfully: "معلومات په بریالیتوب سره بدل شول",
         informationtApprovedSuccessfully: "معلومات په بریالیتوب سره ومنل شول",
 
+        width: "بر (سور)",
+        widthUnit: "د بر(سور) و اندازه کولو واحد",
+        length: "اوږدوالی",
+        lengthUnit: "د اووږدوالي اندازه کولو واحد",
+        latitude: "عرض البلد",
+        longitude: "طول البلد",
+        weaknesses: "د ضعف نقطې",
+        requirements: "اړتیاوې",
+        details: "تفصیلات",
+        viewInfo: "معلومات وګورئ",
     },
 
     input: {
@@ -74,6 +84,9 @@ const pashto = {
         selectGeneralBranch: "عمومي څانګه وټاکئ",
         selectFile: "فایل وټاکئ",
         selectActivityState: "د فعالیت حالت وټاکئ",
+        selectConstruction: "د خوښې ودانۍ وټاکئ",
+        selectConstructionType: "د ودانۍ د جوړښت ډول وټاکئ",
+        selectUnit: "د اندازه کولو واحد وټاکئ",
     },
 
     error: {
@@ -82,12 +95,15 @@ const pashto = {
 
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
 
-        fieldIsNeeded: "دا برخه اړینه ده!",
-                upperCase:"لوی انګلیسي حروف اړین دي!",
-                        englishString:"اړینه ده چې حروف انګلیسي واوسي!",
+        fieldIsNeeded: "دا برخه ډکول اړین دي.",
+        selectionIsInvalid: "ټاکل شوی انتخاب سم نه دی.",
+        shouldBeDecimal: " باید تر دوو اعشاري ځایونو پورې وي.",
+        shouldBeNumber: " باید یوه معتبره شمېره وي.",
+        latitudeOutOfRange: "عرض البلد باید د -90 او 90 ترمنځ وي.",
+        longitudeOutOfRange: "طول البلد باید د -180 او 180 ترمنځ وي.",
 
-
-
+        upperCase: "لوی انګلیسي حروف اړین دي!",
+        englishString: "اړینه ده چې حروف انګلیسي واوسي!",
 
         nameIsNeeded: "نوم اړین دی",
         emailIsNeeded: "برېښنالیک اړین دی",
@@ -163,7 +179,7 @@ const pashto = {
         deActive: "غیرفعال",
         expired: "موده پای ته رسېدلې",
 
-        activityStatus: "فعالیت حالت",
+        activityStatus: "د فعالیت حالت",
         approvalStatus: "د تایید حالت",
     },
 
@@ -288,7 +304,7 @@ const pashto = {
 
     construction: {
         constructionsList: "د ودانیو لیست ",
-                constructionsTypeList: "د ودانیو د ډولونو لیست ",
+        constructionsTypeList: "د ودانیو د ډولونو لیست ",
 
         constructionsPart: "د ودانیو برخه",
         airportConstructions: "د هوايي ډګر ودانۍ",
@@ -302,18 +318,15 @@ const pashto = {
         newConstruction: "نوې ودانۍ",
         construction: "ودانۍ",
         constructionType: "د ودانۍ ډول",
-        addingNewConstruction:"د نوې ودانۍ اضافه کول",
-        addNewConstruction:"نوې ودانۍ اضافه کړئ",
+        addingNewConstruction: "د نوې ودانۍ اضافه کول",
+        addNewConstruction: "نوې ودانۍ اضافه کړئ",
 
-        addingNewConstructionType:"د نوی ودانیز جوړښت اضافه کول",
-        addNewConstructionType:"نوی ودانیز جوړښت اضافه کړئ",
+        addingNewConstructionType: "د نوی ودانیز جوړښت اضافه کول",
+        addNewConstructionType: "نوی ودانیز جوړښت اضافه کړئ",
 
-        constructionTypePashto:"د جوړښت ډول (پښتو)",
-        constructionTypeDari:"د جوړښت ډول (دري)",
-        constructionTypeEnglish:"د جوړښت ډول (انګلیسی)",
-
-
-
+        constructionTypePashto: "د جوړښت ډول (پښتو)",
+        constructionTypeDari: "د جوړښت ډول (دري)",
+        constructionTypeEnglish: "د جوړښت ډول (انګلیسی)",
     },
 
     tashkilat: {
@@ -326,7 +339,7 @@ const pashto = {
         employeeAssignments: "د کارکوونکو مقررۍ",
         tashkil: "تشکیل",
         createDepartment: "د څانګې جوړول",
-        departmentsList: "د څانګو لست",  
+        departmentsList: "د څانګو لست",
         departmentName: "د څانګې نوم",
         parentDepartment: "اصلي څانګه",
         noParent: "اصلي څانګه نشته",

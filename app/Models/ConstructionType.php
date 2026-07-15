@@ -33,14 +33,14 @@ protected $fillable = [
         return $this->hasMany(AirportConstruction::class);
     }
 
-    public function status()
+    public function approvalStatus()
     {
         return $this->belongsTo(ApprovelStatus::class);
     }
 
     public function activate()
     {
-        $this->status_id = 1;
+        $this->approval_status_id = 1;
         $this->save();
         return $this;
     }

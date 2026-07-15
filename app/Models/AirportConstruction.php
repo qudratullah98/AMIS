@@ -27,7 +27,7 @@ class AirportConstruction extends Model
 
 
 
-    
+
 
     // Relationship to Airport
     public function airport()
@@ -69,5 +69,12 @@ class AirportConstruction extends Model
     public function activityStatus()
     {
         return $this->belongsTo(ActivityStatus::class);
+    }
+
+    public function activate()
+    {
+        $this->approval_status_id = 1;
+        $this->save();
+        return $this;
     }
 }

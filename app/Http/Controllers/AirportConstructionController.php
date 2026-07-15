@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Constructions\StoreAirportConstructionsRequest;
 use App\Http\Requests\constructions\StoreConstructionRequest;
 use App\Http\Requests\Constructions\StoreConstructionTypeRequest;
+use App\Models\AirportConstruction;
 use App\Models\Construction;
 use App\Models\ConstructionType;
-use App\Models\AirportConstruction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -19,11 +20,11 @@ class AirportConstructionController extends Controller
     public function getCardStats()
     {
         return response()->json([
-            'constructions'         => \App\Models\Construction::count(),
-            'constructionsType'     => \App\Models\ConstructionType::count(),
-            'airportConstructions'  => \App\Models\AirportConstruction::count(),
+            'constructions'        => \App\Models\Construction::count(),
+            'constructionsType'    => \App\Models\ConstructionType::count(),
+            'airportConstructions' => \App\Models\AirportConstruction::where('airport_id', auth()->user()->airport_id)->count(),
             // 'companie'       => \App\Models\Company::count(),
-            'terminal' => 22,
+            'terminal'             => 22,
         ]);
     }
 
@@ -33,7 +34,7 @@ class AirportConstructionController extends Controller
         $search  = request()->input('query');
         $perPage = request()->input('perPage', 10);
 
-        $constructions = Construction::with(['status:id,code'])->when($search, function ($query, $search) {
+        $constructions = Construction::with(['approvalStatus:id,code'])->when($search, function ($query, $search) {
             return $query->search($search);
         })->latest()->paginate($perPage);
 
@@ -46,7 +47,7 @@ class AirportConstructionController extends Controller
         $construction = Construction::create($request->validated());
 
         return response()->json([
-            'message' => 'Airport created successfully',
+            'message'      => 'Airport created successfully',
             'construction' => ($construction),
         ], 201);
     }
@@ -54,14 +55,14 @@ class AirportConstructionController extends Controller
     public function constructionsActivate()
     {
         $construction = Construction::findOrFail(request()->input('construction'))->activate();
-        if (!$construction) {
+        if (! $construction) {
             return response()->json([
                 'message' => 'Construction not found or could not be activated',
             ], 404);
         }
         return response()->json([
-            'message' => 'Airport activated successfully',
-            'construction' => $construction->load('status:id,code'),
+            'message'      => 'Airport activated successfully',
+            'construction' => $construction->load('approvalStatus:id,code'),
         ], 200);
     }
 
@@ -71,9 +72,9 @@ class AirportConstructionController extends Controller
     public function constructionsTypeIndex()
     {
         $search  = request()->input('query');
-        $perPage = request()->input('perPage', 13);
+        $perPage = request()->input('perPage', 10);
 
-        $constructionsType = ConstructionType::with(['status:id,code'])->when($search, function ($query, $search) {
+        $constructionsType = ConstructionType::with(['approvalStatus:id,code'])->when($search, function ($query, $search) {
             return $query->search($search);
         })->latest()->paginate($perPage);
 
@@ -85,7 +86,7 @@ class AirportConstructionController extends Controller
         $constructionType = ConstructionType::create($request->validated());
 
         return response()->json([
-            'message' => 'Construction Type stored successfully',
+            'message'          => 'Construction Type stored successfully',
             'constructionType' => ($constructionType),
         ], 201);
     }
@@ -93,30 +94,65 @@ class AirportConstructionController extends Controller
     public function constructionTypeActivate()
     {
         $constructionType = ConstructionType::findOrFail(request()->input('constructionType'))->activate();
-        if (!$constructionType) {
+        if (! $constructionType) {
             return response()->json([
                 'message' => 'constructionType not found or could not be activated',
             ], 404);
         }
         return response()->json([
-            'message' => 'constructionType activated successfully',
-            'constructionType' => $constructionType->load('status:id,code'),
+            'message'          => 'constructionType activated successfully',
+            'constructionType' => $constructionType->load('approvalStatus:id,code'),
         ], 200);
     }
 
     //END CONSTRUCTIONS TYPE
 
+    //AIRPORT CONSTRUCTIONS
     public function airportConstructionsIndex()
     {
         $search  = request()->input('query');
-        $perPage = request()->input('perPage', 13);
+        $perPage = request()->input('perPage', 10);
 
-        $airportConstructions = AirportConstruction::when($search, function ($query, $search) {
-            return $query->search($search);
-        })->latest()->paginate($perPage);
+        $airportConstructions = AirportConstruction::with(['activityStatus:id,status_ps', 'approvalStatus:id,code,name_ps', 'construction:id,name_ps', 'constructionType:id,type_ps','widthUnit:id,unit_en,unit_ps','lengthUnit:id,unit_en,unit_ps'])
+            ->when($search, function ($query, $search) {
+                return $query->search($search);
+            })
+            ->where('airport_id', auth()->user()->airport_id)
+            ->latest()->paginate($perPage);
 
         return Inertia::render('Constructions/AirportConstructions/Index', ['airportConstructions' => $airportConstructions]);
 
     }
+
+    public function airportConstructionsStore(StoreAirportConstructionsRequest $request)
+    {
+        $data = $request->validated();
+
+        $data['airport_id'] = auth()->user()->airport_id;
+
+        $airportConstruction = AirportConstruction::create($data);
+
+        return response()->json([
+            'message'             => 'Airport construction stored successfully',
+            'airportConstruction' => $airportConstruction->load('activityStatus:id,status_ps', 'approvalStatus:id,code', 'construction:id,name_ps', 'constructionType:id,type_ps'),
+        ], 201);
+    }
+
+    public function airportConstructionActivate()
+    {
+        $AirportConstruction = AirportConstruction::findOrFail(request()->input('AirportConstruction'))->activate();
+        if (! $AirportConstruction) {
+            return response()->json([
+                'message' => 'AirportConstruction not found or could not be activated',
+            ], 404);
+        }
+        return response()->json([
+            'message'             => 'AirportConstruction activated successfully',
+            'airportConstruction' => $AirportConstruction->load('activityStatus:id,status_ps', 'approvalStatus:id,code', 'construction:id,name_ps', 'constructionType:id,type_ps'),
+        ], 200);
+    }
+
+
+    //END AIRPORT CONSTRUCTIONS
 
 }

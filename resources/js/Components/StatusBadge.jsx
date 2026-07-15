@@ -60,16 +60,16 @@ const StatusBadge = ({ status }) => {
     if (!statusData) return null;
 
     return (
-        <div className={`flex items-center p-2 rounded ${statusData.bgClass} inline-flex group relative`}>
+        <div className={`flex items-center p-1 rounded ${statusData.bgClass} inline-flex group relative`}>
             <div className="mr-1">{statusData.icon}</div>
 
             <span className={`font-medium mx-1 ${statusData.textClass}`}>
                 {statusData.label}
             </span>
 
-            <div className="absolute top-8 transform -translate-x-1/2 ml-20 hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2">
+            {/* <div className="absolute top-8 transform -translate-x-1/2 ml-20 hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2">
                 {statusData.label}
-            </div>
+            </div> */}
         </div>
     );
 };

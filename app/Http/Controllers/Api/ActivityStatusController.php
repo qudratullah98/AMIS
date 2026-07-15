@@ -10,7 +10,7 @@ class ActivityStatusController extends Controller
 {
       public function getActivityStatuses()
     {
-        $statuses = ActivityStatus::get(['id', 'status_ps']);
+        $statuses = ActivityStatus::get(['id', 'status_ps','status_en']);
         return response()->json($statuses);
     }
 }

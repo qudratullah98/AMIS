@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name_dr');
             $table->string('name_en');
             $table->string('code');
-            $table->foreignIdFor(ApprovelStatus::class,'status_id')->default(2);
+            $table->foreignIdFor(ApprovelStatus::class,'approval_status_id')->default(2);
 
             $table->timestamps();
         });
