@@ -6,27 +6,22 @@ import { useTranslation } from "react-i18next";
 import CustomModal from "@/Components/CustomModal";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
 import { Edit2, Trash2 } from "lucide-react";
-import CreateDepartment from "./Create";
+import Create from "./Create";
 // import EditDepartment from "./Edit";
 
-function Index({ departments }) {
+function Index({ tashkils }) {
     const { t } = useTranslation();
-
-    const [departmentsData, setDepartmentsData] = useState(
-        departments?.data || [],
-    );
 
     const [createModal, setCreateModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    const [editableData, setEditableData] = useState(null);
-
-    const paginationLinks = departments?.links || [];
+    const [tashkilsData, setTashkilData] = useState(tashkils.data);
+    const paginationLinks = tashkils?.links || [];
 
     const columns = [
         { label: t("common.NO") },
-        { label: t("tashkilat.departmentName") },
-        { label: t("tashkilat.tashkil") },
-        { label: t("tashkilat.parentDepartment") },
+        { label: t("tashkilat.year") },
+        { label: t("tashkilat.organizations") },
+        { label: t("tashkilat.reference_number") },
         { label: t("common.action") },
     ];
 
@@ -37,12 +32,12 @@ function Index({ departments }) {
 
     return (
         <AuthenticatedLayout
-            header={<SubHeader title={t("tashkilat.departmentsList")} />}
+            header={<SubHeader title={t("tashkilat.tashkilList")} />}
         >
             <SubHeader
                 links={[
                     {
-                        name: t("tashkilat.departmentsList"),
+                        name: t("tashkilat.tashkilList"),
                     },
                 ]}
             />
@@ -52,18 +47,17 @@ function Index({ departments }) {
                 <CustomModal
                     show={createModal}
                     handleClose={() => setCreateModal(false)}
-                    title={t("tashkilat.createDepartment")}
+                    title={t("tashkilat.CreateNewTashkil")}
                     size="large"
                     footer={false}
                     stopPropagation={false}
                 >
-                    <CreateDepartment 
+                    <Create
+                        tashkils={tashkils}
                         onSubmitSuccess={(newDepartment) => {
+                            console.log(newDepartment)
                             setCreateModal(false);
-                            setDepartmentsData((prev) => [
-                                newDepartment,
-                                ...prev,
-                            ]);
+                            setTashkilData((prev) => [newDepartment, ...prev]);
                         }}
                     />
                 </CustomModal>
@@ -85,14 +79,14 @@ function Index({ departments }) {
                         <DataTable
                             columns={columns}
                             links={paginationLinks}
-                            header={t("tashkilat.departmentsList")}
+                            header={t("tashkilat.tashkilList")}
                             enableButton={true}
-                            buttonLabel={t("tashkilat.createDepartment")}
+                            buttonLabel={t("tashkilat.CreateNewTashkil")}
                             onButtonClick={() => setCreateModal(true)}
                         >
-                            {departmentsData.map((department, index) => (
+                            {tashkilsData.map((tashkil, index) => (
                                 <tr
-                                    key={department.id}
+                                    key={tashkil.id}
                                     className="hover:bg-slate-100"
                                 >
                                     {/* No */}
@@ -102,24 +96,17 @@ function Index({ departments }) {
 
                                     {/* Department Name */}
                                     <td className="p-2 text-center">
-                                        {department.name}
+                                        {tashkil.year}
                                     </td>
 
-                                    {/* Tashkil */}
+                                    {/* Organization */}
                                     <td className="p-2 text-center">
-                                        {department.tashkil?.year}
+                                        {tashkil.organization.name}
                                     </td>
 
-                                    {/* Parent */}
+                                     {/* reference */}
                                     <td className="p-2 text-center">
-                                        {department.parent?.name ?? "-"}
-                                    </td>
-
-                                    {/* Created */}
-                                    <td className="p-2 text-center">
-                                        {new Date(
-                                            department.created_at,
-                                        ).toLocaleDateString()}
+                                        {tashkil.reference_number}
                                     </td>
 
                                     {/* Actions */}

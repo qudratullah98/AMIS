@@ -2,64 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTashkilRequest;
 use App\Models\Tashkil;
-use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TashkilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-    }
+        return Inertia::render('Tashkilat/Tashkil/Index', [
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+            'tashkils' => Tashkil::with('organization:id,name')->orderBy('year')->paginate()
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        ]);
     }
+ public function store(StoreTashkilRequest $request)
+{
+    $validatedData = $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tashkil $tashkil)
-    {
-        //
-    }
+    $tashkil = Tashkil::create($validatedData);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tashkil $tashkil)
-    {
-        //
-    }
+    return response()->json([
+        'success' => true,
+        'message' => 'success.tashkil_stored_successfully',
+        'tashkil' => $tashkil->load('organization:id,name'),
+    ]);
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tashkil $tashkil)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tashkil $tashkil)
+    // json data for useeffect
+    public function tashkils()
     {
-        //
+        $tashkils = Tashkil::orderBy('year')->select('id', 'year')->get();
+
+        return response()->json($tashkils);
     }
 }

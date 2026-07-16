@@ -1,13 +1,35 @@
 <?php
 
-use App\Http\Controllers\FlightController;
-use App\Http\Controllers\FlyteServiceController;
 use Illuminate\Support\Facades\Route;
 
 //END MOBILE API ROUTES
 
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\TashkilController;
+use App\Http\Controllers\PositionTypeController;
+use App\Http\Controllers\DepartmentPositionController;
+use App\Http\Controllers\EmployeeAssignmentController;
+use App\Http\Controllers\TashkilatDashboardController;
+use App\Http\Controllers\EmployeeController;
+
+Route::prefix('organizations')
+    ->name('organizations.')
+    ->group(function () {
+        Route::get('/', [OrganizationController::class, 'index'])->name('index');
+        Route::post('/store', [OrganizationController::class, 'store'])->name('store');
+    });
+
+
+Route::prefix('tashkilat')
+    ->name('tashkilat.')
+    ->group(function () {
+        Route::get('/', [TashkilController::class, 'index'])->name('index');
+        Route::post('/store', [TashkilController::class, 'store'])->name('store');
+ 
+    });
+
 
 Route::prefix('departments')
     ->name('departments.')
@@ -22,7 +44,7 @@ Route::prefix('departments')
     });
 
 
-use App\Http\Controllers\PositionTypeController;
+
 
 Route::prefix('position-types')
     ->name('position-types.')
@@ -42,8 +64,8 @@ Route::prefix('position-types')
     });
 
 
-use App\Http\Controllers\DepartmentPositionController;
- 
+
+
 
 Route::prefix('department-positions')
     ->name('department-positions.')
@@ -70,7 +92,7 @@ Route::prefix('department-positions')
         ])->name('destroy');
     });
 
-use App\Http\Controllers\EmployeeController;
+
 
 
 Route::prefix('employees')
@@ -91,8 +113,6 @@ Route::prefix('employees')
     });
 
 
-use App\Http\Controllers\EmployeeAssignmentController;
-
 
 
 Route::prefix('employee-assignments')
@@ -112,15 +132,19 @@ Route::prefix('employee-assignments')
         Route::delete('/delete/{employeeAssignment}', [EmployeeAssignmentController::class,    'destroy'])->name('destroy');
     });
 
+Route::prefix('organizations')
+    ->name('organizations.')
+    ->group(function () {
+        Route::get('/', [OrganizationController::class, 'index'])->name('index');
+    });
 
-use App\Http\Controllers\TashkilatDashboardController;
 
 
-Route::get(
-    '/dashboard-tashkilat',
-    [
-        TashkilatDashboardController::class,
-        'index'
-    ]
-)
-    ->name('Tashkilat.dashboard');
+
+Route::get( '/dashboard-tashkilat',[TashkilatDashboardController::class,'index']) ->name('Tashkilat.dashboard');
+
+
+// json data  for useeffect
+Route::get('/tashkils/json', [TashkilController::class, 'tashkils'])->name('tashkils.json');
+Route::get('/departments/json', [DepartmentController::class, 'departments'])->name('departments.json');
+Route::get('/organizations/json', [OrganizationController::class, 'organizations'])->name('organizations.json');

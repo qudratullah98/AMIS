@@ -128,14 +128,25 @@ const Sidebar = () => {
         // Tashkilat Part
         {
             href: route("Tashkilat.dashboard"),
-            label: t("tashkilat.TashkilatPart"),
+            label: t("tashkilat.tashkilatPart"),
             icon: <Users className="w-5 h-5" />,
             keyword: "tashkilat",
 
             can: permissions.includes("viewTashkilatMenu") || true,
 
             subItems: [
+                 {
+                    href: route("organizations.index"),
+                    label: t("tashkilat.organizations"),
+                    icon: <Building2 className="w-4 h-4" />,
+                    keyword: "organizations",
+                },
                 {
+                    href: route("tashkilat.index"),
+                    label: t("tashkilat.tashkil"),
+                    icon: <Building2 className="w-4 h-4" />,
+                    keyword: "tashkil",
+                }, {
                     href: route("departments.index"),
                     label: t("tashkilat.departments"),
                     icon: <Building2 className="w-4 h-4" />,

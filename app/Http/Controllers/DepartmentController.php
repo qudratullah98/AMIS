@@ -21,14 +21,7 @@ class DepartmentController extends Controller
             ])
                 ->latest()
                 ->paginate(20),
-
-            'tashkils' => Tashkil::orderBy('name')
-                ->select('id', 'name')
-                ->get(),
-
-            'parentDepartments' => Department::orderBy('name')
-                ->select('id', 'name')
-                ->get(),
+ 
 
         ]);
     }
@@ -40,17 +33,16 @@ class DepartmentController extends Controller
         return back()->with('success', 'Department created successfully.');
     }
 
-    public function update(UpdateDepartmentRequest $request, Department $department)
-    {
-        $department->update($request->validated());
+   
 
-        return back()->with('success', 'Department updated successfully.');
+    // json data for useeffect
+    public function departments()
+    {
+        $departments = Department::orderBy('name')->select('id', 'name')->get();
+
+        return response()->json($departments);
     }
 
-    public function destroy(Department $department)
-    {
-        $department->delete();
+    
 
-        return back()->with('success', 'Department deleted successfully.');
-    }
 }

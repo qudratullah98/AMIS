@@ -38,6 +38,13 @@ const pashto = {
         editInfo: "معلومات سمول",
         updating: "د معلوماتو تازه کول...",
         saveChanges: "بدلونونه خوندي کول",
+        save: "زخیره کول",
+        saving: "د معلوماتو ذخیره کول...",
+        cancel: "لغوه کول",
+        close: "بندول",
+        view: "کتل",
+        viewInfo: "معلومات کتل",
+        update: "تغیر کول",
         add: "اضافه کول",
         storInfo: "معلومات ثبت کړئ",
         storingInfo: "معلومات خوندي کېږي...",
@@ -71,11 +78,11 @@ const pashto = {
         viewInfo: "معلومات وګورئ",
 
         addMoreProperties: "نورې ځانګړتیاوې اضافه کړئ",
-        moreProperties:"نورې ځانګړتیاوې",
-propertyName: "د ځانګړتیا نوم",
-propertyValue: "د ځانګړتیا مقدار",
-remove: "لرې کړئ",
-unit: "واحد",
+        moreProperties: "نورې ځانګړتیاوې",
+        propertyName: "د ځانګړتیا نوم",
+        propertyValue: "د ځانګړتیا مقدار",
+        remove: "لرې کړئ",
+        unit: "واحد",
     },
 
     input: {
@@ -109,7 +116,7 @@ unit: "واحد",
         latitudeOutOfRange: "عرض البلد باید د -90 او 90 ترمنځ وي.",
         longitudeOutOfRange: "طول البلد باید د -180 او 180 ترمنځ وي.",
         shouldBeString: "دا باید متن وي.",
-    max255Characters: "اعظمي ۲۵۵ توري اجازه لري.",
+        max255Characters: "اعظمي ۲۵۵ توري اجازه لري.",
 
         upperCase: "لوی انګلیسي حروف اړین دي!",
         englishString: "اړینه ده چې حروف انګلیسي واوسي!",
@@ -145,6 +152,7 @@ unit: "واحد",
         passwordMixedCase: "پټنوم باید لوی او کوچني حروف ولري.",
         passwordNumbers: "پټنوم باید لږ تر لږه یو عدد ولري.",
         passwordSymbols: "پټنوم باید لږ تر لږه یو ځانګړی نښه ولري.",
+
         airline: {
             name_en_required: "د هوايي شرکت انګلیسي نوم اړین دی.",
             name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
@@ -173,6 +181,51 @@ unit: "واحد",
             rate_numeric: "د خدمت نرخ باید عددي وي.",
             rate_min: "د خدمت نرخ باید له صفر څخه کم نه وي.",
         },
+        organization: {
+            name_is_required: "د ادارې نوم اړین دی.",
+            name_unique: "دا نوم مخکې ثبت شوی دی.",
+
+            code_unique: "دا کوډ مخکې ثبت شوی دی.",
+
+            email_email: "برېښنالیک باید د برېښنالیک په بڼه وي.",
+            email_unique: "دا برېښنالیک مخکې ثبت شوی دی.",
+
+            phone_unique: "دا د اړیکې شمېره مخکې ثبت شوی دی.",
+
+            website_url: "وېب‌پاڼه باید د وېب‌پاڼې په بڼه وي.",
+        },
+        tashkil: {
+            year_required: "کال اړین دی.",
+            year_integer: "کال باید بشپړ عدد وي.",
+            year_min: "کال باید لږ تر لږه 1000 وي.",
+            year_max: "کال باید له 9999 څخه زیات نه وي.",
+            organization_year_unique:
+                "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
+
+            reference_number_required: "د مرجع شمېره اړینه ده.",
+            reference_number_string: "د مرجع شمېره باید متن وي.",
+            reference_number_max: "د مرجع شمېره باید له 255 تورو زیاته نه وي.",
+            reference_number_unique: "د مرجع شمېره مخکې ثبت شوې ده.",
+
+            organization_id_required: "د ادارې ټاکل اړین دي.",
+            organization_id_exists: "ټاکل شوې اداره معتبره نه ده.",
+
+            description_string: "تشریح باید متن وي.",
+            description_max: "تشریح باید له 255 تورو زیاته نه وي.",
+        },
+    },
+    success: {
+        organization_stored_successfully: "اداره په بریالیتوب سره جوړه شوه.",
+        organization_updated_successfully: "اداره په بریالیتوب سره تازه شوه.",
+        organization_deleted_successfully: "اداره په بریالیتوب سره حذف شوه.",
+
+        department_stored_successfully: "څانګه په بریالیتوب سره جوړه شوه.",
+        department_updated_successfully: "څانګه په بریالیتوب سره تازه شوه.",
+        department_deleted_successfully: "څانګه په بریالیتوب سره حذف شوه.",
+
+        tashkil_stored_successfully: "تشکیل په بریالیتوب سره جوړ شو.",
+        tashkil_updated_successfully: "تشکیل په بریالیتوب سره تازه شو.",
+        tashkil_deleted_successfully: "تشکیل په بریالیتوب سره حذف شو.",
     },
 
     state: {
@@ -339,19 +392,36 @@ unit: "واحد",
     },
 
     tashkilat: {
-        TashkilatPart: "تشکیلات",
+        organizations: "اداره عمومی",
+        organizationsList: "د ادارو لیست",
+        createOrganization: "اداره جوړول",
+        tashkil: "تشکیل",
+        tashkilatPart: "تشکیلات",
         dashboard: "ډشبورډ",
         departments: "ریاستونه",
         positionTypes: "د بست ډولونه",
         departmentPositions: "د ریاست بستونه",
         employees: "کارکوونکي",
         employeeAssignments: "د کارکوونکو مقررۍ",
-        tashkil: "تشکیل",
         createDepartment: "د څانګې جوړول",
         departmentsList: "د څانګو لست",
         departmentName: "د څانګې نوم",
         parentDepartment: "اصلي څانګه",
         noParent: "اصلي څانګه نشته",
+        code: "کوډ",
+        tashkilList: "د تشکیلاتو لیست",
+        CreateNewTashkil: "نوی تشکیلات جوړول",
+        reference_number: "د رییفرنس شمېره",
+        year: "کال",
+        organization: {
+            name: "د ادارې نوم",
+            code: "د ادارې کوډ",
+            email: "د ادارې برېښنالیک",
+            phone: "د ادارې د اړیکې شمېره",
+            website: "د ادارې وېب‌پاڼه",
+            address: "د ادارې پته",
+            create: "اداره جوړول",
+        },
     },
 };
 

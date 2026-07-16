@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tashkil extends Model
 {
-     protected $fillable = [
-        'name',
+    protected $fillable = [
+        'organization_id',
         'year',
-        'status',
+        'name',
+        'approvel_status_id',
+        'reference_number',
         'description',
     ];
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
 
-    public function departments()
+
+    public function organization()
     {
-        return $this->hasMany(Department::class);
+        return $this->belongsTo(Organization::class);
     }
 }

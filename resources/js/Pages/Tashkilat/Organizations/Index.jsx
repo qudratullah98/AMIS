@@ -6,43 +6,45 @@ import { useTranslation } from "react-i18next";
 import CustomModal from "@/Components/CustomModal";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
 import { Edit2, Trash2 } from "lucide-react";
-import CreateDepartment from "./Create";
+import Create from "./Create";
 // import EditDepartment from "./Edit";
 
-function Index({ departments }) {
+function Index({ organizations }) {
     const { t } = useTranslation();
 
-    const [departmentsData, setDepartmentsData] = useState(
-        departments?.data || [],
+    const [organizationsData, setOrganizationsData] = useState(
+        organizations?.data || [],
     );
 
     const [createModal, setCreateModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [editableData, setEditableData] = useState(null);
 
-    const paginationLinks = departments?.links || [];
+    const paginationLinks = organizations?.links || [];
 
     const columns = [
         { label: t("common.NO") },
-        { label: t("tashkilat.departmentName") },
-        { label: t("tashkilat.tashkil") },
-        { label: t("tashkilat.parentDepartment") },
+        { label: t("tashkilat.organization.name") },
+        { label: t("tashkilat.organization.email") },
+        { label: t("tashkilat.organization.phone") },
+        { label: t("tashkilat.organization.website") },
+        { label: t("tashkilat.organization.address") },
         { label: t("common.action") },
     ];
 
-    const handleEdit = (department) => {
-        setEditableData(department);
+    const handleEdit = (organization) => {
+        setEditableData(organization);
         setEditModal(true);
     };
 
     return (
         <AuthenticatedLayout
-            header={<SubHeader title={t("tashkilat.departmentsList")} />}
+            header={<SubHeader title={t("tashkilat.organizationsList")} />}
         >
             <SubHeader
                 links={[
                     {
-                        name: t("tashkilat.departmentsList"),
+                        name: t("tashkilat.organizations"),
                     },
                 ]}
             />
@@ -52,18 +54,20 @@ function Index({ departments }) {
                 <CustomModal
                     show={createModal}
                     handleClose={() => setCreateModal(false)}
-                    title={t("tashkilat.createDepartment")}
+                    title={t("tashkilat.createOrganization")}
                     size="large"
                     footer={false}
                     stopPropagation={false}
                 >
-                    <CreateDepartment 
-                        onSubmitSuccess={(newDepartment) => {
-                            setCreateModal(false);
-                            setDepartmentsData((prev) => [
-                                newDepartment,
+                    <Create
+                        onSubmitSuccess={(newOrganization) => {
+                            console.log(newOrganization);
+                            setOrganizationsData((prev) => [
+                                newOrganization.organization,
                                 ...prev,
                             ]);
+
+                            setCreateModal(false);
                         }}
                     />
                 </CustomModal>
@@ -85,14 +89,14 @@ function Index({ departments }) {
                         <DataTable
                             columns={columns}
                             links={paginationLinks}
-                            header={t("tashkilat.departmentsList")}
+                            header={t("tashkilat.organizationsList")}
                             enableButton={true}
-                            buttonLabel={t("tashkilat.createDepartment")}
+                            buttonLabel={t("tashkilat.createOrganization")}
                             onButtonClick={() => setCreateModal(true)}
                         >
-                            {departmentsData.map((department, index) => (
+                            {organizationsData.map((organization, index) => (
                                 <tr
-                                    key={department.id}
+                                    key={organization.id}
                                     className="hover:bg-slate-100"
                                 >
                                     {/* No */}
@@ -100,26 +104,29 @@ function Index({ departments }) {
                                         {index + 1}
                                     </td>
 
-                                    {/* Department Name */}
+                                    {/* Organization Name */}
                                     <td className="p-2 text-center">
-                                        {department.name}
+                                        {organization.name}
                                     </td>
 
                                     {/* Tashkil */}
                                     <td className="p-2 text-center">
-                                        {department.tashkil?.year}
+                                        {organization.email}
                                     </td>
 
                                     {/* Parent */}
                                     <td className="p-2 text-center">
-                                        {department.parent?.name ?? "-"}
+                                        {organization.phone ?? "-"}
                                     </td>
 
-                                    {/* Created */}
+                                    {/* Website */}
                                     <td className="p-2 text-center">
-                                        {new Date(
-                                            department.created_at,
-                                        ).toLocaleDateString()}
+                                        {organization.website ?? "-"}
+                                    </td>
+
+                                    {/* Address */}
+                                    <td className="p-2 text-center">
+                                        {organization.address ?? "-"}
                                     </td>
 
                                     {/* Actions */}
@@ -139,7 +146,7 @@ function Index({ departments }) {
                                                     hover:bg-gray-100
                                                     "
                                                     onClick={() =>
-                                                        handleEdit(department)
+                                                        handleEdit(organization)
                                                     }
                                                 >
                                                     <Edit2 className="ml-2 text-xl" />

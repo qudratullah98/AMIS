@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Airport;
 use App\Models\ApprovelStatus;
+use App\Models\Organization;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('tashkils', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Airport::class, "organization_id")->constrained()->cascadeOnDelete();
-            $table->year('year');
-            $table->string('name');
-            $table->foreignIdFor(ApprovelStatus::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Organization::class, "organization_id")->constrained()->cascadeOnDelete();
+            $table->year('year'); 
+            $table->foreignIdFor(ApprovelStatus::class)->default(2)->constrained()->cascadeOnDelete();
             $table->string('reference_number')->unique();
+            $table->unique(['organization_id', 'year']);
             $table->text('description')->nullable();
             $table->timestamps();
         });
