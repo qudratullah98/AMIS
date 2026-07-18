@@ -15,9 +15,7 @@ class StoreDepartmentRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Get the validation rules.
      */
     public function rules(): array
     {
@@ -36,13 +34,14 @@ class StoreDepartmentRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:255', 
             ],
 
             'code' => [
                 'nullable',
                 'string',
                 'max:50',
+                'unique:departments,code',
             ],
 
             'description' => [
@@ -52,22 +51,33 @@ class StoreDepartmentRequest extends FormRequest
 
         ];
     }
+
+    /**
+     * Custom validation messages.
+     */
     public function messages(): array
     {
         return [
-            'tashkil_id.required' => 'department.tashkil_required',
-            'tashkil_id.exists'   => 'department.tashkil_not_found',
 
-            'parent_id.exists'    => 'department.parent_department_not_found',
+            // Tashkil
+            'tashkil_id.required' => 'error.department.tashkil_required',
+            'tashkil_id.exists'   => 'error.department.tashkil_not_found',
 
-            'name.required'       => 'department.name_required',
-            'name.string'         => 'department.name_invalid',
-            'name.max'            => 'department.name_too_long',
+            // Parent Department
+            'parent_id.exists'    => 'error.department.parent_department_not_found',
 
-            'code.string'         => 'department.code_invalid',
-            'code.max'            => 'department.code_too_long',
+            // Name
+            'name.required' => 'error.department.name_required',
+            'name.string'   => 'error.department.name_invalid',
+            'name.max'      => 'error.department.name_too_long', 
 
-            'description.string'  => 'department.description_invalid',
+            // Code
+            'code.string' => 'error.department.code_invalid',
+            'code.max'    => 'error.department.code_too_long',
+            'code.unique' => 'error.department.code_already_exists',
+
+            // Description
+            'description.string' => 'error.department.description_invalid',
         ];
     }
 }

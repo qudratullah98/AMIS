@@ -26,7 +26,7 @@ return new class extends Migration
                 ->nullOnDelete();
 
             $table->string('name');
-            $table->string('code')->nullable();
+            $table->string('code')->unique()->nullable();
             $table->boolean('is_active')->default(true);
             $table->text('description')->nullable();
 

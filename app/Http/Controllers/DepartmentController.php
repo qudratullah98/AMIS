@@ -16,24 +16,31 @@ class DepartmentController extends Controller
         return Inertia::render('Tashkilat/Department/Index', [
 
             'departments' => Department::with([
-                'tashkil',
-                'parent'
+                'tashkil:id,year',
+                'parent:id,name'
             ])
                 ->latest()
                 ->paginate(20),
- 
+
 
         ]);
     }
 
     public function store(StoreDepartmentRequest $request)
     {
-        Department::create($request->validated());
+        $department = Department::create($request->validated());
 
-        return back()->with('success', 'Department created successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Department created successfully.',
+            'data' => $department->load([
+                'tashkil:id,year',
+                'parent:id,name'
+            ]),
+        ], 201);
     }
 
-   
+
 
     // json data for useeffect
     public function departments()
@@ -42,7 +49,4 @@ class DepartmentController extends Controller
 
         return response()->json($departments);
     }
-
-    
-
 }

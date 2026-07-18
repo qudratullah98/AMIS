@@ -135,17 +135,17 @@ const Sidebar = () => {
             can: permissions.includes("viewTashkilatMenu") || true,
 
             subItems: [
-                 {
-                    href: route("organizations.index"),
-                    label: t("tashkilat.organizations"),
-                    icon: <Building2 className="w-4 h-4" />,
-                    keyword: "organizations",
-                },
+                 
                 {
                     href: route("tashkilat.index"),
                     label: t("tashkilat.tashkil"),
                     icon: <Building2 className="w-4 h-4" />,
                     keyword: "tashkil",
+                },{
+                    href: route("organizations.index"),
+                    label: t("tashkilat.organizations"),
+                    icon: <Building2 className="w-4 h-4" />,
+                    keyword: "organizations",
                 }, {
                     href: route("departments.index"),
                     label: t("tashkilat.departments"),

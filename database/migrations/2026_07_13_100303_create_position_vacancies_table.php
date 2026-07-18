@@ -20,8 +20,13 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
             $table->string('vacancy_no');
-            $table->enum('status', ['vacant ', 'occupied', 'pending'])->default('pending');
-
+            $table->enum('status', [
+                'Vacant',
+                'Reserved',
+                'Occupied',
+                'Frozen',
+                'Deleted'
+            ])->default('Vacant');
 
             $table->timestamps();
         });

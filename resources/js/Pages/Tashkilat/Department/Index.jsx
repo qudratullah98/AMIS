@@ -27,6 +27,7 @@ function Index({ departments }) {
         { label: t("tashkilat.departmentName") },
         { label: t("tashkilat.tashkil") },
         { label: t("tashkilat.parentDepartment") },
+        { label: t("tashkilat.code") },
         { label: t("common.action") },
     ];
 
@@ -114,12 +115,9 @@ function Index({ departments }) {
                                     <td className="p-2 text-center">
                                         {department.parent?.name ?? "-"}
                                     </td>
-
-                                    {/* Created */}
+                                     {/* code */}
                                     <td className="p-2 text-center">
-                                        {new Date(
-                                            department.created_at,
-                                        ).toLocaleDateString()}
+                                        {department.code ?? "-"}
                                     </td>
 
                                     {/* Actions */}

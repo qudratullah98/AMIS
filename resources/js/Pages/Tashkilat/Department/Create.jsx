@@ -10,8 +10,9 @@ import InputLabel from "@/Components/InputLabel";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import CustomSelect from "@/Components/CustomSelect";
+import toast from "react-hot-toast";
 
-function CreateDepartment({onSubmitSuccess}) {
+function CreateDepartment({ onSubmitSuccess }) {
     const { t } = useTranslation();
 
     const [tashkils, setTashkils] = useState([]);
@@ -27,35 +28,41 @@ function CreateDepartment({onSubmitSuccess}) {
         },
 
         validationSchema: Yup.object({
-            name: Yup.string()
-                .required(t("validation.required"))
-                .max(255),
+            name: Yup.string().required(t("validation.required")).max(255),
 
-            code: Yup.string()
-                .nullable()
-                .max(100),
+            code: Yup.string().nullable().max(100),
 
             description: Yup.string().nullable(),
 
-            tashkil_id: Yup.number()
-                .required(t("validation.required")),
+            tashkil_id: Yup.number().required(t("validation.required")),
 
             parent_id: Yup.number().nullable(),
         }),
 
-        onSubmit: (values, { setSubmitting, resetForm }) => {
-            router.post(route("departments.store"), values, {
-                preserveScroll: true,
+        onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
+            try {
+                const response = await axios.post(
+                    route("departments.store"),
+                    values,
+                );
 
-                onSuccess: () => {
+                if (response.data.success) {
+                    toast.success(response.data.message);
                     resetForm();
-                    onSubmitSuccess()
-                },
-
-                onFinish: () => {
-                    setSubmitting(false);
-                },
-            });
+                    onSubmitSuccess(response.data.data);
+                }
+            } catch (error) {
+                if (error.response?.status === 422) {
+                    setErrors(error.response.data.errors);
+                } else {
+                    toast.error(
+                        error.response?.data?.message ||
+                            "Something went wrong.",
+                    );
+                }
+            } finally {
+                setSubmitting(false);
+            }
         },
     });
 
@@ -88,16 +95,11 @@ function CreateDepartment({onSubmitSuccess}) {
     }, [formik.values.tashkil_id]);
 
     return (
-        <form
-            onSubmit={formik.handleSubmit}
-            className="space-y-5"
-        >
+        <form onSubmit={formik.handleSubmit} className="space-y-5">
             {/* Name */}
 
             <div>
-                <InputLabel
-                    value={t("tashkilat.departmentName")}
-                />
+                <InputLabel value={t("tashkilat.departmentName")} />
 
                 <TextInput
                     name="name"
@@ -107,19 +109,14 @@ function CreateDepartment({onSubmitSuccess}) {
                 />
 
                 <InputError
-                    message={
-                        formik.touched.name &&
-                        formik.errors.name
-                    }
+                    message={t(formik.touched.name && formik.errors.name)}
                 />
             </div>
 
             {/* Code */}
 
             <div>
-                <InputLabel
-                    value={t("tashkilat.code")}
-                />
+                <InputLabel value={t("tashkilat.code")} />
 
                 <TextInput
                     name="code"
@@ -129,19 +126,14 @@ function CreateDepartment({onSubmitSuccess}) {
                 />
 
                 <InputError
-                    message={
-                        formik.touched.code &&
-                        formik.errors.code
-                    }
+                    message={t(formik.touched.code && formik.errors.code)}
                 />
             </div>
 
             {/* Description */}
 
             <div>
-                <InputLabel
-                    value={t("common.descriptions")}
-                />
+                <InputLabel value={t("common.descriptions")} />
 
                 <textarea
                     name="description"
@@ -154,8 +146,7 @@ function CreateDepartment({onSubmitSuccess}) {
 
                 <InputError
                     message={
-                        formik.touched.description &&
-                        formik.errors.description
+                       t(formik.touched.description && formik.errors.description) 
                     }
                 />
             </div>
@@ -163,34 +154,25 @@ function CreateDepartment({onSubmitSuccess}) {
             {/* Tashkil */}
 
             <div>
-                <InputLabel
-                    value={t("tashkilat.tashkil")}
-                />
+                <InputLabel value={t("tashkilat.tashkil")} />
 
                 <CustomSelect
                     value={formik.values.tashkil_id}
                     options={tashkils.map((item) => ({
                         value: item.id,
-                        label: item.year,
+                        label: item.year +" - "+ item?.organization?.name,
                     }))}
                     onChange={(value) => {
-                        formik.setFieldValue(
-                            "tashkil_id",
-                            value
-                        );
+                        formik.setFieldValue("tashkil_id", value);
 
                         // Clear parent when tashkil changes
-                        formik.setFieldValue(
-                            "parent_id",
-                            ""
-                        );
+                        formik.setFieldValue("parent_id", "");
                     }}
                 />
 
                 <InputError
                     message={
-                        formik.touched.tashkil_id &&
-                        formik.errors.tashkil_id
+                        t(formik.touched.tashkil_id && formik.errors.tashkil_id)
                     }
                 />
             </div>
@@ -198,9 +180,7 @@ function CreateDepartment({onSubmitSuccess}) {
             {/* Parent Department */}
 
             <div>
-                <InputLabel
-                    value={t("tashkilat.parentDepartment")}
-                />
+                <InputLabel value={t("tashkilat.parentDepartment")} />
 
                 <CustomSelect
                     value={formik.values.parent_id}
@@ -215,17 +195,13 @@ function CreateDepartment({onSubmitSuccess}) {
                         })),
                     ]}
                     onChange={(value) => {
-                        formik.setFieldValue(
-                            "parent_id",
-                            value
-                        );
+                        formik.setFieldValue("parent_id", value);
                     }}
                 />
 
                 <InputError
                     message={
-                        formik.touched.parent_id &&
-                        formik.errors.parent_id
+                        t(formik.touched.parent_id && formik.errors.parent_id)
                     }
                 />
             </div>
@@ -233,9 +209,7 @@ function CreateDepartment({onSubmitSuccess}) {
             {/* Submit */}
 
             <div className="flex justify-end">
-                <PrimaryButton
-                    disabled={formik.isSubmitting}
-                >
+                <PrimaryButton disabled={formik.isSubmitting}>
                     {formik.isSubmitting
                         ? t("common.saving")
                         : t("common.save")}

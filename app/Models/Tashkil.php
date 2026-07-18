@@ -9,7 +9,6 @@ class Tashkil extends Model
     protected $fillable = [
         'organization_id',
         'year',
-        'name',
         'approvel_status_id',
         'reference_number',
         'description',

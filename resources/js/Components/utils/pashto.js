@@ -213,6 +213,22 @@ const pashto = {
             description_string: "تشریح باید متن وي.",
             description_max: "تشریح باید له 255 تورو زیاته نه وي.",
         },
+        department: {
+            tashkil_required: "تشکیل ټاکل اړین دي.",
+            tashkil_not_found: "ټاکل شوی تشکیل ونه موندل شو.",
+
+            parent_department_not_found: "اصلي څانګه ونه موندل شوه.",
+
+            name_required: "د څانګې نوم اړین دی.",
+            name_invalid: "د څانګې نوم سم نه دی.",
+            name_too_long: "د څانګې نوم باید له ۲۵۵ تورو څخه زیات نه وي.",
+            name_already_exists: "دا د څانګې نوم مخکې ثبت شوی دی.",
+
+            code_invalid: "د څانګې کوډ سم نه دی.",
+            code_too_long: "د څانګې کوډ باید له ۵۰ تورو څخه زیات نه وي.",
+            code_already_exists: "دا د څانګې کوډ مخکې ثبت شوی دی.",
+            description_invalid: "د څانګې تشریح سمه نه ده.",
+        },
     },
     success: {
         organization_stored_successfully: "اداره په بریالیتوب سره جوړه شوه.",

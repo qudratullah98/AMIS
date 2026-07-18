@@ -23,13 +23,8 @@ return new class extends Migration
             $table->foreignIdFor(PositionType::class)
                 ->constrained()
                 ->cascadeOnDelete();
-  
-               $table->integer('total_positions')->default(0);
 
-            $table->integer('filled_positions')->default(0);
-
-            $table->integer('vacant_positions')->default(0);
-
+            $table->integer('total_positions')->default(0);
             $table->text('description')->nullable();
 
             $table->timestamps();

@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GeneralDepartmentSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(RolePermissionSeeder::class);
+        $this->call(BloodGroupSeeder::class);
     }
 }

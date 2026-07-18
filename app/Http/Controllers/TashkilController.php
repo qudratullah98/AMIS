@@ -16,24 +16,27 @@ class TashkilController extends Controller
 
         ]);
     }
- public function store(StoreTashkilRequest $request)
-{
-    $validatedData = $request->validated();
+    public function store(StoreTashkilRequest $request)
+    {
+        $validatedData = $request->validated();
 
-    $tashkil = Tashkil::create($validatedData);
+        $tashkil = Tashkil::create($validatedData);
 
-    return response()->json([
-        'success' => true,
-        'message' => 'success.tashkil_stored_successfully',
-        'tashkil' => $tashkil->load('organization:id,name'),
-    ]);
-}
+        return response()->json([
+            'success' => true,
+            'message' => 'success.tashkil_stored_successfully',
+            'tashkil' => $tashkil->load('organization:id,name'),
+        ]);
+    }
 
 
     // json data for useeffect
     public function tashkils()
     {
-        $tashkils = Tashkil::orderBy('year')->select('id', 'year')->get();
+        $tashkils = Tashkil::with('organization:id,name')
+            ->select('id', 'organization_id', 'year')
+            ->orderBy('year')
+            ->get();
 
         return response()->json($tashkils);
     }

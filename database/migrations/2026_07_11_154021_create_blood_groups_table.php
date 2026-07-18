@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('position_types', function (Blueprint $table) {
+        Schema::create('blood_groups', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('code')->unique();
-            $table->string('grade');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('position_types');
+        Schema::dropIfExists('blood_groups');
     }
 };

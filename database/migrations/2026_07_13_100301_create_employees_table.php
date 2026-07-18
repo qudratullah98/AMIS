@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\blood_group;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,29 +15,66 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
 
+            // Employee Number
             $table->string('employee_no')->unique();
 
+            // Personal Information
             $table->string('first_name');
             $table->string('last_name');
-
             $table->string('father_name')->nullable();
 
             $table->enum('gender', ['Male', 'Female']);
 
-            $table->date('dob')->nullable();
+            $table->date('birth_date')->nullable();
 
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
+            // Contact Information
+            $table->string('phone', 20)->nullable();
+            $table->string('email')->nullable()->unique();
 
-            $table->string('national_id')->nullable();
+            // Government Information
+            $table->string('national_id')->unique();
+            $table->string('passport_no')->nullable()->unique();
 
+            // Personal Information
+            $table->enum('marital_status', [
+                'Single',
+                'Married',
+                'Divorced',
+                'Widowed'
+            ])->nullable();
+
+            $table->foreignIdFor(blood_group::class)->nullable();
+
+            // Address
+            $table->string('province')->nullable();
+            $table->string('district')->nullable();
             $table->text('address')->nullable();
 
+            // Photo
             $table->string('photo')->nullable();
 
+            // Approval
+            $table->foreignId('approval_status_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+
+            // Status
             $table->boolean('status')->default(true);
 
+            // Audit
+            $table->foreignId('created_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->foreignId('updated_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

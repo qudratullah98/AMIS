@@ -204,20 +204,37 @@ const dari = {
             description_string: "توضیحات باید متن باشد.",
             description_max: "توضیحات نباید بیشتر از 255 کاراکتر باشد.",
         },
+        department: {
+            tashkil_required: "انتخاب تشکیل الزامی است.",
+            tashkil_not_found: "تشکیل انتخاب‌شده یافت نشد.",
+
+            parent_department_not_found: "دیپارتمنت والد یافت نشد.",
+
+            name_required: "نام دیپارتمنت الزامی است.",
+            name_invalid: "نام دیپارتمنت معتبر نیست.",
+            name_too_long: "نام دیپارتمنت نباید بیشتر از ۲۵۵ کاراکتر باشد.",
+            name_already_exists: "این نام دیپارتمنت قبلاً ثبت شده است.",
+
+            code_invalid: "کد دیپارتمنت معتبر نیست.",
+            code_too_long: "کد دیپارتمنت نباید بیشتر از ۵۰ کاراکتر باشد.",
+            code_already_exists: "این کد دیپارتمنت قبلاً ثبت شده است.",
+
+            description_invalid: "توضیحات دیپارتمنت معتبر نیست.",
+        },
     },
     success: {
-    organization_stored_successfully: "سازمان با موفقیت ایجاد شد.",
-    organization_updated_successfully: "سازمان با موفقیت به‌روزرسانی شد.",
-    organization_deleted_successfully: "سازمان با موفقیت حذف شد.",
+        organization_stored_successfully: "سازمان با موفقیت ایجاد شد.",
+        organization_updated_successfully: "سازمان با موفقیت به‌روزرسانی شد.",
+        organization_deleted_successfully: "سازمان با موفقیت حذف شد.",
 
-    department_stored_successfully: "دیپارتمنت با موفقیت ایجاد شد.",
-    department_updated_successfully: "دیپارتمنت با موفقیت به‌روزرسانی شد.",
-    department_deleted_successfully: "دیپارتمنت با موفقیت حذف شد.",
+        department_stored_successfully: "دیپارتمنت با موفقیت ایجاد شد.",
+        department_updated_successfully: "دیپارتمنت با موفقیت به‌روزرسانی شد.",
+        department_deleted_successfully: "دیپارتمنت با موفقیت حذف شد.",
 
-    tashkil_stored_successfully: "تشکیل با موفقیت ایجاد شد.",
-    tashkil_updated_successfully: "تشکیل با موفقیت به‌روزرسانی شد.",
-    tashkil_deleted_successfully: "تشکیل با موفقیت حذف شد."
-},
+        tashkil_stored_successfully: "تشکیل با موفقیت ایجاد شد.",
+        tashkil_updated_successfully: "تشکیل با موفقیت به‌روزرسانی شد.",
+        tashkil_deleted_successfully: "تشکیل با موفقیت حذف شد.",
+    },
 
     state: {
         approve: "تأیید کردن",
