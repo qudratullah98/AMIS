@@ -92,10 +92,7 @@ class StoreEmployeeRequest extends FormRequest
                 'max:2048'
             ],
 
-
-            'status'=>[
-                'boolean'
-            ],
+ 
 
         ];
     }

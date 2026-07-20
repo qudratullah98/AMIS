@@ -62,7 +62,7 @@ class EmployeeAssignmentController extends Controller
 
 
         return Inertia::render(
-            'EmployeeAssignment/Index',
+            'Tashkilat/EmployeeAssignment/Index',
             [
 
                 'assignments'=>

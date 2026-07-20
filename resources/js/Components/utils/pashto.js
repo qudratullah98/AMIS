@@ -1,4 +1,6 @@
-import { Construction } from "lucide-react";
+import {
+    Construction
+} from "lucide-react";
 
 // src/locales/pashto.js
 const pashto = {
@@ -51,6 +53,7 @@ const pashto = {
         next: "وروستنی",
         previous: "مخکینی",
         descriptions: "تشریحات",
+        description: "تشریحات",
         search: "لټون",
         searching: "لټون روان دی...",
         delete: "حذف",
@@ -104,8 +107,7 @@ const pashto = {
     },
 
     error: {
-        general:
-            "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
+        general: "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
 
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
 
@@ -168,8 +170,7 @@ const pashto = {
             unit_required: "د خدمت واحد ټاکل اړین دي.",
             unit_invalid: "ټاکل شوی د خدمت واحد سم نه دی.",
 
-            airline_rates_required:
-                "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
+            airline_rates_required: "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
             airline_rates_invalid: "د هوايي شرکتونو د نرخونو معلومات سم نه دي.",
             airline_rates_min: "لږ تر لږه یو هوايي شرکت باید اضافه شي.",
 
@@ -199,8 +200,7 @@ const pashto = {
             year_integer: "کال باید بشپړ عدد وي.",
             year_min: "کال باید لږ تر لږه 1000 وي.",
             year_max: "کال باید له 9999 څخه زیات نه وي.",
-            organization_year_unique:
-                "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
+            organization_year_unique: "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
 
             reference_number_required: "د مرجع شمېره اړینه ده.",
             reference_number_string: "د مرجع شمېره باید متن وي.",
@@ -429,6 +429,17 @@ const pashto = {
         CreateNewTashkil: "نوی تشکیلات جوړول",
         reference_number: "د رییفرنس شمېره",
         year: "کال",
+        createNewPositionType: 'د بست ‌‌ډول اضافه کوړی',
+        positionType: "د بست ډول",
+
+        createDepartmentPosition: "د ریاست بست جوړول",
+        positionTitle: "د بست عنوان",
+        department: "ریاست",
+        positionTypeList: "د بستونو ډولونه",
+        grade: "کچه",
+        totalPositions: "د بستونو شمېر",
+        salary: "معاش",
+        description: "تشریح",
         organization: {
             name: "د ادارې نوم",
             code: "د ادارې کوډ",
@@ -437,6 +448,90 @@ const pashto = {
             website: "د ادارې وېب‌پاڼه",
             address: "د ادارې پته",
             create: "اداره جوړول",
+        },
+        employee: {
+            employeeNo: "د کارکوونکي شمېره",
+
+            firstName: "لومړی نوم",
+
+            lastName: "تخلص",
+
+            fatherName: "د پلار نوم",
+
+            gender: "جنسیت",
+
+            birthDate: "د زیږون نېټه",
+
+            phone: "د اړیکې شمېره",
+
+            email: "برېښنالیک",
+
+            nationalId: "د پېژندپاڼې شمېره",
+
+            passportNo: "د پاسپورټ شمېره",
+
+            maritalStatus: "مدني حالت",
+
+            bloodGroup: "د وینې ګروپ",
+
+            province: "ولایت",
+
+            district: "ولسوالي",
+
+            address: "پته",
+
+            photo: "انځور",
+
+            approvalStatus: "د تایید حالت",
+
+            status: "حالت",
+
+            employeeName: "د کارکوونکي نوم",
+
+            employees: "کارکوونکي",
+
+            createEmployee: "د کارکوونکي جوړول",
+
+            employeeList: "د کارکوونکو لېست",
+
+            single: "مجرد",
+
+            married: "واده شوی",
+
+            divorced: "طلاق شوی",
+
+            widowed: "کونډ/کونډه",
+
+            active: "فعال",
+
+            inactive: "غیر فعال"
+
+        },
+        employeeAssignment: {
+            employeeAssignmentsList: "د کارکوونکو دندو لېست",
+            createEmployeeAssignment: "د کارکوونکي دنده جوړول",
+            editEmployeeAssignment: "د کارکوونکي دنده سمول",
+            employeeName: "د کارکوونکي نوم",
+            startDate: "د پیل نېټه",
+            endDate: "د پای نېټه",
+            approvalStatus: "د تایید حالت",
+            selectEmployee: "کارکوونکی وټاکئ",
+            selectVacancy: "دنده وټاکئ",
+            selectApprovalStatus: "د تایید حالت وټاکئ",
+            vacancy: "دنده",
+            position: "بست",
+            remarks: "نوټونه",
+            enterRemarks: "نوټونه دلته ولیکئ...",
+            assignmentDetails: "د دندې تفصیلات",
+            noAssignmentsFound: "د کارکوونکي دنده ونه موندل شوه",
+            assignmentCreated: "د کارکوونکي دنده په بریالیتوب سره جوړه شوه",
+            assignmentUpdated: "د کارکوونکي دنده په بریالیتوب سره سمه شوه",
+            assignmentDeleted: "د کارکوونکي دنده حذف شوه",
+            confirmDelete: "آیا تاسو د دې دندې حذف کولو یقین لرئ؟",
+            pending: "په انتظار کې",
+            approved: "تایید شوی",
+            rejected: "رد شوی",
+            underReview: "تر بیاکتنې لاندې"
         },
     },
 };

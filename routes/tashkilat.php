@@ -36,12 +36,12 @@ Route::prefix('departments')
     ->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('index');
 
-        Route::post('/store', [DepartmentController::class, 'store'])->name('store');
+        Route::post('/store', [DepartmentController::class, 'store'])->name('store');});
 
-        Route::put('/update/{department}', [DepartmentController::class, 'update'])->name('update');
+   
 
-        Route::delete('/delete/{department}', [DepartmentController::class, 'destroy'])->name('destroy');
-    });
+
+
 
 
 
@@ -56,12 +56,9 @@ Route::prefix('position-types')
         Route::post('/store', [PositionTypeController::class, 'store'])
             ->name('store');
 
-        Route::put('/update/{positionType}', [PositionTypeController::class, 'update'])
-            ->name('update');
 
-        Route::delete('/delete/{positionType}', [PositionTypeController::class, 'destroy'])
-            ->name('destroy');
     });
+   
 
 
 
@@ -104,12 +101,7 @@ Route::prefix('employees')
 
 
         Route::post('/store', [EmployeeController::class,    'store'])->name('store');
-
-
-        Route::post('/update/{employee}', [EmployeeController::class,    'update'])->name('update');
-
-
-        Route::delete('/delete/{employee}', [EmployeeController::class,    'destroy'])->name('destroy');
+ 
     });
 
 
@@ -148,3 +140,4 @@ Route::get( '/dashboard-tashkilat',[TashkilatDashboardController::class,'index']
 Route::get('/tashkils/json', [TashkilController::class, 'tashkils'])->name('tashkils.json');
 Route::get('/departments/json', [DepartmentController::class, 'departments'])->name('departments.json');
 Route::get('/organizations/json', [OrganizationController::class, 'organizations'])->name('organizations.json');
+Route::get('/position-types/json',[PositionTypeController::class,'positionTypes'])->name('position-types.json');

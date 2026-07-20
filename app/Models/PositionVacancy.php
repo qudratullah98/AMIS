@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PositionVacancy extends Model
 {
-    protected $fillable = [
+   protected $fillable = [
         'department_position_id',
-        'total_positions',
-        'filled_positions',
-        'vacant_positions',
+        'vacancy_no',
+        'status',
     ];
 
     /*

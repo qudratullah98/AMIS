@@ -23,11 +23,11 @@ class StorePositionTypeRequest extends FormRequest
     {
         return [
 
-            'name' => [
+            'title' => [
                 'required',
                 'string',
                 'max:255',
-                'unique:position_types,name',
+                'unique:position_types,title',
             ],
 
             'grade' => [
@@ -36,7 +36,10 @@ class StorePositionTypeRequest extends FormRequest
                 'max:100',
             ],
 
-            'description' => [
+            'code' => [
+                'string',
+                'max:100',
+                'unique:position_types,code',
                 'nullable',
                 'string',
             ],
@@ -46,15 +49,15 @@ class StorePositionTypeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'position_type.name_required',
-            'name.string'   => 'position_type.name_invalid',
-            'name.max'      => 'position_type.name_too_long',
-            'name.unique'   => 'position_type.name_already_exists',
+            'title.required' => 'position_type.title_required',
+            'title.string'   => 'position_type.title_invalid',
+            'title.max'      => 'position_type.title_too_long',
+            'title.unique'   => 'position_type.title_already_exists',
 
             'grade.string'  => 'position_type.grade_invalid',
             'grade.max'     => 'position_type.grade_too_long',
 
-            'description.string' => 'position_type.description_invalid',
+            'code.string' => 'position_type.code_invalid',
         ];
     }
 }

@@ -20,7 +20,7 @@ class PositionTypeController extends Controller
                   ->orWhere('grade', 'like', "%{$request->search}%");
         }
 
-        return Inertia::render('PositionType/Index', [
+        return Inertia::render('Tashkilat/PositionType/Index', [
 
             'positionTypes' => $query
                 ->latest()
@@ -36,22 +36,21 @@ class PositionTypeController extends Controller
 
     public function store(StorePositionTypeRequest $request)
     {
-        PositionType::create($request->validated());
+        $positionType = PositionType::create($request->validated());
 
-        return back()->with('success', 'Position Type created successfully.');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Position type created successfully.',
+            'data' => $positionType,
+        ]);
+
     }
 
-    public function update(UpdatePositionTypeRequest $request, PositionType $positionType)
+// json data for useeffect
+    public function positionTypes()
     {
-        $positionType->update($request->validated());
-
-        return back()->with('success', 'Position Type updated successfully.');
-    }
-
-    public function destroy(PositionType $positionType)
-    {
-        $positionType->delete();
-
-        return back()->with('success', 'Position Type deleted successfully.');
+        $positionTypes = PositionType::select('id', 'title')->get();
+        return response()->json($positionTypes);
     }
 }

@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(RolePermissionSeeder::class);
         $this->call(BloodGroupSeeder::class);
+        $this->call(PositionTypeSeeder::class);
     }
 }

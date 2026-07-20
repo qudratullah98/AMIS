@@ -2,70 +2,42 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
-
-use App\Http\Requests\StoreEmployeeRequest;
-use App\Http\Requests\UpdateEmployeeRequest;
-
 use Inertia\Inertia;
-
 
 class EmployeeController extends Controller
 {
 
-
     public function index(Request $request)
     {
-
 
         $query = Employee::query();
 
 
+        if($request->search){
 
-        if($request->search)
-        {
+            $search = $request->search;
 
-            $query->where(function($q) use($request){
 
-                $q->where(
-                    'employee_no',
-                    'like',
-                    '%'.$request->search.'%'
-                )
+            $query->where(function($q) use($search){
 
-                ->orWhere(
-                    'first_name',
-                    'like',
-                    '%'.$request->search.'%'
-                )
-
-                ->orWhere(
-                    'last_name',
-                    'like',
-                    '%'.$request->search.'%'
-                )
-
-                ->orWhere(
-                    'national_id',
-                    'like',
-                    '%'.$request->search.'%'
-                );
+                $q->where('first_name','like',"%$search%")
+                ->orWhere('last_name','like',"%$search%")
+                ->orWhere('employee_no','like',"%$search%")
+                ->orWhere('national_id','like',"%$search%");
 
             });
 
         }
 
 
-
         return Inertia::render(
-            'Employee/Index',
+            'Tashkilat/Employee/Index',
             [
 
-                'employees'=>
-                    $query
-                    ->with('activeAssignment')
+                'employees'=>$query
                     ->latest()
                     ->paginate(20)
                     ->withQueryString(),
@@ -82,98 +54,38 @@ class EmployeeController extends Controller
 
 
 
+ public function store(StoreEmployeeRequest $request)
+{
+
+    $employee = Employee::create(
+        $request->validated()
+    );
 
 
-    public function store(StoreEmployeeRequest $request)
+    return response()->json([
+
+        'success'=>true,
+
+        'message'=>'employee.created',
+
+        'data'=>$employee
+
+    ]);
+
+}
+
+
+
+    public function json()
     {
-
-
-        $data=$request->validated();
-
-
-
-        if($request->hasFile('photo'))
-        {
-
-            $data['photo']
-                =
-            $request
-            ->file('photo')
-            ->store('employees','public');
-
-        }
-
-
-
-        Employee::create($data);
-
-
-
-        return back()->with(
-            'success',
-            'employee.created'
+        return response()->json(
+            Employee::select(
+                'id',
+                'employee_no',
+                'first_name',
+                'last_name'
+            )->get()
         );
-
     }
-
-
-
-
-
-
-    public function update(
-        UpdateEmployeeRequest $request,
-        Employee $employee
-    )
-    {
-
-
-        $data=$request->validated();
-
-
-
-        if($request->hasFile('photo'))
-        {
-
-            $data['photo']
-            =
-            $request
-            ->file('photo')
-            ->store('employees','public');
-
-        }
-
-
-
-        $employee->update($data);
-
-
-
-        return back()->with(
-            'success',
-            'employee.updated'
-        );
-
-    }
-
-
-
-
-
-
-    public function destroy(Employee $employee)
-    {
-
-        $employee->delete();
-
-
-
-        return back()->with(
-            'success',
-            'employee.deleted'
-        );
-
-    }
-
 
 }

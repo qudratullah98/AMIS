@@ -11,7 +11,7 @@ class DepartmentPosition extends Model
         'position_type_id',
         'title',
         'grade',
-        'quantity',
+        'total_positions',
         'salary',
         'description',
     ];
@@ -24,6 +24,10 @@ class DepartmentPosition extends Model
     */
 
 
+    public function vacancy()
+    {
+        return $this->hasOne(PositionVacancy::class);
+    }
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -42,10 +46,6 @@ class DepartmentPosition extends Model
     }
 
 
-    public function vacancy()
-    {
-        return $this->hasOne(PositionVacancy::class);
-    }
 
 
     /*

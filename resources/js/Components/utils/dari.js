@@ -47,6 +47,7 @@ const dari = {
         next: "بعدی",
         previous: "قبلی",
         descriptions: "توضیحات",
+        description: "توضیحات",
         search: "جستجو",
         searching: "در حال جستجو...",
         delete: "حذف",
@@ -100,8 +101,7 @@ const dari = {
     },
 
     error: {
-        general:
-            "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
+        general: "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
         credentialInvalid: "ایمیل یا رمز عبور نادرست است",
 
         fieldIsNeeded: "پر کردن این بخش الزامی است.",
@@ -165,8 +165,7 @@ const dari = {
             unit_required: "انتخاب واحد خدمت الزامی است.",
             unit_invalid: "واحد خدمت انتخاب‌شده معتبر نیست.",
 
-            airline_rates_required:
-                "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
+            airline_rates_required: "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
             airline_rates_invalid: "اطلاعات نرخ‌های شرکت‌های هوایی معتبر نیست.",
             airline_rates_min: "حداقل یک شرکت هوایی باید اضافه شود.",
 
@@ -190,8 +189,7 @@ const dari = {
             year_integer: "سال باید یک عدد صحیح باشد.",
             year_min: "سال باید حداقل 1000 باشد.",
             year_max: "سال نباید بیشتر از 9999 باشد.",
-            organization_year_unique:
-                "برای این سازمان، تشکیل این سال قبلاً ثبت شده است.",
+            organization_year_unique: "برای این سازمان، تشکیل این سال قبلاً ثبت شده است.",
 
             reference_number_required: "شماره مرجع الزامی است.",
             reference_number_string: "شماره مرجع باید متن باشد.",
@@ -414,6 +412,18 @@ const dari = {
         code: "کد",
         tashkilList: "لیست تشکیلات",
         CreateNewTashkil: "ایجاد تشکیلات جدید",
+        createNewPositionType: 'ایجاد نوعیت بست',
+        positionType: "نوعیت بست",
+
+        createDepartmentPosition: "ایجاد بست تشکیلاتی ریاست",
+        positionTitle: "عنوان بست",
+        department: "ریاست",
+        positionTypeList: "فهرست نوعیت‌های بست",
+        grade: "کد درجه بست",
+
+        totalPositions: "مجموع بست‌ها",
+        salary: "معاش",
+        description: "توضیحات",
         organization: {
             name: "نام سازمان",
             code: "کد سازمان",
@@ -422,6 +432,89 @@ const dari = {
             website: "وب‌سایت سازمان",
             address: "آدرس سازمان",
             create: "ایجاد سازمان",
+        },
+        employee: {
+            employeeNo: "شماره کارمند",
+
+            firstName: "نام",
+
+            lastName: "تخلص",
+
+            fatherName: "نام پدر",
+
+            gender: "جنسیت",
+
+            birthDate: "تاریخ تولد",
+
+            phone: "شماره تماس",
+
+            email: "ایمیل",
+
+            nationalId: "شماره تذکره",
+
+            passportNo: "شماره پاسپورت",
+
+            maritalStatus: "حالت مدنی",
+
+            bloodGroup: "گروپ خون",
+
+            province: "ولایت",
+
+            district: "ولسوالی",
+
+            address: "آدرس",
+
+            photo: "عکس",
+
+            approvalStatus: "حالت منظوری",
+
+            status: "حالت",
+
+            employeeName: "نام کارمند",
+
+            employees: "کارمندان",
+
+            createEmployee: "ایجاد کارمند",
+
+            employeeList: "فهرست کارمندان",
+
+            single: "مجرد",
+
+            married: "متأهل",
+
+            divorced: "طلاق شده",
+
+            widowed: "بیوه",
+
+            active: "فعال",
+
+            inactive: "غیرفعال"
+        },
+        employeeAssignment: {
+            employeeAssignmentsList: "لیست وظایف کارمندان",
+            createEmployeeAssignment: "ایجاد وظیفه کارمند",
+            editEmployeeAssignment: "ویرایش وظیفه کارمند",
+            employeeName: "نام کارمند",
+            startDate: "تاریخ شروع",
+            endDate: "تاریخ ختم",
+            approvalStatus: "حالت تایید",
+            selectEmployee: "کارمند را انتخاب کنید",
+            selectVacancy: "وظیفه را انتخاب کنید",
+            selectApprovalStatus: "حالت تایید را انتخاب کنید",
+            vacancy: "وظیفه",
+            position: "بست",
+            remarks: "ملاحظات",
+            enterRemarks: "ملاحظات را اینجا بنویسید...",
+            assignmentDetails: "جزئیات وظیفه",
+            noAssignmentsFound: "هیچ وظیفه‌ای برای کارمند یافت نشد",
+            assignmentCreated: "وظیفه کارمند با موفقیت ایجاد شد",
+            assignmentUpdated: "وظیفه کارمند با موفقیت ویرایش شد",
+            assignmentDeleted: "وظیفه کارمند حذف شد",
+            confirmDelete: "آیا شما از حذف این وظیفه اطمینان دارید؟",
+            pending: "در انتظار",
+            approved: "تایید شده",
+            rejected: "رد شده",
+            underReview: "در حال بررسی"
         },
     },
 };

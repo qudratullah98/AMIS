@@ -39,7 +39,7 @@ class DepartmentPositionController extends Controller
                 ->orWhereHas('positionType',function($q) use($request){
 
                     $q->where(
-                        'name',
+                        'title',
                         'like',
                         '%'.$request->search.'%'
                     );
@@ -50,7 +50,7 @@ class DepartmentPositionController extends Controller
 
 
         return Inertia::render(
-            'DepartmentPosition/Index',
+            'Tashkilat/DepartmentPosition/Index',
             [
 
                 'positions'=>$query
@@ -69,9 +69,9 @@ class DepartmentPositionController extends Controller
 
                 'positionTypes'=>PositionType::select(
                     'id',
-                    'name'
+                    'title'
                 )
-                ->orderBy('name')
+                ->orderBy('title')
                 ->get(),
 
 
@@ -86,35 +86,40 @@ class DepartmentPositionController extends Controller
 
 
 
-    public function store(
-        StoreDepartmentPositionRequest $request
-    )
-    {
-
-        $position = DepartmentPosition::create(
-            $request->validated()
-        );
-
-
-        // create vacancy record
-
-        $position->vacancy()->create([
-
-            'total_positions'=>$position->quantity,
-
-            'filled_positions'=>0,
-
-            'vacant_positions'=>$position->quantity,
-
-        ]);
+public function store(StoreDepartmentPositionRequest $request)
+{
+    $position = DepartmentPosition::create([
+        'title' => $request->title,
+        'department_id' => $request->department_id,
+        'position_type_id' => $request->position_type_id,
+        'total_positions' => $request->total_positions,
+        'description' => $request->description,
+    ]);
 
 
-        return back()->with(
-            'success',
-            'department_position.created'
-        );
+    $position->vacancy()->create([
 
-    }
+        'vacancy_no' => 'VAC-' . time(),
+
+        'status' => 'Vacant',
+
+    ]);
+
+
+    return response()->json([
+
+        'success' => true,
+
+        'message' => 'Position created successfully.',
+
+        'data' => $position->load([
+            'department',
+            'positionType',
+            'vacancy'
+        ])
+
+    ]);
+}
 
 
 

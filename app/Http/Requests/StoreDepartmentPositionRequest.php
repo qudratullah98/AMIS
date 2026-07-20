@@ -38,7 +38,7 @@ class StoreDepartmentPositionRequest extends FormRequest
                 'max:100',
             ],
 
-            'quantity' => [
+            'total_positions' => [
                 'required',
                 'integer',
                 'min:1',

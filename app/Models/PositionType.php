@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class PositionType extends Model
 {
      protected $fillable = [
-        'name',
+        'title',
         'grade',
-        'description',
+        'code',
     ];
 
     /*

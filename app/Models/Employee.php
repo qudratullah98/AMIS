@@ -11,23 +11,41 @@ class Employee extends Model
 {
 
 
+protected $fillable = [
 
-    protected $fillable = [
+    'employee_no',
 
-        'employee_no',
-        'first_name',
-        'last_name',
-        'father_name',
-        'gender',
-        'dob',
-        'phone',
-        'email',
-        'national_id',
-        'address',
-        'photo',
-        'status',
+    'first_name',
+    'last_name',
+    'father_name',
 
-    ];
+    'gender',
+    'birth_date',
+
+    'phone',
+    'email',
+
+    'national_id',
+    'passport_no',
+
+    'marital_status',
+
+    'blood_group_id',
+
+    'province',
+    'district',
+    'address',
+
+    'photo',
+
+    'approval_status_id',
+
+    'status',
+
+    'created_by',
+    'updated_by',
+
+];
 
 
 
