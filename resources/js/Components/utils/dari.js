@@ -80,6 +80,7 @@ const dari = {
         propertyValue: "مقدار مشخصه",
         remove: "حذف",
         unit: "واحد",
+        reset: "پاک کردن",
     },
 
     input: {

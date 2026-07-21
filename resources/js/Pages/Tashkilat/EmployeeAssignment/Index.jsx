@@ -9,7 +9,7 @@ import { Edit2, Trash2 } from "lucide-react";
 import CreateEmployeeAssignment from "./Create";
 // import EditEmployeeAssignment from "./Edit";
 
-function Index({ employeeAssignments }) {
+function Index({ employee_assignments: employeeAssignments }) {
     const { t } = useTranslation();
 
     const [assignmentsData, setAssignmentsData] = useState(
@@ -24,11 +24,11 @@ function Index({ employeeAssignments }) {
 
     const columns = [
         { label: t("common.NO") },
-        { label: t("employee.employeeName") },
+        { label: t("tashkilat.employee.employeeName") },
         { label: t("vacancy.position") },
-        { label: t("employee.startDate") },
-        { label: t("employee.endDate") },
-        { label: t("employee.approvalStatus") },
+        { label: t("tashkilat.employeeAssignment.startDate") },
+        { label: t("tashkilat.employeeAssignment.endDate") },
+        { label: t("tashkilat.employeeAssignment.approvalStatus") },
         { label: t("common.action") },
     ];
 
@@ -39,12 +39,12 @@ function Index({ employeeAssignments }) {
 
     return (
         <AuthenticatedLayout
-            header={<SubHeader title={t("employee.employeeAssignmentsList")} />}
+            header={<SubHeader title={t("tashkilat.employeeAssignment.employeeAssignmentsList")} />}
         >
             <SubHeader
                 links={[
                     {
-                        name: t("employee.employeeAssignmentsList"),
+                        name: t("tashkilat.employeeAssignment.employeeAssignmentsList"),
                     },
                 ]}
             />
@@ -54,7 +54,7 @@ function Index({ employeeAssignments }) {
                 <CustomModal
                     show={createModal}
                     handleClose={() => setCreateModal(false)}
-                    title={t("employee.createEmployeeAssignment")}
+                    title={t("tashkilat.employeeAssignment.createEmployeeAssignment")}
                     size="large"
                     footer={false}
                     stopPropagation={false}
@@ -76,7 +76,7 @@ function Index({ employeeAssignments }) {
                 <CustomModal
                     show={editModal}
                     handleClose={() => setEditModal(false)}
-                    title={t("employee.editEmployeeAssignment")}
+                    title={t("tashkilat.employeeAssignment.editEmployeeAssignment")}
                     size="large"
                     footer={false}
                     stopPropagation={false}
@@ -113,11 +113,12 @@ function Index({ employeeAssignments }) {
                         <DataTable
                             columns={columns}
                             links={paginationLinks}
-                            header={t("employee.employeeAssignmentsList")}
+                            header={t("tashkilat.employeeAssignment.employeeAssignmentsList")}
                             enableButton={true}
-                            buttonLabel={t("employee.createEmployeeAssignment")}
+                            buttonLabel={t("tashkilat.employeeAssignment.createEmployeeAssignment")}
                             onButtonClick={() => setCreateModal(true)}
-                        >
+                            
+                        >{console.log(assignmentsData)}
                             {assignmentsData.map((assignment, index) => (
                                 <tr
                                     key={assignment.id}
@@ -130,12 +131,12 @@ function Index({ employeeAssignments }) {
 
                                     {/* Employee Name */}
                                     <td className="p-2 text-center">
-                                        {assignment.employee?.name ?? "-"}
+                                        {assignment.employee?.first_name ?? "-"}
                                     </td>
 
                                     {/* Vacancy Position */}
                                     <td className="p-2 text-center">
-                                        {assignment.vacancy?.position ?? "-"}
+                                        {assignment.vacancy?.vacancy_no ?? "-"}
                                     </td>
 
                                     {/* Start Date */}

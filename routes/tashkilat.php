@@ -13,6 +13,7 @@ use App\Http\Controllers\DepartmentPositionController;
 use App\Http\Controllers\EmployeeAssignmentController;
 use App\Http\Controllers\TashkilatDashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionVacancyController;
 
 Route::prefix('organizations')
     ->name('organizations.')
@@ -98,8 +99,6 @@ Route::prefix('employees')
 
 
         Route::get('/',  [EmployeeController::class,    'index'])->name('index');
-
-
         Route::post('/store', [EmployeeController::class,    'store'])->name('store');
  
     });
@@ -116,12 +115,7 @@ Route::prefix('employee-assignments')
 
 
         Route::post('/store', [EmployeeAssignmentController::class,    'store'])->name('store');
-
-
-        Route::put('/update/{employeeAssignment}', [EmployeeAssignmentController::class,    'update'])->name('update');
-
-
-        Route::delete('/delete/{employeeAssignment}', [EmployeeAssignmentController::class,    'destroy'])->name('destroy');
+ 
     });
 
 Route::prefix('organizations')
@@ -137,6 +131,8 @@ Route::get( '/dashboard-tashkilat',[TashkilatDashboardController::class,'index']
 
 
 // json data  for useeffect
+Route::get('/employee/json', [EmployeeController::class, 'employees'])->name('employee.json');
+Route::get('/position-vacancies/json', [PositionVacancyController::class, 'vacancy'])->name('position-vacancies.json');
 Route::get('/tashkils/json', [TashkilController::class, 'tashkils'])->name('tashkils.json');
 Route::get('/departments/json', [DepartmentController::class, 'departments'])->name('departments.json');
 Route::get('/organizations/json', [OrganizationController::class, 'organizations'])->name('organizations.json');

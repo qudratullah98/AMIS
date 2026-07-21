@@ -25,11 +25,9 @@ class EmployeeAssignmentController extends Controller
 
         $query = EmployeeAssignment::with([
 
-            'employee',
+            'employee:id,first_name,last_name,national_id',
 
-            'departmentPosition.department',
-
-            'departmentPosition.positionType'
+            'vacancy:id,vacancy_no',
 
         ]);
 
@@ -65,38 +63,9 @@ class EmployeeAssignmentController extends Controller
             'Tashkilat/EmployeeAssignment/Index',
             [
 
-                'assignments'=>
-
-                    $query
-                    ->latest()
-                    ->paginate(20)
-                    ->withQueryString(),
-
-
-
-                'employees'=>
-
-                    Employee::select(
-                        'id',
-                        'first_name',
-                        'last_name'
-                    )
-                    ->get(),
-
-
-
-                'positions'=>
-
-                    DepartmentPosition::with(
-                        'department'
-                    )
-                    ->get(),
-
-
-
-                'filters'=>[
-                    'search'=>$request->search
-                ]
+                'employee_assignments'=>$query
+                ->latest()
+                ->paginate(20)
 
             ]
         );
@@ -112,53 +81,20 @@ class EmployeeAssignmentController extends Controller
     )
     {
 
+       $employeeAssignment = EmployeeAssignment::create(
+            $request->validated());
 
-        $position =
-        DepartmentPosition::findOrFail(
-            $request->department_position_id
-        );
+       
+  
 
+        return response()->json(
 
+            [
 
-        $filled =
-        $position
-        ->assignments()
-        ->where(
-            'status',
-            'active'
-        )
-        ->count();
+                'success'=>'employee_assignment.created',
 
-
-
-        if($filled >= $position->quantity)
-        {
-
-            return back()->withErrors([
-
-                'department_position_id'
-                =>
-                'department_position.full'
-
-            ]);
-
-        }
-
-
-
-        EmployeeAssignment::create(
-            $request->validated()
-        );
-
-
-
-        $this->updateVacancy($position);
-
-
-
-        return back()->with(
-            'success',
-            'employee_assignment.created'
+                'data'=>$employeeAssignment
+            ]
         );
 
 

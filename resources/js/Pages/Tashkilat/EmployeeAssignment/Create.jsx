@@ -9,7 +9,8 @@ import InputLabel from "@/Components/InputLabel";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import CustomSelect from "@/Components/CustomSelect";
-import toast from "react-hot-toast";
+import toast from "react-hot-toast"; 
+import AsyncSelect from "@/Components/AsyncSelect";
 
 function CreateEmployeeAssignment({ onSubmitSuccess }) {
     const { t } = useTranslation();
@@ -23,8 +24,7 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
             employee_id: "",
             vacancy_id: "",
             start_date: "",
-            end_date: "",
-            approval_status_id: "",
+            end_date: "", 
             remarks: "",
         },
 
@@ -49,9 +49,7 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
                     t("validation.end_date_must_be_after_start_date")
                 ),
 
-            approval_status_id: Yup.number()
-                .required(t("validation.required"))
-                .typeError(t("validation.number")),
+          
 
             remarks: Yup.string().nullable().max(1000, t("validation.max_length")),
         }),
@@ -98,14 +96,14 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
     /**
      * Load Vacancies
      */
-    // useEffect(() => {
-    //     axios
-    //         .get(route("position-vacancies.json"))
-    //         .then((res) => {
-    //             setVacancies(res.data);
-    //         })
-    //         .catch(console.error);
-    // }, []);
+    useEffect(() => {
+        axios
+            .get(route("position-vacancies.json"))
+            .then((res) => {
+                setVacancies(res.data);
+            })
+            .catch(console.error);
+    }, []);
 
     /**
      * Load Approval Statuses
@@ -119,38 +117,39 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
     //         .catch(console.error);
     // }, []);
 
+    const handleEmployeeSelect = (flight) => {
+        formik.setFieldValue("employee_id", flight.id);
+    };
+
     return (
         <form onSubmit={formik.handleSubmit} className="space-y-5">
             {/* Employee */}
-            <div>
+           
                 <InputLabel value={t("tashkilat.employee.employeeName")} />
 
-                <CustomSelect
-                    value={formik.values.employee_id}
-                    options={employees.map((item) => ({
-                        value: item.id,
-                        label: item.name,
-                    }))}
-                    onChange={(value) => {
-                        formik.setFieldValue("employee_id", value);
-                    }}
-                    placeholder={t("tashkilat.employeeAssignment.selectEmployee")}
-                />
+                      <AsyncSelect
+                        apiEndpoint={route("employee.json")}
+                        onSelect={handleEmployeeSelect}
+                        formatOption={(employess) =>
+                            `${employess.national_id} - ${employess.first_name}`
+                        }
+                         placeholder={t("tashkilat.employeeAssignment.selectEmployee")}
+                    />
 
                 <InputError
                     message={t(formik.touched.employee_id && formik.errors.employee_id)}
                 />
-            </div>
+            
 
             {/* Vacancy */}
             <div>
-                <InputLabel value={t("employeeAssignment.position")} />
+                <InputLabel value={t("tashkilat.employeeAssignment.position")} />
 
                 <CustomSelect
                     value={formik.values.vacancy_id}
                     options={vacancies.map((item) => ({
                         value: item.id,
-                        label: `${item.position} - ${item.department?.name || ""}`,
+                        label: `${item.vacancy_no} - ${item.department_position?.title || ""}`,
                     }))}
                     onChange={(value) => {
                         formik.setFieldValue("vacancy_id", value);
@@ -165,7 +164,7 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
 
             {/* Start Date */}
             <div>
-                <InputLabel value={t("tashkilat.employee.startDate")} />
+                <InputLabel value={t("tashkilat.employeeAssignment.startDate")} />
 
                 <TextInput
                     type="date"
@@ -182,7 +181,7 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
 
             {/* End Date */}
             <div>
-                <InputLabel value={t("tashkilat.employee.endDate")} />
+                <InputLabel value={t("tashkilat.employeeAssignment.endDate")} />
 
                 <TextInput
                     type="date"
@@ -196,30 +195,7 @@ function CreateEmployeeAssignment({ onSubmitSuccess }) {
                     message={t(formik.touched.end_date && formik.errors.end_date)}
                 />
             </div>
-
-            {/* Approval Status */}
-            <div>
-                <InputLabel value={t("tashkilat.employee.approvalStatus")} />
-
-                <CustomSelect
-                    value={formik.values.approval_status_id}
-                    options={approvalStatuses.map((item) => ({
-                        value: item.id,
-                        label: item.name,
-                    }))}
-                    onChange={(value) => {
-                        formik.setFieldValue("approval_status_id", value);
-                    }}
-                    placeholder={t("tashkilat.employee.selectApprovalStatus")}
-                />
-
-                <InputError
-                    message={t(
-                        formik.touched.approval_status_id && 
-                        formik.errors.approval_status_id
-                    )}
-                />
-            </div>
+ 
 
             {/* Remarks */}
             <div>

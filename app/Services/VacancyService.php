@@ -19,43 +19,10 @@ class VacancyService
         $filled = $position
             ->assignments()
             ->where(
-                'status',
-                'active'
+                'approval_status_id',
+                '1'
             )
             ->count();
-
-
-
-        $position->vacancy()
-            ->updateOrCreate(
-
-            [
-
-                'department_position_id'
-                =>
-                $position->id
-
-            ],
-
-
-            [
-
-                'total_positions'
-                =>
-                $position->quantity,
-
-
-                'filled_positions'
-                =>
-                $filled,
-
-
-                'vacant_positions'
-                =>
-                $position->quantity-$filled
-
-            ]);
-
 
     }
 

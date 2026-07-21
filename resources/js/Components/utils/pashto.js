@@ -86,6 +86,7 @@ const pashto = {
         propertyValue: "د ځانګړتیا مقدار",
         remove: "لرې کړئ",
         unit: "واحد",
+        reset: "پاکول",
     },
 
     input: {
@@ -453,7 +454,7 @@ const pashto = {
             employeeNo: "د کارکوونکي شمېره",
 
             firstName: "لومړی نوم",
-
+            fullName: "بشپر نوم",
             lastName: "تخلص",
 
             fatherName: "د پلار نوم",

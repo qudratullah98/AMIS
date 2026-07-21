@@ -12,8 +12,8 @@ class EmployeeAssignmentObserver
      */
     public function created(EmployeeAssignment $assignment): void
     {
-        app(VacancyService::class)
-            ->update($assignment->departmentPosition);
+        // app(VacancyService::class)
+        //     ->update($assignment->departmentPosition);
     }
 
     /**

@@ -76,12 +76,12 @@ class EmployeeController extends Controller
 
 
 
-    public function json()
-    {
+    public function employees()
+    {   
         return response()->json(
-            Employee::select(
+            Employee::when(request('query'), function($q) { $q->where('first_name', 'like', request('query').'%')->orWhere('national_id', 'like', request('query')); })->select(
                 'id',
-                'employee_no',
+                'national_id',
                 'first_name',
                 'last_name'
             )->get()

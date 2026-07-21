@@ -27,7 +27,7 @@ class StoreEmployeeAssignmentRequest extends FormRequest
             ],
 
 
-            'department_position_id'=>[
+            'vacancy_id'=>[
                 'required',
                 'exists:department_positions,id'
             ],
@@ -45,11 +45,6 @@ class StoreEmployeeAssignmentRequest extends FormRequest
                 'after_or_equal:start_date'
             ],
 
-
-            'status'=>[
-                'required',
-                'in:active,inactive'
-            ],
 
 
             'remarks'=>[
@@ -78,11 +73,11 @@ class StoreEmployeeAssignmentRequest extends FormRequest
 
 
 
-            'department_position_id.required'
+            'vacancy_id.required'
                 =>
             'employee_assignment.position_required',
 
-            'department_position_id.exists'
+            'vacancy_id.exists'
                 =>
             'employee_assignment.position_invalid',
 

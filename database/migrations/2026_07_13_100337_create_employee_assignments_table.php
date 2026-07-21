@@ -29,7 +29,7 @@ return new class extends Migration
 
             $table->date('end_date')->nullable();
 
-             $table->foreignIdFor(ApprovelStatus::class, 'approval_status_id')
+             $table->foreignIdFor(ApprovelStatus::class, 'approval_status_id')->default(2)
                 ->constrained()
                 ->cascadeOnDelete();
 
