@@ -152,7 +152,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                 <div>
                     <IconLabel
                         htmlFor="name_en"
-                        icon="✈️"
+                        icon=""
                         text="English Name"
                     />
 
@@ -169,7 +169,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
                 {/* NAME PS */}
                 <div>
-                    <IconLabel htmlFor="name_ps" icon="🛫" text="Pashto Name" />
+                    <IconLabel htmlFor="name_ps" icon="" text="Pashto Name" />
 
                     <TextInput
                         id="name_ps"
@@ -184,7 +184,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
                 {/* NAME DR */}
                 <div>
-                    <IconLabel htmlFor="name_dr" icon="🛫" text="Dari Name" />
+                    <IconLabel htmlFor="name_dr" icon="" text="Dari Name" />
 
                     <TextInput
                         id="name_dr"
@@ -199,7 +199,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
 
                 {/* UNIT */}
                 <div>
-                    <IconLabel htmlFor="unit" icon="📦" text="Service Unit" />
+                    <IconLabel htmlFor="unit" icon="" text="Service Unit" />
 
                     <CustomSelect
                         value={data.sgha_service_unit_id}
@@ -241,7 +241,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         <div>
                             <IconLabel
                                 htmlFor={`airline_${index}`}
-                                icon="🏢"
+                                icon=""
                                 text="Airline"
                             />
 
@@ -263,10 +263,10 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                                 message={
                                     errors[`airline_rates.${index}.airline_id`]
                                         ? t(
-                                              errors[
-                                                  `airline_rates.${index}.airline_id`
-                                              ],
-                                          )
+                                            errors[
+                                            `airline_rates.${index}.airline_id`
+                                            ],
+                                        )
                                         : ""
                                 }
                             />
@@ -276,7 +276,7 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                         <div>
                             <IconLabel
                                 htmlFor={`rate_${index}`}
-                                icon="📊"
+                                icon=""
                                 text="Completion Rate"
                             />
 
@@ -297,10 +297,10 @@ export default function CreateSghaService({ onSubmitSuccess }) {
                                         `airline_rates.${index}.complation_rate`
                                     ]
                                         ? t(
-                                              errors[
-                                                  `airline_rates.${index}.complation_rate`
-                                              ],
-                                          )
+                                            errors[
+                                            `airline_rates.${index}.complation_rate`
+                                            ],
+                                        )
                                         : ""
                                 }
                             />

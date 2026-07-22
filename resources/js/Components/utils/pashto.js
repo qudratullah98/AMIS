@@ -322,15 +322,12 @@ const pashto = {
         arrival: "رسېدل",
         departureTime: "د روانېدو وخت",
         arrivalTime: "د رسېدو وخت",
-        origin: "مبدا",
-        destination: "مقصد",
         flightServices: "د الوتنو چوپړتیاوې",
         airport: "هوایي ډګر",
         airline: "هوایي شرکت",
         aircraft_type: "د الوتکې ډول",
         aircraft_registration: "د الوتکې ثبت نمبر",
         flight_number: "د پرواز شمېره",
-        work_order: "کاري امر",
         charge_note: "د مصرف یادښت",
         arrival_date: "د رسېدو نېټه",
         departure_date: "د وتلو نېټه",
@@ -349,6 +346,7 @@ const pashto = {
         sghaServiceUnite: "د SGHA خدماتي واحد",
         sghaServices: "د SGHA خدمات",
         sghaServicesList: "د SGHA خدماتو لیست",
+        addNewSghaService: "نوی SGHA خدمات اضافه کړئ",
     },
 
     passenger: {

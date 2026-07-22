@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useState } from "react";
 import DataTable from "@/Components/Datatable";
 import SubHeader from "@/Components/SubHeader";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 import CreateSghaService from "./Create";
 import CustomModal from "@/Components/CustomModal";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
@@ -26,7 +26,7 @@ function Index({ sgha_services }) {
         { label: t("common.namePashto") },
         { label: t("common.nameDari") },
         { label: t("sgha.serviceUnit") },
-        { label: t("sgha.airline") }, 
+        { label: t("sgha.airline") },
         { label: t("common.actions") },
     ];
 
@@ -45,7 +45,7 @@ function Index({ sgha_services }) {
                 <CustomModal
                     show={createModel}
                     handleClose={() => setCreateModel(false)}
-                    title={t("sgha.addingNewSghaService")}
+                    title={t("sgha.addNewSghaService")}
                     size="large"
                     stopPropagation={false}
                     footer={false}
@@ -63,30 +63,7 @@ function Index({ sgha_services }) {
             )}
 
             {/* Edit Modal */}
-            {editModel && (
-                <CustomModal
-                    show={editModel}
-                    handleClose={() => setEditModel(false)}
-                    title={t("sgha.editingSghaService")}
-                    size="large"
-                    stopPropagation={false}
-                    footer={false}
-                >
-                    <EditSghaService
-                        sghaService={editableData}
-                        onEditSuccess={(updatedService) => {
-                            setSghaServicesData((prev) =>
-                                prev.map((s) =>
-                                    s.id === updatedService.id
-                                        ? updatedService
-                                        : s,
-                                ),
-                            );
-                            setEditModel(false);
-                        }}
-                    />
-                </CustomModal>
-            )}
+
             <div className="mx-auto">
                 <div className="overflow-hidden bg-white shadow-none sm:rounded-lg border border-gray-100 dark:bg-gray-800">
                     <div className="px-4 py-2 text-gray-900 dark:text-gray-100">
@@ -95,7 +72,7 @@ function Index({ sgha_services }) {
                             links={paginationLinks}
                             header={t("sgha.sghaServicesList")}
                             enableButton={true}
-                            buttonLabel={t("CreateNewSgha")} 
+                            buttonLabel={t("sgha.addNewSghaService")}
                             onButtonClick={() => setCreateModel(true)}
                         >
                             {sghaServicesData.map((service, index) => (
@@ -116,64 +93,62 @@ function Index({ sgha_services }) {
                                         {service.name_dr}
                                     </td>
                                     <td className="p-2 text-center">
-                                        {service.service_unit?.service_name  }
-                                        </td>
-                               <td className="p-4">
-<td className="p-2 min-w-[260px]">
-    <div className="flex flex-col gap-2">
-        {service.sgha_services_rate?.map((rate) => (
-            <div
-                key={rate.id}
-                className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-1 shadow-sm"
-            >
-                {/* Airline Name */}
-                <div className="w-24 truncate text-xs font-medium text-gray-700">
-                    ✈️ {rate.airline?.name_en}
-                </div>
+                                        {service.service_unit?.service_name}
+                                    </td>
+                                        <td className="p-2 min-w-[260px]">
+                                            <div className="flex flex-col gap-2">
+                                                {service.sgha_services_rate?.map((rate) => (
+                                                    <div
+                                                        key={rate.id}
+                                                        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-1 shadow-sm"
+                                                    >
+                                                        {/* Airline Name */}
+                                                        <div className="w-24 truncate text-xs font-medium text-gray-700">
+                                                              {rate.airline?.name_en}
+                                                        </div>
 
-                {/* Progress Bar */}
-                <div className="flex-1">
-                    <div className="h-2 overflow-hidden rounded-full bg-gray-200">
-                        <div
-                            className="h-full rounded-full bg-gradient-to-r from-blue-500 to-green-400 transition-all duration-300"
-                            style={{
-                                width: `${rate.complation_rate}%`,
-                            }}
-                        />
-                    </div>
-                </div>
+                                                        {/* Progress Bar */}
+                                                        <div className="flex-1">
+                                                            <div className="h-2 overflow-hidden rounded-full bg-gray-200">
+                                                                <div
+                                                                    className="h-full rounded-full bg-gradient-to-r from-blue-500 to-green-400 transition-all duration-300"
+                                                                    style={{
+                                                                        width: `${rate.complation_rate}%`,
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
 
-                {/* Percentage */}
-                <div className="w-10 text-right text-xs font-bold text-blue-700">
-                    {rate.complation_rate}%
-                </div>
-            </div>
-        ))}
-    </div>
-</td>
-</td>
-                                  <td className=" text-center">
+                                                        {/* Percentage */}
+                                                        <div className="w-10 text-right text-xs font-bold text-blue-700">
+                                                            {rate.complation_rate}%
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                    </td>
+                                    <td className=" text-center">
                                         <ThreeDotMenu>
                                             <div className="py-0">
-                                               
-                                                    <button
-                                                        className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                        onClick={() =>
-                                                            activation(
-                                                                service.id,
-                                                            )
-                                                        }
-                                                    >
-                                                       
-                                                      
-                                                                <Verified className="ml-2 text-xl" />
-                                                                {t(
-                                                                    "state.approve",
-                                                                )}
-                                                             
-                                                         
-                                                    </button>
-                                                
+
+                                                <button
+                                                    className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    onClick={() =>
+                                                        activation(
+                                                            service.id,
+                                                        )
+                                                    }
+                                                >
+
+
+                                                    <Verified className="ml-2 text-xl" />
+                                                    {t(
+                                                        "state.approve",
+                                                    )}
+
+
+                                                </button>
+
                                                 <button
                                                     className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                     onClick={() => {
