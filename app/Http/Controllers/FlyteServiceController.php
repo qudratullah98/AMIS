@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFlightServiceRequest;
 use App\Models\ApprovelStatus;
 use App\Models\Flight;
 use App\Models\FlightService;
@@ -14,9 +15,11 @@ class FlyteServiceController extends Controller
     public function getFlightServices()
     {
         $flightServices = FlightService::with([
-            'flight',
-            'sghaService',
-            'approvalStatus'
+            'flight:id,flight_number,airline_id,aircraft_type_id,airport_id',
+            'sghaService:id,name_ps',
+            'flight.airport:id,name_ps',
+            'flight.airline:id,name_ps',
+            'flight.aircraftType:id,name',
         ])
             ->latest()
             ->paginate(10);
@@ -27,45 +30,21 @@ class FlyteServiceController extends Controller
         ]);
     }
 
- 
 
 
 
-    public function store(Request $request)
+
+    public function store(StoreFlightServiceRequest $request)
     {
 
-        $validated = $request->validate([
-
-            'flight_id' => [
-                'required',
-                'exists:flights,id'
-            ],
-
-            'sgha_service_id' => [
-                'required',
-                'exists:sgha_services,id'
-            ],
-
-            'count' => [
-                'required',
-                'integer',
-                'min:1'
-            ],
-
-          
-
-        ]);
-
-
-        $service = FlightService::create($validated);
-
-
+        $service = FlightService::create($request->validated());
         return response()->json([
             'message' => 'Flight Service created successfully',
             'data' => $service->load(
-                'flight',
-                'sghaService',
-                'approvalStatus'
+                [
+                    'flight:id,flight_number',
+                    'sghaService:id,name_ps',
+                ]
             )
         ]);
     }

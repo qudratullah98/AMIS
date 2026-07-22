@@ -230,6 +230,18 @@ const pashto = {
             code_already_exists: "دا د څانګې کوډ مخکې ثبت شوی دی.",
             description_invalid: "د څانګې تشریح سمه نه ده.",
         },
+        flight_service: {
+            flight_required: 'الوتنه اړینه ده.',
+            flight_exists: 'ټاکل شوې الوتنه شتون نه لري.',
+
+            service_required: 'د SGHA خدمت ټاکل اړین دي.',
+            service_exists: 'ټاکل شوی SGHA خدمت شتون نه لري.',
+
+            count_required: 'تعداد اړین دی.',
+            count_integer: 'تعداد باید یو صحیح عدد وي.',
+            count_min: 'تعداد باید لږ تر لږه ۱ وي.',
+        }
+
     },
     success: {
         organization_stored_successfully: "اداره په بریالیتوب سره جوړه شوه.",
@@ -347,6 +359,7 @@ const pashto = {
         sghaServices: "د SGHA خدمات",
         sghaServicesList: "د SGHA خدماتو لیست",
         addNewSghaService: "نوی SGHA خدمات اضافه کړئ",
+        countOfService: "د خدمات تعداد",
     },
 
     passenger: {

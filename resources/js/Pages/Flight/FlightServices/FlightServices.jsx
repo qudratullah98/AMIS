@@ -14,17 +14,21 @@ function FlightServices({ flightServices }) {
     const columns = [
         { label: t("common.NO") },
         { label: t("flight.flight_number") },
+        { label: t("flight.flightServices") },
         { label: t("flight.airport") },
         { label: t("flight.airline") },
         { label: t("airport.aircraftTypes") },
+        { label: t("sgha.countOfService") },
+        { label: t("state.approvalStatus") },
     ];
 
+    console.log(services);
     return (
-        <AuthenticatedLayout header={<SubHeader title= {t("flight.flightServices")}/>}>
+        <AuthenticatedLayout header={<SubHeader title={t("flight.flightServices")} />}>
             <SubHeader
                 links={[
                     {
-                        name: t("flight.flightServices"), 
+                        name: t("flight.flightServices"),
                     },
                 ]}
             />
@@ -38,7 +42,7 @@ function FlightServices({ flightServices }) {
             >
                 <Create onSubmitSuccess={(data) => {
                     setCreateModal(false);
-                    setServices((prev) => [ data,...prev]);
+                    setServices((prev) => [data, ...prev]);
                 }}></Create>
             </CustomModal>
 
@@ -68,7 +72,7 @@ function FlightServices({ flightServices }) {
                                     className="hover:bg-gray-50"
                                 >
                                     <td className="p-3 text-center">
-                                        {index + 1}
+                                        {index + 1}dd
                                     </td>
 
                                     <td className="p-3 text-center font-semibold">
@@ -76,7 +80,17 @@ function FlightServices({ flightServices }) {
                                     </td>
 
                                     <td className="p-3 text-center">
-                                        {service.sgha_service?.name_en}
+                                        {service.sgha_service?.name_ps}
+                                    </td> 
+                                    <td className="p-3 text-center">
+                                        {service.flight.airport?.name_ps}
+                                        {console.log(service.airport)}
+                                    </td> 
+                                    <td className="p-3 text-center">
+                                        {service.flight.airline?.name_ps}
+                                    </td>
+                                     <td className="p-3 text-center">
+                                        {service.flight.aircraft_type?.name}
                                     </td>
 
                                     <td className="p-3 text-center">

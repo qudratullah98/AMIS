@@ -157,7 +157,7 @@ export default function CreateFlightService({ onSubmitSuccess }) {
                         placeholder={t("flight.searchFlightNumber")}
                     />
 
-                    <InputError message={errors.flight_id} />
+                    <InputError message={t(errors.flight_id)} />
                 </div>
 
                 {/* SGHA Service */}
@@ -176,7 +176,7 @@ export default function CreateFlightService({ onSubmitSuccess }) {
                         }
                     />
 
-                    <InputError message={errors.sgha_service_id} />
+                    <InputError message={t(errors.sgha_service_id)} />
                 </div>
 
                 {/* Count */}
@@ -193,7 +193,7 @@ export default function CreateFlightService({ onSubmitSuccess }) {
                         }
                     />
 
-                    <InputError message={errors.count} />
+                    <InputError message={t(errors.count)} />
                 </div>
 
             </div>

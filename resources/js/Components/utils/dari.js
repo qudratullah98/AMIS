@@ -220,6 +220,17 @@ const dari = {
 
             description_invalid: "توضیحات دیپارتمنت معتبر نیست.",
         },
+        flight_service: {
+            flight_required: "انتخاب پرواز الزامی است.",
+            flight_exists: "پرواز انتخاب‌شده وجود ندارد.",
+
+            service_required: "انتخاب خدمت SGHA الزامی است.",
+            service_exists: "خدمت SGHA انتخاب‌شده وجود ندارد.",
+
+            count_required: "تعداد الزامی است.",
+            count_integer: "تعداد باید یک عدد صحیح باشد.",
+            count_min: "تعداد باید حداقل ۱ باشد.",
+        }
     },
     success: {
         organization_stored_successfully: "سازمان با موفقیت ایجاد شد.",
@@ -333,7 +344,8 @@ const dari = {
         sghaServiceUnite: "واحد خدمات SGHA",
         sghaServices: "خدمات SGHA",
         sghaServicesList: "لیست خدمات SGHA",
-        addNewSghaService:"افزودن خدمات SGHA جدید",
+        addNewSghaService: "افزودن خدمات SGHA جدید",
+        countOfService: "تعداد خدمات",
     },
 
     passenger: {

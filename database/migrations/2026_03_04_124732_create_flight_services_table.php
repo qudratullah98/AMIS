@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ApprovelStatus;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,7 +25,9 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->integer('count');
-
+            $table->foreignIdFor(User::class,'created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignIdFor(User::class,'updated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignIdFor(ApprovelStatus::class,'approval_status')->default(2)->nullable()->constrained('approvel_statuses')->nullOnDelete();
             $table->timestamps();
         });
     }

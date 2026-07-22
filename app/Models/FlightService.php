@@ -10,6 +10,9 @@ class FlightService extends Model
         'flight_id',
         'sgha_service_id',
         'count',
+        'approval_status_id',
+        'created_by',
+        'updated_by',
     ];
 
 
