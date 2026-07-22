@@ -37,14 +37,17 @@ class FlyteServiceController extends Controller
     public function store(StoreFlightServiceRequest $request)
     {
 
-        $service = FlightService::create($request->validated());
+        $service = FlightService::create(['created_by'=>auth()->user()->id,...$request->validated()]);
         return response()->json([
             'message' => 'Flight Service created successfully',
             'data' => $service->load(
-                [
-                    'flight:id,flight_number',
-                    'sghaService:id,name_ps',
-                ]
+               [
+            'flight:id,flight_number,airline_id,aircraft_type_id,airport_id',
+            'sghaService:id,name_ps',
+            'flight.airport:id,name_ps',
+            'flight.airline:id,name_ps',
+            'flight.aircraftType:id,name',
+        ]
             )
         ]);
     }
