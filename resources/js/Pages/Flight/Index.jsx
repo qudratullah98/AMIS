@@ -32,7 +32,7 @@ function Index({ flights }) {
                 stopPropagation={false}
                 footer={false}
             >
-                <Create></Create>
+                <Create onSubmitSuccess={(newFlight) => {console.log(newFlight) ;setCreateModal(false); setflightData((prevData) => [newFlight, ...prevData])}}></Create>
             </CustomModal>
 
             <SubHeader links={[{ name: t("flight.flights") }]} />
@@ -63,17 +63,17 @@ function Index({ flights }) {
 
                                     {/* AIRPORT */}
                                     <td className="p-2 text-center">
-                                        {flight.airport?.name_en}
+                                        {flight.airport?.name_ps}
                                     </td>
 
                                     {/* AIRLINE */}
                                     <td className="p-2 text-center">
-                                        {flight.airline?.name_en}
+                                        {flight.airline?.name_ps}
                                     </td>
 
                                     {/* AIRCRAFT TYPE */}
                                     <td className="p-2 text-center">
-                                        {flight.aircraftType?.name}
+                                        {flight.aircraft_type?.name}
                                     </td>
 
                                     {/* REGISTRATION */}

@@ -13,9 +13,9 @@ class FlightController extends Controller
     {
         $perPage = request()->input('perPage', 10);
         $flights = Flight::with([
-            'airport',
-            'airline',
-            'aircraftType'
+            'airport:id,name_ps',
+            'airline:id,name_ps',
+            'aircraftType:id,name'
         ])
             ->latest()
             ->paginate($perPage);
@@ -28,7 +28,11 @@ class FlightController extends Controller
         $flight = Flight::create($request->validated());
 
         return response()->json([
-            'flight' => $flight,
+            'flight' => $flight->load([
+            'airport',
+            'airline',
+            'aircraftType'
+        ]),
             'message' => 'Flight created successfully'
         ]);
     }

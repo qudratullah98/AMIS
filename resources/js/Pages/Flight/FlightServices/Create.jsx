@@ -146,7 +146,7 @@ export default function CreateFlightService({ onSubmitSuccess }) {
                 {/* Flight */}
 
                 <div>
-                    <InputLabel>Flight</InputLabel>
+                    <InputLabel>{t("flight.flight")}</InputLabel>
 
                     <AsyncSelect
                         apiEndpoint={route("flights.json")}
@@ -154,7 +154,7 @@ export default function CreateFlightService({ onSubmitSuccess }) {
                         formatOption={(flight) =>
                             `${flight.flight_number} - ${flight.aircraft_registration}`
                         }
-                        placeholder={t("platePlaceholder")}
+                        placeholder={t("flight.searchFlightNumber")}
                     />
 
                     <InputError message={errors.flight_id} />

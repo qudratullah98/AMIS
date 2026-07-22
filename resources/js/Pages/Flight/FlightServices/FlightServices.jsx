@@ -12,26 +12,26 @@ function FlightServices({ flightServices }) {
     const [isCreateModalOpen, setCreateModal] = useState(false);
 
     const columns = [
-        { label: "NO" },
-        { label: "Flight" },
-        { label: "SGHA Service" },
-        { label: "Count" },
-        { label: "Approval Status" },
+        { label: t("common.NO") },
+        { label: t("flight.flight_number") },
+        { label: t("flight.airport") },
+        { label: t("flight.airline") },
+        { label: t("airport.aircraftTypes") },
     ];
 
     return (
-        <AuthenticatedLayout header={<SubHeader title="Flight Services" />}>
+        <AuthenticatedLayout header={<SubHeader title= {t("flight.flightServices")}/>}>
             <SubHeader
                 links={[
                     {
-                        name: "Flight Services",
+                        name: t("flight.flightServices"), 
                     },
                 ]}
             />
             <CustomModal
                 show={isCreateModalOpen}
                 handleClose={() => setCreateModal(false)}
-                title={t("flight.createFlight")}
+                title={t("flight.newFlightServices")}
                 size="xxlarge"
                 stopPropagation={false}
                 footer={false}
@@ -57,9 +57,10 @@ function FlightServices({ flightServices }) {
                         <DataTable
                             columns={columns}
                             links={flightServices.links}
-                            header="Flight Services"
+                            header={t("flight.flightServices")}
                             enableButton={true}
                             onButtonClick={() => setCreateModal(true)}
+                            buttonLabel={t("flight.newFlightServices")}
                         >
                             {services.map((service, index) => (
                                 <tr
