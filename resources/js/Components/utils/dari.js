@@ -544,7 +544,7 @@ const dari = {
         },
     },
     education: {
-        educationPart: "بخش تحصیلات و آموزش",
+        educationPart: " تحصیلات و آموزش",
         educationLevels: "سطوح تحصیلی",
         employeeEducation: "تحصیلات کارمند",
         positionRequiredEducation: "تحصیلات مورد نیاز بست",

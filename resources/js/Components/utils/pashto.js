@@ -562,7 +562,7 @@ const pashto = {
         },
     },
     education: {
-        educationPart: "زده کړه او روزنه",
+        educationPart: "زده کړی او روزنه",
         educationLevels: "د زده کړې کچې",
         employeeEducation: "د کارکوونکي زده کړې",
         positionRequiredEducation: "د دندې اړینې زده کړې",
