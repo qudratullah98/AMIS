@@ -543,6 +543,22 @@ const dari = {
             underReview: "در حال بررسی"
         },
     },
+    education: {
+        educationPart: "بخش تحصیلات و آموزش",
+        educationLevels: "سطوح تحصیلی",
+        employeeEducation: "تحصیلات کارمند",
+        positionRequiredEducation: "تحصیلات مورد نیاز بست",
+
+        certificates: "سندها",
+
+        courseTypes: "انواع کورس‌ها",
+        courses: "کورس‌ها",
+
+        trainers: "آموزش‌دهندگان",
+
+        trainingPlans: "پلان‌های آموزشی",
+        trainings: "آموزش‌ها"
+    }
 };
 
 export default dari;

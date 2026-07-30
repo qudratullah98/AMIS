@@ -32,5 +32,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePermissionSeeder::class);
         $this->call(BloodGroupSeeder::class);
         $this->call(PositionTypeSeeder::class);
-    }
+        $this->call(EducationLevelSeeder::class);
+        $this->call(CourseTypeSeeder::class);
+        $this->call(CourseSeeder::class);
+        $this->call(TrainerSeeder::class);
+        $this->call(CertificateSeeder::class);    
+        }
 }

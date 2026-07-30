@@ -11,7 +11,7 @@ function Index({ sghaServiceUnit }) {
 
     const columns = [
         { label: t("common.NO") },
-        { label: t("common.namePashto") }, 
+        { label: t("common.name") }, 
     ];
 
     return (

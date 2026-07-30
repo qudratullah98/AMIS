@@ -340,7 +340,7 @@ const pashto = {
         aircraft_type: "د الوتکې ډول",
         aircraft_registration: "د الوتکې ثبت نمبر",
         flight_number: "د پرواز شمېره",
-        charge_note: "د مصرف یادښت",
+        charge_note: "چارچ نوت",
         arrival_date: "د رسېدو نېټه",
         departure_date: "د وتلو نېټه",
         approximate_time_arrival: "د رسېدو اټکلي وخت",
@@ -561,6 +561,22 @@ const pashto = {
             underReview: "تر بیاکتنې لاندې"
         },
     },
+    education: {
+        educationPart: "زده کړه او روزنه",
+        educationLevels: "د زده کړې کچې",
+        employeeEducation: "د کارکوونکي زده کړې",
+        positionRequiredEducation: "د دندې اړینې زده کړې",
+
+        certificates: "سندونه",
+
+        courseTypes: "د کورس ډولونه",
+        courses: "کورسونه",
+
+        trainers: "روزونکي",
+
+        trainingPlans: "د روزنې پلانونه",
+        trainings: "روزنې"
+    }
 };
 
 export default pashto;
