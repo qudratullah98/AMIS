@@ -100,6 +100,13 @@ Route::prefix('employees')
 
         Route::get('/',  [EmployeeController::class,    'index'])->name('index');
         Route::post('/store', [EmployeeController::class,    'store'])->name('store');
+        Route::get('/{employee}/educations', [EmployeeController::class, 'educations'])->name('educations');
+        Route::get('/{employee}/employee-certificates/json',[EmployeeController::class,'certificatesJson'])->name('certificates.json');
+        Route::get('/{employee}/employee-trainings/json',[EmployeeController::class,'trainingsJson'])->name('trainings.json');
+        Route::get('/{employee}/employee-educations/json',[EmployeeController::class,'educationsJson'])->name('educations.json');
+        Route::post('/{employee}/employee-educations/store',[EmployeeController::class,'storeEducation'])->name('educations.store');
+        Route::get('/{employee}/employee-certificates/json',[EmployeeController::class,'certificatesJson'])->name('certificates.json');
+        Route::post('/employees/{employee}/certificates', [EmployeeController::class, 'storeCertificate'])->name('certificates.store');
  
     });
 

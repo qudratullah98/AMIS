@@ -2,54 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEducationLevelRequest;
 use App\Models\EducationLevel;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EducationLevelController extends Controller
 {
 
     public function index()
     {
-        return EducationLevel::all();
-    }
-
-
-    public function store(Request $request)
-    {
-
-        $data = $request->validate([
-            'name'=>'required|string',
-            'description'=>'nullable|string'
+        $educationLevels = EducationLevel::all();
+        return Inertia::render('Educations/EducationLevel/Index', [
+            'educationLevels' => $educationLevels
         ]);
-
-
-        return EducationLevel::create($data);
-
     }
 
+ 
 
-    public function show(EducationLevel $educationLevel)
+public function store(StoreEducationLevelRequest $request)
+{
+
+    $educationLevel = EducationLevel::create(
+        $request->validated()
+    );
+
+
+    return response()->json([
+
+        'success'=>true,
+
+        'message'=>'education.education_level_created',
+
+        'data'=>$educationLevel
+
+    ]);
+
+}
+
+
+    
+    public function json()
     {
-        return $educationLevel;
-    }
-
-
-    public function update(Request $request, EducationLevel $educationLevel)
-    {
-
-        $educationLevel->update($request->all());
-
-        return $educationLevel;
-
-    }
-
-
-    public function destroy(EducationLevel $educationLevel)
-    {
-        $educationLevel->delete();
-
-        return response()->json([
-            'message'=>'Deleted successfully'
-        ]);
+        $educationLevels = EducationLevel::all();
+        return response()->json($educationLevels);
     }
 }

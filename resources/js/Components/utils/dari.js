@@ -557,7 +557,8 @@ const dari = {
         trainers: "آموزش‌دهندگان",
 
         trainingPlans: "پلان‌های آموزشی",
-        trainings: "آموزش‌ها"
+        trainings: "آموزش‌ها",
+        addNewEducationLevel: "سطح تحصیلی جدید را اضافه کنید",
     }
 };
 

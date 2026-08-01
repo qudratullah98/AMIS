@@ -131,7 +131,7 @@ const Sidebar = () => {
         },
         // Education Part
      {
-    href: "#",
+    href: route("education.dashboard"),
     label: t("education.educationPart"),
     icon: <GraduationCap className="w-5 h-5" />,
     keyword: "education",

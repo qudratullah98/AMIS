@@ -18,14 +18,6 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
 
-            'employee_no'=>[
-                'required',
-                'string',
-                'max:100',
-                'unique:employees,employee_no'
-            ],
-
-
             'first_name'=>[
                 'required',
                 'string',

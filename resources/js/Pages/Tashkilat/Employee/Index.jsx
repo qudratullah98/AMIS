@@ -7,6 +7,8 @@ import SubHeader from "@/Components/SubHeader";
 import CustomModal from "@/Components/CustomModal";
 
 import CreateEmployee from "./Create";
+import ThreeDotMenu from "@/Components/ThreeDotMenu";
+import { Book, Edit2, Trash2 } from "lucide-react";
 
 function Index({ employees }) {
     const { t } = useTranslation();
@@ -63,12 +65,14 @@ function Index({ employees }) {
             >
                 {data.map((employee) => (
                     <tr key={employee.id}>
-                      
 
                         <td className="p-2 text-center">
-                            {employee.employee_no}
+                            {employee.id}
                         </td>
 
+                        <td className="p-2 text-center">
+                            {employee.first_name}{" "}
+                        </td>
                         <td className="p-2 text-center">
                             {employee.first_name}{" "}
                             {employee.last_name}
@@ -78,8 +82,53 @@ function Index({ employees }) {
                             {employee.phone ?? "-"}
                         </td>
 
-                        <td className="p-2 text-center">
-                            {employee.status}
+                        <td className="text-center">
+                            <ThreeDotMenu>
+                                <div className="py-0">
+                                    <button
+                                        className="
+                                                    flex 
+                                                    items-center 
+                                                    w-full 
+                                                    text-left 
+                                                    px-4 
+                                                    py-2 
+                                                    text-sm 
+                                                    text-gray-700 
+                                                    hover:bg-gray-100
+                                                    "
+                                        onClick={() =>
+                                            handleEdit(department)
+                                        }
+                                    >
+                                        <Edit2 className="ml-2 text-xl" />
+
+                                        {t("common.editInfo")}
+                                    </button>
+                                    <a href={route('employees.educations', employee.id)} className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <Book className="ml-2 text-xl"></Book>
+                                        {t("education.educationPart")}
+                                    </a>
+
+                                    {/* <button
+                                        className="
+                                                    flex 
+                                                    items-center 
+                                                    w-full 
+                                                    text-left 
+                                                    px-4 
+                                                    py-2 
+                                                    text-sm 
+                                                    text-red-600 
+                                                    hover:bg-gray-100
+                                                    "
+                                    >
+                                        <Trash2 className="ml-2 text-xl" />
+
+                                        {t("common.delete")}
+                                    </button> */}
+                                </div>
+                            </ThreeDotMenu>
                         </td>
                     </tr>
                 ))}

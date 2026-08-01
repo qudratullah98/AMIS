@@ -15,9 +15,6 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
 
-            // Employee Number
-            $table->string('employee_no')->unique();
-
             // Personal Information
             $table->string('first_name');
             $table->string('last_name');

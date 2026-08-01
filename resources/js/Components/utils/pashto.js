@@ -575,7 +575,9 @@ const pashto = {
         trainers: "روزونکي",
 
         trainingPlans: "د روزنې پلانونه",
-        trainings: "روزنې"
+        trainings: "روزنې",
+        addNewEducationLevel: "د زده کړې نوې کچه اضافه کړئ",
+        educationLevel: "د زده کړې کچه",
     }
 };
 

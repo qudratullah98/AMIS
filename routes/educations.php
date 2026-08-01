@@ -5,12 +5,17 @@ use App\Http\Controllers\PositionRequiredEducationController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CourseTypeController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EducationDashboardController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\TrainingPlanController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('education')->name('education.')->group(function () {
+
+
+ Route::get('/', [EducationDashboardController::class, 'index'])
+            ->name('dashboard');
 
     // Education Levels
     Route::resource('levels', EducationLevelController::class)
@@ -23,7 +28,7 @@ Route::prefix('education')->name('education.')->group(function () {
             'update' => 'levels.update',
             'destroy' => 'levels.destroy',
         ]);
-
+ 
 
     // Employee Education
     Route::resource('employee', EmployeeEducationController::class)
@@ -49,6 +54,16 @@ Route::prefix('education')->name('education.')->group(function () {
             'update' => 'position.required.update',
             'destroy' => 'position.required.destroy',
         ]);
+
+
+
+    Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
+    ->name('education.levels.json');
+      Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
+    ->name('levels.json');
+    Route::get('/certificates/json', [CertificateController::class, 'json'])
+    ->name('certificates.json');
+
 
 });
 

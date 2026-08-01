@@ -13,7 +13,6 @@ class Employee extends Model
 
 protected $fillable = [
 
-    'employee_no',
 
     'first_name',
     'last_name',
@@ -69,6 +68,12 @@ protected $fillable = [
     {
         return $this->hasMany(
             EmployeeAssignment::class
+        );
+    }
+    public function educations()
+    {
+        return $this->hasMany(
+            EmployeeEducation::class
         );
     }
 
