@@ -6,11 +6,13 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import DataTable from "@/Components/Datatable";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
 import DocumentPreviewCard from "@/Components/DocumentPreviewCard";
+import { useTranslation } from "react-i18next";
 
 export default function EducationTab({ employee, onOpenEducationModel }) {
 
     const [educations, setEducations] = useState([]);
     const [paginationLinks, setPaginationLinks] = useState([]);
+    const { t } = useTranslation();
 
 
     useEffect(() => {
