@@ -9,14 +9,14 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import CustomSelect from "@/Components/CustomSelect";
-
+import FileUpload from "@/Components/FileUpload";
 
 export default function CreateEducation({ employee, onClose }) {
 
     const { t } = useTranslation();
 
     const [educationLevels, setEducationLevels] = useState([]);
-    
+
 
 
     useEffect(() => {
@@ -43,6 +43,7 @@ export default function CreateEducation({ employee, onClose }) {
             institution_name: "",
             graduation_year: "",
             gpa: "",
+            document_file: null,
         },
 
 
@@ -68,26 +69,69 @@ export default function CreateEducation({ employee, onClose }) {
                 .nullable()
                 .min(0, "GPA must be greater than 0")
                 .max(4, "GPA must be less than 4"),
+            document_file: Yup.mixed()
+                .test(
+                    "fileSize",
+                    t("validation.fileSize"),
+                    (value) => !value || value.size <= 5 * 1024 * 1024
+                ),
 
         }),
 
 
         onSubmit: (values) => {
+            console.log("Form values:", values);
+
+            const formData = new FormData();
+
+            formData.append("employee_id", values.employee_id);
+            formData.append(
+                "education_level_id",
+                values.education_level_id
+            );
+            formData.append(
+                "field_of_study",
+                values.field_of_study
+            );
+            formData.append(
+                "institution_name",
+                values.institution_name
+            );
+            formData.append(
+                "graduation_year",
+                values.graduation_year
+            );
+            formData.append(
+                "gpa",
+                values.gpa
+            );
+
+
+            if (values.document_file) {
+                formData.append(
+                    "document_file",
+                    values.document_file
+                );
+            }
+
 
             axios.post(
-                route("employees.educations.store", { employee: employee.id }),
-                values
+                route("employees.educations.store", {
+                    employee: employee.id
+                }),
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
             )
-            .then(() => {
-
-                onClose();
-
-            })
-            .catch((error) => {
-
-                console.log(error);
-
-            });
+                .then(() => {
+                    onClose();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
 
         },
 
@@ -97,7 +141,7 @@ export default function CreateEducation({ employee, onClose }) {
 
     return (
 
-        <form 
+        <form
             onSubmit={formik.handleSubmit}
             className="space-y-5"
         >
@@ -106,8 +150,8 @@ export default function CreateEducation({ employee, onClose }) {
             {/* Education Level */}
             <div>
 
-                <InputLabel 
-                    value={t("education.educationLevel")} 
+                <InputLabel
+                    value={t("education.educationLevel")}
                 />
 
 
@@ -116,14 +160,14 @@ export default function CreateEducation({ employee, onClose }) {
                     value={formik.values.education_level_id}
 
                     options={
-                        educationLevels.map((item)=>({
-                            value:item.id,
-                            label:item.name
+                        educationLevels.map((item) => ({
+                            value: item.id,
+                            label: item.name
                         }))
                     }
 
 
-                    onChange={(value)=>{
+                    onChange={(value) => {
 
                         formik.setFieldValue(
                             "education_level_id",
@@ -135,7 +179,7 @@ export default function CreateEducation({ employee, onClose }) {
                 />
 
 
-                <InputError 
+                <InputError
                     message={
                         formik.touched.education_level_id &&
                         formik.errors.education_level_id
@@ -150,8 +194,8 @@ export default function CreateEducation({ employee, onClose }) {
             {/* Field Of Study */}
             <div>
 
-                <InputLabel 
-                    value={t("education.fieldOfStudy")} 
+                <InputLabel
+                    value={t("education.feildofStudy")}
                 />
 
 
@@ -185,8 +229,8 @@ export default function CreateEducation({ employee, onClose }) {
             {/* Institution Name */}
             <div>
 
-                <InputLabel 
-                    value={t("education.institutionName")} 
+                <InputLabel
+                    value={t("education.university")}
                 />
 
 
@@ -220,8 +264,8 @@ export default function CreateEducation({ employee, onClose }) {
             {/* Graduation Year */}
             <div>
 
-                <InputLabel 
-                    value={t("education.graduationYear")} 
+                <InputLabel
+                    value={t("education.graduationYear")}
                 />
 
 
@@ -240,6 +284,26 @@ export default function CreateEducation({ employee, onClose }) {
                     onBlur={formik.handleBlur}
 
                 />
+                {/* Document */}
+                <div>
+                    <FileUpload
+                        name="document_file"
+                        label={t("education.uploadDocument")}
+                        onFileSelect={(file) => {
+                            formik.setFieldTouched("document_file", true);
+                            console.log("Selected file:", file);
+                            formik.setFieldValue("document_file", file);
+                        }}
+                        size="5mb"
+                    />
+
+                    <InputError
+                        message={
+                            formik.touched.document_file &&
+                            formik.errors.document_file
+                        }
+                    />
+                </div>
 
 
                 <InputError
@@ -312,7 +376,7 @@ export default function CreateEducation({ employee, onClose }) {
 
 
 
-                <PrimaryButton 
+                <PrimaryButton
                     type="submit"
                     onClick={formik.handleSubmit}
                 >

@@ -63,7 +63,8 @@ Route::prefix('education')->name('education.')->group(function () {
     ->name('levels.json');
     Route::get('/certificates/json', [CertificateController::class, 'json'])
     ->name('certificates.json');
-
+    Route::get('/certificates/json', [CertificateController::class, 'json'])
+    ->name('certificates.json');
 
 });
 

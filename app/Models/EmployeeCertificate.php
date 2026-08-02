@@ -13,8 +13,8 @@ protected $fillable=[
 
 'employee_id',
 'certificate_id',
-'obtained_date',
-'certificate_number'
+'obtained_date', 
+'document_file', 
 
 ];
 

@@ -14,7 +14,8 @@ class EmployeeEducation extends Model
         'field_of_study',
         'institution_name',
         'graduation_year',
-        'gpa'
+        'gpa',
+        'document_file',
 
     ];
 

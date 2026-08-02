@@ -578,6 +578,13 @@ const pashto = {
         trainings: "روزنې",
         addNewEducationLevel: "د زده کړې نوې کچه اضافه کړئ",
         educationLevel: "د زده کړې کچه",
+        educations: "زده کړې",
+        feildofStudy: "څانګه ",
+        university: "پوهنتون",
+        graduationYear: "د فراغت کال",
+        certificate: "سند",
+        obtainedDate: "د ترلاسه کولو نېټه",
+        certificateNumber: "د سند شمېره",
     }
 };
 

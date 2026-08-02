@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeCertificateRequest;
 use App\Http\Requests\EmployeeEducationRequest;
+use App\Http\Requests\StoreEmployeeCertificateRequest;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Employee;
+use App\Models\EmployeeCertificate;
+use App\Models\EmployeeEducation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -75,18 +78,40 @@ class EmployeeController extends Controller
     {
         return Inertia::render('Tashkilat/Employee/EmployeeEducations/EmployeeEducation', ['employee' => $employee]);
     }
-    public function storeEducation(EmployeeEducationRequest $request, Employee $employee)
-    {
-        $education = $employee->educations()->create($request->validated());
-        return response()->json([
-            'success' => true,
-            'message' => 'Education added successfully',
-            'data' => $education
-        ]);
+public function storeEducation(EmployeeEducationRequest $request, Employee $employee)
+{
+    $validated = $request->validated();
+
+
+    if($request->hasFile('document_file')){
+
+        $validated['document_file'] =
+            $request->file('document_file')
+            ->store('educations','public');
+
     }
-    public function storeCertificate(EmployeeCertificateRequest $request, Employee $employee)
+
+
+    $education = $employee->educations()->create($validated);
+
+
+    return response()->json([
+        'success'=>true,
+        'data'=>$education
+    ]);
+}
+    public function storeCertificate(StoreEmployeeCertificateRequest $request, Employee $employee)
     {
-        $certificate = $employee->certificates()->create($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('file')) {
+            $validated['document_file'] = $request
+                ->file('file')
+                ->store('certificates', 'public');
+        }
+
+        $certificate = $employee->certificates()->create($validated);
+
         return response()->json([
             'success' => true,
             'message' => 'Certificate added successfully',
@@ -108,16 +133,22 @@ class EmployeeController extends Controller
         );
     }
 
-    public function certificatesJson(Employee $employee)
+    public function certificatesJson($employee)
     {
-        return response()->json($employee->certificates);
+        $certificates = EmployeeCertificate::with('certificate')
+            ->where('employee_id', $employee)
+            ->get();
+        return response()->json($certificates);
     }
     public function trainingsJson(Employee $employee)
     {
         return response()->json($employee->trainings);
     }
-    public function educationsJson(Employee $employee)
+    public function educationsJson( $employee)
     {
-        return response()->json($employee->educations);
+        $educations = EmployeeEducation::with('educationLevel')
+            ->where('employee_id', $employee)
+            ->get();
+        return response()->json($educations);
     }
 }

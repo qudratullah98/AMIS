@@ -28,7 +28,7 @@ export default function EmployeeEducation({ employee }) {
   const tabs = [
     {
       key: "education",
-      label: t("education.education"),
+      label: t("education.educations"),
       icon: GraduationCap,
       color: "blue",
     },
@@ -105,11 +105,13 @@ export default function EmployeeEducation({ employee }) {
         show={showEducationCreateModal}
         handleClose={() => setShowEducationCreateModal(false)}
         stopPropagation={false}
+        footer={false}
       >
         <CreateEducation
           employee={employee}
           educationLevels={[]} // Pass the education levels if available
           onClose={() => setShowEducationCreateModal(false)}
+          
         />
       </CustomModal>
 
@@ -117,6 +119,7 @@ export default function EmployeeEducation({ employee }) {
         show={showCertificateCreateModal}
         handleClose={() => setShowCertificateCreateModal(false)}
         stopPropagation={false}
+        footer={false}
       >
         <CreateCertificate
           employee={employee}

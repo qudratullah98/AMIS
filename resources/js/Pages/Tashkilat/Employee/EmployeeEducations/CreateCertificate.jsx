@@ -9,6 +9,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import CustomSelect from "@/Components/CustomSelect";
+import FileUpload from "@/Components/FileUpload";
 
 
 export default function CreateCertificate({ employee, onClose }) {
@@ -19,14 +20,9 @@ export default function CreateCertificate({ employee, onClose }) {
 
 
     useEffect(() => {
-
-        axios
-            .get(route("employees.certificates.json", { employee: employee.id }))
-            .then((response) => {
-
-                setCertificates([...response.data]);
-
-            })
+        axios.get(route("education.certificates.json", { employee: employee.id })).then((response) => {
+            setCertificates([...response.data]);
+        })
             .catch((error) => {
 
                 console.log(error);
@@ -44,7 +40,7 @@ export default function CreateCertificate({ employee, onClose }) {
             employee_id: employee?.id || "",
             certificate_id: "",
             obtained_date: "",
-            certificate_number: "",
+            file: null,
 
         },
 
@@ -53,36 +49,47 @@ export default function CreateCertificate({ employee, onClose }) {
 
             certificate_id: Yup.string()
                 .required(t("validation.required")),
-
-
             obtained_date: Yup.string()
                 .required(t("validation.required")),
+            employee_id: Yup.string()
+                .required(t("validation.required")),
 
-
-            certificate_number: Yup.string()
-                .max(100),
+            file: Yup.mixed()
+                .required(t("validation.required"))
+                .test("fileSize", t("validation.fileSize"), (value) => {
+                    return value && value.size <= 5 * 1024 * 1024; // 5MB
+                }),
 
         }),
 
 
 
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
+            const formData = new FormData();
 
-            axios.post(
-                route("employees.certificates.store", employee.id),
-                values
-            )
-                .then(() => {
+            formData.append("employee_id", values.employee_id);
+            formData.append("certificate_id", values.certificate_id);
+            formData.append("obtained_date", values.obtained_date);
 
-                    onClose();
+            if (values.file) {
+                formData.append("file", values.file);
+            }
 
-                })
-                .catch((error) => {
+            try {
+                await axios.post(
+                    route("employees.certificates.store", employee.id),
+                    formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                    }
+                );
 
-                    console.log(error);
-
-                });
-
+                onClose();
+            } catch (error) {
+                console.log(error);
+            }
         },
 
     });
@@ -101,7 +108,7 @@ export default function CreateCertificate({ employee, onClose }) {
             <div>
 
                 <InputLabel
-                    value={t("certificate.certificate")}
+                    value={t("education.certificate")}
                 />
 
 
@@ -147,7 +154,7 @@ export default function CreateCertificate({ employee, onClose }) {
             <div>
 
                 <InputLabel
-                    value={t("certificate.obtainedDate")}
+                    value={t("education.obtainedDate")}
                 />
 
 
@@ -177,41 +184,28 @@ export default function CreateCertificate({ employee, onClose }) {
 
             </div>
 
-
-
-
-
-            {/* Certificate Number */}
+            {/* File uploading */}
             <div>
-
-                <InputLabel
-                    value={t("certificate.certificateNumber")}
+                <FileUpload
+                    name="file"
+                    label={t("education.uploadDocument")}
+                    onFileSelect={(file) => {
+                        formik.setFieldTouched("file", true);
+                        console.log("Selected file:", file);
+                        formik.setFieldValue("file", file);
+                    }}
+                    size={"5mb"}
                 />
-
-
-                <TextInput
-
-                    name="certificate_number"
-
-                    className="mt-1 block w-full"
-
-                    value={formik.values.certificate_number}
-
-                    onChange={formik.handleChange}
-
-                    onBlur={formik.handleBlur}
-
-                />
-
-
                 <InputError
                     message={
-                        formik.touched.certificate_number &&
-                        formik.errors.certificate_number
+                        formik.touched.file &&
+                        formik.errors.file
                     }
                 />
-
             </div>
+
+
+
 
 
 

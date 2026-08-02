@@ -4,13 +4,21 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmployeeCertificateRequest extends FormRequest
+class StoreEmployeeCertificateRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
@@ -30,11 +38,7 @@ class EmployeeCertificateRequest extends FormRequest
                 'date',
             ],
 
-            'certificate_number' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
+            'file' => 'required|file|max:5120', // 5120 KB = 5 MB
 
         ];
     }
@@ -52,7 +56,9 @@ class EmployeeCertificateRequest extends FormRequest
             'obtained_date.required' => 'obtained_date_required',
             'obtained_date.date' => 'obtained_date_invalid',
 
-            'certificate_number.max' => 'certificate_number_max',
+            'file.required' => 'file_required',
+            'file.file' => 'file_invalid',
+            'file.max' => 'file_max',
 
         ];
     }

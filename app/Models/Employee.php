@@ -76,6 +76,12 @@ protected $fillable = [
             EmployeeEducation::class
         );
     }
+    public function certificates()
+    {
+        return $this->hasMany(
+            EmployeeCertificate::class
+        );
+    }
 
 
 
