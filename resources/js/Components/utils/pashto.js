@@ -87,6 +87,7 @@ const pashto = {
         remove: "لرې کړئ",
         unit: "واحد",
         reset: "پاکول",
+        documents: "اسناد",
     },
 
     input: {
@@ -584,7 +585,9 @@ const pashto = {
         graduationYear: "د فراغت کال",
         certificate: "سند",
         obtainedDate: "د ترلاسه کولو نېټه",
+        expiryDate: "د پای نېټه",
         certificateNumber: "د سند شمېره",
+        addCertificate: "سند اضافه کړئ",
     }
 };
 

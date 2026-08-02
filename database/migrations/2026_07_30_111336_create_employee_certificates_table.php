@@ -27,7 +27,7 @@ return new class extends Migration
 
 
             $table->date('obtained_date')->nullable();
-
+            $table->date('expiry_date')->nullable();
 
           
              $table->string('document_file')->nullable();

@@ -36,7 +36,7 @@ export default function EducationTab({ employee, onOpenEducationModel }) {
         { label: "Institution" },
         { label: "Year" },
         { label: "GPA" },
-        { label: "Document" },
+        { label: t("common.documents") },
         { label: "Actions" },
     ];
 

@@ -40,6 +40,7 @@ export default function CreateCertificate({ employee, onClose }) {
             employee_id: employee?.id || "",
             certificate_id: "",
             obtained_date: "",
+            expiry_date: "",
             file: null,
 
         },
@@ -50,6 +51,8 @@ export default function CreateCertificate({ employee, onClose }) {
             certificate_id: Yup.string()
                 .required(t("validation.required")),
             obtained_date: Yup.string()
+                .required(t("validation.required")),
+            expiry_date: Yup.string()
                 .required(t("validation.required")),
             employee_id: Yup.string()
                 .required(t("validation.required")),
@@ -70,6 +73,7 @@ export default function CreateCertificate({ employee, onClose }) {
             formData.append("employee_id", values.employee_id);
             formData.append("certificate_id", values.certificate_id);
             formData.append("obtained_date", values.obtained_date);
+            formData.append("expiry_date", values.expiry_date);
 
             if (values.file) {
                 formData.append("file", values.file);
@@ -179,6 +183,39 @@ export default function CreateCertificate({ employee, onClose }) {
                     message={
                         formik.touched.obtained_date &&
                         formik.errors.obtained_date
+                    }
+                />
+
+            </div>
+            {/* expiry date */}
+             <div>
+
+                <InputLabel
+                    value={t("education.expiryDate")}
+                />
+
+
+                <TextInput
+
+                    type="date"
+
+                    name="expiry_date"
+
+                    className="mt-1 block w-full"
+
+                    value={formik.values.expiry_date}
+
+                    onChange={formik.handleChange}
+
+                    onBlur={formik.handleBlur}
+
+                />
+
+
+                <InputError
+                    message={
+                        formik.touched.expiry_date &&
+                        formik.errors.expiry_date
                     }
                 />
 

@@ -37,6 +37,10 @@ class StoreEmployeeCertificateRequest extends FormRequest
                 'required',
                 'date',
             ],
+            'expiry_date' => [
+                'required',
+                'date',
+            ],
 
             'file' => 'required|file|max:5120', // 5120 KB = 5 MB
 
@@ -55,6 +59,9 @@ class StoreEmployeeCertificateRequest extends FormRequest
 
             'obtained_date.required' => 'obtained_date_required',
             'obtained_date.date' => 'obtained_date_invalid',
+
+            'expiry_date.required' => 'expiry_date_required',
+            'expiry_date.date' => 'expiry_date_invalid',
 
             'file.required' => 'file_required',
             'file.file' => 'file_invalid',

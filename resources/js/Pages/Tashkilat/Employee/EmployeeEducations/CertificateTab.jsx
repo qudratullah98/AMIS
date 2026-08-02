@@ -35,7 +35,8 @@ export default function CertificateTab({ employee, onOpenCertificateModel }) {
         { label: t("common.no") },
         { label: t("education.certificate") },
         { label: t("education.obtainedDate") },
-        { label: t("education.document") },
+        { label: t("education.expiryDate") },
+        { label: t("common.documents") },
         { label: t("common.actions") },
     ];
 
@@ -90,6 +91,10 @@ export default function CertificateTab({ employee, onOpenCertificateModel }) {
                             {/* Obtained Date */}
                             <td className="p-2 text-center">
                                 {certificate.obtained_date}
+                            </td>
+                             {/* Obtained Date */}
+                            <td className="p-2 text-center">
+                                {certificate.expiry_date}
                             </td>
 
                             {/* Document */}

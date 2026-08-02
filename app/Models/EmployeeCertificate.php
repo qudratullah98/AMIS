@@ -14,6 +14,7 @@ protected $fillable=[
 'employee_id',
 'certificate_id',
 'obtained_date', 
+'expiry_date',
 'document_file', 
 
 ];

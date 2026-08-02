@@ -81,6 +81,7 @@ const dari = {
         remove: "حذف",
         unit: "واحد",
         reset: "پاک کردن",
+        documents: "اسناد",
     },
 
     input: {
