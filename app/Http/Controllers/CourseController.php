@@ -64,4 +64,11 @@ class CourseController extends Controller
             'message' => 'Course deleted successfully'
         ]);
     }
+
+
+    public function jsonList()
+    {
+        $courses = Course::select('id', 'name')->get();
+        return response()->json($courses);
+    }
 }

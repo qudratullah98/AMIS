@@ -82,6 +82,8 @@ Route::prefix('education')->name('education.')->group(function () {
 
     // json
     Route::get('course-types/list', [CourseTypeController::class, 'jsonList'])->name('course-types.list');
+    Route::get('training-plans.courses', [CourseController::class, 'jsonList'])->name('training-plans.courses');
+    Route::get('training-plans.trainers', [TrainerController::class, 'jsonList'])->name('training-plans.trainers');
 });
 
 

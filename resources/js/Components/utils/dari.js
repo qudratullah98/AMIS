@@ -595,9 +595,10 @@ const dari = {
             courseList: "فهرست کورس‌ها",
             courseName: "نام کورس",
             courseCode: "کود کورس",
-            validityPeriod: "مدت اعتبار (ماه)", 
+            validityPeriod: "مدت اعتبار (ماه)",
         },
         trainers: {
+            trainers: "آموزشدهندگان",
             trainer: "آموزشدهندگان",
             trainerList: "فهرست آموزشدهندگان",
             addNewTrainer: "افزودن آموزشدهندگان جدید",
@@ -605,12 +606,34 @@ const dari = {
             editTrainer: "ویرایش آموزشدهندگان",
         },
         trainingPlans: {
-            trainingPlan: "پلان آموزشی",
-            trainingPlanList: "فهرست پلان‌های آموزشی",
-            addNewTrainingPlan: "افزودن پلان آموزشی جدید",
-            createTrainingPlan: "ایجاد پلان آموزشی",
-            editTrainingPlan: "ویرایش پلان آموزشی",
+            trainingPlans: "پلان‌های آموزشی",
+            createTrainingPlan: "ایجاد پلان آموزشی جدید",
+            editTrainingPlan: "ویرایش پلان آموزشی",
+            id: "شناسه",
+            name: "نام پلان",
+            namePlaceholder: "نام پلان آموزشی را وارد کنید",
+            course: "کورس",
+            selectCourse: "کورس را انتخاب کنید",
+            trainer: "آموزگار",
+            selectTrainer: "آموزگار را انتخاب کنید",
+            startDate: "تاریخ شروع",
+            endDate: "تاریخ پایان",
+            period: "مدت",
+            location: "مکان",
+            locationPlaceholder: "مکان آموزشی را وارد کنید",
+            status: "وضعیت",
+            selectStatus: "وضعیت را انتخاب کنید",
+            description: "توضیحات",
+            descriptionPlaceholder: "توضیحات پلان آموزشی را وارد کنید",
+            days: "روزها",
+            statuses: {
+                planned: "برنامه‌ریزی شده",
+                in_progress: "در جریان",
+                completed: "تکمیل شده",
+                cancelled: "لغو شده"
+            }
         },
+
     }
 };
 

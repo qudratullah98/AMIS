@@ -162,14 +162,14 @@ const Sidebar = () => {
 
                 {
                     href: route("training-plans.index"),
-                    label: t("education.trainingPlans"),
+                    label: t("education.trainingPlans.trainingPlans"),
                     icon: <CalendarCheck className="w-4 h-4" />,
                     keyword: "trainingPlans",
                 },
 
                 {
                     href: route("trainers.index"),
-                    label: t("education.trainers"),
+                    label: t("education.trainers.trainers"),
                     icon: <Users className="w-4 h-4" />,
                     keyword: "trainers",
                 },

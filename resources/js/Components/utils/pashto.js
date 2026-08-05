@@ -110,7 +110,7 @@ const pashto = {
 
     error: {
         general: "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
-
+        required: "دا برخه اړینه ده.",
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
 
         fieldIsNeeded: "دا برخه ډکول اړین دي.",
@@ -156,6 +156,12 @@ const pashto = {
         passwordMixedCase: "پټنوم باید لوی او کوچني حروف ولري.",
         passwordNumbers: "پټنوم باید لږ تر لږه یو عدد ولري.",
         passwordSymbols: "پټنوم باید لږ تر لږه یو ځانګړی نښه ولري.",
+        trainingPlans: {
+           endDateAfterStart: "د پای نېټه باید د پیل نېټې وروسته وي.",
+           futureDate: "د پیل نېټه باید د اوسني وخت وروسته وي.",
+        },
+
+
 
         airline: {
             name_en_required: "د هوايي شرکت انګلیسي نوم اړین دی.",
@@ -533,9 +539,8 @@ const pashto = {
         courseTypes: "د کورس ډولونه",
         courses: "کورسونه",
 
-        trainers: "روزونکي",
+        
 
-        trainingPlans: "د روزنې پلانونه",
         trainings: "روزنې",
         addNewEducationLevel: "د زده کړې نوې کچه اضافه کړئ",
         educationLevel: "د زده کړې کچه",
@@ -572,7 +577,8 @@ const pashto = {
             validity: "د اعتبار موده (په میاشتو کې)",
             description: "د کورس تشریح",
         },
-        trainer: {
+        trainers: {
+            trainers: "روزونکي",
             trainerList: "د روزونکو لیست",
             addNewTrainer: "نوی روزونکی اضافه کړئ",
             addingNewTrainer: "د نوي روزونکي اضافه کول",
@@ -581,14 +587,37 @@ const pashto = {
             trainerEmail: "د روزونکي برېښنالیک",
             trainerPhone: "د روزونکي د اړیکې شمېره",
         },
-        trainingPlan: {
-            trainingPlanList: "د روزنې د پلانونو لیست",
-            addNewTrainingPlan: "د روزنې نوی پلان اضافه کړئ",
-            addingNewTrainingPlan: "د نوي روزنې پلان اضافه کول",
-            trainingPlanInfo: "د روزنې د پلان معلومات",
-            trainingPlanName: "د روزنې د پلان نوم",
-            trainingPlanDescription: "د روزنې د پلان تشریح",
+
+        trainingPlans: {
+            trainingPlans: "د روزنې پلانونه",
+            createTrainingPlan: "د روزنې نوی پلان جوړول",
+            editTrainingPlan: "د روزنې پلان سمول",
+            id: "پېژندنه",
+            name: "د پلان نوم",
+            namePlaceholder: "د روزنې پلان نوم دننه کړئ",
+            course: "کورس",
+            selectCourse: "کورس وټاکئ",
+            trainer: "روزونکی",
+            selectTrainer: "روزونکی وټاکئ",
+            startDate: "پیل نیټه",
+            endDate: "پای نیټه",
+            period: "موده",
+            location: "ځای",
+            locationPlaceholder: "د روزنې ځای دننه کړئ",
+            status: "حالت",
+            selectStatus: "حالت وټاکئ",
+            description: "تشریح",
+            descriptionPlaceholder: "د روزنې پلان تشریح دننه کړئ",
+            days: "ورځې",
+            statuses: {
+                planned: "پلان شوی",
+                in_progress: "په روانه توګه",
+                completed: "ترسره شوی",
+                cancelled: "لغوه شوی"
+            }
         },
+
+
     }
 };
 

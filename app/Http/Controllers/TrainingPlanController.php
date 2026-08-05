@@ -3,63 +3,96 @@
 namespace App\Http\Controllers;
 
 use App\Models\TrainingPlan;
+use App\Models\Course;
+use App\Models\Trainer;
+use App\Http\Requests\TrainingPlanRequest;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TrainingPlanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $trainingPlans = TrainingPlan::with(['course', 'trainer'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Educations/TrainingPlans/Index', [
+            'trainingPlans' => $trainingPlans
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $courses = Course::orderBy('name')->get(['id', 'name', 'code']);
+        $trainers = Trainer::orderBy('name')->get(['id', 'name', 'email']);
+        $statuses = TrainingPlan::getStatuses();
+
+        return Inertia::render('TrainingPlans/Create', [
+            'courses' => $courses,
+            'trainers' => $trainers,
+            'statuses' => $statuses,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(TrainingPlanRequest $request)
     {
-        //
+        $trainingPlan = TrainingPlan::create($request->validated());
+
+        return redirect()
+            ->route('training-plans.index')
+            ->with('success', 'Training plan created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TrainingPlan $trainingPlan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(TrainingPlan $trainingPlan)
     {
-        //
+        $courses = Course::orderBy('name')->get(['id', 'name', 'code']);
+        $trainers = Trainer::orderBy('name')->get(['id', 'name', 'email']);
+        $statuses = TrainingPlan::getStatuses();
+
+        return Inertia::render('TrainingPlans/Edit', [
+            'trainingPlan' => $trainingPlan->load(['course', 'trainer']),
+            'courses' => $courses,
+            'trainers' => $trainers,
+            'statuses' => $statuses,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TrainingPlan $trainingPlan)
+    public function update(TrainingPlanRequest $request, TrainingPlan $trainingPlan)
     {
-        //
+        $trainingPlan->update($request->validated());
+
+        return redirect()
+            ->route('training-plans.index')
+            ->with('success', 'Training plan updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(TrainingPlan $trainingPlan)
     {
-        //
+        $trainingPlan->delete();
+
+        return redirect()
+            ->route('training-plans.index')
+            ->with('success', 'Training plan deleted successfully.');
+    }
+
+    // API endpoints for dropdowns
+    public function getCourses()
+    {
+        return response()->json(
+            Course::orderBy('name')->get(['id', 'name', 'code'])
+        );
+    }
+
+    public function getTrainers()
+    {
+        return response()->json(
+            Trainer::orderBy('name')->get(['id', 'name', 'email'])
+        );
+    }
+
+    public function getStatusesList()
+    {
+        return response()->json(TrainingPlan::getStatuses());
     }
 }
