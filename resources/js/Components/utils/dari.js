@@ -16,6 +16,7 @@ const dari = {
     },
 
     common: {
+        runwayDetails:"جزئیات رنوی",
         dashboard: "داشبورد",
         loading: "لطفاً صبر کنید...",
         name: "نام",
@@ -289,6 +290,8 @@ const dari = {
         airportType: "نوعیت میدان هوایی",
         aircraftTypes: "انواع هواپیما ها",
         aircraftType: "انواع هواپیما",
+        addNewAircraftType:"نوعیت جدید هواپیما را اضافه نمایید",
+        addingNewAircraftType:"اضافه نمودن نوعیت جدید هواپیما",
 
         aircraftCode: "کود هواپیما",
         type: {
@@ -399,10 +402,11 @@ const dari = {
     construction: {
         constructionsList: " لیست ساخت و سازها ",
         constructionsPart: "بخش ساختمانی",
-        airportConstructions: "ساخت‌وساز میدان هوایی",
+        airportConstructions: "ساخت‌وساز/تأسیسات میدان هوایی",
         airportConstructionsList: "لیست ساخت‌وساز میدان هوایی",
         constructions: "ساخت‌وسازها",
         constructionsTypes: "نوعیت های ساخت‌وساز",
+        buildingsAndFacilities: "ساختمان‌ها و تأسیسات",
 
         constructionTypes: "نوعیت های ساخت‌وساز",
         constructionCode: "کود ساختمان",

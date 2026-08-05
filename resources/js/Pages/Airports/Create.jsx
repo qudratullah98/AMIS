@@ -11,7 +11,6 @@ import axios from "axios";
 
 // IconLabel Component
 
-
 export default function CreateAirport({ onSubmitSuccess }) {
     const { t } = useTranslation();
 
@@ -32,12 +31,21 @@ export default function CreateAirport({ onSubmitSuccess }) {
         area: "",
         area_unit_id: "",
         description: "",
+        //runways info
+        construction_type_id: "",
+        width: "",
+        width_unit_id: "",
+        length: "",
+        length_unit_id: "",
+        activity_status_id: "",
     });
 
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [units, setUnits] = useState([]);
     const [statuses, setStatuses] = useState([]);
+    const [constructionType, setConstructionType] = useState([]);
+
     const [smallLoading, setSmallLoading] = useState(false);
     const [pageLoading, setPageLoading] = useState(true);
 
@@ -45,15 +53,18 @@ export default function CreateAirport({ onSubmitSuccess }) {
     useEffect(() => {
         const fetchDropdowns = async () => {
             try {
-                const [provRes, unitsRes, statusRes] = await Promise.all([
-                    axios.get(route("api_provinces")),
-                    axios.get(route("api_units")),
-                    axios.get(route("api_statuses")),
-                ]);
+                const [provRes, unitsRes, statusRes, constructionTypeRes] =
+                    await Promise.all([
+                        axios.get(route("api_provinces")),
+                        axios.get(route("api_units")),
+                        axios.get(route("api_statuses")),
+                        axios.get(route("api_constructionTypes")),
+                    ]);
 
                 setProvinces(provRes.data);
                 setUnits(unitsRes.data);
                 setStatuses(statusRes.data);
+                setConstructionType(constructionTypeRes.data);
             } catch (err) {
                 console.error("Error fetching dropdowns:", err);
             } finally {
@@ -101,13 +112,13 @@ export default function CreateAirport({ onSubmitSuccess }) {
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
             {/* Grid Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white px-6  shadow-none">
                 {/* Name PS */}
                 <div>
                     <IconLabel
                         htmlFor="name_ps"
                         icon="🛫"
-                        text={t("Name (Pashto)")}
+                        text={t("common.namePashto")}
                     />
                     <TextInput
                         id="name_ps"
@@ -122,7 +133,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
                     <IconLabel
                         htmlFor="name_dr"
                         icon="🛫"
-                        text={t("Name (Dari)")}
+                        text={t("common.nameDari")}
                     />
                     <TextInput
                         id="name_dr"
@@ -137,7 +148,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
                     <IconLabel
                         htmlFor="name_en"
                         icon="✈️"
-                        text={t("Name (English)")}
+                        text={t("common.nameEnglish")}
                     />
                     <TextInput
                         id="name_en"
@@ -149,11 +160,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
 
                 {/* IATA */}
                 <div>
-                    <IconLabel
-                        htmlFor="IATA_code"
-                        icon="🏷️"
-                        text="IATA Code"
-                    />
+                    <IconLabel htmlFor="IATA_code" icon="🏷️" text="IATA Code" />
                     <TextInput
                         id="IATA_code"
                         value={data.IATA_code}
@@ -164,11 +171,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
 
                 {/* ICAO */}
                 <div>
-                    <IconLabel
-                        htmlFor="ICAO_code"
-                        icon="🏷️"
-                        text="ICAO Code"
-                    />
+                    <IconLabel htmlFor="ICAO_code" icon="🏷️" text="ICAO Code" />
                     <TextInput
                         id="ICAO_code"
                         value={data.ICAO_code}
@@ -182,7 +185,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
                     <IconLabel
                         htmlFor="province_id"
                         icon="📍"
-                        text={t("Province")}
+                        text={t("common.province")}
                     />
                     <CustomSelect
                         id="province_id"
@@ -192,6 +195,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
                         }))}
                         value={data.province_id}
                         onChange={(e) => handleProvinceChange(e)}
+                        placeholder={t("common.selectProvince")}
                     />
                     <InputError message={errors.province_id} />
                 </div>
@@ -201,7 +205,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
                     <IconLabel
                         htmlFor="district_id"
                         icon="📍"
-                        text={t("District")}
+                        text={t("common.district")}
                     />
                     <CustomSelect
                         id="district_id"
@@ -212,6 +216,8 @@ export default function CreateAirport({ onSubmitSuccess }) {
                         }))}
                         onChange={(e) => setData("district_id", e)}
                         disabled={!data.province_id || smallLoading}
+                                                placeholder={t("common.selectDistrict")}
+
                     />
                     {smallLoading && <SmallLoader />}
                     <InputError message={errors.district_id} />
@@ -219,11 +225,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
 
                 {/* Latitude */}
                 <div>
-                    <IconLabel
-                        htmlFor="latitude"
-                        icon="🌐"
-                        text="Latitude"
-                    />
+                    <IconLabel htmlFor="latitude" icon="🌐" text={t("common.latitude")} />
                     <TextInput
                         id="latitude"
                         value={data.latitude}
@@ -234,11 +236,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
 
                 {/* Longitude */}
                 <div>
-                    <IconLabel
-                        htmlFor="longitude"
-                        icon="🌐"
-                        text="Longitude"
-                    />
+                    <IconLabel htmlFor="longitude" icon="🌐" text={t("common.longitude")} />
                     <TextInput
                         id="longitude"
                         value={data.longitude}
@@ -279,7 +277,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
 
                 {/* Area */}
                 <div>
-                    <IconLabel htmlFor="area" icon="📐" text="Area" />
+                    <IconLabel htmlFor="area" icon="📐" text={t("measurement.area")} />
                     <TextInput
                         id="area"
                         value={data.area}
@@ -309,7 +307,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
             </div>
 
             {/* Description */}
-            <div className="bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-white px-6  shadow-none">
                 <IconLabel
                     htmlFor="description"
                     icon="📝"
@@ -324,6 +322,145 @@ export default function CreateAirport({ onSubmitSuccess }) {
                 />
                 <InputError message={errors.description} />
             </div>
+            <hr className=" pb-2" />
+            <span className="px-6 font-bold ">{t("common.runwayDetails")}</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white px-6  shadow-none">
+                {/* CONSTRUCTIONS  TYPE  */}
+                <div>
+                    <IconLabel
+                        htmlFor="construction_type_id"
+                        text={t("input.selectConstructionType")}
+                    />
+                    <CustomSelect
+                        id="construction_type_id"
+                        value={data.construction_type_id}
+                        options={constructionType.map((c) => ({
+                            value: c.id,
+                            label: c.type_ps + "  -  " + c.type_en,
+                        }))}
+                        onChange={(e) => setData("construction_type_id", e)}
+                        placeholder={t("input.selectConstructionType")}
+                    />
+                    <InputError
+                        message={
+                            errors.construction_type_id
+                                ? t(`error.${errors.construction_type_id}`)
+                                : ""
+                        }
+                    ></InputError>
+                </div>
+
+                {/* WIDTH    */}
+                <div>
+                    <IconLabel htmlFor="width" text={t("common.width")} />
+                    <TextInput
+                        id="width"
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={data.width}
+                        onChange={(e) => setData("width", e.target.value)}
+                        placeholder={t("common.width")}
+                    />
+                    <InputError
+                        message={errors.width ? t(`error.${errors.width}`) : ""}
+                    />
+                </div>
+
+                {/* WIDTH UNIT ID   */}
+                <div>
+                    <IconLabel
+                        htmlFor="width_unit_id"
+                        text={t("common.widthUnit")}
+                    />
+                    <CustomSelect
+                        id="width_unit_id"
+                        value={data.width_unit_id}
+                        options={units.map((u) => ({
+                            value: u.id,
+                            label: u.unit_ps + "  -  " + u.unit_en,
+                        }))}
+                        onChange={(e) => setData("width_unit_id", e)}
+                        placeholder={t("input.selectUnit")}
+                    />
+                    <InputError
+                        message={
+                            errors.width_unit_id
+                                ? t(`error.${errors.width_unit_id}`)
+                                : ""
+                        }
+                    ></InputError>
+                </div>
+
+                {/* LENGTH    */}
+                <div>
+                    <IconLabel htmlFor="length" text={t("common.length")} />
+                    <TextInput
+                        id="length"
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={data.length}
+                        onChange={(e) => setData("length", e.target.value)}
+                        placeholder={t("common.length")}
+                    />
+                    <InputError
+                        message={
+                            errors.length ? t(`error.${errors.length}`) : ""
+                        }
+                    ></InputError>
+                </div>
+
+                {/* LENGTH UNIT ID   */}
+                <div>
+                    <IconLabel
+                        htmlFor="length_unit_id"
+                        text={t("common.lengthUnit")}
+                    />
+                    <CustomSelect
+                        id="length_unit_id"
+                        value={data.length_unit_id}
+                        options={units.map((u) => ({
+                            value: u.id,
+                            label: u.unit_ps + "  -  " + u.unit_en,
+                        }))}
+                        onChange={(e) => setData("length_unit_id", e)}
+                        placeholder={t("input.selectUnit")}
+                    />
+                    <InputError
+                        message={
+                            errors.length_unit_id
+                                ? t(`error.${errors.length_unit_id}`)
+                                : ""
+                        }
+                    ></InputError>
+                </div>
+
+                {/* ACTIVITY STATUS ID   */}
+                <div>
+                    <IconLabel
+                        htmlFor="activity_status_id"
+                        text={t("input.selectActivityState")}
+                    />
+                    <CustomSelect
+                        id="activity_status_id"
+                        value={data.activity_status_id}
+                        options={statuses.map((s) => ({
+                            value: s.id,
+                            label: s.status_ps + "  -  " + s.status_en,
+                        }))}
+                        onChange={(e) => setData("activity_status_id", e)}
+                        placeholder={t("input.selectActivityState")}
+                    />
+                    <InputError
+                        message={
+                            errors.activity_status_id
+                                ? t(`error.${errors.activity_status_id}`)
+                                : ""
+                        }
+                    ></InputError>
+                </div>
+            </div>
 
             {/* Submit Button */}
             <div className="flex justify-end">
@@ -332,7 +469,7 @@ export default function CreateAirport({ onSubmitSuccess }) {
                     disabled={processing || smallLoading}
                     className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow"
                 >
-                    ✈️ {t("Save Airport")}
+                    ✈️ {t("cmmon.save")}
                     {smallLoading && <SmallLoader />}
                 </button>
             </div>

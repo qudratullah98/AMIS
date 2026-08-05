@@ -10,6 +10,7 @@ use App\Models\ConstructionType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
 class AirportConstructionController extends Controller
 {
     public function index()
@@ -109,41 +110,41 @@ class AirportConstructionController extends Controller
 
     //AIRPORT CONSTRUCTIONS
     public function airportConstructionsIndex()
-{
-    $search  = request()->input('query');
-    $perPage = request()->input('perPage', 10);
+    {
+        $search  = request()->input('query');
+        $perPage = request()->input('perPage', 10);
 
-    $airportConstructions = AirportConstruction::with([
-        'activityStatus:id,status_ps',
-        'approvalStatus:id,code,name_ps',
-        'construction:id,name_ps',
-        'constructionType:id,type_ps',
-        'widthUnit:id,unit_en,unit_ps',
-        'lengthUnit:id,unit_en,unit_ps',
-        'properties' => function ($query) {
-            $query->select(
-                'id',
-                'construction_id',
-                'property_name',
-                'property_value',
-                'unit_id'
-            )->with('unit:id,unit_ps,unit_en');
-        },
-    ])
-        ->when($search, function ($query, $search) {
-            return $query->search($search);
-        })
-        ->where('airport_id', auth()->user()->airport_id)
-        ->latest()
-        ->paginate($perPage);
+        $airportConstructions = AirportConstruction::with([
+            'activityStatus:id,status_ps',
+            'approvalStatus:id,code,name_ps',
+            'construction:id,name_ps',
+            'constructionType:id,type_ps',
+            'widthUnit:id,unit_en,unit_ps',
+            'lengthUnit:id,unit_en,unit_ps',
+            'properties' => function ($query) {
+                $query->select(
+                    'id',
+                    'construction_id',
+                    'property_name',
+                    'property_value',
+                    'unit_id'
+                )->with('unit:id,unit_ps,unit_en');
+            },
+        ])
+            ->when($search, function ($query, $search) {
+                return $query->search($search);
+            })
+            ->where('airport_id', auth()->user()->airport_id)
+            ->latest()
+            ->paginate($perPage);
 
-    return Inertia::render(
-        'Constructions/AirportConstructions/Index',
-        [
-            'airportConstructions' => $airportConstructions,
-        ]
-    );
-}
+        return Inertia::render(
+            'Constructions/AirportConstructions/Index',
+            [
+                'airportConstructions' => $airportConstructions,
+            ]
+        );
+    }
 
     public function airportConstructionsStore(StoreAirportConstructionsRequest $request)
     {

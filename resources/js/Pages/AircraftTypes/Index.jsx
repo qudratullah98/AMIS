@@ -11,7 +11,7 @@ function AirportsIndex({ aircraftTypes }) {
     const [aircraftTypesData, setAircraftTypesData] = useState(aircraftTypes?.data || []);
     const paginationLinks = aircraftTypes?.links || [];
     const [createModel, setCreateModel] = useState(false);
-    
+
 
     const columns = [
         { label: t("common.NO") },
@@ -28,7 +28,7 @@ function AirportsIndex({ aircraftTypes }) {
                  <CustomModal
                     show={createModel}
                     handleClose={() => setCreateModel(false)}
-                    title={t("sgha.creatingSghaService")}
+                    title={t("airport.addingNewAircraftType")}
                     size="large"
                     stopPropagation={false}
                     footer={false}
@@ -45,9 +45,9 @@ function AirportsIndex({ aircraftTypes }) {
                         <DataTable
                             columns={columns}
                             links={paginationLinks}
-                            header={t("airport.aircraftTypes")} 
+                            header={t("airport.aircraftTypes")}
                              enableButton={true}
-                            buttonLabel={t("CreateNewSgha")} 
+                            buttonLabel={t("airport.addNewAircraftType")}
                             onButtonClick={() => setCreateModel(true)}
 
                         >

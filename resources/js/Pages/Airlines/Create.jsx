@@ -38,7 +38,7 @@ export default function Create({ onSubmitSuccess }) {
         toast.success("Airline created successfully!");
     } catch (err) {
         setError( err.response?.data?.errors || {});
-        
+
 
         toast.error("Failed to create airline.");
     } finally {
@@ -53,13 +53,14 @@ export default function Create({ onSubmitSuccess }) {
                     <IconLabel
                         htmlFor="name_en"
                         icon="✈️"
-                        text="English Name"
+                        text={t("common.nameEnglish")}
                     />
 
                     <TextInput
                         id="name_en"
                         value={data.name_en}
                         onChange={(e) => handleChange("name_en", e.target.value)}
+                        placeholder={t("common.nameEnglish")}
                     />
 
                     <InputError message={t(errors.name_en)} />
@@ -67,13 +68,14 @@ export default function Create({ onSubmitSuccess }) {
 
                 {/* Dari Name */}
                 <div>
-                    <IconLabel htmlFor="name_dr" icon="🇦🇫" text="Dari Name" />
+                    <IconLabel htmlFor="name_dr" icon="🇦🇫" text={t("common.nameDari")}/>
 
                     <TextInput
                         id="name_dr"
                         dir="rtl"
-                        value={data.name_dr}  
+                        value={data.name_dr}
                         onChange={(e) => handleChange("name_dr", e.target.value)}
+                         placeholder={t("common.nameDari")}
                     />
 
                     <InputError message={t(errors.name_dr)} />
@@ -81,13 +83,14 @@ export default function Create({ onSubmitSuccess }) {
 
                 {/* Pashto Name */}
                 <div>
-                    <IconLabel htmlFor="name_ps" icon="🇦🇫" text="Pashto Name" />
+                    <IconLabel htmlFor="name_ps" icon="🇦🇫" text={t("common.namePashto")} />
 
                     <TextInput
                         id="name_ps"
                         dir="rtl"
                         value={data.name_ps}
                         onChange={(e) => handleChange("name_ps", e.target.value)}
+                         placeholder={t("common.namePashto")}
                     />
 
                     <InputError message={t(errors.name_ps)} />
@@ -100,7 +103,7 @@ export default function Create({ onSubmitSuccess }) {
                     disabled={SmallLoading}
                     className="px-5 py-2 bg-blue-600 text-white rounded-lg"
                 >
-                    {SmallLoading ? "Saving..." : "Save"}
+                    {SmallLoading ? t("common.saving") : t("common.save")}
                 </button>
             </div>
         </form>

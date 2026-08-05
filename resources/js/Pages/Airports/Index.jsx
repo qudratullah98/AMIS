@@ -63,7 +63,7 @@ function AirportsIndex({ airports }) {
                     show={CreateModel}
                     handleClose={() => setCreateModel(false)}
                     title={t("airport.addingNewAirport")}
-                    size="large"
+                    size="xxlarge"
                     stopPropagation={false}
                     footer={false}
                 >

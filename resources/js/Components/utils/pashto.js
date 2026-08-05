@@ -20,6 +20,8 @@ const pashto = {
     },
 
     common: {
+                runwayDetails:"د رنوې تفصیلات",
+
         dashboard: "ډشبورډ",
         loading: "مهرباني وکړئ لږ صبر وکړئ...",
         name: "نوم",
@@ -302,6 +304,8 @@ const pashto = {
         airportType: " هوایي ډګر ډول",
         aircraftTypes: "د الوتکو ډولونه",
         aircraftType: "د الوتکې ډول",
+        addNewAircraftType:"نوی د الوتکې ډول اضافه کړئ",
+        addingNewAircraftType:"د الوتکې د نوي ډول اضافه کول",
 
         aircraftCode: " د الوتکې کوډ",
 
@@ -413,8 +417,9 @@ const pashto = {
         constructionsTypeList: "د ودانیو د ډولونو لیست ",
 
         constructionsPart: "د ودانیو برخه",
-        airportConstructions: "د هوايي ډګر ودانۍ",
-        airportConstructionsList: "د هوايي ډګر د ودانیو لیست",
+        buildingsAndFacilities: "ودانۍ او تاسیسات",
+        airportConstructions: "د هوايي ډګر ودانۍ/تاسیسات",
+        airportConstructionsList: "د هوايي ډګر د ودانیو/تاسیساتو لیست",
 
         constructions: "ودانۍ",
         constructionsTypes: "د ودانیو ډولونه",

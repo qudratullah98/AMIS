@@ -27,7 +27,7 @@ function AirlinesIndex({ airlines }) {
             <CustomModal
                 show={createModal}
                 handleClose={() => setCreateModal(false)}
-                title={t("airline.createAirline")}
+                title={t("airline.addingNewAirline")}
                 size="xlarge"
                 stopPropagation={false}
                 footer={false}

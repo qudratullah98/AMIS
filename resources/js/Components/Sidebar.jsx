@@ -12,16 +12,16 @@ import {
     Menu,
     Box,
     Layers,
-    PlaneLanding, 
+    PlaneLanding,
     Layers2,
     PlaneTakeoff,
     UsersRound,
     UserCheck,
     Building2,
         GraduationCap,
-    BookOpen, 
+    BookOpen,
     BriefcaseBusiness,
-    Award,  
+    Award,
     CalendarCheck,
     Network,
 } from "lucide-react";
@@ -271,14 +271,14 @@ const Sidebar = () => {
         //Constructions
         {
             href: "/constructions",
-            label: t("construction.constructionsPart"),
+            label: t("construction.buildingsAndFacilities"),
             icon: <Layers className="w-5 h-5" />,
             keyword: "constructions",
             can: permissions.includes("viewConstructionMenu") || true,
             subItems: [
                 {
                     href: route("constructions"),
-                    label: t("construction.constructions"),
+                    label: t("construction.buildingsAndFacilities"),
                     icon: <Building2 className="w-4 h-4" />,
                     keyword: "constructions",
                 },
