@@ -78,7 +78,7 @@ Route::get('test', function () {
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/log.php';
-require __DIR__ . '/airport.php';
+require __DIR__ . '/airport.php';   
 require __DIR__ . '/airline.php';
 require __DIR__ . '/constructions.php';
 require __DIR__ . '/sgha.php';
@@ -86,3 +86,4 @@ require __DIR__ . '/flight.php';
 require __DIR__ . '/aircraft_type.php';
 require __DIR__ . '/tashkilat.php';
 require __DIR__ . '/educations.php';
+require __DIR__ . '/positionRequredRouts.php';

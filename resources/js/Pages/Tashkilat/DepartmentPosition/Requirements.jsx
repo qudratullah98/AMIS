@@ -1,0 +1,436 @@
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import {
+    Plus,
+    Trash2,
+    Edit2,
+    CheckCircle,
+    XCircle,
+    AlertCircle,
+    BookOpen,
+    GraduationCap,
+    Award,
+    Clock,
+    Info,
+    Save,
+    X
+} from 'lucide-react';
+
+function PositionRequirements({ position, requirements, available }) {
+    const { t } = useTranslation();
+    const [activeTab, setActiveTab] = useState('certificates');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+
+    // State for adding new requirements
+    const [newCertificate, setNewCertificate] = useState('');
+    const [newCourse, setNewCourse] = useState({
+        course_id: '',
+        requirement_type: 'mandatory',
+        validity_months: '',
+        description: ''
+    });
+    const [newEducation, setNewEducation] = useState('');
+
+    // Local state for requirements
+    const [certificates, setCertificates] = useState(requirements.certificates || []);
+    const [courses, setCourses] = useState(requirements.courses || []);
+    const [educations, setEducations] = useState(requirements.educations || []);
+
+    const tabs = [
+        { key: 'certificates', label: t('positionRequirements.certificates'), icon: Award },
+        { key: 'courses', label: t('positionRequirements.courses'), icon: BookOpen },
+        { key: 'educations', label: t('positionRequirements.educations'), icon: GraduationCap },
+    ];
+
+    const handleAddCertificate = async () => {
+        if (!newCertificate) return;
+        
+        setLoading(true);
+        setError(null);
+        
+        try {
+            const response = await axios.post(
+                route('positions.requirements.add-certificate', position.id),
+                { certificate_id: newCertificate, is_required: true }
+            );
+            
+            setCertificates([...certificates, response.data.requirement]);
+            setNewCertificate('');
+            setSuccess(t('common.success'));
+            
+            setTimeout(() => setSuccess(null), 3000);
+        } catch (err) {
+            setError(err.response?.data?.message || t('common.error'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleAddCourse = async () => {
+        if (!newCourse.course_id) return;
+        
+        setLoading(true);
+        setError(null);
+        
+        try {
+            const response = await axios.post(
+                route('positions.requirements.add-course', position.id),
+                newCourse
+            );
+            
+            setCourses([...courses, response.data.requirement]);
+            setNewCourse({
+                course_id: '',
+                requirement_type: 'mandatory',
+                validity_months: '',
+                description: ''
+            });
+            setSuccess(t('common.success'));
+            
+            setTimeout(() => setSuccess(null), 3000);
+        } catch (err) {
+            setError(err.response?.data?.message || t('common.error'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleAddEducation = async () => {
+        if (!newEducation) return;
+        
+        setLoading(true);
+        setError(null);
+        
+        try {
+            const response = await axios.post(
+                route('positions.requirements.add-education', position.id),
+                { education_level_id: newEducation, is_required: true }
+            );
+            
+            setEducations([...educations, response.data.requirement]);
+            setNewEducation('');
+            setSuccess(t('common.success'));
+            
+            setTimeout(() => setSuccess(null), 3000);
+        } catch (err) {
+            setError(err.response?.data?.message || t('common.error'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleRemove = async (type, id) => {
+        if (!confirm(t('common.confirmDelete'))) return;
+        
+        setLoading(true);
+        
+        try {
+            const routes = {
+                certificate: route('positions.requirements.remove-certificate', id),
+                course: route('positions.requirements.remove-course', id),
+                education: route('positions.requirements.remove-education', id),
+            };
+            
+            await axios.delete(routes[type]);
+            
+            // Update local state
+            if (type === 'certificate') {
+                setCertificates(certificates.filter(c => c.id !== id));
+            } else if (type === 'course') {
+                setCourses(courses.filter(c => c.id !== id));
+            } else if (type === 'education') {
+                setEducations(educations.filter(e => e.id !== id));
+            }
+            
+            setSuccess(t('common.deleted'));
+            setTimeout(() => setSuccess(null), 3000);
+        } catch (err) {
+            setError(err.response?.data?.message || t('common.error'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getRequirementBadge = (type) => {
+        const badges = {
+            mandatory: { color: 'bg-red-100 text-red-800', label: t('positionRequirements.mandatory') },
+            preferred: { color: 'bg-yellow-100 text-yellow-800', label: t('positionRequirements.preferred') },
+            optional: { color: 'bg-gray-100 text-gray-800', label: t('positionRequirements.optional') },
+        };
+        return badges[type] || badges.mandatory;
+    };
+
+    return (
+        <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-800">
+                    {t('positionRequirements.requirements')}
+                </h2>
+                <div className="text-sm text-gray-500">
+                    {t('positionRequirements.total')}: {certificates.length + courses.length + educations.length}
+                </div>
+            </div>
+
+            {/* Error/Success Messages */}
+            {error && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700">
+                    <AlertCircle className="h-5 w-5" />
+                    {error}
+                </div>
+            )}
+            {success && (
+                <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-700">
+                    <CheckCircle className="h-5 w-5" />
+                    {success}
+                </div>
+            )}
+
+            {/* Tabs */}
+            <div className="border-b border-gray-200 mb-6">
+                <nav className="flex gap-4">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.key}
+                            onClick={() => setActiveTab(tab.key)}
+                            className={`
+                                flex items-center gap-2 px-4 py-3 border-b-2 text-sm font-medium transition-colors
+                                ${activeTab === tab.key 
+                                    ? 'border-blue-500 text-blue-600' 
+                                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                }
+                            `}
+                        >
+                            <tab.icon className="h-4 w-4" />
+                            {tab.label}
+                            <span className="ml-1 px-2 py-0.5 bg-gray-100 rounded-full text-xs">
+                                {tab.key === 'certificates' && certificates.length}
+                                {tab.key === 'courses' && courses.length}
+                                {tab.key === 'educations' && educations.length}
+                            </span>
+                        </button>
+                    ))}
+                </nav>
+            </div>
+
+            {/* Content */}
+            <div className="space-y-4">
+                {/* Certificates Tab */}
+                {activeTab === 'certificates' && (
+                    <>
+                        {/* Add Form */}
+                        <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-4">
+                            <select
+                                value={newCertificate}
+                                onChange={(e) => setNewCertificate(e.target.value)}
+                                className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                <option value="">{t('positionRequirements.selectCertificate')}</option>
+                                {available.certificates.map((cert) => (
+                                    <option key={cert.id} value={cert.id}>
+                                        {cert.name} {cert.level ? `(${cert.level})` : ''}
+                                    </option>
+                                ))}
+                            </select>
+                            <button
+                                onClick={handleAddCertificate}
+                                disabled={!newCertificate || loading}
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
+                            >
+                                <Plus className="h-4 w-4" />
+                                {t('common.add')}
+                            </button>
+                        </div>
+
+                        {/* List */}
+                        <div className="space-y-2">
+                            {certificates.map((req) => (
+                                <div key={req.id} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                                    <div className="flex items-center gap-3">
+                                        <Award className="h-5 w-5 text-blue-500" />
+                                        <div>
+                                            <p className="font-medium">{req.certificate?.name}</p>
+                                            <p className="text-sm text-gray-500">
+                                                {req.is_required ? '✅ Required' : '❌ Not Required'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => handleRemove('certificate', req.id)}
+                                        className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+                                    </button>
+                                </div>
+                            ))}
+                            {certificates.length === 0 && (
+                                <div className="text-center py-6 text-gray-500">
+                                    {t('positionRequirements.noCertificates')}
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+
+                {/* Courses Tab */}
+                {activeTab === 'courses' && (
+                    <>
+                        {/* Add Form */}
+                        <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <select
+                                    value={newCourse.course_id}
+                                    onChange={(e) => setNewCourse({...newCourse, course_id: e.target.value})}
+                                    className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    <option value="">{t('positionRequirements.selectCourse')}</option>
+                                    {available.courses.map((course) => (
+                                        <option key={course.id} value={course.id}>
+                                            {course.code} - {course.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    value={newCourse.requirement_type}
+                                    onChange={(e) => setNewCourse({...newCourse, requirement_type: e.target.value})}
+                                    className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    <option value="mandatory">{t('positionRequirements.mandatory')}</option>
+                                    <option value="preferred">{t('positionRequirements.preferred')}</option>
+                                    <option value="optional">{t('positionRequirements.optional')}</option>
+                                </select>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <input
+                                    type="number"
+                                    placeholder={t('positionRequirements.validityMonths')}
+                                    value={newCourse.validity_months}
+                                    onChange={(e) => setNewCourse({...newCourse, validity_months: e.target.value})}
+                                    className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder={t('positionRequirements.description')}
+                                    value={newCourse.description}
+                                    onChange={(e) => setNewCourse({...newCourse, description: e.target.value})}
+                                    className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <button
+                                onClick={handleAddCourse}
+                                disabled={!newCourse.course_id || loading}
+                                className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center justify-center gap-2"
+                            >
+                                <Plus className="h-4 w-4" />
+                                {t('common.add')}
+                            </button>
+                        </div>
+
+                        {/* List */}
+                        <div className="space-y-2">
+                            {courses.map((req) => {
+                                const badge = getRequirementBadge(req.requirement_type);
+                                return (
+                                    <div key={req.id} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                                        <div className="flex items-center gap-3">
+                                            <BookOpen className="h-5 w-5 text-green-500" />
+                                            <div>
+                                                <div className="flex items-center gap-2">
+                                                    <p className="font-medium">{req.course?.name}</p>
+                                                    <span className={`text-xs px-2 py-0.5 rounded-full ${badge.color}`}>
+                                                        {badge.label}
+                                                    </span>
+                                                </div>
+                                                {req.validity_months && (
+                                                    <p className="text-sm text-gray-500 flex items-center gap-1">
+                                                        <Clock className="h-3 w-3" />
+                                                        {t('positionRequirements.validity')}: {req.validity_months} months
+                                                    </p>
+                                                )}
+                                                {req.description && (
+                                                    <p className="text-sm text-gray-500">{req.description}</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => handleRemove('course', req.id)}
+                                            className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                        >
+                                            <Trash2 className="h-4 w-4" />
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                            {courses.length === 0 && (
+                                <div className="text-center py-6 text-gray-500">
+                                    {t('positionRequirements.noCourses')}
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+
+                {/* Educations Tab */}
+                {activeTab === 'educations' && (
+                    <>
+                        {/* Add Form */}
+                        <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-4">
+                            <select
+                                value={newEducation}
+                                onChange={(e) => setNewEducation(e.target.value)}
+                                className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                <option value="">{t('positionRequirements.selectEducation')}</option>
+                                {available.educationLevels.map((level) => (
+                                    <option key={level.id} value={level.id}>
+                                        {level.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <button
+                                onClick={handleAddEducation}
+                                disabled={!newEducation || loading}
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
+                            >
+                                <Plus className="h-4 w-4" />
+                                {t('common.add')}
+                            </button>
+                        </div>
+
+                        {/* List */}
+                        <div className="space-y-2">
+                            {educations.map((req) => (
+                                <div key={req.id} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                                    <div className="flex items-center gap-3">
+                                        <GraduationCap className="h-5 w-5 text-purple-500" />
+                                        <div>
+                                            <p className="font-medium">{req.education_level?.name}</p>
+                                            <p className="text-sm text-gray-500">
+                                                {req.is_required ? '✅ Required' : '❌ Not Required'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => handleRemove('education', req.id)}
+                                        className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+                                    </button>
+                                </div>
+                            ))}
+                            {educations.length === 0 && (
+                                <div className="text-center py-6 text-gray-500">
+                                    {t('positionRequirements.noEducations')}
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default PositionRequirements;

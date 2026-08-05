@@ -100,7 +100,7 @@ function Index({ positions }) {
                                     </td>
                                     <td className="text-center">
                                         <ThreeDotMenu>
-                                        <a href={route("department-positions.requirements", position.id)} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <a href={route("positions.requirements.index", position.id)} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                             <Edit2 className="w-4 h-4" />
                                             {t("tashkilat.addRequirements")}
                                         </a>
