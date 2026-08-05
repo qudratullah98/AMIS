@@ -112,7 +112,7 @@ const pashto = {
 
     error: {
         general: "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
-
+        required: "دا برخه اړینه ده.",
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
 
         fieldIsNeeded: "دا برخه ډکول اړین دي.",
@@ -158,6 +158,12 @@ const pashto = {
         passwordMixedCase: "پټنوم باید لوی او کوچني حروف ولري.",
         passwordNumbers: "پټنوم باید لږ تر لږه یو عدد ولري.",
         passwordSymbols: "پټنوم باید لږ تر لږه یو ځانګړی نښه ولري.",
+        trainingPlans: {
+            endDateAfterStart: "د پای نېټه باید د پیل نېټې وروسته وي.",
+            futureDate: "د پیل نېټه باید د اوسني وخت وروسته وي.",
+        },
+
+
 
         airline: {
             name_en_required: "د هوايي شرکت انګلیسي نوم اړین دی.",
@@ -170,18 +176,14 @@ const pashto = {
         sgha_service: {
             name_en_required: "د خدمت انګلیسي نوم اړین دی.",
             name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
-
             unit_required: "د خدمت واحد ټاکل اړین دي.",
             unit_invalid: "ټاکل شوی د خدمت واحد سم نه دی.",
-
             airline_rates_required: "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
             airline_rates_invalid: "د هوايي شرکتونو د نرخونو معلومات سم نه دي.",
             airline_rates_min: "لږ تر لږه یو هوايي شرکت باید اضافه شي.",
-
             airline_required: "د هوايي شرکت ټاکل اړین دي.",
             airline_invalid: "ټاکل شوی هوايي شرکت سم نه دی.",
             airline_duplicate: "یو هوايي شرکت یوازې یو ځل اضافه کېدای شي.",
-
             rate_required: "د خدمت نرخ اړین دی.",
             rate_numeric: "د خدمت نرخ باید عددي وي.",
             rate_min: "د خدمت نرخ باید له صفر څخه کم نه وي.",
@@ -189,14 +191,10 @@ const pashto = {
         organization: {
             name_is_required: "د ادارې نوم اړین دی.",
             name_unique: "دا نوم مخکې ثبت شوی دی.",
-
             code_unique: "دا کوډ مخکې ثبت شوی دی.",
-
             email_email: "برېښنالیک باید د برېښنالیک په بڼه وي.",
             email_unique: "دا برېښنالیک مخکې ثبت شوی دی.",
-
             phone_unique: "دا د اړیکې شمېره مخکې ثبت شوی دی.",
-
             website_url: "وېب‌پاڼه باید د وېب‌پاڼې په بڼه وي.",
         },
         tashkil: {
@@ -205,29 +203,24 @@ const pashto = {
             year_min: "کال باید لږ تر لږه 1000 وي.",
             year_max: "کال باید له 9999 څخه زیات نه وي.",
             organization_year_unique: "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
-
             reference_number_required: "د مرجع شمېره اړینه ده.",
             reference_number_string: "د مرجع شمېره باید متن وي.",
             reference_number_max: "د مرجع شمېره باید له 255 تورو زیاته نه وي.",
             reference_number_unique: "د مرجع شمېره مخکې ثبت شوې ده.",
-
             organization_id_required: "د ادارې ټاکل اړین دي.",
             organization_id_exists: "ټاکل شوې اداره معتبره نه ده.",
-
             description_string: "تشریح باید متن وي.",
             description_max: "تشریح باید له 255 تورو زیاته نه وي.",
+
         },
         department: {
             tashkil_required: "تشکیل ټاکل اړین دي.",
             tashkil_not_found: "ټاکل شوی تشکیل ونه موندل شو.",
-
             parent_department_not_found: "اصلي څانګه ونه موندل شوه.",
-
             name_required: "د څانګې نوم اړین دی.",
             name_invalid: "د څانګې نوم سم نه دی.",
             name_too_long: "د څانګې نوم باید له ۲۵۵ تورو څخه زیات نه وي.",
             name_already_exists: "دا د څانګې نوم مخکې ثبت شوی دی.",
-
             code_invalid: "د څانګې کوډ سم نه دی.",
             code_too_long: "د څانګې کوډ باید له ۵۰ تورو څخه زیات نه وي.",
             code_already_exists: "دا د څانګې کوډ مخکې ثبت شوی دی.",
@@ -236,10 +229,8 @@ const pashto = {
         flight_service: {
             flight_required: 'الوتنه اړینه ده.',
             flight_exists: 'ټاکل شوې الوتنه شتون نه لري.',
-
             service_required: 'د SGHA خدمت ټاکل اړین دي.',
             service_exists: 'ټاکل شوی SGHA خدمت شتون نه لري.',
-
             count_required: 'تعداد اړین دی.',
             count_integer: 'تعداد باید یو صحیح عدد وي.',
             count_min: 'تعداد باید لږ تر لږه ۱ وي.',
@@ -469,10 +460,11 @@ const pashto = {
         positionTitle: "د بست عنوان",
         department: "ریاست",
         positionTypeList: "د بستونو ډولونه",
-        grade: "کچه",
+        grade: "درجه بست",
         totalPositions: "د بستونو شمېر",
         salary: "معاش",
         description: "تشریح",
+        addRequirements: "اړتیاوې اضافه کړئ",
         organization: {
             name: "د ادارې نوم",
             code: "د ادارې کوډ",
@@ -484,59 +476,33 @@ const pashto = {
         },
         employee: {
             employeeNo: "د کارکوونکي شمېره",
-
             firstName: "لومړی نوم",
             fullName: "بشپر نوم",
             lastName: "تخلص",
-
             fatherName: "د پلار نوم",
-
             gender: "جنسیت",
-
             birthDate: "د زیږون نېټه",
-
             phone: "د اړیکې شمېره",
-
             email: "برېښنالیک",
-
             nationalId: "د پېژندپاڼې شمېره",
-
             passportNo: "د پاسپورټ شمېره",
-
             maritalStatus: "مدني حالت",
-
             bloodGroup: "د وینې ګروپ",
-
             province: "ولایت",
-
             district: "ولسوالي",
-
             address: "پته",
-
             photo: "انځور",
-
             approvalStatus: "د تایید حالت",
-
             status: "حالت",
-
             employeeName: "د کارکوونکي نوم",
-
             employees: "کارکوونکي",
-
             createEmployee: "د کارکوونکي جوړول",
-
             employeeList: "د کارکوونکو لېست",
-
             single: "مجرد",
-
             married: "واده شوی",
-
             divorced: "طلاق شوی",
-
             widowed: "کونډ/کونډه",
-
             active: "فعال",
-
             inactive: "غیر فعال"
 
         },
@@ -578,9 +544,8 @@ const pashto = {
         courseTypes: "د کورس ډولونه",
         courses: "کورسونه",
 
-        trainers: "روزونکي",
 
-        trainingPlans: "د روزنې پلانونه",
+
         trainings: "روزنې",
         addNewEducationLevel: "د زده کړې نوې کچه اضافه کړئ",
         educationLevel: "د زده کړې کچه",
@@ -593,6 +558,91 @@ const pashto = {
         expiryDate: "د پای نېټه",
         certificateNumber: "د سند شمېره",
         addCertificate: "سند اضافه کړئ",
+        addNewCertificate: "نوی سند اضافه کړئ",
+        certificateName: "د سند نوم",
+        certificateLevel: "د سند کچه",
+        certificateList: "د سندونو لیست",
+        createCertificate: "سند جوړول",
+
+        levels: {
+            beginner: "لومړنۍ",
+            intermediate: "منځنۍ",
+            advanced: "پرمختللې",
+            expert: "متخصصه",
+        },
+        courses: {
+            courses: "کورسونه",
+            courseList: "د کورسونو لیست",
+            addNewCourse: "نوی کورس اضافه کړئ",
+            addingNewCourse: "د نوي کورس اضافه کول",
+            courseInfo: "د کورس معلومات",
+            courseCode: "د کورس کوډ",
+            courseType: "د کورس ډول",
+            courseName: "د کورس نوم",
+            validity: "د اعتبار موده (په میاشتو کې)",
+            description: "د کورس تشریح",
+        },
+        trainers: {
+            trainers: "روزونکي",
+            createTrainer: "نوی روزونکی جوړول",
+            editTrainer: "روزونکی سمول",
+            id: "پېژندنه",
+            name: "بشپړ نوم",
+            namePlaceholder: "د روزونکي بشپړ نوم دننه کړئ",
+            type: "ډول",
+            selectType: "د روزونکي ډول وټاکئ",
+            phone: "د تلیفون شمېره",
+            phonePlaceholder: "د تلیفون شمېره دننه کړئ",
+            email: "برېښناليک",
+            emailPlaceholder: "برېښناليک آدرس دننه کړئ",
+            licenseNumber: "د جواز شمېره",
+            licensePlaceholder: "د جواز شمېره دننه کړئ",
+            organization: "اداره/سازمان",
+            organizationPlaceholder: "د ادارې نوم دننه کړئ",
+            address: "آدرس",
+            addressPlaceholder: "آدرس دننه کړئ",
+            description: "تشریح",
+            descriptionPlaceholder: "تشریح دننه کړئ",
+            contact: "اړیکه",
+            license: "جواز",
+            types: {
+                internal: "داخلي",
+                external: "بهرنی",
+                consultant: "سلاکار"
+            }
+        },
+
+
+        trainingPlans: {
+            trainingPlans: "د روزنې پلانونه",
+            createTrainingPlan: "د روزنې نوی پلان جوړول",
+            editTrainingPlan: "د روزنې پلان سمول",
+            id: "پېژندنه",
+            name: "د پلان نوم",
+            namePlaceholder: "د روزنې پلان نوم دننه کړئ",
+            course: "کورس",
+            selectCourse: "کورس وټاکئ",
+            trainer: "روزونکی",
+            selectTrainer: "روزونکی وټاکئ",
+            startDate: "پیل نیټه",
+            endDate: "پای نیټه",
+            period: "موده",
+            location: "ځای",
+            locationPlaceholder: "د روزنې ځای دننه کړئ",
+            status: "حالت",
+            selectStatus: "حالت وټاکئ",
+            description: "تشریح",
+            descriptionPlaceholder: "د روزنې پلان تشریح دننه کړئ",
+            days: "ورځې",
+            statuses: {
+                planned: "پلان شوی",
+                in_progress: "په روانه توګه",
+                completed: "ترسره شوی",
+                cancelled: "لغوه شوی"
+            }
+        },
+
+
     }
 };
 

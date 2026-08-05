@@ -26,26 +26,23 @@ class DepartmentPositionController extends Controller
 
         if ($request->search) {
 
-            $query->where('title','like','%'.$request->search.'%')
-                ->orWhereHas('department',function($q) use($request){
+            $query->where('title', 'like', '%' . $request->search . '%')
+                ->orWhereHas('department', function ($q) use ($request) {
 
                     $q->where(
                         'name',
                         'like',
-                        '%'.$request->search.'%'
+                        '%' . $request->search . '%'
                     );
-
                 })
-                ->orWhereHas('positionType',function($q) use($request){
+                ->orWhereHas('positionType', function ($q) use ($request) {
 
                     $q->where(
                         'title',
                         'like',
-                        '%'.$request->search.'%'
+                        '%' . $request->search . '%'
                     );
-
                 });
-
         }
 
 
@@ -53,139 +50,87 @@ class DepartmentPositionController extends Controller
             'Tashkilat/DepartmentPosition/Index',
             [
 
-                'positions'=>$query
+                'positions' => $query
                     ->latest()
                     ->paginate(20)
                     ->withQueryString(),
 
 
-                'departments'=>Department::select(
+                'departments' => Department::select(
                     'id',
                     'name'
                 )
-                ->orderBy('name')
-                ->get(),
+                    ->orderBy('name')
+                    ->get(),
 
 
-                'positionTypes'=>PositionType::select(
+                'positionTypes' => PositionType::select(
                     'id',
                     'title'
                 )
-                ->orderBy('title')
-                ->get(),
+                    ->orderBy('title')
+                    ->get(),
 
 
-                'filters'=>[
-                    'search'=>$request->search
+                'filters' => [
+                    'search' => $request->search
                 ]
 
             ]
         );
-
     }
 
 
 
-public function store(StoreDepartmentPositionRequest $request)
-{
-    $position = DepartmentPosition::create([
-        'title' => $request->title,
-        'department_id' => $request->department_id,
-        'position_type_id' => $request->position_type_id,
-        'total_positions' => $request->total_positions,
-        'description' => $request->description,
-    ]);
-
-
-    $position->vacancy()->create([
-
-        'vacancy_no' => 'VAC-' . time(),
-
-        'status' => 'Vacant',
-
-    ]);
-
-
-    return response()->json([
-
-        'success' => true,
-
-        'message' => 'Position created successfully.',
-
-        'data' => $position->load([
-            'department',
-            'positionType',
-            'vacancy'
-        ])
-
-    ]);
-}
-
-
-
-
-
-    public function update(
-        UpdateDepartmentPositionRequest $request,
-        DepartmentPosition $departmentPosition
-    )
+    public function store(StoreDepartmentPositionRequest $request)
     {
-
-        $departmentPosition->update(
-            $request->validated()
-        );
-
-
-        // update total vacancy
-
-        if($departmentPosition->vacancy)
-        {
-
-            $filled = $departmentPosition
-                ->assignments()
-                ->where('status','active')
-                ->count();
+        $position = DepartmentPosition::create([
+            'title' => $request->title,
+            'department_id' => $request->department_id,
+            'position_type_id' => $request->position_type_id,
+            'total_positions' => $request->total_positions,
+            'description' => $request->description,
+            'grade' => $request->grade,
+        ]);
 
 
-            $departmentPosition->vacancy()->update([
+        $position->vacancy()->create([
 
-                'total_positions'=>$departmentPosition->quantity,
+            'vacancy_no' => 'VAC-' . time(),
 
-                'filled_positions'=>$filled,
+            'status' => 'Vacant',
 
-                'vacant_positions'=>
-                    $departmentPosition->quantity - $filled
-
-            ]);
-
-        }
+        ]);
 
 
+        return response()->json([
 
-        return back()->with(
-            'success',
-            'department_position.updated'
-        );
+            'success' => true,
 
+            'message' => 'Position created successfully.',
+
+            'data' => $position->load([
+                'department',
+                'positionType',
+                'vacancy'
+            ])
+
+        ]);
     }
 
 
 
 
 
-    public function destroy(
-        DepartmentPosition $departmentPosition
-    )
+    public function requirements(DepartmentPosition $departmentPosition)
     {
-
-        $departmentPosition->delete();
-
-
-        return back()->with(
-            'success',
-            'department_position.deleted'
+        return Inertia::render(
+            'Tashkilat/DepartmentPosition/RequirementsList',
+            [
+                'position' => $departmentPosition->load([
+                    'd'
+                ])
+            ]
         );
-
     }
-
 }

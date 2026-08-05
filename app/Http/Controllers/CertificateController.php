@@ -12,37 +12,23 @@ class CertificateController extends Controller
 
     public function index()
     {
-        return Certificate::with(
-            'course',
-            'trainer'
-        )->get();
+        $certificates = Certificate::all();
+        return inertia('Educations/Certificates/Index', [
+            'certificates' => $certificates,
+        ]);
     }
-
-
-
     public function store(Request $request)
     {
-
-        $data = $request->validate([
-
-            'name' => 'required',
-            'issuer' => 'nullable',
-            'issue_date' => 'nullable|date',
-            'expiry_date' => 'nullable|date',
-            'trainer_id' => 'nullable',
-            'course_id' => 'nullable'
-
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'level' => 'required|string',
         ]);
 
+        $certificate = Certificate::create($validatedData);
 
-        return Certificate::create($data);
-    }
-
-
-
-    public function json()
-    {
-        $certificates = Certificate::all();
-        return response()->json($certificates);
+        return response()->json([
+            'success' => true,
+            'certificate' => $certificate
+        ]);
     }
 }

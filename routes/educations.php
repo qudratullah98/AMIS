@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\EducationLevelController;
 use App\Http\Controllers\EmployeeEducationController;
 use App\Http\Controllers\PositionRequiredEducationController;
@@ -14,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('education')->name('education.')->group(function () {
 
 
- Route::get('/', [EducationDashboardController::class, 'index'])
-            ->name('dashboard');
+    Route::get('/', [EducationDashboardController::class, 'index'])
+        ->name('dashboard');
 
     // Education Levels
     Route::resource('levels', EducationLevelController::class)
@@ -28,7 +29,7 @@ Route::prefix('education')->name('education.')->group(function () {
             'update' => 'levels.update',
             'destroy' => 'levels.destroy',
         ]);
- 
+
 
     // Employee Education
     Route::resource('employee', EmployeeEducationController::class)
@@ -58,27 +59,43 @@ Route::prefix('education')->name('education.')->group(function () {
 
 
     Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
-    ->name('education.levels.json');
-      Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
-    ->name('levels.json');
+        ->name('education.levels.json');
+    Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
+        ->name('levels.json');
     Route::get('/certificates/json', [CertificateController::class, 'json'])
-    ->name('certificates.json');
+        ->name('certificates.json');
     Route::get('/certificates/json', [CertificateController::class, 'json'])
-    ->name('certificates.json');
+        ->name('certificates.json');
 
+
+    // Certificates
+    Route::get('/certificates', [CertificateController::class, 'index'])
+        ->name('certificates.index');
+    Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
+
+
+
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+
+
+    Route::get('/trainers', [TrainerController::class, 'index'])->name('trainers.index');
+    Route::post('/trainers', [TrainerController::class, 'store'])->name('trainers.store');
+
+
+    // json
+    Route::get('course-types/list', [CourseTypeController::class, 'jsonList'])->name('course-types.list');
+    Route::get('training-plans.courses', [CourseController::class, 'jsonList'])->name('training-plans.courses');
+    Route::get('training-plans.trainers', [TrainerController::class, 'jsonList'])->name('training-plans.trainers');
 });
 
 
-// Certificates
-Route::resource('certificates', CertificateController::class);
-
 
 // Course Types
-Route::resource('course-types', CourseTypeController::class);
 
 
-// Courses
-Route::resource('courses', CourseController::class);
+
+
 
 
 // Trainers

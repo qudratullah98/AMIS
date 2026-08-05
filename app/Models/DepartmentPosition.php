@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DepartmentPosition extends Model
 {
@@ -22,7 +23,20 @@ class DepartmentPosition extends Model
     | Relationships
     |--------------------------------------------------------------------------
     */
+    public function requiredCertificates(): HasMany
+    {
+        return $this->hasMany(PositionRequiredCertificate::class,);
+    }
 
+    public function requiredCourses(): HasMany
+    {
+        return $this->hasMany(PositionRequiredCourse::class);
+    }
+
+    public function requiredEducations(): HasMany
+    {
+        return $this->hasMany(PositionRequiredEducation::class);
+    }
 
     public function vacancy()
     {
@@ -44,6 +58,7 @@ class DepartmentPosition extends Model
     {
         return $this->hasMany(EmployeeAssignment::class);
     }
+
 
 
 

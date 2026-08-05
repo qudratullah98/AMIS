@@ -79,15 +79,10 @@ Route::prefix('department-positions')
             'store'
         ])->name('store');
 
-        Route::put('/update/{departmentPosition}', [
+       Route::get('/{departmentPosition}/requirements', [
             DepartmentPositionController::class,
-            'update'
-        ])->name('update');
-
-        Route::delete('/delete/{departmentPosition}', [
-            DepartmentPositionController::class,
-            'destroy'
-        ])->name('destroy');
+            'requirements'
+        ])->name('requirements'); 
     });
 
 
