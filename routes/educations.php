@@ -79,6 +79,9 @@ Route::prefix('education')->name('education.')->group(function () {
     Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
 
 
+    Route::get('/trainers', [TrainerController::class, 'index'])->name('trainers.index');
+    Route::post('/trainers', [TrainerController::class, 'store'])->name('trainers.store');
+
 
     // json
     Route::get('course-types/list', [CourseTypeController::class, 'jsonList'])->name('course-types.list');

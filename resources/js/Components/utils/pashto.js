@@ -157,8 +157,8 @@ const pashto = {
         passwordNumbers: "پټنوم باید لږ تر لږه یو عدد ولري.",
         passwordSymbols: "پټنوم باید لږ تر لږه یو ځانګړی نښه ولري.",
         trainingPlans: {
-           endDateAfterStart: "د پای نېټه باید د پیل نېټې وروسته وي.",
-           futureDate: "د پیل نېټه باید د اوسني وخت وروسته وي.",
+            endDateAfterStart: "د پای نېټه باید د پیل نېټې وروسته وي.",
+            futureDate: "د پیل نېټه باید د اوسني وخت وروسته وي.",
         },
 
 
@@ -539,7 +539,7 @@ const pashto = {
         courseTypes: "د کورس ډولونه",
         courses: "کورسونه",
 
-        
+
 
         trainings: "روزنې",
         addNewEducationLevel: "د زده کړې نوې کچه اضافه کړئ",
@@ -579,14 +579,34 @@ const pashto = {
         },
         trainers: {
             trainers: "روزونکي",
-            trainerList: "د روزونکو لیست",
-            addNewTrainer: "نوی روزونکی اضافه کړئ",
-            addingNewTrainer: "د نوي روزونکي اضافه کول",
-            trainerInfo: "د روزونکي معلومات",
-            trainerName: "د روزونکي نوم",
-            trainerEmail: "د روزونکي برېښنالیک",
-            trainerPhone: "د روزونکي د اړیکې شمېره",
+            createTrainer: "نوی روزونکی جوړول",
+            editTrainer: "روزونکی سمول",
+            id: "پېژندنه",
+            name: "بشپړ نوم",
+            namePlaceholder: "د روزونکي بشپړ نوم دننه کړئ",
+            type: "ډول",
+            selectType: "د روزونکي ډول وټاکئ",
+            phone: "د تلیفون شمېره",
+            phonePlaceholder: "د تلیفون شمېره دننه کړئ",
+            email: "برېښناليک",
+            emailPlaceholder: "برېښناليک آدرس دننه کړئ",
+            licenseNumber: "د جواز شمېره",
+            licensePlaceholder: "د جواز شمېره دننه کړئ",
+            organization: "اداره/سازمان",
+            organizationPlaceholder: "د ادارې نوم دننه کړئ",
+            address: "آدرس",
+            addressPlaceholder: "آدرس دننه کړئ",
+            description: "تشریح",
+            descriptionPlaceholder: "تشریح دننه کړئ",
+            contact: "اړیکه",
+            license: "جواز",
+            types: {
+                internal: "داخلي",
+                external: "بهرنی",
+                consultant: "سلاکار"
+            }
         },
+
 
         trainingPlans: {
             trainingPlans: "د روزنې پلانونه",
