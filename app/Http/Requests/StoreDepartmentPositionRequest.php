@@ -32,10 +32,10 @@ class StoreDepartmentPositionRequest extends FormRequest
                 'max:255',
             ],
 
-            'grade' => [
-                'nullable',
+            'grade' => [ 
+                'required',
                 'string',
-                'max:100',
+                'max:30',
             ],
 
             'total_positions' => [
@@ -77,6 +77,7 @@ class StoreDepartmentPositionRequest extends FormRequest
 
             'grade.string' => 'department_position.grade_invalid',
             'grade.max'    => 'department_position.grade_too_long',
+            'grade.required' => 'department_position.grade_required',
 
 
             'quantity.required' => 'department_position.quantity_required',

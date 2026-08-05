@@ -12,16 +12,16 @@ import {
     Menu,
     Box,
     Layers,
-    PlaneLanding, 
+    PlaneLanding,
     Layers2,
     PlaneTakeoff,
     UsersRound,
     UserCheck,
     Building2,
-        GraduationCap,
-    BookOpen, 
+    GraduationCap,
+    BookOpen,
     BriefcaseBusiness,
-    Award,  
+    Award,
     CalendarCheck,
     Network,
 } from "lucide-react";
@@ -130,86 +130,60 @@ const Sidebar = () => {
             ],
         },
         // Education Part
-     {
-    href: route("education.dashboard"),
-    label: t("education.educationPart"),
-    icon: <GraduationCap className="w-5 h-5" />,
-    keyword: "education",
-    can: permissions.includes("viewEducationMenu") || true,
-
-    subItems: [
-
         {
-            href: route("education.levels.index"),
-            label: t("education.educationLevels"),
-            icon: <BookOpen className="w-4 h-4" />,
-            keyword: "educationLevels",
+            href: route("education.dashboard"),
+            label: t("education.educationPart"),
+            icon: <GraduationCap className="w-5 h-5" />,
+            keyword: "education",
+            can: permissions.includes("viewEducationMenu") || true,
+
+            subItems: [
+
+
+
+
+                {
+                    href: route("education.certificates.index"),
+                    label: t("education.certificates"),
+                    icon: <Award className="w-4 h-4" />,
+                    keyword: "certificates",
+                },
+
+
+                {
+                    href: route("education.courses.index"),
+                    label: t("education.courses.courses"),
+                    icon: <BookOpen className="w-4 h-4" />,
+                    keyword: "courses",
+                },
+
+
+
+
+                {
+                    href: route("training-plans.index"),
+                    label: t("education.trainingPlans"),
+                    icon: <CalendarCheck className="w-4 h-4" />,
+                    keyword: "trainingPlans",
+                },
+
+                {
+                    href: route("trainers.index"),
+                    label: t("education.trainers"),
+                    icon: <Users className="w-4 h-4" />,
+                    keyword: "trainers",
+                },
+
+
+                {
+                    href: route("education.levels.index"),
+                    label: t("education.educationLevels"),
+                    icon: <BookOpen className="w-4 h-4" />,
+                    keyword: "educationLevels",
+                },
+
+            ],
         },
-
-        {
-            href: route("education.employee.index"),
-            label: t("education.employeeEducation"),
-            icon: <BookOpen className="w-4 h-4" />,
-            keyword: "employeeEducation",
-        },
-
-        {
-            href: route("education.position.required.index"),
-            label: t("education.positionRequiredEducation"),
-            icon: <BriefcaseBusiness className="w-4 h-4" />,
-            keyword: "positionRequiredEducation",
-        },
-
-
-        {
-            href: route("certificates.index"),
-            label: t("education.certificates"),
-            icon: <Award className="w-4 h-4" />,
-            keyword: "certificates",
-        },
-
-
-        {
-            href: route("course-types.index"),
-            label: t("education.courseTypes"),
-            icon: <Layers className="w-4 h-4" />,
-            keyword: "courseTypes",
-        },
-
-
-        {
-            href: route("courses.index"),
-            label: t("education.courses"),
-            icon: <BookOpen className="w-4 h-4" />,
-            keyword: "courses",
-        },
-
-
-        {
-            href: route("trainers.index"),
-            label: t("education.trainers"),
-            icon: <Users className="w-4 h-4" />,
-            keyword: "trainers",
-        },
-
-
-        {
-            href: route("training-plans.index"),
-            label: t("education.trainingPlans"),
-            icon: <CalendarCheck className="w-4 h-4" />,
-            keyword: "trainingPlans",
-        },
-
-
-        {
-            href: route("trainings.index"),
-            label: t("education.trainings"),
-            icon: <GraduationCap className="w-4 h-4" />,
-            keyword: "trainings",
-        },
-
-    ],
-},
         // Tashkilat Part
         {
             href: route("Tashkilat.dashboard"),
@@ -347,8 +321,8 @@ const Sidebar = () => {
                     <Link href="/" className="hover:cursor-pointer">
                         <ApplicationLogo
                             className={`h-auto transition-all duration-500 ${collapsed
-                                    ? "w-10 opacity-90"
-                                    : "w-20 opacity-100"
+                                ? "w-10 opacity-90"
+                                : "w-20 opacity-100"
                                 }`}
                         />
                     </Link>
@@ -392,8 +366,8 @@ const Sidebar = () => {
                                 <Link
                                     href={link.href}
                                     className={`flex items-center gap-3 mx-2 mb-0.5 px-3 py-1.5 rounded-lg transition-all duration-500 ${collapsed
-                                            ? "justify-center"
-                                            : "justify-start"
+                                        ? "justify-center"
+                                        : "justify-start"
                                         } ${isParentActive
                                             ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                                             : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200"
@@ -401,8 +375,8 @@ const Sidebar = () => {
                                 >
                                     <span
                                         className={`transition-colors duration-500 ${isParentActive
-                                                ? "text-gray-900 dark:text-gray-100"
-                                                : "text-gray-500 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300"
+                                            ? "text-gray-900 dark:text-gray-100"
+                                            : "text-gray-500 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300"
                                             }`}
                                     >
                                         {link.icon}
@@ -410,8 +384,8 @@ const Sidebar = () => {
 
                                     <span
                                         className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${collapsed
-                                                ? "opacity-0 w-0 ml-0"
-                                                : "opacity-100 w-auto ml-2"
+                                            ? "opacity-0 w-0 ml-0"
+                                            : "opacity-100 w-auto ml-2"
                                             }`}
                                     >
                                         {link.label}
@@ -449,10 +423,10 @@ const Sidebar = () => {
                             {hasSubItems && (
                                 <div
                                     className={`ml-4 pl-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ${(openItems[link.keyword] ||
-                                            isChildActive(link.subItems)) &&
-                                            !collapsed
-                                            ? "max-h-96 opacity-100 mt-1 mb-1"
-                                            : "max-h-0 opacity-0 mt-0 mb-0"
+                                        isChildActive(link.subItems)) &&
+                                        !collapsed
+                                        ? "max-h-96 opacity-100 mt-1 mb-1"
+                                        : "max-h-0 opacity-0 mt-0 mb-0"
                                         }`}
                                 >
                                     {link.subItems.map((sub) => (
@@ -460,22 +434,22 @@ const Sidebar = () => {
                                             key={sub.keyword}
                                             href={sub.href}
                                             className={`flex items-center gap-3 mx-2 px-3 py-2 rounded-lg transition-all duration-500 ${isActive(sub.href)
-                                                    ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                                                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200"
+                                                ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200"
                                                 }`}
                                         >
                                             <span
                                                 className={`w-4 h-4 ${isActive(sub.href)
-                                                        ? "text-gray-900 dark:text-gray-100"
-                                                        : "text-gray-500 dark:text-gray-500"
+                                                    ? "text-gray-900 dark:text-gray-100"
+                                                    : "text-gray-500 dark:text-gray-500"
                                                     }`}
                                             >
                                                 {sub.icon}
                                             </span>
                                             <span
                                                 className={`text-sm transition-all duration-500 overflow-hidden whitespace-nowrap ${collapsed
-                                                        ? "opacity-0 w-0 ml-0"
-                                                        : "opacity-100 w-auto ml-2"
+                                                    ? "opacity-0 w-0 ml-0"
+                                                    : "opacity-100 w-auto ml-2"
                                                     }`}
                                             >
                                                 {sub.label}
@@ -513,8 +487,8 @@ const Sidebar = () => {
 
                             <span
                                 className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${collapsed
-                                        ? "opacity-0 w-0 ml-0"
-                                        : "opacity-100 w-auto ml-2"
+                                    ? "opacity-0 w-0 ml-0"
+                                    : "opacity-100 w-auto ml-2"
                                     }`}
                             >
                                 {i18n.language === "dr"

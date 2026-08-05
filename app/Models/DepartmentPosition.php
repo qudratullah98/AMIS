@@ -22,7 +22,18 @@ class DepartmentPosition extends Model
     | Relationships
     |--------------------------------------------------------------------------
     */
-
+  public function PositionRequredCertificates()
+    {
+        return $this->hasMany(PositionRequiredCertificate::class);
+    }
+    public function positionRequredCourses()
+    {
+        return $this->hasMany(PositionRequiredCourse::class);
+    }
+    public function positionRequredEductions()
+    {
+        return $this->hasMany(PositionRequiredEducation::class);
+    }
 
     public function vacancy()
     {
@@ -44,6 +55,7 @@ class DepartmentPosition extends Model
     {
         return $this->hasMany(EmployeeAssignment::class);
     }
+  
 
 
 

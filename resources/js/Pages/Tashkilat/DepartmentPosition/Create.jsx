@@ -24,6 +24,7 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
 
         initialValues: {
             title: "",
+            grade: "",
             department_id: "",
             position_type_id: "",
             total_positions: 1,
@@ -42,11 +43,15 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
             position_type_id: Yup.number()
                 .required(t("validation.required")),
 
-      
+
 
             total_positions: Yup.number()
                 .required(t("validation.required"))
                 .min(1),
+
+            grade: Yup.string()
+                .required(t("validation.required"))
+                .max(50),
 
             description: Yup.string()
                 .nullable(),
@@ -56,44 +61,27 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
         onSubmit: async (values, { resetForm, setSubmitting, setErrors }) => {
 
             try {
-
                 const response =
                     await axios.post(
                         route("department-positions.store"),
                         values
                     );
-
-
-                if (response.data.success) {
-
-                    toast.success(response.data.message);
-
-                    resetForm();
-
-                    onSubmitSuccess(response.data.data);
-
-                }
+                if (response.data.success) { toast.success(response.data.message); resetForm(); onSubmitSuccess(response.data.data); }
 
 
             } catch (error) {
-
                 if (error.response?.status === 422) {
-
                     setErrors(
                         error.response.data.errors
                     );
-
                 } else {
-
                     toast.error(
                         "Something went wrong"
                     );
-
                 }
 
             }
             finally {
-
                 setSubmitting(false);
 
             }
@@ -109,35 +97,23 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
         const fetchData = async () => {
 
             try {
-
                 const [
                     departmentsResponse,
                     positionTypesResponse
-                ] = await Promise.all([
-
-                    axios.get(
-                        route("departments.json")
-                    ),
-
-                    axios.get(
-                        route("position-types.json")
-                    )
-
-                ]);
-
-
+                ] = await Promise.all([axios.get(
+                    route("departments.json")
+                ), axios.get(
+                    route("position-types.json")
+                )]);
                 setDepartments(
                     departmentsResponse.data
                 );
-
-
                 setPositionTypes(
                     positionTypesResponse.data
                 );
 
 
             } catch (error) {
-
                 toast.error(
                     t("common.somethingWentWrong")
                 );
@@ -151,6 +127,9 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
 
     }, []);
 
+
+
+
     return (
 
         <form
@@ -159,23 +138,9 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
         >
 
 
-            <div>
-
-                <InputLabel
-                    value={t("tashkilat.positionTitle")}
-                />
-
-                <TextInput
-
-                    name="title"
-
-                    value={formik.values.title}
-
-                    onChange={formik.handleChange}
-
-                />
-
-
+            <div>  <InputLabel
+                value={t("tashkilat.positionTitle")}
+            />  <TextInput name="title" value={formik.values.title} onChange={formik.handleChange} />
                 <InputError
                     message={
                         formik.touched.title &&
@@ -187,16 +152,31 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
             </div>
 
 
+
+
+            <div>
+                <InputLabel value={t("tashkilat.grade")} />
+                <TextInput
+                    name="grade"
+                    value={formik.values.grade}
+                    onChange={formik.handleChange} />
+                <InputError
+                    message={
+                        formik.touched.grade &&
+                        formik.errors.grade
+                    }
+                />
+            </div>
+
+
             <div>
                 <InputLabel value={t("tashkilat.totalPositions")} />
-
                 <TextInput
                     type="number"
                     name="total_positions"
                     value={formik.values.total_positions}
                     onChange={formik.handleChange}
                 />
-
                 <InputError
                     message={
                         formik.touched.total_positions &&
@@ -204,40 +184,21 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
                     }
                 />
             </div>
-
-            <div>
-
-                <InputLabel
-                    value={t("tashkilat.department")}
-                />
-
-
-                <CustomSelect
-
-                    value={
-                        formik.values.department_id
-                    }
-
-
+            <div>  <InputLabel
+                value={t("tashkilat.department")}
+            />
+                <CustomSelect value={
+                    formik.values.department_id
+                }
                     options={
-                        departments.map(item => ({
-
-                            value: item.id,
-
-                            label: item.name
-
-                        }))
+                        departments.map(item => ({ value: item.id, label: item.name }))
                     }
-
-
                     onChange={(value) =>
                         formik.setFieldValue(
                             "department_id",
                             value
                         )
                     }
-
-
                 />
 
             </div>
@@ -245,54 +206,31 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
 
 
 
-            <div>
-
-                <InputLabel
-                    value={t("tashkilat.positionType")}
-                />
-
-
-                <CustomSelect
-
-                    value={
-                        formik.values.position_type_id
-                    }
-
-
+            <div>  <InputLabel
+                value={t("tashkilat.positionType")}
+            />
+                <CustomSelect value={
+                    formik.values.position_type_id
+                }
                     options={
-                        positionTypes.map(item => ({
-
-                            value: item.id,
-
-                            label: item.title
-
-                        }))
-                    }
-
-
-                    onChange={(value) =>
+                        positionTypes.map(item => ({ value: item.id, label: item.title }))
+                    } onChange={(value) =>
                         formik.setFieldValue(
                             "position_type_id",
                             value
                         )
                     }
-
-
                 />
 
             </div>
             <div>
-                <InputLabel value={t("common.description")} />
-
-                <textarea
+                <InputLabel value={t("common.description")} />  <textarea
                     name="description"
                     rows={4}
                     value={formik.values.description}
                     onChange={formik.handleChange}
                     className="w-full rounded-md border-gray-300"
-                />
-
-                <InputError
+                />  <InputError
                     message={
                         formik.touched.description &&
                         formik.errors.description
@@ -302,21 +240,15 @@ function CreateDepartmentPosition({ onSubmitSuccess }) {
 
 
 
-            <div className="flex justify-end">
-
-                <PrimaryButton
-                    disabled={formik.isSubmitting}
-                >
-
-                    {
-                        formik.isSubmitting
-                            ?
-                            t("common.saving")
-                            :
-                            t("common.save")
-                    }
-
-                </PrimaryButton>
+            <div className="flex justify-end">  <PrimaryButton
+                disabled={formik.isSubmitting}
+            >      {
+                    formik.isSubmitting
+                        ?
+                        t("common.saving")
+                        :
+                        t("common.save")
+                }  </PrimaryButton>
 
 
             </div>

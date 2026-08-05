@@ -446,11 +446,12 @@ const dari = {
         positionTitle: "عنوان بست",
         department: "ریاست",
         positionTypeList: "فهرست نوعیت‌های بست",
-        grade: "کد درجه بست",
+        grade: " درجه بست",
 
         totalPositions: "مجموع بست‌ها",
         salary: "معاش",
         description: "توضیحات",
+        addRequirements: "اضافه نمودن ضرورت‌ها",
         organization: {
             name: "نام سازمان",
             code: "کد سازمان",
@@ -545,21 +546,71 @@ const dari = {
         },
     },
     education: {
-        educationPart: " تحصیلات و آموزش",
+        educationPart: "تحصیلات و آموزش",
         educationLevels: "سطوح تحصیلی",
         employeeEducation: "تحصیلات کارمند",
         positionRequiredEducation: "تحصیلات مورد نیاز بست",
 
-        certificates: "سندها",
+        certificates: "اسناد",
 
-        courseTypes: "انواع کورس‌ها",
+        courseTypes: "انواع کورس",
         courses: "کورس‌ها",
 
         trainers: "آموزش‌دهندگان",
 
         trainingPlans: "پلان‌های آموزشی",
         trainings: "آموزش‌ها",
-        addNewEducationLevel: "سطح تحصیلی جدید را اضافه کنید",
+
+        addNewEducationLevel: "افزودن سطح تحصیلی جدید",
+        educationLevel: "سطح تحصیلی",
+        educations: "تحصیلات",
+        feildofStudy: "رشته تحصیلی",
+        university: "دانشگاه",
+        graduationYear: "سال فراغت",
+        certificate: "سند",
+        obtainedDate: "تاریخ دریافت",
+        expiryDate: "تاریخ انقضا",
+        certificateNumber: "شماره سند",
+        addCertificate: "افزودن سند",
+        addNewCertificate: "افزودن سند جدید",
+        certificateName: "نام سند",
+        certificateLevel: "سطح سند",
+        certificateList: "فهرست اسناد",
+        createCertificate: "ایجاد سند",
+
+        levels: {
+            beginner: "مبتدی",
+            intermediate: "متوسط",
+            advanced: "پیشرفته",
+            expert: "متخصص",
+        },
+        courses: {
+            course: "کورس",
+            courses: "کورس‌ها",
+            courseType: "نوع کورس",
+            courseTypes: "انواع کورس",
+            addNewCourse: "افزودن کورس جدید",
+            createCourse: "ایجاد کورس",
+            editCourse: "ویرایش کورس",
+            courseList: "فهرست کورس‌ها",
+            courseName: "نام کورس",
+            courseCode: "کود کورس",
+            validityPeriod: "مدت اعتبار (ماه)", 
+        },
+        trainers: {
+            trainer: "آموزشدهندگان",
+            trainerList: "فهرست آموزشدهندگان",
+            addNewTrainer: "افزودن آموزشدهندگان جدید",
+            createTrainer: "ایجاد آموزشدهندگان",
+            editTrainer: "ویرایش آموزشدهندگان",
+        },
+        trainingPlans: {
+            trainingPlan: "پلان آموزشی",
+            trainingPlanList: "فهرست پلان‌های آموزشی",
+            addNewTrainingPlan: "افزودن پلان آموزشی جدید",
+            createTrainingPlan: "ایجاد پلان آموزشی",
+            editTrainingPlan: "ویرایش پلان آموزشی",
+        },
     }
 };
 

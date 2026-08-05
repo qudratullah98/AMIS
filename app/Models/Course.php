@@ -11,10 +11,8 @@ class Course extends Model
 
         'course_type_id',
         'name',
-        'code',
-        'duration_hours',
         'description',
-        'validity_months'
+        'validity_months', 
 
     ];
 
@@ -33,10 +31,7 @@ class Course extends Model
 
     public function trainers()
     {
-        return $this->belongsToMany(
-            Trainer::class,
-            'course_trainers'
-        );
+        return $this->hasMany(Trainer::class);
     }
 
 
