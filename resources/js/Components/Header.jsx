@@ -26,7 +26,6 @@ export default function Header() {
     const location = window.location.pathname;
     const { activeTab, changeTab } = useTabStore();
 
-
     // Menu groups
     const menuGroups = {
         dashboard: [
@@ -117,39 +116,72 @@ export default function Header() {
                 can: true,
             },
         ],
-        
+
         positions: [
             {
                 title: t("tashkilat.educationPart"),
                 icon: <GraduationCap className="w-5 h-5" />,
                 can: true,
                 isbutton: true,
-                tabKey: 'educations',
+                tabKey: "educations",
                 clickhandler: () => {
-                    changeTab('educations');
-                }
+                    changeTab("educations");
+                },
             },
             {
                 title: t("tashkilat.certificatesPart"),
                 icon: <Award className="w-5 h-5" />,
                 can: true,
                 isbutton: true,
-                tabKey: 'certificates',
+                tabKey: "certificates",
                 clickhandler: () => {
-                    changeTab('certificates');
-                }
+                    changeTab("certificates");
+                },
             },
             {
                 title: t("tashkilat.trainingsPart"),
                 icon: <BookOpen className="w-5 h-5" />,
                 can: true,
                 isbutton: true,
-                tabKey: 'courses',
+                tabKey: "courses",
                 clickhandler: () => {
-                    changeTab('courses');
-                }
+                    changeTab("courses");
+                },
             },
-        ]
+        ],
+
+        employeeEducation: [
+            {
+                title: t("education.educations"),
+                icon: <GraduationCap className="w-5 h-5" />,
+                can: true,
+                isbutton: true,
+                tabKey: "employee-education",
+                clickhandler: () => {
+                    changeTab("employee-education");
+                },
+            },
+            {
+                title: t("education.certificates"),
+                icon: <Award className="w-5 h-5" />,
+                can: true,
+                isbutton: true,
+                tabKey: "employee-certificates",
+                clickhandler: () => {
+                    changeTab("employee-certificates");
+                },
+            },
+            {
+                title: t("education.trainings"),
+                icon: <BookOpen className="w-5 h-5" />,
+                can: true,
+                isbutton: true,
+                tabKey: "employee-trainings",
+                clickhandler: () => {
+                    changeTab("employee-trainings");
+                },
+            },
+        ],
     };
 
     // Determine which menu group to show based on current path
@@ -178,8 +210,18 @@ export default function Header() {
             return menuGroups.constructions;
         if (location.startsWith("/flights") || location.startsWith("/flight"))
             return menuGroups.flight;
-        if (location.startsWith("/positions") || location.startsWith("/positions"))
+        if (
+            location.startsWith("/positions") ||
+            location.startsWith("/positions")
+        )
             return menuGroups.positions;
+
+        if (
+            location.startsWith("/employees/") &&
+            location.includes("/education")
+        ) {
+            return menuGroups.employeeEducation;
+        }
 
         if (location === "/logout" || location === "/profile")
             return menuGroups.profile;
@@ -224,7 +266,7 @@ export default function Header() {
                                 location
                                     .split("/")
                                     .filter(Boolean)
-                                    .includes(part)
+                                    .includes(part),
                             )
                             ? "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white"
                             : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"

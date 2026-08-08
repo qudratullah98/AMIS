@@ -16,7 +16,7 @@ const dari = {
     },
 
     common: {
-        runwayDetails:"جزئیات رنوی",
+        runwayDetails: "جزئیات رنوی",
         dashboard: "داشبورد",
         loading: "لطفاً صبر کنید...",
         name: "نام",
@@ -27,7 +27,7 @@ const dari = {
         district: "ولسوالی",
         selectProvince: "ولایت را انتخاب کنید",
         selectDistrict: "ولسوالی را انتخاب کنید",
-        confirmDelete:"آیا دیلیت شود!",
+        confirmDelete: "آیا دیلیت شود!",
         action: "عملیات",
         NO: "شماره",
         date: "تاریخ",
@@ -55,7 +55,7 @@ const dari = {
         clear: "پاک کردن",
         goBack: "بازگشت",
         type: "نوع",
-        errorOccured:"خطا رخ داد!",
+        errorOccured: "خطا رخ داد!",
 
         image: "عکس",
         log: "لاگ",
@@ -85,8 +85,8 @@ const dari = {
         reset: "پاک کردن",
         documents: "اسناد",
         status: "وضعیت",
-        deletedSuccessfully:"موفقانه delete ګردید",
-        noInfoFound:"معلومات یافت نگردید",
+        deletedSuccessfully: "موفقانه delete ګردید",
+        noInfoFound: "معلومات یافت نگردید",
     },
 
     input: {
@@ -108,7 +108,8 @@ const dari = {
     },
 
     error: {
-        general: "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
+        general:
+            "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
         credentialInvalid: "ایمیل یا رمز عبور نادرست است",
 
         fieldIsNeeded: "پر کردن این بخش الزامی است.",
@@ -172,7 +173,8 @@ const dari = {
             unit_required: "انتخاب واحد خدمت الزامی است.",
             unit_invalid: "واحد خدمت انتخاب‌شده معتبر نیست.",
 
-            airline_rates_required: "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
+            airline_rates_required:
+                "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
             airline_rates_invalid: "اطلاعات نرخ‌های شرکت‌های هوایی معتبر نیست.",
             airline_rates_min: "حداقل یک شرکت هوایی باید اضافه شود.",
 
@@ -196,7 +198,8 @@ const dari = {
             year_integer: "سال باید یک عدد صحیح باشد.",
             year_min: "سال باید حداقل 1000 باشد.",
             year_max: "سال نباید بیشتر از 9999 باشد.",
-            organization_year_unique: "برای این سازمان، تشکیل این سال قبلاً ثبت شده است.",
+            organization_year_unique:
+                "برای این سازمان، تشکیل این سال قبلاً ثبت شده است.",
 
             reference_number_required: "شماره مرجع الزامی است.",
             reference_number_string: "شماره مرجع باید متن باشد.",
@@ -236,7 +239,7 @@ const dari = {
             count_required: "تعداد الزامی است.",
             count_integer: "تعداد باید یک عدد صحیح باشد.",
             count_min: "تعداد باید حداقل ۱ باشد.",
-        }
+        },
     },
     success: {
         organization_stored_successfully: "سازمان با موفقیت ایجاد شد.",
@@ -294,8 +297,8 @@ const dari = {
         airportType: "نوعیت میدان هوایی",
         aircraftTypes: "انواع هواپیما ها",
         aircraftType: "انواع هواپیما",
-        addNewAircraftType:"نوعیت جدید هواپیما را اضافه نمایید",
-        addingNewAircraftType:"اضافه نمودن نوعیت جدید هواپیما",
+        addNewAircraftType: "نوعیت جدید هواپیما را اضافه نمایید",
+        addingNewAircraftType: "اضافه نمودن نوعیت جدید هواپیما",
 
         aircraftCode: "کود هواپیما",
         type: {
@@ -429,7 +432,8 @@ const dari = {
     },
 
     tashkilat: {
-        pleaseAddPositionRequirements: "لطفاً شرایط مورد نیاز بست را اضافه نمایید",
+        pleaseAddPositionRequirements:
+            "لطفاً شرایط مورد نیاز بست را اضافه نمایید",
         selectCertificate: "لطفاً سند مورد نظر را انتخاب نمایید",
         selectEducationLevel: "لطفاً سطح تحصیلی را انتخاب نمایید",
         totalRequirments: "مجموع شرایط مورد نیاز بست",
@@ -441,14 +445,9 @@ const dari = {
         certificatesPart: "بخش اسناد",
         educationPart: "بخش تحصیلات",
         trainingsPart: "بخش کورس‌ها و آموزش‌ها",
-        monthOrMonths:"ماه/ ماه ها",
-         Required: "الزامی میباشد",
-  notRequired: " الزامی نمی باشد",
-
-
-
-
-
+        monthOrMonths: "ماه/ ماه ها",
+        Required: "الزامی میباشد",
+        notRequired: " الزامی نمی باشد",
 
         organizations: "اداره عمومی",
         createOrganization: "ایجاد سازمان",
@@ -469,7 +468,7 @@ const dari = {
         code: "کد",
         tashkilList: "لیست تشکیلات",
         CreateNewTashkil: "ایجاد تشکیلات جدید",
-        createNewPositionType: 'ایجاد نوعیت بست',
+        createNewPositionType: "ایجاد نوعیت بست",
         positionType: "نوعیت بست",
 
         createDepartmentPosition: "ایجاد بست تشکیلاتی ریاست",
@@ -547,7 +546,7 @@ const dari = {
 
             active: "فعال",
 
-            inactive: "غیرفعال"
+            inactive: "غیرفعال",
         },
         employeeAssignment: {
             employeeAssignmentsList: "لیست وظایف کارمندان",
@@ -573,9 +572,10 @@ const dari = {
             pending: "در انتظار",
             approved: "تایید شده",
             rejected: "رد شده",
-            underReview: "در حال بررسی"
+            underReview: "در حال بررسی",
         },
     },
+    
     education: {
         educationPart: "تحصیلات و آموزش",
         educationLevels: "سطوح تحصیلی",
@@ -661,11 +661,10 @@ const dari = {
                 planned: "برنامه‌ریزی شده",
                 in_progress: "در جریان",
                 completed: "تکمیل شده",
-                cancelled: "لغو شده"
-            }
+                cancelled: "لغو شده",
+            },
         },
-
-    }
+    },
 };
 
 export default dari;

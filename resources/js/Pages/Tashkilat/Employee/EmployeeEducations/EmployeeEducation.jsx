@@ -1,249 +1,343 @@
-import React, { useState } from "react";
-import {
-  GraduationCap,
-  Award,
-  BookOpen,
-  User,
-  Phone,
-  Mail,
-} from "lucide-react";
+// Pages/EmployeeEducation/EmployeeEducation.jsx
+
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { usePage } from "@inertiajs/react";
+import useTabStore from "@/stores/tabStore";
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import SubHeader from "@/Components/SubHeader";
+import CustomModal from "@/Components/CustomModal";
 
 import EducationTab from "./EducationTab";
 import CertificateTab from "./CertificateTab";
 import TrainingTab from "./TrainingTab";
 import CreateEducation from "./CreateEducation";
-import CustomModal from "@/Components/CustomModal";
 import CreateCertificate from "./CreateCertificate";
+import Breadcrumbs from "@/Components/Breadcrumbs";
+import GoBackButton from "@/Components/GoBackButton";
 
 export default function EmployeeEducation({ employee }) {
-  const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("education");
-  const [showEducationCreateModal, setShowEducationCreateModal] = useState(false);
-  const [showCertificateCreateModal, setShowCertificateCreateModal] = useState(false);
+    const { t } = useTranslation();
+    const { activeTab, changeTab } = useTabStore();
 
-  const tabs = [
-    {
-      key: "education",
-      label: t("education.educations"),
-      icon: GraduationCap,
-      color: "blue",
-    },
-    {
-      key: "certificates",
-      label: t("education.certificates"),
-      icon: Award,
-      color: "purple",
-    },
-    {
-      key: "trainings",
-      label: t("education.trainings"),
-      icon: BookOpen,
-      color: "green",
-    },
-  ];
+    const [showEducationCreateModal, setShowEducationCreateModal] =
+        React.useState(false);
 
-  const getTabStyles = (tabKey) => {
-    const isActive = activeTab === tabKey;
+    const [showCertificateCreateModal, setShowCertificateCreateModal] =
+        React.useState(false);
 
-    const baseStyles = {
-      trainings: {
-        active: "bg-blue-50 text-blue-700 border-blue-200",
-        inactive: "text-gray-600 hover:text-blue-600 hover:bg-blue-50",
-        iconActive: "text-blue-600",
-        iconInactive: "text-gray-400",
-      },
-      certificates: {
-        active: "bg-purple-50 text-purple-700 border-purple-200",
-        inactive: "text-gray-600 hover:text-purple-600 hover:bg-purple-50",
-        iconActive: "text-purple-600",
-        iconInactive: "text-gray-400",
-      },
-      education: {
-        active: "bg-green-50 text-green-700 border-green-200",
-        inactive: "text-gray-600 hover:text-green-600 hover:bg-green-50",
-        iconActive: "text-green-600",
-        iconInactive: "text-gray-400",
-      },
+    /*
+     * Set the default tab when this page is opened.
+     *
+     * This is important because Header.jsx controls the tabs
+     * using these exact keys:
+     *
+     * employee-education
+     * employee-certificates
+     * employee-trainings
+     */
+    useEffect(() => {
+        if (
+            ![
+                "employee-education",
+                "employee-certificates",
+                "employee-trainings",
+            ].includes(activeTab)
+        ) {
+            changeTab("employee-education");
+        }
+    }, [activeTab, changeTab]);
+
+    /*
+     * Render the content according to the tab selected
+     * from Header.jsx.
+     */
+    const renderContent = () => {
+        switch (activeTab) {
+            case "employee-education":
+                return (
+                    <EducationTab
+                        employee={employee}
+                        onOpenEducationModel={() => {
+                            setShowEducationCreateModal(true);
+                        }}
+                    />
+                );
+
+            case "employee-certificates":
+                return (
+                    <CertificateTab
+                        employee={employee}
+                        onOpenCertificateModel={() => {
+                            setShowCertificateCreateModal(true);
+                        }}
+                    />
+                );
+
+            case "employee-trainings":
+                return <TrainingTab employee={employee} />;
+
+            default:
+                return (
+                    <EducationTab
+                        employee={employee}
+                        onOpenEducationModel={() => {
+                            setShowEducationCreateModal(true);
+                        }}
+                    />
+                );
+        }
     };
 
-    return baseStyles[tabKey] || baseStyles.education;
-  };
+    return (
+        <AuthenticatedLayout
+            header={<SubHeader title={t("education.employeeEducation")} />}
+        >
+            {/* Page breadcrumb/header */}
 
-  const renderTab = () => {
-    switch (activeTab) {
-      case "education":
-        return <EducationTab employee={employee} onOpenEducationModel={() => { setShowEducationCreateModal(true);  }} />;
-      case "certificates":
-        return <CertificateTab employee={employee} onOpenCertificateModel={() => { setShowCertificateCreateModal(true);console.log("onOpenCertificateModel");  }} />;
-      case "trainings":
-        return <TrainingTab employee={employee} />;
-      default:
-        return null;
-    }
-  };
- 
-  return (
-    <AuthenticatedLayout
-      header={
-        <SubHeader
-          title={t("education.employeeEducation")}
-        />
-      }
-    >
-      <SubHeader
-        links={[
-          {
-            name: t("education.employeeEducation")
-          }
-        ]}
-      />
-      <CustomModal
-        show={showEducationCreateModal}
-        handleClose={() => setShowEducationCreateModal(false)}
-        stopPropagation={false}
-        footer={false}
-      >
-        <CreateEducation
-          employee={employee}
-          educationLevels={[]} // Pass the education levels if available
-          onClose={() => setShowEducationCreateModal(false)}
-          
-        />
-      </CustomModal>
-
-      <CustomModal
-        show={showCertificateCreateModal}
-        handleClose={() => setShowCertificateCreateModal(false)}
-        stopPropagation={false}
-        footer={false}
-      >
-        <CreateCertificate
-          employee={employee}
-          educationLevels={[]} // Pass the education levels if available
-          onClose={() => setShowCertificateCreateModal(false)}
-        />
-      </CustomModal>
-
-      <div className="p-6 mx-auto">
-        {/* Employee Info Card */}
-        {/* Employee Info Card */}
-        <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm border border-gray-200">
-          <div className="flex items-center gap-6">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-              <User className="w-10 h-10 text-gray-500" />
+            <div className="flex items-center justify-between mx-0  ">
+                <Breadcrumbs
+                    links={[
+                        { name: t("common.dashboard"), href: "/" },
+                        {
+                            name: t("tashkilat.employees"),
+                            href: route("employees.index"),
+                        },
+                        { name: t("education.employeeEducation") },
+                    ]}
+                />
+                <GoBackButton />
             </div>
 
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold text-gray-800">
-                {employee?.first_name || t("common.employee")}
-              </h2>
+            {/* =====================================================
+                CREATE EDUCATION MODAL
+            ====================================================== */}
+            <CustomModal
+                show={showEducationCreateModal}
+                handleClose={() => setShowEducationCreateModal(false)}
+                stopPropagation={false}
+                footer={false}
+            >
+                <CreateEducation
+                    employee={employee}
+                    educationLevels={[]}
+                    onClose={() => setShowEducationCreateModal(false)}
+                />
+            </CustomModal>
 
-              <div className="flex flex-wrap items-center gap-5 mt-3 text-gray-600">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-gray-500" />
-                  <span>
-                    {employee?.email || "-"}
-                  </span>
+            {/* =====================================================
+                CREATE CERTIFICATE MODAL
+            ====================================================== */}
+            <CustomModal
+                show={showCertificateCreateModal}
+                handleClose={() => setShowCertificateCreateModal(false)}
+                stopPropagation={false}
+                footer={false}
+            >
+                <CreateCertificate
+                    employee={employee}
+                    educationLevels={[]}
+                    onClose={() => setShowCertificateCreateModal(false)}
+                />
+            </CustomModal>
+
+            {/* =====================================================
+                EMPLOYEE INFORMATION
+            ====================================================== */}
+            <div className="p-0 mx-auto">
+                <div className="bg-white rounded-lg p-4 mb-1 shadow-none border border-gray-200">
+                    <div className="flex items-start justify-between gap-6">
+                        {/* Employee Main Information */}
+                        <div className="flex-1">
+                            {/* Name */}
+                            <div className="flex flex-wrap items-center gap-3">
+                                <h2 className="text-2xl font-bold text-gray-800">
+                                    {employee?.first_name ||
+                                        t("common.employee")}{" "}
+                                    {employee?.last_name || ""}
+                                </h2>
+
+                                {/* Status */}
+                                {/* <span
+                                    className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                                        employee?.status
+                                            ? "bg-green-100 text-green-700"
+                                            : "bg-red-100 text-red-700"
+                                    }`}
+                                >
+                                    {employee?.status
+                                        ? t("state.active")
+                                        : t("state.inactive")}
+                                </span> */}
+                            </div>
+
+                            {/* Employee Details */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 mt-4 text-sm">
+                                {/* Father Name */}
+                                {employee?.father_name && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.fatherName")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.father_name}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Gender */}
+                                {employee?.gender && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.gender")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.gender}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* National ID */}
+                                {employee?.national_id && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.nationalId")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.national_id}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Phone */}
+                                {employee?.phone && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("employee.phone")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.phone}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Email */}
+                                {employee?.email && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.email")}
+                                        </p>
+                                        <p className="font-medium text-gray-700 break-all">
+                                            {employee.email}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Birth Date */}
+                                {employee?.birth_date && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.birthDate")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.birth_date}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Marital Status */}
+                                {employee?.marital_status && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t(
+                                                "tashkilat.employee.maritalStatus",
+                                            )}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.marital_status}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Address */}
+                                {employee?.address && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.address")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.address}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Province */}
+                                {employee?.province && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.province")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.province}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* District */}
+                                {employee?.district && (
+                                    <div>
+                                        <p className="text-gray-400 text-xs mb-1">
+                                            {t("tashkilat.employee.district")}
+                                        </p>
+                                        <p className="font-medium text-gray-700">
+                                            {employee.district}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-500" />
-                  <span>
-                    {employee?.phone || "-"}
-                  </span>
+                {/* =================================================
+                                    TAB CONTENT
+
+                                    The actual tab buttons are in Header.jsx.
+
+                                    Header.jsx calls:
+
+                                    changeTab("employee-education")
+                                    changeTab("employee-certificates")
+                                    changeTab("employee-trainings")
+
+                                    This component renders the selected content.
+                                ================================================== */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-0 min-h-[200px]">
+                    <div className="animate-fadeIn">{renderContent()}</div>
                 </div>
-              </div>
             </div>
 
-            <div className="hidden sm:block">
-              <div className="bg-gray-50 border border-gray-200 rounded-lg px-5 py-3 text-center">
-                <div className="text-2xl font-bold text-gray-800">
-                  {tabs.length}
-                </div>
-
-                <div className="text-sm text-gray-500">
-                  {t("common.total")}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
-          <div className="flex flex-wrap gap-1 p-3 bg-gray-50/50 border-b border-gray-100">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              const styles = getTabStyles(tab.key);
-              const isActive = activeTab === tab.key;
-              const currentStyles = isActive ? styles.active : styles.inactive;
-
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`
-                                        flex items-center gap-2.5
-                                        px-5 py-2.5
-                                        rounded-xl
-                                        text-sm font-medium
-                                        transition-all duration-200
-                                        border-2 border-transparent
-                                        ${currentStyles}
-                                        ${isActive ? "border-current shadow-sm" : ""}
-                                        hover:scale-[1.02]
-                                        focus:outline-none focus:ring-2 focus:ring-offset-1
-                                        ${isActive ? `focus:ring-${tab.color}-500` : "focus:ring-gray-300"}
-                                    `}
-                >
-                  <Icon
-                    className={`
-                                            w-5 h-5 
-                                            transition-colors duration-200
-                                            ${isActive ? styles.iconActive : styles.iconInactive}
-                                        `}
-                  />
-                  <span>{tab.label}</span>
-                  {isActive && (
-                    <span className="ml-1 w-1.5 h-1.5 rounded-full bg-current"></span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Tab Indicator */}
-
-        </div>
-
-        {/* Content Area */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[400px]">
-          <div className="animate-fadeIn">
-            {renderTab()}
-          </div>
-        </div>
-      </div>
-
-      {/* Custom Animation Styles */}
-      <style>{`
+            {/* =====================================================
+                FADE ANIMATION
+            ====================================================== */}
+            <style>{`
                 @keyframes fadeIn {
                     from {
                         opacity: 0;
                         transform: translateY(8px);
                     }
+
                     to {
                         opacity: 1;
                         transform: translateY(0);
                     }
                 }
+
                 .animate-fadeIn {
                     animation: fadeIn 0.3s ease-out forwards;
                 }
             `}</style>
-    </AuthenticatedLayout>
-  );
+        </AuthenticatedLayout>
+    );
 }
