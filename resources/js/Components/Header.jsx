@@ -1,3 +1,4 @@
+// Components/Header.js
 import React from "react";
 import { Link, usePage } from "@inertiajs/react";
 import {
@@ -9,14 +10,22 @@ import {
     PlaneTakeoff,
     Building2,
     ChartColumnBig,
+    ChartNoAxesColumn,
+    Award,
+    BookOpen,
+    GraduationCap,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "./LogoutComponent";
+import { Button } from "./ui/button";
+import useTabStore from "@/stores/tabStore";
 
 export default function Header() {
     const { permissions } = usePage().props.auth;
     const { t } = useTranslation();
     const location = window.location.pathname;
+    const { activeTab, changeTab } = useTabStore();
+ 
 
     // Menu groups
     const menuGroups = {
@@ -61,7 +70,7 @@ export default function Header() {
                 title: t("airport.airports"),
                 href: "/airports",
                 icon: <PlaneTakeoff className="w-5 h-5" />,
-                can: true, //permissions.includes("veiwAirports"),
+                can: true,
             },
         ],
 
@@ -70,7 +79,7 @@ export default function Header() {
                 title: t("airline.airlines"),
                 href: "/airlines",
                 icon: <Building2 className="w-5 h-5" />,
-                can: true, //permissions.includes("veiwAirports"),
+                can: true,
             },
         ],
 
@@ -79,7 +88,7 @@ export default function Header() {
                 title: t("airport.aircraftTypes"),
                 href: "/airCraftTypes",
                 icon: "🚁",
-                can: true, //permissions.includes("veiwAirports"),
+                can: true,
             },
         ],
 
@@ -88,7 +97,7 @@ export default function Header() {
                 title: t("construction.constructionsPart"),
                 href: "/constructions",
                 icon: <PlaneTakeoff className="w-5 h-5" />,
-                can: true, //permissions.includes("veiwAirports"),
+                can: true,
             },
         ],
         flight: [
@@ -96,7 +105,7 @@ export default function Header() {
                 title: t("flight.flights"),
                 href: "/flights",
                 icon: <PlaneTakeoff className="w-5 h-5" />,
-                can: true, //permissions.includes("veiwAirports"),
+                can: true,
             },
         ],
 
@@ -108,6 +117,38 @@ export default function Header() {
                 can: true,
             },
         ],
+        positions: [
+            {
+                title: t("tashkilat.positions.requirements.education"),
+                icon: <GraduationCap className="w-5 h-5" />,
+                can: true,
+                isbutton: true,
+                tabKey: 'educations',
+                clickhandler: () => {
+                    changeTab('educations');
+                }
+            },
+            {
+                title: t("tashkilat.positions.requirements.certificate"),
+                icon: <Award className="w-5 h-5" />,
+                can: true,
+                isbutton: true,
+                tabKey: 'certificates',
+                clickhandler: () => {
+                    changeTab('certificates');
+                }
+            },
+            {
+                title: t("tashkilat.positions.requirements.training"),
+                icon: <BookOpen className="w-5 h-5" />,
+                can: true,
+                isbutton: true,
+                tabKey: 'courses',
+                clickhandler: () => {
+                    changeTab('courses');
+                }
+            },
+        ]
     };
 
     // Determine which menu group to show based on current path
@@ -136,6 +177,8 @@ export default function Header() {
             return menuGroups.constructions;
         if (location.startsWith("/flights") || location.startsWith("/flight"))
             return menuGroups.flight;
+        if (location.startsWith("/positions") || location.startsWith("/positions"))
+            return menuGroups.positions;    
 
         if (location === "/logout" || location === "/profile")
             return menuGroups.profile;
@@ -143,34 +186,54 @@ export default function Header() {
     };
 
     const renderLinks = (links) =>
-        links.map(
-            (item, idx) =>
-                item.can &&
-                (item.href === "/logout" ? (
-                    <LogoutComponent key={idx} />
-                ) : (
-                    <Link
+        links.map((item, idx) => {
+            if (!item.can) return null;
+
+            if (item.href === "/logout") {
+                return <LogoutComponent key={idx} />;
+            }
+
+            if (item?.isbutton) {
+                const isActive = activeTab === item.tabKey;
+                return (
+                    <Button
                         key={idx}
-                        href={item.href}
+                        onClick={item.clickhandler}
                         className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                            item.href
-                                .split("/")
-                                .filter(Boolean)
-                                .some((part) =>
-                                    location
-                                        .split("/")
-                                        .filter(Boolean)
-                                        .includes(part),
-                                )
-                                ? "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white"
-                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            isActive
+                                ? "bg-blue-600 text-white hover:bg-blue-700"
+                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                         }`}
                     >
                         {item.icon}
                         <span>{item.title}</span>
-                    </Link>
-                )),
-        );
+                    </Button>
+                );
+            }
+
+            return (
+                <Link
+                    key={idx}
+                    href={item.href}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        item.href
+                            .split("/")
+                            .filter(Boolean)
+                            .some((part) =>
+                                location
+                                    .split("/")
+                                    .filter(Boolean)
+                                    .includes(part)
+                            )
+                            ? "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
+                >
+                    {item.icon}
+                    <span>{item.title}</span>
+                </Link>
+            );
+        });
 
     return (
         <header
