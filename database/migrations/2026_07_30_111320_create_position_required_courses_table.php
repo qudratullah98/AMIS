@@ -18,26 +18,23 @@ return new class extends Migration
             // Position that requires the course
             $table->foreignIdfor(DepartmentPosition::class)->constrained()->cascadeOnDelete();
 
-
             // Required course
             $table->foreignId('course_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-
             // Mandatory or Optional requirement
             $table->enum('requirement_type', [
                 'mandatory',
-                'optional'
+                'optional',
             ])->default('mandatory');
 
-
-        
+            $table->integer('validity_months')
+                ->nullable();
 
             // Notes
             $table->text('description')
                 ->nullable();
-
 
             $table->timestamps();
         });

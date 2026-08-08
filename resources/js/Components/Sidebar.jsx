@@ -138,10 +138,6 @@ const Sidebar = () => {
             can: permissions.includes("viewEducationMenu") || true,
 
             subItems: [
-
-
-
-
                 {
                     href: route("education.certificates.index"),
                     label: t("education.certificates"),
@@ -149,17 +145,12 @@ const Sidebar = () => {
                     keyword: "certificates",
                 },
 
-
                 {
                     href: route("education.courses.index"),
                     label: t("education.courses.courses"),
                     icon: <BookOpen className="w-4 h-4" />,
                     keyword: "courses",
                 },
-
-
-
-
                 {
                     href: route("training-plans.index"),
                     label: t("education.trainingPlans.trainingPlans"),
@@ -173,8 +164,6 @@ const Sidebar = () => {
                     icon: <Users className="w-4 h-4" />,
                     keyword: "trainers",
                 },
-
-
                 {
                     href: route("education.levels.index"),
                     label: t("education.educationLevels"),

@@ -14,7 +14,7 @@ export default function GoBackButton({
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       onClick={goBack}
       className={`
         px-2.5
@@ -23,14 +23,17 @@ export default function GoBackButton({
         text-xs font-medium
         text-gray-600
         bg-gray-100
+        border border-gray-300
         hover:text-gray-700
         hover:bg-gray-200
+        hover:border-gray-400
         active:scale-95
         transition-all duration-200
         ${className}
       `}
     >
       <ArrowLeft className="h-3 w-3" />
+
       <span className="hidden sm:inline">
         {label || t("common.goBack")}
       </span>

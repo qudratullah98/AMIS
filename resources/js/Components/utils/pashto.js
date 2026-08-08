@@ -70,6 +70,8 @@ const pashto = {
         informationtStoredSuccessfully: "معلومات په بریالیتوب سره ثبت شول",
         informationtUpdatedSuccessfully: "معلومات په بریالیتوب سره بدل شول",
         informationtApprovedSuccessfully: "معلومات په بریالیتوب سره ومنل شول",
+        noInfoFound:"کوم معلومات و نموندل شود",
+
 
         width: "بر (سور)",
         widthUnit: "د بر(سور) و اندازه کولو واحد",
@@ -90,6 +92,11 @@ const pashto = {
         unit: "واحد",
         reset: "پاکول",
         documents: "اسناد",
+        errorOccured:"یوه تېروتنه رامنځته شوه!",
+        confirmDelete:"آیا Delete شي!",
+        deletedSuccessfully:"په بریالیتوب سره لرې شو"
+
+
     },
 
     input: {
@@ -432,6 +439,22 @@ const pashto = {
     },
 
     tashkilat: {
+         pleaseAddPositionRequirements: "مهرباني وکړئ د بست اړین شرایط اضافه کړئ",
+        selectCertificate: "مهرباني وکړئ اړوند سند انتخاب کړئ",
+        selectEducationLevel: "مهرباني وکړئ د زده‌کړې کچه انتخاب کړئ",
+        totalRequirments: "د بست د اړینو شرایطو ټوټل",
+        selectCourse: "مهرباني وکړئ اړوند کورس انتخاب کړئ",
+        validityMonths: "د کورس د اعتبار موده په میاشتو کې",
+        courseIsMandatory: "کورس اجباري دی",
+        courseIsPrefered: "کورس ترجیحي دی",
+        courseIsOptional: "کورس اختیاري دی",
+        certificatesPart: "د اسنادو برخه",
+        educationPart: "د زده‌کړو برخه",
+        trainingsPart: "د کورسونو او روزنو برخه",
+        monthOrMonths:"میاشت/ میاشتې",
+         Required: "اړین",
+  notRequired: " اړین ندی",
+
         organizations: "اداره عمومی",
         organizationsList: "د ادارو لیست",
         createOrganization: "اداره جوړول",

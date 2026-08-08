@@ -27,7 +27,7 @@ const dari = {
         district: "ولسوالی",
         selectProvince: "ولایت را انتخاب کنید",
         selectDistrict: "ولسوالی را انتخاب کنید",
-
+        confirmDelete:"آیا دیلیت شود!",
         action: "عملیات",
         NO: "شماره",
         date: "تاریخ",
@@ -55,6 +55,7 @@ const dari = {
         clear: "پاک کردن",
         goBack: "بازگشت",
         type: "نوع",
+        errorOccured:"خطا رخ داد!",
 
         image: "عکس",
         log: "لاگ",
@@ -83,6 +84,8 @@ const dari = {
         unit: "واحد",
         reset: "پاک کردن",
         documents: "اسناد",
+        deletedSuccessfully:"موفقانه delete ګردید",
+        noInfoFound:"معلومات یافت نگردید",
     },
 
     input: {
@@ -423,7 +426,29 @@ const dari = {
         constructionTypeDari: "نوعیت ساخت و ساز (دری)",
         constructionTypeEnglish: "نوعیت ساخت و ساز (انګلیسی)",
     },
+
     tashkilat: {
+        pleaseAddPositionRequirements: "لطفاً شرایط مورد نیاز بست را اضافه نمایید",
+        selectCertificate: "لطفاً سند مورد نظر را انتخاب نمایید",
+        selectEducationLevel: "لطفاً سطح تحصیلی را انتخاب نمایید",
+        totalRequirments: "مجموع شرایط مورد نیاز بست",
+        selectCourse: "لطفاً کورس مورد نظر را انتخاب نمایید",
+        validityMonths: "تعداد ماه‌های اعتبار کورس",
+        courseIsMandatory: "کورس اجباری است",
+        courseIsPrefered: "کورس ترجیحی است",
+        courseIsOptional: "کورس اختیاری است",
+        certificatesPart: "بخش اسناد",
+        educationPart: "بخش تحصیلات",
+        trainingsPart: "بخش کورس‌ها و آموزش‌ها",
+        monthOrMonths:"ماه/ ماه ها",
+         Required: "الزامی میباشد",
+  notRequired: " الزامی نمی باشد",
+
+
+
+
+
+
         organizations: "اداره عمومی",
         createOrganization: "ایجاد سازمان",
         organizationsList: "لیست سازمان‌ها",
@@ -465,6 +490,7 @@ const dari = {
             address: "آدرس سازمان",
             create: "ایجاد سازمان",
         },
+
         employee: {
             employeeNo: "شماره کارمند",
 

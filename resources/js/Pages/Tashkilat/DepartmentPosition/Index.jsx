@@ -5,7 +5,7 @@ import SubHeader from "@/Components/SubHeader";
 import { useTranslation } from "react-i18next";
 import CustomModal from "@/Components/CustomModal";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
-import { Edit2, Trash2 } from "lucide-react";
+import { Edit2 } from "lucide-react";
 import CreateDepartmentPosition from "./Create";
 
 function Index({ positions }) {
@@ -37,6 +37,10 @@ function Index({ positions }) {
                     },
                 ]}
             />
+
+            
+
+
 
             {createModal && (
                 <CustomModal

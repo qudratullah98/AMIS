@@ -26,6 +26,8 @@ return new class extends Migration
 
             $table->boolean('is_required')
                 ->default(true);
+
+            $table->timestamps();
         });
     }
 

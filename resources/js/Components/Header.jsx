@@ -25,7 +25,7 @@ export default function Header() {
     const { t } = useTranslation();
     const location = window.location.pathname;
     const { activeTab, changeTab } = useTabStore();
- 
+
 
     // Menu groups
     const menuGroups = {
@@ -117,9 +117,10 @@ export default function Header() {
                 can: true,
             },
         ],
+        
         positions: [
             {
-                title: t("tashkilat.positions.requirements.education"),
+                title: t("tashkilat.educationPart"),
                 icon: <GraduationCap className="w-5 h-5" />,
                 can: true,
                 isbutton: true,
@@ -129,7 +130,7 @@ export default function Header() {
                 }
             },
             {
-                title: t("tashkilat.positions.requirements.certificate"),
+                title: t("tashkilat.certificatesPart"),
                 icon: <Award className="w-5 h-5" />,
                 can: true,
                 isbutton: true,
@@ -139,7 +140,7 @@ export default function Header() {
                 }
             },
             {
-                title: t("tashkilat.positions.requirements.training"),
+                title: t("tashkilat.trainingsPart"),
                 icon: <BookOpen className="w-5 h-5" />,
                 can: true,
                 isbutton: true,
@@ -178,7 +179,7 @@ export default function Header() {
         if (location.startsWith("/flights") || location.startsWith("/flight"))
             return menuGroups.flight;
         if (location.startsWith("/positions") || location.startsWith("/positions"))
-            return menuGroups.positions;    
+            return menuGroups.positions;
 
         if (location === "/logout" || location === "/profile")
             return menuGroups.profile;
