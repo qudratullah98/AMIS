@@ -31,7 +31,7 @@ function CreateCertificate({ onSubmitSuccess, onCancel }) {
         onSubmit: async (values, { resetForm, setSubmitting, setErrors }) => {
             try {
                 const response = await axios.post(
-                    route("education..store"),
+                    route("education.certificates.store"),
                     values,
                     {
                         headers: {
@@ -41,7 +41,7 @@ function CreateCertificate({ onSubmitSuccess, onCancel }) {
                 );
 
                 if (response.data.success) {
-                    toast.success(response.data.message || t("common.savedSuccessfully"));
+                    toast.success(response.data.message || t("common.informationtStoredSuccessfully"));
                     resetForm();
                     if (onSubmitSuccess) {
                         onSubmitSuccess(response.data.data);

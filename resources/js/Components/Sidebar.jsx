@@ -140,7 +140,7 @@ const Sidebar = () => {
             subItems: [
                 {
                     href: route("education.certificates.index"),
-                    label: t("education.certificates"),
+                    label: t("Certificates"),
                     icon: <Award className="w-4 h-4" />,
                     keyword: "certificates",
                 },
