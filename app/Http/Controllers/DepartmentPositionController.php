@@ -20,7 +20,7 @@ class DepartmentPositionController extends Controller
             ->with([
                 'department',
                 'positionType',
-                'vacancy'
+                'vacancies'
             ]);
 
 
@@ -94,13 +94,14 @@ class DepartmentPositionController extends Controller
         ]);
 
 
-        $position->vacancy()->create([
 
-            'vacancy_no' => 'VAC-' . time(),
-
-            'status' => 'Vacant',
-
-        ]);
+        for ($i = 1; $i <= $request->total_positions; $i++) {
+            $position->vacancies()->create([
+                'vacancy_no' => 'VAC-' . time(),
+                'status' => 'Vacant',
+            ]);
+        }
+     
 
 
         return response()->json([
@@ -112,7 +113,7 @@ class DepartmentPositionController extends Controller
             'data' => $position->load([
                 'department',
                 'positionType',
-                'vacancy'
+                'vacancies'
             ])
 
         ]);

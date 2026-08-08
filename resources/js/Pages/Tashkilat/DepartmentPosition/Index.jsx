@@ -23,9 +23,10 @@ function Index({ positions }) {
         { label: t("tashkilat.grade") },
         { label: t("tashkilat.department") },
         { label: t("tashkilat.positionType") },
+        { label: t("tashkilat.totalPosition") },
         { label: t("common.action") },
     ];
-
+console.log(positionsData)
     return (
         <AuthenticatedLayout
             header={<SubHeader title={t("tashkilat.departmentPositions")} />}
@@ -101,6 +102,9 @@ function Index({ positions }) {
                                     </td>
                                     <td className="p-2 text-center">
                                         {position.position_type?.title}
+                                    </td>
+                                       <td className="p-2 text-center">
+                                        {position.total_positions}
                                     </td>
                                     <td className="text-center">
                                         <ThreeDotMenu>

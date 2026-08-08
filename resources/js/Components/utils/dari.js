@@ -211,6 +211,7 @@ const dari = {
 
             description_string: "توضیحات باید متن باشد.",
             description_max: "توضیحات نباید بیشتر از 255 کاراکتر باشد.",
+            totalPositions:'تمام بستها'
         },
         department: {
             tashkil_required: "انتخاب تشکیل الزامی است.",

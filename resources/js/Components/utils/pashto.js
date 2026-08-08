@@ -455,7 +455,7 @@ const pashto = {
         trainingsPart: "د کورسونو او روزنو برخه",
         monthOrMonths:"میاشت/ میاشتې",
          Required: "اړین",
-  notRequired: " اړین ندی",
+        notRequired: " اړین ندی",
 
         organizations: "اداره عمومی",
         organizationsList: "د ادارو لیست",
@@ -489,7 +489,8 @@ const pashto = {
         totalPositions: "د بستونو شمېر",
         salary: "معاش",
         description: "تشریح",
-        addRequirements: "اړتیاوې اضافه کړئ",
+        addRequirements: "اړتیاوې اضافه کړئ", 
+
         organization: {
             name: "د ادارې نوم",
             code: "د ادارې کوډ",

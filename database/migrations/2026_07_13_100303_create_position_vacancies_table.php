@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(DepartmentPosition::class)
-                ->unique()
                 ->constrained()
                 ->cascadeOnDelete();
             $table->string('vacancy_no');
