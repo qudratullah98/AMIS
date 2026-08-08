@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,11 @@ Route::middleware(['auth', 'blocked'])->group(function () {
         ->middleware('can:manageUsers')->name('role.update');
     Route::get('roles/{roleId}', [RoleController::class, 'Edit'])
         ->middleware('can:manageUsers')->name('role.edit');
+
+
+
+    Route::post('/change-status', [StatusController::class, 'change'])
+    ->name('ChangeStatus');
 });
 
 Route::get('/', function () {

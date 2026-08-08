@@ -24,13 +24,10 @@ class StoreEmployeeAssignmentRequest extends FormRequest
                 'required',
                 'exists:employees,id',
                 Rule::unique('employee_assignments', 'employee_id')
-                    ->where('approval_status_id', '1'),
             ],
 
             'vacancy_id' => [
-                'required',
-                Rule::exists('position_vacancies', 'id')
-                    ->where('status', 'Vacant'),
+                'required', 
             ],
 
             'start_date' => [

@@ -91,6 +91,7 @@ const pashto = {
         reset: "پاکول",
         documents: "اسناد",
         status: "د تایدی حالت",
+        cheangeStatus: "تاید کول",
     },
 
     input: {

@@ -119,19 +119,25 @@ public function storeEducation(EmployeeEducationRequest $request, Employee $empl
         ]);
     }
 
-    public function employees()
-    {
-        return response()->json(
-            Employee::when(request('query'), function ($q) {
-                $q->where('first_name', 'like', request('query') . '%')->orWhere('national_id', 'like', request('query'));
-            })->select(
+ public function employees()
+{
+    return response()->json(
+        Employee::where('approval_status_id', 1)
+            ->when(request('query'), function ($q) {
+                $q->where(function ($query) {
+                    $query->where('first_name', 'like', request('query') . '%')
+                        ->orWhere('national_id', 'like', request('query') . '%');
+                });
+            })
+            ->select(
                 'id',
                 'national_id',
                 'first_name',
                 'last_name'
-            )->get()
-        );
-    }
+            )
+            ->get()
+    );
+}
 
     public function certificatesJson($employee)
     {

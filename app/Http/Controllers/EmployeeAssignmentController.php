@@ -11,6 +11,7 @@ use App\Http\Requests\StoreEmployeeAssignmentRequest;
 use App\Http\Requests\UpdateEmployeeAssignmentRequest;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 
@@ -72,25 +73,112 @@ class EmployeeAssignmentController extends Controller
 
 
 
+
+
     public function store(StoreEmployeeAssignmentRequest $request)
     {
+        $employeeAssignment = DB::transaction(function () use ($request) {
 
-        $employeeAssignment = EmployeeAssignment::create(
-            $request->validated()
-        );
+            $data = $request->validated();
 
+            $employee = Employee::with([
+                'certificates',
+                'educations',
+                'trainings',
+            ])->findOrFail($data['employee_id']);
 
+            $employeeAssignment = EmployeeAssignment::create($data);
 
+            $departmentPosition = $employeeAssignment
+                ->vacancy
+                ->departmentPosition;
 
-        return response()->json(
+            /*
+        |--------------------------------------------------------------------------
+        | Required Certificates
+        |--------------------------------------------------------------------------
+        */
 
-            [
+            $employeeCertificateIds = $employee->certificates->pluck('certificate_id');
+           
 
-                'success' => 'employee_assignment.created',
+            $requiredCertificateIds = $departmentPosition->requiredCertificates
+                ->pluck('certificate_id'); 
 
-                'data' => $employeeAssignment
-            ]
-        );
+            $missingCertificates = $requiredCertificateIds
+                ->diff($employeeCertificateIds);
+
+            if ($missingCertificates->isNotEmpty()) {
+                throw new \Exception(
+                    'The selected employee does not have all required certificates for this position.'
+                );
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | Required Educations
+        |--------------------------------------------------------------------------
+        */
+
+            $requiredEducations = $departmentPosition->requiredEducations;
+
+            $employeeEducationIds = $employee->educations
+                ->pluck('id');
+
+            $missingEducations = $requiredEducations
+                ->whereNotIn('id', $employeeEducationIds);
+
+            if ($missingEducations->isNotEmpty()) {
+                throw new \Exception(
+                    'The selected employee does not have all required education qualifications for this position.'
+                );
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | Required Courses
+        |--------------------------------------------------------------------------
+        */
+
+            $requiredCourses = $departmentPosition->requiredCourses;
+
+            $employeeCourseIds = $employee->trainings
+                ->pluck('id');
+
+            $missingCourses = $requiredCourses
+                ->whereNotIn('id', $employeeCourseIds);
+
+            if ($missingCourses->isNotEmpty()) {
+                throw new \Exception(
+                    'The selected employee does not have all required courses for this position.'
+                );
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | Occupy Vacancy
+        |--------------------------------------------------------------------------
+        */
+
+            $updated = $employeeAssignment->vacancy()
+                ->where('status', 'Vacant')
+                ->update([
+                    'status' => 'Occupied',
+                ]);
+
+            if ($updated === 0) {
+                throw new \Exception(
+                    'The selected vacancy is no longer available.'
+                );
+            }
+
+            return $employeeAssignment;
+        });
+
+        return response()->json([
+            'success' => 'employee_assignment.created',
+            'data' => $employeeAssignment,
+        ]);
     }
 
 

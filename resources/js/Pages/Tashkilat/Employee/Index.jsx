@@ -8,20 +8,25 @@ import CustomModal from "@/Components/CustomModal";
 
 import CreateEmployee from "./Create";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
-import { Book, Edit2, Trash2 } from "lucide-react";
+import { Book, Edit2, LeafyGreen, Loader, Trash2 } from "lucide-react";
 import { Link } from "@inertiajs/react";
+import axios from "axios";
+import { changeStatus } from "@/Utils/changeStatus";
+import StatusBadge from "@/Components/StatusBadge";
 
 function Index({ employees }) {
     const { t } = useTranslation();
 
     const [data, setData] = useState(employees?.data || []);
     const [createModal, setCreateModal] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const columns = [
         { label: t("tashkilat.employee.employeeNo") },
         { label: t("tashkilat.employee.firstName") },
         { label: t("tashkilat.employee.fullName") },
         { label: t("tashkilat.employee.phone") },
+        { label: t("tashkilat.employee.nationalId") },
         { label: t("common.status") },
         { label: t("common.action") },
     ];
@@ -30,6 +35,29 @@ function Index({ employees }) {
         setCreateModal(false);
         setData((prev) => [employee, ...prev]);
     };
+
+const handleChangeStatus = (employee) => {
+    setLoader(true);
+
+    changeStatus(employee.id, "Employee")
+        .then((response) => {
+            if (response.success) {
+                setData((prev) =>
+                    prev.map((item) =>
+                        item.id === employee.id
+                            ? {
+                                  ...item,
+                                  approval_status_id: 1,
+                              }
+                            : item
+                    )
+                );
+            }
+        })
+        .finally(() => {
+            setLoader(false);
+        });
+};
 
     return (
         <AuthenticatedLayout
@@ -51,8 +79,9 @@ function Index({ employees }) {
                 title={t("tashkilat.employee.createEmployee")}
                 footer={false}
                 size="xlarge"
+                stopPropagation={false}
             >
-                <CreateEmployee
+                <CreateEmployee 
                     onSubmitSuccess={handleCreateSuccess}
                 />
             </CustomModal>
@@ -83,8 +112,11 @@ function Index({ employees }) {
                         <td className="p-2 text-center">
                             {employee.phone ?? "-"}
                         </td>
+                          <td className="p-2 text-center">
+                            {employee.national_id ?? "-"}
+                        </td>
                         <td className="p-2 text-center">
-                            {employee?.approval_status_id ?? "-"}
+                            <StatusBadge className="ml-2 text-xl" status={employee?.approval_status_id === 1 ? "approved" : "notApproved"} />
                         </td>
                         <td className="text-center">
                             <ThreeDotMenu>
@@ -115,9 +147,9 @@ function Index({ employees }) {
                                         {t("education.educationPart")}
 
                                     </Link>
-
-                                    {/* <button
-                                        className="
+                                    {employee.approval_status_id === 2 &&
+                                        <button
+                                            className="
                                                     flex 
                                                     items-center 
                                                     w-full 
@@ -125,14 +157,19 @@ function Index({ employees }) {
                                                     px-4 
                                                     py-2 
                                                     text-sm 
-                                                    text-red-600 
+                                                    text-gray-700 
                                                     hover:bg-gray-100
                                                     "
-                                    >
-                                        <Trash2 className="ml-2 text-xl" />
-
-                                        {t("common.delete")}
-                                    </button> */}
+                                            onClick={() =>
+                                                handleChangeStatus(employee)
+                                            }
+                                        >
+                                            {loader ? (
+                                                <Loader className="ml-2 text-xl animate-spin" />
+                                            ) : (
+                                                <StatusBadge className="ml-2 text-xl" status={employee?.approval_status_id === 1 ? "approved" : "notApproved"} />
+                                            )}
+                                        </button>}
                                 </div>
                             </ThreeDotMenu>
                         </td>
