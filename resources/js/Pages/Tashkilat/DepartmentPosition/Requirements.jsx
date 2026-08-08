@@ -161,8 +161,7 @@ function PositionRequirements({ position, requirements, available }) {
     };
 
     // Render content based on active tab
-    const renderContent = () => {
-        console.log('🟡 Rendering content for tab:', activeTab);
+    const renderContent = () => { 
         
         switch (activeTab) {
             case 'certificates':
