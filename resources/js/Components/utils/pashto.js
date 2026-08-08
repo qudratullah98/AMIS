@@ -92,6 +92,8 @@ const pashto = {
         unit: "واحد",
         reset: "پاکول",
         documents: "اسناد",
+        status: "د تایدی حالت",
+        cheangeStatus: "تاید کول",
         errorOccured:"یوه تېروتنه رامنځته شوه!",
         confirmDelete:"آیا Delete شي!",
         deletedSuccessfully:"په بریالیتوب سره لرې شو"

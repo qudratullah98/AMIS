@@ -22,8 +22,7 @@ function CreateEmployee({ onSubmitSuccess }) {
     const formik = useFormik({
 
         initialValues: {
-
-            employee_no: "",
+ 
             first_name: "",
             last_name: "",
             father_name: "",
@@ -47,7 +46,7 @@ function CreateEmployee({ onSubmitSuccess }) {
 
             photo: null,
 
-            approval_status_id: "",
+            approval_status_id: 2,
 
             status: true,
 
@@ -56,14 +55,11 @@ function CreateEmployee({ onSubmitSuccess }) {
 
         validationSchema: Yup.object({
 
-            employee_no:
-                Yup.string()
-                    .required(t("validation.required")), first_name:
-                Yup.string()
-                    .required(t("validation.required")), gender:
-                Yup.string()
-                    .required(t("validation.required")), email:
-                Yup.string()
+             first_name: Yup.string()
+                    .required(t("validation.required")),
+                     gender:Yup.string()
+                    .required(t("validation.required")), 
+                    email: Yup.string()
                     .email(t("validation.email"))
                     .nullable(), photo:
                 Yup.mixed()
@@ -175,19 +171,6 @@ function CreateEmployee({ onSubmitSuccess }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                {/* Employee No */}
-                <div>
-                    <InputLabel value={t("tashkilat.employee.employeeNo")} />
-                    <TextInput
-                        name="employee_no"
-                        value={formik.values.employee_no}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    <InputError
-                        message={formik.touched.employee_no && formik.errors.employee_no}
-                    />
-                </div>
 
                 {/* First Name */}
                 <div>

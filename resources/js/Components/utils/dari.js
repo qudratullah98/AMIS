@@ -84,6 +84,7 @@ const dari = {
         unit: "واحد",
         reset: "پاک کردن",
         documents: "اسناد",
+        status: "وضعیت",
         deletedSuccessfully:"موفقانه delete ګردید",
         noInfoFound:"معلومات یافت نگردید",
     },

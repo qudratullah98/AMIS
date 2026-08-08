@@ -12,7 +12,7 @@ class PositionVacancyController extends Controller
      */
     public function vacancy()
     {
-        $pv=PositionVacancy::with('departmentPosition')->get();
+        $pv=PositionVacancy::where('status','vacant')->with('departmentPosition')->get();
         return response()->json($pv);
     }
    

@@ -11,6 +11,7 @@ use App\Http\Requests\StoreEmployeeAssignmentRequest;
 use App\Http\Requests\UpdateEmployeeAssignmentRequest;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 
@@ -33,28 +34,25 @@ class EmployeeAssignmentController extends Controller
 
 
 
-        if($request->search)
-        {
+        if ($request->search) {
 
             $query->whereHas(
                 'employee',
-                function($q) use($request){
+                function ($q) use ($request) {
 
                     $q->where(
                         'first_name',
                         'like',
-                        '%'.$request->search.'%'
+                        '%' . $request->search . '%'
                     )
 
-                    ->orWhere(
-                        'last_name',
-                        'like',
-                        '%'.$request->search.'%'
-                    );
-
+                        ->orWhere(
+                            'last_name',
+                            'like',
+                            '%' . $request->search . '%'
+                        );
                 }
             );
-
         }
 
 
@@ -63,41 +61,124 @@ class EmployeeAssignmentController extends Controller
             'Tashkilat/EmployeeAssignment/Index',
             [
 
-                'employee_assignments'=>$query
-                ->latest()
-                ->paginate(20)
+                'employee_assignments' => $query
+                    ->latest()
+                    ->paginate(20)
 
             ]
         );
-
     }
 
 
 
 
 
-    public function store(
-        StoreEmployeeAssignmentRequest $request
-    )
+
+
+    public function store(StoreEmployeeAssignmentRequest $request)
     {
+        $employeeAssignment = DB::transaction(function () use ($request) {
 
-       $employeeAssignment = EmployeeAssignment::create(
-            $request->validated());
+            $data = $request->validated();
 
-       
-  
+            $employee = Employee::with([
+                'certificates',
+                'educations',
+                'trainings',
+            ])->findOrFail($data['employee_id']);
 
-        return response()->json(
+            $employeeAssignment = EmployeeAssignment::create($data);
 
-            [
+            $departmentPosition = $employeeAssignment
+                ->vacancy
+                ->departmentPosition;
 
-                'success'=>'employee_assignment.created',
+            /*
+        |--------------------------------------------------------------------------
+        | Required Certificates
+        |--------------------------------------------------------------------------
+        */
 
-                'data'=>$employeeAssignment
-            ]
-        );
+            $employeeCertificateIds = $employee->certificates->pluck('certificate_id');
+           
 
+            $requiredCertificateIds = $departmentPosition->requiredCertificates
+                ->pluck('certificate_id'); 
 
+            $missingCertificates = $requiredCertificateIds
+                ->diff($employeeCertificateIds);
+
+            if ($missingCertificates->isNotEmpty()) {
+                throw new \Exception(
+                    'The selected employee does not have all required certificates for this position.'
+                );
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | Required Educations
+        |--------------------------------------------------------------------------
+        */
+
+            $requiredEducations = $departmentPosition->requiredEducations;
+
+            $employeeEducationIds = $employee->educations
+                ->pluck('id');
+
+            $missingEducations = $requiredEducations
+                ->whereNotIn('id', $employeeEducationIds);
+
+            if ($missingEducations->isNotEmpty()) {
+                throw new \Exception(
+                    'The selected employee does not have all required education qualifications for this position.'
+                );
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | Required Courses
+        |--------------------------------------------------------------------------
+        */
+
+            $requiredCourses = $departmentPosition->requiredCourses;
+
+            $employeeCourseIds = $employee->trainings
+                ->pluck('id');
+
+            $missingCourses = $requiredCourses
+                ->whereNotIn('id', $employeeCourseIds);
+
+            if ($missingCourses->isNotEmpty()) {
+                throw new \Exception(
+                    'The selected employee does not have all required courses for this position.'
+                );
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | Occupy Vacancy
+        |--------------------------------------------------------------------------
+        */
+
+            $updated = $employeeAssignment->vacancy()
+                ->where('status', 'Vacant')
+                ->update([
+                    'status' => 'Occupied',
+                ]);
+
+            if ($updated === 0) {
+                throw new \Exception(
+                    'The selected vacancy is no longer available.'
+                );
+            }
+
+            return $employeeAssignment;
+        });
+
+        return response()->json([
+            'success' => 'employee_assignment.created',
+            'data' => $employeeAssignment,
+        ]);
     }
 
 
@@ -107,13 +188,12 @@ class EmployeeAssignmentController extends Controller
     public function update(
         UpdateEmployeeAssignmentRequest $request,
         EmployeeAssignment $employeeAssignment
-    )
-    {
+    ) {
 
 
         $oldPosition =
-        $employeeAssignment
-        ->departmentPosition;
+            $employeeAssignment
+            ->departmentPosition;
 
 
 
@@ -139,8 +219,6 @@ class EmployeeAssignmentController extends Controller
             'success',
             'employee_assignment.updated'
         );
-
-
     }
 
 
@@ -149,13 +227,12 @@ class EmployeeAssignmentController extends Controller
 
     public function destroy(
         EmployeeAssignment $employeeAssignment
-    )
-    {
+    ) {
 
 
         $position =
-        $employeeAssignment
-        ->departmentPosition;
+            $employeeAssignment
+            ->departmentPosition;
 
 
 
@@ -173,7 +250,6 @@ class EmployeeAssignmentController extends Controller
             'success',
             'employee_assignment.deleted'
         );
-
     }
 
 
@@ -183,18 +259,17 @@ class EmployeeAssignmentController extends Controller
 
     private function updateVacancy(
         DepartmentPosition $position
-    )
-    {
+    ) {
 
 
         $filled =
-        $position
-        ->assignments()
-        ->where(
-            'status',
-            'active'
-        )
-        ->count();
+            $position
+            ->assignments()
+            ->where(
+                'status',
+                'active'
+            )
+            ->count();
 
 
 
@@ -223,13 +298,10 @@ class EmployeeAssignmentController extends Controller
 
                 'vacant_positions'
                 =>
-                $position->quantity-$filled
+                $position->quantity - $filled
 
             ]
 
         );
-
     }
-
-
 }

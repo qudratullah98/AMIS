@@ -22,4 +22,5 @@ class PositionVacancy extends Model
     {
         return $this->belongsTo(DepartmentPosition::class);
     }
+    
 }

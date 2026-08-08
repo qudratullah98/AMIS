@@ -58,14 +58,7 @@ Route::prefix('education')->name('education.')->group(function () {
 
 
 
-    Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
-        ->name('education.levels.json');
-    Route::get('/education-levels/json', [EducationLevelController::class, 'json'])
-        ->name('levels.json');
-    Route::get('/certificates/json', [CertificateController::class, 'json'])
-        ->name('certificates.json');
-    Route::get('/certificates/json', [CertificateController::class, 'json'])
-        ->name('certificates.json');
+
 
 
     // Certificates
@@ -86,7 +79,10 @@ Route::prefix('education')->name('education.')->group(function () {
     // json
     Route::get('course-types/list', [CourseTypeController::class, 'jsonList'])->name('course-types.list');
     Route::get('training-plans.courses', [CourseController::class, 'jsonList'])->name('training-plans.courses');
-    Route::get('training-plans.trainers', [TrainerController::class, 'jsonList'])->name('training-plans.trainers');
+    Route::get('training-plans.trainers', [TrainerController::class, 'jsonList'])->name('training-plans.trainers');    
+    Route::get('/education-levels/json', [EducationLevelController::class, 'json'])->name('education.levels.json');
+    Route::get('/education-levels/json', [EducationLevelController::class, 'json'])->name('levels.json');
+    Route::get('/certificates/json', [CertificateController::class, 'json'])->name('certificates.json');
 });
 
 

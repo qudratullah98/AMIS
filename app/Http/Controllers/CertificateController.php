@@ -31,4 +31,9 @@ class CertificateController extends Controller
             'certificate' => $certificate
         ]);
     }
+    public function json()
+    {
+        $certificates = Certificate::all();
+        return response()->json($certificates);
+    }
 }
