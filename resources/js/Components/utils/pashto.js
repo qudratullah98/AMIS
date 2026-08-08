@@ -90,6 +90,7 @@ const pashto = {
         unit: "واحد",
         reset: "پاکول",
         documents: "اسناد",
+        status: "د تایدی حالت",
     },
 
     input: {

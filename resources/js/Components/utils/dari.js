@@ -83,6 +83,7 @@ const dari = {
         unit: "واحد",
         reset: "پاک کردن",
         documents: "اسناد",
+        status: "وضعیت",
     },
 
     input: {

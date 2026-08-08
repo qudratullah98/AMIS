@@ -9,6 +9,7 @@ import CustomModal from "@/Components/CustomModal";
 import CreateEmployee from "./Create";
 import ThreeDotMenu from "@/Components/ThreeDotMenu";
 import { Book, Edit2, Trash2 } from "lucide-react";
+import { Link } from "@inertiajs/react";
 
 function Index({ employees }) {
     const { t } = useTranslation();
@@ -21,6 +22,7 @@ function Index({ employees }) {
         { label: t("tashkilat.employee.firstName") },
         { label: t("tashkilat.employee.fullName") },
         { label: t("tashkilat.employee.phone") },
+        { label: t("common.status") },
         { label: t("common.action") },
     ];
 
@@ -81,7 +83,9 @@ function Index({ employees }) {
                         <td className="p-2 text-center">
                             {employee.phone ?? "-"}
                         </td>
-
+                        <td className="p-2 text-center">
+                            {employee?.approval_status_id ?? "-"}
+                        </td>
                         <td className="text-center">
                             <ThreeDotMenu>
                                 <div className="py-0">
@@ -105,10 +109,12 @@ function Index({ employees }) {
 
                                         {t("common.editInfo")}
                                     </button>
-                                    <a href={route('employees.educations', employee.id)} className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+
+                                    <Link href={route('employees.educations', employee.id)} className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                         <Book className="ml-2 text-xl"></Book>
                                         {t("education.educationPart")}
-                                    </a>
+
+                                    </Link>
 
                                     {/* <button
                                         className="

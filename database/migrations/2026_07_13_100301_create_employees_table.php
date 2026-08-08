@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ApprovelStatus;
 use App\Models\blood_group;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -51,13 +52,10 @@ return new class extends Migration
             $table->string('photo')->nullable();
 
             // Approval
-            $table->foreignId('approval_status_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
+            $table->foreignIdFor(ApprovelStatus::class, 'approval_status_id')->default(2);
+              
 
-            // Status
-            $table->boolean('status')->default(true);
+            
 
             // Audit
             $table->foreignId('created_by')

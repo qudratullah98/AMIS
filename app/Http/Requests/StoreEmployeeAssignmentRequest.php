@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 
 class StoreEmployeeAssignmentRequest extends FormRequest
 {
@@ -16,105 +16,68 @@ class StoreEmployeeAssignmentRequest extends FormRequest
 
 
 
+
     public function rules(): array
     {
-
         return [
-
-            'employee_id'=>[
+            'employee_id' => [
                 'required',
-                'exists:employees,id'
+                'exists:employees,id',
+                Rule::unique('employee_assignments', 'employee_id')
+                    ->where('approval_status_id', '1'),
             ],
 
-
-            'vacancy_id'=>[
+            'vacancy_id' => [
                 'required',
-                'exists:department_positions,id'
+                Rule::exists('position_vacancies', 'id')
+                    ->where('status', 'Vacant'),
             ],
 
-
-            'start_date'=>[
+            'start_date' => [
                 'required',
-                'date'
+                'date',
             ],
 
-
-            'end_date'=>[
+            'end_date' => [
                 'nullable',
                 'date',
-                'after_or_equal:start_date'
+                'after_or_equal:start_date',
             ],
 
-
-
-            'remarks'=>[
+            'remarks' => [
                 'nullable',
-                'string'
+                'string',
             ],
-
         ];
-
     }
 
 
+  public function messages(): array
+{
+    return [
+        // Employee
+        'employee_id.required' => 'employee_assignment.employee_required',
+        'employee_id.exists' => 'employee_assignment.employee_invalid',
+        'employee_id.unique' => 'employee_assignment.employee_already_assigned',
 
-    public function messages(): array
-    {
+        // Vacancy / Position
+        'vacancy_id.required' => 'employee_assignment.position_required',
+        'vacancy_id.exists' => 'employee_assignment.position_not_available',
 
-        return [
+        // Start Date
+        'start_date.required' => 'employee_assignment.start_date_required',
+        'start_date.date' => 'employee_assignment.start_date_invalid',
 
-            'employee_id.required'
-                =>
-            'employee_assignment.employee_required',
+        // End Date
+        'end_date.date' => 'employee_assignment.end_date_invalid',
+        'end_date.after_or_equal' => 'employee_assignment.end_date_before_start',
 
-            'employee_id.exists'
-                =>
-            'employee_assignment.employee_invalid',
+        // Status
+        'status.required' => 'employee_assignment.status_required',
+        'status.in' => 'employee_assignment.status_invalid',
 
-
-
-            'vacancy_id.required'
-                =>
-            'employee_assignment.position_required',
-
-            'vacancy_id.exists'
-                =>
-            'employee_assignment.position_invalid',
-
-
-
-            'start_date.required'
-                =>
-            'employee_assignment.start_date_required',
-
-            'start_date.date'
-                =>
-            'employee_assignment.start_date_invalid',
-
-
-
-            'end_date.after_or_equal'
-                =>
-            'employee_assignment.end_date_invalid',
-
-
-
-            'status.required'
-                =>
-            'employee_assignment.status_required',
-
-            'status.in'
-                =>
-            'employee_assignment.status_invalid',
-
-
-
-            'remarks.string'
-                =>
-            'employee_assignment.remarks_invalid',
-
-        ];
-
-    }
-
+        // Remarks
+        'remarks.string' => 'employee_assignment.remarks_invalid',
+    ];
+}
 }

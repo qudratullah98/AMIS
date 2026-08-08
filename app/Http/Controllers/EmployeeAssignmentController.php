@@ -33,28 +33,25 @@ class EmployeeAssignmentController extends Controller
 
 
 
-        if($request->search)
-        {
+        if ($request->search) {
 
             $query->whereHas(
                 'employee',
-                function($q) use($request){
+                function ($q) use ($request) {
 
                     $q->where(
                         'first_name',
                         'like',
-                        '%'.$request->search.'%'
+                        '%' . $request->search . '%'
                     )
 
-                    ->orWhere(
-                        'last_name',
-                        'like',
-                        '%'.$request->search.'%'
-                    );
-
+                        ->orWhere(
+                            'last_name',
+                            'like',
+                            '%' . $request->search . '%'
+                        );
                 }
             );
-
         }
 
 
@@ -63,41 +60,37 @@ class EmployeeAssignmentController extends Controller
             'Tashkilat/EmployeeAssignment/Index',
             [
 
-                'employee_assignments'=>$query
-                ->latest()
-                ->paginate(20)
+                'employee_assignments' => $query
+                    ->latest()
+                    ->paginate(20)
 
             ]
         );
-
     }
 
 
 
 
 
-    public function store(
-        StoreEmployeeAssignmentRequest $request
-    )
+    public function store(StoreEmployeeAssignmentRequest $request)
     {
 
-       $employeeAssignment = EmployeeAssignment::create(
-            $request->validated());
+        $employeeAssignment = EmployeeAssignment::create(
+            $request->validated()
+        );
 
-       
-  
+
+
 
         return response()->json(
 
             [
 
-                'success'=>'employee_assignment.created',
+                'success' => 'employee_assignment.created',
 
-                'data'=>$employeeAssignment
+                'data' => $employeeAssignment
             ]
         );
-
-
     }
 
 
@@ -107,13 +100,12 @@ class EmployeeAssignmentController extends Controller
     public function update(
         UpdateEmployeeAssignmentRequest $request,
         EmployeeAssignment $employeeAssignment
-    )
-    {
+    ) {
 
 
         $oldPosition =
-        $employeeAssignment
-        ->departmentPosition;
+            $employeeAssignment
+            ->departmentPosition;
 
 
 
@@ -139,8 +131,6 @@ class EmployeeAssignmentController extends Controller
             'success',
             'employee_assignment.updated'
         );
-
-
     }
 
 
@@ -149,13 +139,12 @@ class EmployeeAssignmentController extends Controller
 
     public function destroy(
         EmployeeAssignment $employeeAssignment
-    )
-    {
+    ) {
 
 
         $position =
-        $employeeAssignment
-        ->departmentPosition;
+            $employeeAssignment
+            ->departmentPosition;
 
 
 
@@ -173,7 +162,6 @@ class EmployeeAssignmentController extends Controller
             'success',
             'employee_assignment.deleted'
         );
-
     }
 
 
@@ -183,18 +171,17 @@ class EmployeeAssignmentController extends Controller
 
     private function updateVacancy(
         DepartmentPosition $position
-    )
-    {
+    ) {
 
 
         $filled =
-        $position
-        ->assignments()
-        ->where(
-            'status',
-            'active'
-        )
-        ->count();
+            $position
+            ->assignments()
+            ->where(
+                'status',
+                'active'
+            )
+            ->count();
 
 
 
@@ -223,13 +210,10 @@ class EmployeeAssignmentController extends Controller
 
                 'vacant_positions'
                 =>
-                $position->quantity-$filled
+                $position->quantity - $filled
 
             ]
 
         );
-
     }
-
-
 }
