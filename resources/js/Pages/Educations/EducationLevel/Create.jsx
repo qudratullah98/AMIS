@@ -39,10 +39,10 @@ function CreateEducationLevel({ onSubmitSuccess }) {
                     route("education.levels.store"),
                     values
                 );
- 
+
                 if(response.data.success){
 
-                    toast.success(response.data.message);
+                    toast.success(t("common.informationtStoredSuccessfully"));
 
                     resetForm();
 

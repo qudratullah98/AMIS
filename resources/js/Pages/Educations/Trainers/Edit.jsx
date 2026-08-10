@@ -14,9 +14,9 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
     const { t } = useTranslation();
 
     const typeOptions = [
-        { value: 'internal', label: t('trainers.types.internal') },
-        { value: 'external', label: t('trainers.types.external') },
-        { value: 'consultant', label: t('trainers.types.consultant') },
+        { value: 'internal', label: t('education.trainers.types.internal') },
+        { value: 'external', label: t('education.trainers.types.external') },
+        { value: 'consultant', label: t('education.trainers.types.consultant') },
     ];
 
     const validationSchema = Yup.object({
@@ -93,8 +93,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("trainers.namePlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.name && formik.errors.name 
-                                ? 'border-red-500' 
+                            formik.touched.name && formik.errors.name
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -119,8 +119,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         onBlur={() => formik.setFieldTouched("type", true)}
                         placeholder={t("trainers.selectType")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none bg-white ${
-                            formik.touched.type && formik.errors.type 
-                                ? 'border-red-500' 
+                            formik.touched.type && formik.errors.type
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -144,8 +144,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("trainers.phonePlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.phone && formik.errors.phone 
-                                ? 'border-red-500' 
+                            formik.touched.phone && formik.errors.phone
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -169,8 +169,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("trainers.emailPlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.email && formik.errors.email 
-                                ? 'border-red-500' 
+                            formik.touched.email && formik.errors.email
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -194,8 +194,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("trainers.licensePlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.license_number && formik.errors.license_number 
-                                ? 'border-red-500' 
+                            formik.touched.license_number && formik.errors.license_number
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -219,8 +219,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("trainers.organizationPlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.organization && formik.errors.organization 
-                                ? 'border-red-500' 
+                            formik.touched.organization && formik.errors.organization
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -244,8 +244,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         placeholder={t("trainers.addressPlaceholder")}
                         rows="2"
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none resize-y ${
-                            formik.touched.address && formik.errors.address 
-                                ? 'border-red-500' 
+                            formik.touched.address && formik.errors.address
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -269,8 +269,8 @@ function EditTrainer({ trainer, onSubmitSuccess, onCancel }) {
                         placeholder={t("trainers.descriptionPlaceholder")}
                         rows="3"
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none resize-y ${
-                            formik.touched.description && formik.errors.description 
-                                ? 'border-red-500' 
+                            formik.touched.description && formik.errors.description
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />

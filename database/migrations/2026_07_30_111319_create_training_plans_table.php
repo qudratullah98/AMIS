@@ -32,10 +32,7 @@ return new class extends Migration
             $table->string('location')->nullable();
 
             $table->enum('status', [
-                'Planned',
-                'Ongoing',
-                'Completed',
-                'Cancelled'
+                'planned', 'in_progress', 'completed', 'cancelled'
             ])->default('Planned');
 
             $table->text('description')->nullable();

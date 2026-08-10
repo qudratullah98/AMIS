@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\TrainingPlan;
+use App\Http\Requests\TrainingPlanRequest;
 use App\Models\Course;
 use App\Models\Trainer;
-use App\Http\Requests\TrainingPlanRequest;
-use Illuminate\Http\Request;
+use App\Models\TrainingPlan;
 use Inertia\Inertia;
 
 class TrainingPlanController extends Controller
@@ -18,18 +16,18 @@ class TrainingPlanController extends Controller
             ->paginate(10);
 
         return Inertia::render('Educations/TrainingPlans/Index', [
-            'trainingPlans' => $trainingPlans
+            'trainingPlans' => $trainingPlans,
         ]);
     }
 
     public function create()
     {
-        $courses = Course::orderBy('name')->get(['id', 'name', 'code']);
+        $courses  = Course::orderBy('name')->get(['id', 'name', 'code']);
         $trainers = Trainer::orderBy('name')->get(['id', 'name', 'email']);
         $statuses = TrainingPlan::getStatuses();
 
         return Inertia::render('TrainingPlans/Create', [
-            'courses' => $courses,
+            'courses'  => $courses,
             'trainers' => $trainers,
             'statuses' => $statuses,
         ]);
@@ -39,22 +37,28 @@ class TrainingPlanController extends Controller
     {
         $trainingPlan = TrainingPlan::create($request->validated());
 
-        return redirect()
-            ->route('training-plans.index')
-            ->with('success', 'Training plan created successfully.');
+        $trainingPlan->load([
+            'course',
+            'trainer',
+        ]);
+
+        return response()->json([
+            'message'      => 'Training plan created successfully.',
+            'trainingPlan' => $trainingPlan,
+        ], 201);
     }
 
     public function edit(TrainingPlan $trainingPlan)
     {
-        $courses = Course::orderBy('name')->get(['id', 'name', 'code']);
+        $courses  = Course::orderBy('name')->get(['id', 'name', 'code']);
         $trainers = Trainer::orderBy('name')->get(['id', 'name', 'email']);
         $statuses = TrainingPlan::getStatuses();
 
         return Inertia::render('TrainingPlans/Edit', [
             'trainingPlan' => $trainingPlan->load(['course', 'trainer']),
-            'courses' => $courses,
-            'trainers' => $trainers,
-            'statuses' => $statuses,
+            'courses'      => $courses,
+            'trainers'     => $trainers,
+            'statuses'     => $statuses,
         ]);
     }
 

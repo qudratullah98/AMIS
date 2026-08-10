@@ -26,7 +26,7 @@ function Index({ certificates }) {
 
     const columns = [
         {
-            label: t("education.id"),
+            label: t("common.NO"),
         },
         {
             label: t("education.certificateName"),
@@ -179,7 +179,12 @@ function Index({ certificates }) {
             {/* =====================================================
                 DATA TABLE
             ====================================================== */}
-            <DataTable
+
+
+             <div className="mx-auto">
+                <div className="overflow-hidden bg-white shadow-none sm:rounded-lg border border-gray-100 dark:bg-gray-800">
+                    <div className="px-4 py-2 text-gray-900 dark:text-gray-100">
+                         <DataTable
                 columns={columns}
                 links={certificates?.links || []}
                 header={t("education.certificates")}
@@ -188,12 +193,12 @@ function Index({ certificates }) {
                 onButtonClick={() => setCreateModal(true)}
             >
                 {data && data.length > 0 ? (
-                    data.map((certificate) => (
+                    data.map((certificate, a) => (
                         <tr key={certificate.id} className="hover:bg-gray-50">
                             {" "}
                             <td className="p-2 text-center">
                                 {" "}
-                                {certificate.id}{" "}
+                                {a + 1}{" "}
                             </td>{" "}
                             <td className="p-2 text-center">
                                 {" "}
@@ -255,6 +260,9 @@ function Index({ certificates }) {
                     </tr>
                 )}
             </DataTable>
+</div>
+                </div>
+            </div>
         </AuthenticatedLayout>
     );
 }

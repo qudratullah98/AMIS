@@ -51,7 +51,7 @@ function CreateCourse({ onSubmitSuccess, onCancel }) {
     const formik = useFormik({
         initialValues: {
             course_type_id: '',
-            name: '', 
+            name: '',
             description: '',
             validity_months: '',
         },
@@ -134,7 +134,7 @@ function CreateCourse({ onSubmitSuccess, onCancel }) {
                 {/* Validity Months */}
                 <div>
                     <InputLabel
-                        value={t("education.courses.validity")}
+                        value={t("education.courses.validityPeriod")}
                         required={true}
                         className="text-sm font-medium text-gray-700 mb-1.5 block"
                     />
@@ -144,7 +144,7 @@ function CreateCourse({ onSubmitSuccess, onCancel }) {
                         value={formik.values.validity_months}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        placeholder={t("education.courses.validity")}
+                        placeholder={t("education.courses.validityPeriod")}
                         min="1"
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${formik.touched.validity_months && formik.errors.validity_months
                                 ? 'border-red-500'
@@ -160,7 +160,7 @@ function CreateCourse({ onSubmitSuccess, onCancel }) {
                 {/* Description - Full Width */}
                 <div className="md:col-span-2">
                     <InputLabel
-                        value={t("education.courses.description")}
+                        value={t("common.description")}
                         className="text-sm font-medium text-gray-700 mb-1.5 block"
                     />
                     <textarea
@@ -168,7 +168,7 @@ function CreateCourse({ onSubmitSuccess, onCancel }) {
                         value={formik.values.description}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        placeholder={t("education.courses.description")}
+                        placeholder={t("common.description")}
                         rows="3"
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none resize-y ${formik.touched.description && formik.errors.description
                                 ? 'border-red-500'

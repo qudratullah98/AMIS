@@ -24,7 +24,7 @@ class TrainerController extends Controller
             'name' => 'required|string|max:255',
             'type' => 'required|string|in:internal,external,consultant',
             'phone' => 'nullable|string|max:50',
-            'email' => 'nullable|email|max:255|unique:trainers,email', 
+            'email' => 'nullable|email|max:255|unique:trainers,email',
             'organization' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:500',
             'description' => 'nullable|string',
@@ -44,7 +44,7 @@ class TrainerController extends Controller
             'name' => 'required|string|max:255',
             'type' => 'required|string|in:internal,external,consultant',
             'phone' => 'nullable|string|max:50',
-            'email' => 'nullable|email|max:255|unique:trainers,email,' . $trainer->id, 
+            'email' => 'nullable|email|max:255|unique:trainers,email,' . $trainer->id,
             'organization' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:500',
             'description' => 'nullable|string',
@@ -80,5 +80,11 @@ class TrainerController extends Controller
         return response()->json(
             Trainer::orderBy('name')->get(['id', 'name', 'type', 'email'])
         );
+    }
+
+    public function jsonList()
+    {
+        $trainers = Trainer::select('id', 'name', 'email')->get();
+        return response()->json($trainers);
     }
 }

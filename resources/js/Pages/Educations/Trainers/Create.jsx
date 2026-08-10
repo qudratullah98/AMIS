@@ -14,9 +14,9 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
     const { t } = useTranslation();
 
     const typeOptions = [
-        { value: 'internal', label: t('trainers.types.internal') },
-        { value: 'external', label: t('trainers.types.external') },
-        { value: 'consultant', label: t('trainers.types.consultant') },
+        { value: 'internal', label: t('education.trainers.types.internal') },
+        { value: 'external', label: t('education.trainers.types.external') },
+        { value: 'consultant', label: t('education.trainers.types.consultant') },
     ];
 
     const validationSchema = Yup.object({
@@ -32,7 +32,7 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
         email: Yup.string()
             .nullable()
             .email(t("validation.email"))
-            .max(255, t("validation.max", { max: 255 })),  
+            .max(255, t("validation.max", { max: 255 })),
         organization: Yup.string()
             .nullable()
             .max(255, t("validation.max", { max: 255 })),
@@ -48,9 +48,10 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
             name: '',
             type: '',
             phone: '',
-            email: '', 
+            email: '',
             organization: '',
             address: '',
+            license_number:'',
             description: '',
         },
         validationSchema: validationSchema,
@@ -89,8 +90,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("education.trainers.namePlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.name && formik.errors.name 
-                                ? 'border-red-500' 
+                            formik.touched.name && formik.errors.name
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -115,8 +116,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         onBlur={() => formik.setFieldTouched("type", true)}
                         placeholder={t("education.trainers.selectType")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none bg-white ${
-                            formik.touched.type && formik.errors.type 
-                                ? 'border-red-500' 
+                            formik.touched.type && formik.errors.type
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -140,8 +141,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("education.trainers.phonePlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.phone && formik.errors.phone 
-                                ? 'border-red-500' 
+                            formik.touched.phone && formik.errors.phone
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -165,8 +166,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("education.trainers.emailPlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.email && formik.errors.email 
-                                ? 'border-red-500' 
+                            formik.touched.email && formik.errors.email
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -176,7 +177,32 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                     />
                 </div>
 
-               
+                {/* License Number */}
+                                <div>
+                                    <InputLabel
+                                        value={t("education.trainers.licenseNumber")}
+                                        className="text-sm font-medium text-gray-700 mb-1.5 block"
+                                    />
+                                    <TextInput
+                                        name="license_number"
+                                        type="text"
+                                        value={formik.values.license_number}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        placeholder={t("education.trainers.licensePlaceholder")}
+                                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
+                                            formik.touched.license_number && formik.errors.license_number
+                                                ? 'border-red-500'
+                                                : 'border-gray-300'
+                                        }`}
+                                    />
+                                    <InputError
+                                        message={formik.touched.license_number && formik.errors.license_number}
+                                        className="mt-1.5 text-sm text-red-500"
+                                    />
+                                </div>
+
+
 
                 {/* Organization */}
                 <div>
@@ -192,8 +218,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         onBlur={formik.handleBlur}
                         placeholder={t("education.trainers.organizationPlaceholder")}
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none ${
-                            formik.touched.organization && formik.errors.organization 
-                                ? 'border-red-500' 
+                            formik.touched.organization && formik.errors.organization
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -217,8 +243,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         placeholder={t("education.trainers.addressPlaceholder")}
                         rows="2"
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none resize-y ${
-                            formik.touched.address && formik.errors.address 
-                                ? 'border-red-500' 
+                            formik.touched.address && formik.errors.address
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />
@@ -242,8 +268,8 @@ function CreateTrainer({ onSubmitSuccess, onCancel }) {
                         placeholder={t("education.trainers.descriptionPlaceholder")}
                         rows="3"
                         className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none resize-y ${
-                            formik.touched.description && formik.errors.description 
-                                ? 'border-red-500' 
+                            formik.touched.description && formik.errors.description
+                                ? 'border-red-500'
                                 : 'border-gray-300'
                         }`}
                     />

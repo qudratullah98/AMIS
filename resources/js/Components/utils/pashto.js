@@ -1,6 +1,4 @@
-import {
-    Construction
-} from "lucide-react";
+import { Construction } from "lucide-react";
 
 // src/locales/pashto.js
 const pashto = {
@@ -20,7 +18,7 @@ const pashto = {
     },
 
     common: {
-                runwayDetails:"د رنوې تفصیلات",
+        runwayDetails: "د رنوې تفصیلات",
 
         dashboard: "ډشبورډ",
         loading: "مهرباني وکړئ لږ صبر وکړئ...",
@@ -70,8 +68,7 @@ const pashto = {
         informationtStoredSuccessfully: "معلومات په بریالیتوب سره ثبت شول",
         informationtUpdatedSuccessfully: "معلومات په بریالیتوب سره بدل شول",
         informationtApprovedSuccessfully: "معلومات په بریالیتوب سره ومنل شول",
-        noInfoFound:"کوم معلومات و نموندل شود",
-
+        noInfoFound: "کوم معلومات و نموندل شود",
 
         width: "بر (سور)",
         widthUnit: "د بر(سور) و اندازه کولو واحد",
@@ -94,11 +91,9 @@ const pashto = {
         documents: "اسناد",
         status: "د تایدی حالت",
         cheangeStatus: "تاید کول",
-        errorOccured:"یوه تېروتنه رامنځته شوه!",
-        confirmDelete:"آیا Delete شي!",
-        deletedSuccessfully:"په بریالیتوب سره لرې شو"
-
-
+        errorOccured: "یوه تېروتنه رامنځته شوه!",
+        confirmDelete: "آیا Delete شي!",
+        deletedSuccessfully: "په بریالیتوب سره لرې شو",
     },
 
     input: {
@@ -120,7 +115,8 @@ const pashto = {
     },
 
     error: {
-        general: "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
+        general:
+            "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
         required: "دا برخه اړینه ده.",
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
 
@@ -172,8 +168,6 @@ const pashto = {
             futureDate: "د پیل نېټه باید د اوسني وخت وروسته وي.",
         },
 
-
-
         airline: {
             name_en_required: "د هوايي شرکت انګلیسي نوم اړین دی.",
             name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
@@ -187,7 +181,8 @@ const pashto = {
             name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
             unit_required: "د خدمت واحد ټاکل اړین دي.",
             unit_invalid: "ټاکل شوی د خدمت واحد سم نه دی.",
-            airline_rates_required: "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
+            airline_rates_required:
+                "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
             airline_rates_invalid: "د هوايي شرکتونو د نرخونو معلومات سم نه دي.",
             airline_rates_min: "لږ تر لږه یو هوايي شرکت باید اضافه شي.",
             airline_required: "د هوايي شرکت ټاکل اړین دي.",
@@ -211,7 +206,8 @@ const pashto = {
             year_integer: "کال باید بشپړ عدد وي.",
             year_min: "کال باید لږ تر لږه 1000 وي.",
             year_max: "کال باید له 9999 څخه زیات نه وي.",
-            organization_year_unique: "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
+            organization_year_unique:
+                "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
             reference_number_required: "د مرجع شمېره اړینه ده.",
             reference_number_string: "د مرجع شمېره باید متن وي.",
             reference_number_max: "د مرجع شمېره باید له 255 تورو زیاته نه وي.",
@@ -220,7 +216,6 @@ const pashto = {
             organization_id_exists: "ټاکل شوې اداره معتبره نه ده.",
             description_string: "تشریح باید متن وي.",
             description_max: "تشریح باید له 255 تورو زیاته نه وي.",
-
         },
         department: {
             tashkil_required: "تشکیل ټاکل اړین دي.",
@@ -236,15 +231,14 @@ const pashto = {
             description_invalid: "د څانګې تشریح سمه نه ده.",
         },
         flight_service: {
-            flight_required: 'الوتنه اړینه ده.',
-            flight_exists: 'ټاکل شوې الوتنه شتون نه لري.',
-            service_required: 'د SGHA خدمت ټاکل اړین دي.',
-            service_exists: 'ټاکل شوی SGHA خدمت شتون نه لري.',
-            count_required: 'تعداد اړین دی.',
-            count_integer: 'تعداد باید یو صحیح عدد وي.',
-            count_min: 'تعداد باید لږ تر لږه ۱ وي.',
-        }
-
+            flight_required: "الوتنه اړینه ده.",
+            flight_exists: "ټاکل شوې الوتنه شتون نه لري.",
+            service_required: "د SGHA خدمت ټاکل اړین دي.",
+            service_exists: "ټاکل شوی SGHA خدمت شتون نه لري.",
+            count_required: "تعداد اړین دی.",
+            count_integer: "تعداد باید یو صحیح عدد وي.",
+            count_min: "تعداد باید لږ تر لږه ۱ وي.",
+        },
     },
     success: {
         organization_stored_successfully: "اداره په بریالیتوب سره جوړه شوه.",
@@ -304,8 +298,8 @@ const pashto = {
         airportType: " هوایي ډګر ډول",
         aircraftTypes: "د الوتکو ډولونه",
         aircraftType: "د الوتکې ډول",
-        addNewAircraftType:"نوی د الوتکې ډول اضافه کړئ",
-        addingNewAircraftType:"د الوتکې د نوي ډول اضافه کول",
+        addNewAircraftType: "نوی د الوتکې ډول اضافه کړئ",
+        addingNewAircraftType: "د الوتکې د نوي ډول اضافه کول",
 
         aircraftCode: " د الوتکې کوډ",
 
@@ -441,7 +435,8 @@ const pashto = {
     },
 
     tashkilat: {
-         pleaseAddPositionRequirements: "مهرباني وکړئ د بست اړین شرایط اضافه کړئ",
+        pleaseAddPositionRequirements:
+            "مهرباني وکړئ د بست اړین شرایط اضافه کړئ",
         selectCertificate: "مهرباني وکړئ اړوند سند انتخاب کړئ",
         selectEducationLevel: "مهرباني وکړئ د زده‌کړې کچه انتخاب کړئ",
         totalRequirments: "د بست د اړینو شرایطو ټوټل",
@@ -453,9 +448,9 @@ const pashto = {
         certificatesPart: "د اسنادو برخه",
         educationPart: "د زده‌کړو برخه",
         trainingsPart: "د کورسونو او روزنو برخه",
-        monthOrMonths:"میاشت/ میاشتې",
-         Required: "اړین",
-  notRequired: " اړین ندی",
+        monthOrMonths: "میاشت/ میاشتې",
+        Required: "اړین",
+        notRequired: " اړین ندی",
 
         organizations: "اداره عمومی",
         organizationsList: "د ادارو لیست",
@@ -478,7 +473,7 @@ const pashto = {
         CreateNewTashkil: "نوی تشکیلات جوړول",
         reference_number: "د رییفرنس شمېره",
         year: "کال",
-        createNewPositionType: 'د بست ‌‌ډول اضافه کوړی',
+        createNewPositionType: "د بست ‌‌ډول اضافه کوړی",
         positionType: "د بست ډول",
 
         createDepartmentPosition: "د ریاست بست جوړول",
@@ -528,8 +523,7 @@ const pashto = {
             divorced: "طلاق شوی",
             widowed: "کونډ/کونډه",
             active: "فعال",
-            inactive: "غیر فعال"
-
+            inactive: "غیر فعال",
         },
         employeeAssignment: {
             employeeAssignmentsList: "د کارکوونکو دندو لېست",
@@ -555,7 +549,7 @@ const pashto = {
             pending: "په انتظار کې",
             approved: "تایید شوی",
             rejected: "رد شوی",
-            underReview: "تر بیاکتنې لاندې"
+            underReview: "تر بیاکتنې لاندې",
         },
     },
     education: {
@@ -564,12 +558,10 @@ const pashto = {
         employeeEducation: "د کارکوونکي زده کړې",
         positionRequiredEducation: "د دندې اړینې زده کړې",
 
-        certificates: "سندونه",
+        certificates: "Certificates",
 
         courseTypes: "د کورس ډولونه",
         courses: "کورسونه",
-
-
 
         trainings: "روزنې",
         addNewEducationLevel: "د زده کړې نوې کچه اضافه کړئ",
@@ -584,10 +576,10 @@ const pashto = {
         certificateNumber: "د سند شمېره",
         addCertificate: "سند اضافه کړئ",
         addNewCertificate: "نوی سند اضافه کړئ",
-        certificateName: "د سند نوم",
-        certificateLevel: "د سند کچه",
+        certificateName: "د Certificate نوم",
+        certificateLevel: "د Certificate کچه",
         certificateList: "د سندونو لیست",
-        createCertificate: "سند جوړول",
+        createCertificate: "Certificate جوړول",
 
         levels: {
             beginner: "لومړنۍ",
@@ -609,34 +601,31 @@ const pashto = {
         },
         trainers: {
             trainers: "روزونکي",
-            createTrainer: "نوی روزونکی جوړول",
-            editTrainer: "روزونکی سمول",
-            id: "پېژندنه",
-            name: "بشپړ نوم",
-            namePlaceholder: "د روزونکي بشپړ نوم دننه کړئ",
-            type: "ډول",
+            trainer: "روزونکی",
+            trainerList: "د روزونکو لست",
+            addNewTrainer: "د نوي روزونکي اضافه کول",
+            createTrainer: "روزونکی جوړول",
+            editTrainer: "د روزونکي سمون",
+            name: "د روزونکي نوم",
+            namePlaceholder: "د روزونکي نوم ولیکئ",
+            type: "د روزونکي ډول",
             selectType: "د روزونکي ډول وټاکئ",
-            phone: "د تلیفون شمېره",
-            phonePlaceholder: "د تلیفون شمېره دننه کړئ",
-            email: "برېښناليک",
-            emailPlaceholder: "برېښناليک آدرس دننه کړئ",
-            licenseNumber: "د جواز شمېره",
-            licensePlaceholder: "د جواز شمېره دننه کړئ",
-            organization: "اداره/سازمان",
-            organizationPlaceholder: "د ادارې نوم دننه کړئ",
-            address: "آدرس",
-            addressPlaceholder: "آدرس دننه کړئ",
-            description: "تشریح",
-            descriptionPlaceholder: "تشریح دننه کړئ",
-            contact: "اړیکه",
-            license: "جواز",
+            phone: "د اړیکې شمېره",
+            phonePlaceholder: "د اړیکې شمېره ولیکئ",
+            email: "برېښنالیک",
+            emailPlaceholder: "برېښنالیک ولیکئ",
+            organization: "اداره / سازمان",
+            organizationPlaceholder: "د ادارې یا سازمان نوم ولیکئ",
+            address: "پته",
+            addressPlaceholder: "پته ولیکئ",
+            description: "توضیحات",
+            descriptionPlaceholder: "توضیحات ولیکئ",
             types: {
-                internal: "داخلي",
-                external: "بهرنی",
-                consultant: "سلاکار"
-            }
+                internal: "داخلي روزونکی",
+                external: "بهرنی روزونکی",
+                consultant: "مشاور",
+            },
         },
-
 
         trainingPlans: {
             trainingPlans: "د روزنې پلانونه",
@@ -658,17 +647,16 @@ const pashto = {
             selectStatus: "حالت وټاکئ",
             description: "تشریح",
             descriptionPlaceholder: "د روزنې پلان تشریح دننه کړئ",
+            licenseNumber: "د جواز شمېره", licensePlaceholder: "د جواز شمېره ولیکئ",
             days: "ورځې",
             statuses: {
                 planned: "پلان شوی",
                 in_progress: "په روانه توګه",
                 completed: "ترسره شوی",
-                cancelled: "لغوه شوی"
-            }
+                cancelled: "لغوه شوی",
+            },
         },
-
-
-    }
+    },
 };
 
 export default pashto;

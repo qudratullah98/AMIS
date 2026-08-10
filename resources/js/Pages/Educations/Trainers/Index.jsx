@@ -23,12 +23,12 @@ function Index({ trainers }) {
     const [selectedTrainer, setSelectedTrainer] = useState(null);
 
     const columns = [
-        { label: t("education.trainers.id") },
+        { label: t("common.NO") },
         { label: t("education.trainers.name") },
         { label: t("education.trainers.type") },
-        { label: t("education.trainers.contact") },
+        { label: t("education.trainers.phone") },
         { label: t("education.trainers.organization") },
-        { label: t("education.trainers.license") },
+        { label: t("education.trainers.licenseNumber") },
         { label: t("common.action") },
     ];
 
@@ -39,9 +39,9 @@ function Index({ trainers }) {
             consultant: 'bg-purple-100 text-purple-800',
         };
         const labels = {
-            internal: t('trainers.types.internal'),
-            external: t('trainers.types.external'),
-            consultant: t('trainers.types.consultant'),
+            internal: t('education.trainers.types.internal'),
+            external: t('education.trainers.types.external'),
+            consultant: t('education.trainers.types.consultant'),
         };
         return (
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${colors[type] || 'bg-gray-100 text-gray-800'}`}>
@@ -62,8 +62,8 @@ function Index({ trainers }) {
 
     const handleUpdateSuccess = (updatedTrainer) => {
         setEditModal(false);
-        setData((prev) => 
-            prev.map((item) => 
+        setData((prev) =>
+            prev.map((item) =>
                 item.id === updatedTrainer.id ? updatedTrainer : item
             )
         );
@@ -135,7 +135,11 @@ function Index({ trainers }) {
                 )}
             </CustomModal>
 
-            <DataTable
+
+ <div className="mx-auto">
+                <div className="overflow-hidden bg-white shadow-none sm:rounded-lg border border-gray-100 dark:bg-gray-800">
+                    <div className="px-4 py-2 text-gray-900 dark:text-gray-100">
+<DataTable
                 columns={columns}
                 links={trainers.links}
                 header={t("education.trainers.trainers")}
@@ -146,7 +150,7 @@ function Index({ trainers }) {
                 {data.map((trainer) => (
                     <tr key={trainer.id} className="hover:bg-gray-50 transition-colors">
                         <td className="p-3 text-center text-sm">
-                            #{trainer.id}
+                            {trainer.id}
                         </td>
                         <td className="p-3">
                             <div className="flex items-center gap-3">
@@ -220,7 +224,10 @@ function Index({ trainers }) {
                         </td>
                     </tr>
                 ))}
-            </DataTable>
+            </DataTable></div>
+                </div>
+            </div>
+
         </AuthenticatedLayout>
     );
 }
