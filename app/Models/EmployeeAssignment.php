@@ -14,6 +14,7 @@ class EmployeeAssignment extends Model
         'end_date',
         'approval_status_id',
         'remarks',
+        'status'
     ];
 
     protected $casts = [

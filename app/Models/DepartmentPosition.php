@@ -38,9 +38,9 @@ class DepartmentPosition extends Model
         return $this->hasMany(PositionRequiredEducation::class);
     }
 
-    public function vacancy()
+    public function vacancies()
     {
-        return $this->hasOne(PositionVacancy::class);
+        return $this->hasMany(PositionVacancy::class);
     }
     public function department()
     {

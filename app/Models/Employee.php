@@ -66,7 +66,7 @@ protected $fillable = [
 
     public function assignments()
     {
-        return $this->hasMany(
+        return $this->hasOne(
             EmployeeAssignment::class
         );
     }

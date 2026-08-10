@@ -18,7 +18,7 @@ import {
     UsersRound,
     UserCheck,
     Building2,
-        GraduationCap,
+    GraduationCap,
     BookOpen,
     BriefcaseBusiness,
     Award,
@@ -170,7 +170,6 @@ const Sidebar = () => {
                     icon: <BookOpen className="w-4 h-4" />,
                     keyword: "educationLevels",
                 },
-
             ],
         },
         // Tashkilat Part
@@ -183,29 +182,24 @@ const Sidebar = () => {
             can: permissions.includes("viewTashkilatMenu") || true,
 
             subItems: [
-
+              
+                {
+                    href: route("organizations.index"),
+                    label: t("tashkilat.organizations"),
+                    icon: <Building2 className="w-4 h-4" />,
+                    keyword: "organizations",
+                },
                 {
                     href: route("tashkilat.index"),
                     label: t("tashkilat.tashkil"),
                     icon: <Building2 className="w-4 h-4" />,
                     keyword: "tashkil",
-                }, {
-                    href: route("organizations.index"),
-                    label: t("tashkilat.organizations"),
-                    icon: <Building2 className="w-4 h-4" />,
-                    keyword: "organizations",
-                }, {
+                },
+                {
                     href: route("departments.index"),
                     label: t("tashkilat.departments"),
                     icon: <Building2 className="w-4 h-4" />,
                     keyword: "departments",
-                },
-
-                {
-                    href: route("position-types.index"),
-                    label: t("tashkilat.positionTypes"),
-                    icon: <Layers className="w-4 h-4" />,
-                    keyword: "positionTypes",
                 },
 
                 {
@@ -227,6 +221,12 @@ const Sidebar = () => {
                     label: t("tashkilat.employeeAssignments"),
                     icon: <UserCheck className="w-4 h-4" />,
                     keyword: "employeeAssignments",
+                },
+                {
+                    href: route("position-types.index"),
+                    label: t("tashkilat.positionTypes"),
+                    icon: <Layers className="w-4 h-4" />,
+                    keyword: "positionTypes",
                 },
             ],
         },
@@ -301,18 +301,20 @@ const Sidebar = () => {
 
     return (
         <div
-            className={`h-screen bg-white dark:bg-gray-900 flex flex-col transition-all duration-500 ease-in-out border-r border-gray-200 dark:border-gray-800 shadow-md ${collapsed ? "w-20" : "w-64"
-                }`}
+            className={`h-screen bg-white dark:bg-gray-900 flex flex-col transition-all duration-500 ease-in-out border-r border-gray-200 dark:border-gray-800 shadow-md ${
+                collapsed ? "w-20" : "w-64"
+            }`}
         >
             {/* Header */}
             <div className="relative flex items-center py-6 border-gray-200 dark:border-gray-800">
                 <div className="absolute left-1/2 -translate-x-1/2 transform transition-all duration-500 ease-in-out">
                     <Link href="/" className="hover:cursor-pointer">
                         <ApplicationLogo
-                            className={`h-auto transition-all duration-500 ${collapsed
-                                ? "w-10 opacity-90"
-                                : "w-20 opacity-100"
-                                }`}
+                            className={`h-auto transition-all duration-500 ${
+                                collapsed
+                                    ? "w-10 opacity-90"
+                                    : "w-20 opacity-100"
+                            }`}
                         />
                     </Link>
                 </div>
@@ -354,28 +356,32 @@ const Sidebar = () => {
                             >
                                 <Link
                                     href={link.href}
-                                    className={`flex items-center gap-3 mx-2 mb-0.5 px-3 py-1.5 rounded-lg transition-all duration-500 ${collapsed
-                                        ? "justify-center"
-                                        : "justify-start"
-                                        } ${isParentActive
+                                    className={`flex items-center gap-3 mx-2 mb-0.5 px-3 py-1.5 rounded-lg transition-all duration-500 ${
+                                        collapsed
+                                            ? "justify-center"
+                                            : "justify-start"
+                                    } ${
+                                        isParentActive
                                             ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                                             : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200"
-                                        }`}
+                                    }`}
                                 >
                                     <span
-                                        className={`transition-colors duration-500 ${isParentActive
-                                            ? "text-gray-900 dark:text-gray-100"
-                                            : "text-gray-500 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300"
-                                            }`}
+                                        className={`transition-colors duration-500 ${
+                                            isParentActive
+                                                ? "text-gray-900 dark:text-gray-100"
+                                                : "text-gray-500 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300"
+                                        }`}
                                     >
                                         {link.icon}
                                     </span>
 
                                     <span
-                                        className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${collapsed
-                                            ? "opacity-0 w-0 ml-0"
-                                            : "opacity-100 w-auto ml-2"
-                                            }`}
+                                        className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${
+                                            collapsed
+                                                ? "opacity-0 w-0 ml-0"
+                                                : "opacity-100 w-auto ml-2"
+                                        }`}
                                     >
                                         {link.label}
                                     </span>
@@ -393,7 +399,7 @@ const Sidebar = () => {
                                             }
                                         >
                                             {openItems[link.keyword] ||
-                                                isChildActive(link.subItems) ? (
+                                            isChildActive(link.subItems) ? (
                                                 <ChevronDown className="w-4 h-4 transition-transform duration-500" />
                                             ) : (
                                                 <ChevronRightIcon className="w-4 h-4 transition-transform duration-500" />
@@ -411,35 +417,39 @@ const Sidebar = () => {
 
                             {hasSubItems && (
                                 <div
-                                    className={`ml-4 pl-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ${(openItems[link.keyword] ||
-                                        isChildActive(link.subItems)) &&
+                                    className={`ml-4 pl-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ${
+                                        (openItems[link.keyword] ||
+                                            isChildActive(link.subItems)) &&
                                         !collapsed
-                                        ? "max-h-96 opacity-100 mt-1 mb-1"
-                                        : "max-h-0 opacity-0 mt-0 mb-0"
-                                        }`}
+                                            ? "max-h-96 opacity-100 mt-1 mb-1"
+                                            : "max-h-0 opacity-0 mt-0 mb-0"
+                                    }`}
                                 >
                                     {link.subItems.map((sub) => (
                                         <Link
                                             key={sub.keyword}
                                             href={sub.href}
-                                            className={`flex items-center gap-3 mx-2 px-3 py-2 rounded-lg transition-all duration-500 ${isActive(sub.href)
-                                                ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                                                : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200"
-                                                }`}
+                                            className={`flex items-center gap-3 mx-2 px-3 py-2 rounded-lg transition-all duration-500 ${
+                                                isActive(sub.href)
+                                                    ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                                                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200"
+                                            }`}
                                         >
                                             <span
-                                                className={`w-4 h-4 ${isActive(sub.href)
-                                                    ? "text-gray-900 dark:text-gray-100"
-                                                    : "text-gray-500 dark:text-gray-500"
-                                                    }`}
+                                                className={`w-4 h-4 ${
+                                                    isActive(sub.href)
+                                                        ? "text-gray-900 dark:text-gray-100"
+                                                        : "text-gray-500 dark:text-gray-500"
+                                                }`}
                                             >
                                                 {sub.icon}
                                             </span>
                                             <span
-                                                className={`text-sm transition-all duration-500 overflow-hidden whitespace-nowrap ${collapsed
-                                                    ? "opacity-0 w-0 ml-0"
-                                                    : "opacity-100 w-auto ml-2"
-                                                    }`}
+                                                className={`text-sm transition-all duration-500 overflow-hidden whitespace-nowrap ${
+                                                    collapsed
+                                                        ? "opacity-0 w-0 ml-0"
+                                                        : "opacity-100 w-auto ml-2"
+                                                }`}
                                             >
                                                 {sub.label}
                                             </span>
@@ -467,18 +477,20 @@ const Sidebar = () => {
                                     i18n.language === "dr" ? "pa" : "dr",
                                 )
                             }
-                            className={`flex items-center gap-3 mx-2 mb-0.5 px-3 py-1.5 rounded-lg transition-all duration-500 ${collapsed ? "justify-center" : "justify-start"
-                                } text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200`}
+                            className={`flex items-center gap-3 mx-2 mb-0.5 px-3 py-1.5 rounded-lg transition-all duration-500 ${
+                                collapsed ? "justify-center" : "justify-start"
+                            } text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200`}
                         >
                             <span className="text-gray-500 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300">
                                 <EarthIcon className="w-5 h-5" />
                             </span>
 
                             <span
-                                className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${collapsed
-                                    ? "opacity-0 w-0 ml-0"
-                                    : "opacity-100 w-auto ml-2"
-                                    }`}
+                                className={`flex-1 text-lg font-medium transition-all duration-500 overflow-hidden whitespace-nowrap ${
+                                    collapsed
+                                        ? "opacity-0 w-0 ml-0"
+                                        : "opacity-100 w-auto ml-2"
+                                }`}
                             >
                                 {i18n.language === "dr"
                                     ? t("pashto")
@@ -503,8 +515,9 @@ const Sidebar = () => {
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
 
                 <div
-                    className={`flex items-center transition-all duration-300 ${collapsed ? "justify-center" : "gap-3"
-                        }`}
+                    className={`flex items-center transition-all duration-300 ${
+                        collapsed ? "justify-center" : "gap-3"
+                    }`}
                 >
                     {/* Avatar with enhanced gradient and glow effect */}
                     <div className="relative group">
@@ -541,10 +554,10 @@ const Sidebar = () => {
                                     ))}
                                     {(!user?.roles ||
                                         user?.roles.length === 0) && (
-                                            <span className="text-[10px] font-bold text-white bg-gradient-to-r from-gray-500 to-gray-600 px-2 py-0.5 rounded-full shadow-sm whitespace-nowrap">
-                                                No Role
-                                            </span>
-                                        )}
+                                        <span className="text-[10px] font-bold text-white bg-gradient-to-r from-gray-500 to-gray-600 px-2 py-0.5 rounded-full shadow-sm whitespace-nowrap">
+                                            No Role
+                                        </span>
+                                    )}
                                 </div>
                             </div>
 

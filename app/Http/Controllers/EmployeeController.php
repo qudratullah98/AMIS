@@ -78,28 +78,27 @@ class EmployeeController extends Controller
     {
         return Inertia::render('Tashkilat/Employee/EmployeeEducations/EmployeeEducation', ['employee' => $employee]);
     }
-public function storeEducation(EmployeeEducationRequest $request, Employee $employee)
-{
-    $validated = $request->validated();
+    public function storeEducation(EmployeeEducationRequest $request, Employee $employee)
+    {
+        $validated = $request->validated();
 
 
-    if($request->hasFile('document_file')){
+        if ($request->hasFile('document_file')) {
 
-        $validated['document_file'] =
-            $request->file('document_file')
-            ->store('educations','public');
+            $validated['document_file'] =
+                $request->file('document_file')
+                ->store('educations', 'public');
+        }
 
+
+        $education = $employee->educations()->create($validated);
+
+
+        return response()->json([
+            'success' => true,
+            'data' => $education
+        ]);
     }
-
-
-    $education = $employee->educations()->create($validated);
-
-
-    return response()->json([
-        'success'=>true,
-        'data'=>$education
-    ]);
-}
     public function storeCertificate(StoreEmployeeCertificateRequest $request, Employee $employee)
     {
         $validated = $request->validated();
@@ -119,25 +118,27 @@ public function storeEducation(EmployeeEducationRequest $request, Employee $empl
         ]);
     }
 
- public function employees()
-{
-    return response()->json(
-        Employee::where('approval_status_id', 1)
-            ->when(request('query'), function ($q) {
-                $q->where(function ($query) {
-                    $query->where('first_name', 'like', request('query') . '%')
-                        ->orWhere('national_id', 'like', request('query') . '%');
-                });
-            })
-            ->select(
-                'id',
-                'national_id',
-                'first_name',
-                'last_name'
-            )
-            ->get()
-    );
-}
+    public function employees()
+    {
+        return response()->json(
+            Employee::where('approval_status_id', 1)
+                ->when(request('query'), function ($q) {
+                    $q->where(function ($query) {
+                        $query->where('first_name', 'like', request('query') . '%')
+                            ->orWhere('national_id', 'like', request('query') . '%');
+                    });
+                })->whereDoesntHave('assignments', function ($q) {
+                    $q->where('status', 'assigned');
+                })
+                ->select(
+                    'id',
+                    'national_id',
+                    'first_name',
+                    'last_name'
+                )
+                ->get()
+        );
+    }
 
     public function certificatesJson($employee)
     {
@@ -150,7 +151,7 @@ public function storeEducation(EmployeeEducationRequest $request, Employee $empl
     {
         return response()->json($employee->trainings);
     }
-    public function educationsJson( $employee)
+    public function educationsJson($employee)
     {
         $educations = EmployeeEducation::with('educationLevel')
             ->where('employee_id', $employee)

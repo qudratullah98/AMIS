@@ -34,6 +34,8 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->text('remarks')->nullable();
+            $table->enum('status', ['assigned','occupied','resigned','separated',])->default('assigned');
+
 
             $table->timestamps();
         });
