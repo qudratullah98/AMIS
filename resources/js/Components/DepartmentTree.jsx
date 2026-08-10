@@ -158,26 +158,29 @@ export default function DepartmentTree({ departments = [] }) {
     }
 
     return (
-        <div style={{ width: "100%", height: "700px" }} className="bg-gray-50 rounded-lg">
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                nodeTypes={nodeTypes}
-                fitView
-                fitViewOptions={{ 
-                    padding: 0.2,
-                    includeHiddenNodes: false 
-                }}
-                minZoom={0.5}
-                maxZoom={1.5}
-            >
-                <Background variant="dots" gap={12} size={1} />
-                <Controls />
-                <MiniMap 
-                    nodeColor="#60A5FA"
-                    maskColor="rgba(0,0,0,0.1)"
-                />
-            </ReactFlow>
-        </div>
+<div
+    className="department-tree bg-gray-50 rounded-lg"
+    style={{ width: "100%", height: "700px" }}
+>
+    <style>{`
+        .department-tree .react-flow__attribution {
+            display: none !important;
+        }
+    `}</style>
+
+    <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        fitView
+        fitViewOptions={{
+            padding: 0.2,
+            includeHiddenNodes: false,
+        }}
+        minZoom={0.5}
+        maxZoom={1.5}
+    >
+    </ReactFlow>
+</div>
     );
 }

@@ -1,4 +1,6 @@
-import { Construction } from "lucide-react";
+import {
+    Construction
+} from "lucide-react";
 
 // src/locales/pashto.js
 const pashto = {
@@ -115,8 +117,7 @@ const pashto = {
     },
 
     error: {
-        general:
-            "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
+        general: "یو څه غلط شول! مهرباني وکړئ معلومات وګورئ، یا له ادمین سره اړیکه ونیسئ.",
         required: "دا برخه اړینه ده.",
         credentialInvalid: "برېښنالیک یا پټنوم ناسم دی",
 
@@ -181,8 +182,7 @@ const pashto = {
             name_en_unique: "دا انګلیسي نوم مخکې ثبت شوی دی.",
             unit_required: "د خدمت واحد ټاکل اړین دي.",
             unit_invalid: "ټاکل شوی د خدمت واحد سم نه دی.",
-            airline_rates_required:
-                "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
+            airline_rates_required: "لږ تر لږه د یوې هوايي شرکت نرخ داخلول اړین دي.",
             airline_rates_invalid: "د هوايي شرکتونو د نرخونو معلومات سم نه دي.",
             airline_rates_min: "لږ تر لږه یو هوايي شرکت باید اضافه شي.",
             airline_required: "د هوايي شرکت ټاکل اړین دي.",
@@ -206,8 +206,7 @@ const pashto = {
             year_integer: "کال باید بشپړ عدد وي.",
             year_min: "کال باید لږ تر لږه 1000 وي.",
             year_max: "کال باید له 9999 څخه زیات نه وي.",
-            organization_year_unique:
-                "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
+            organization_year_unique: "د دې ادارې لپاره د همدې کال تشکیل مخکې ثبت شوی دی.",
             reference_number_required: "د مرجع شمېره اړینه ده.",
             reference_number_string: "د مرجع شمېره باید متن وي.",
             reference_number_max: "د مرجع شمېره باید له 255 تورو زیاته نه وي.",
@@ -435,8 +434,7 @@ const pashto = {
     },
 
     tashkilat: {
-        pleaseAddPositionRequirements:
-            "مهرباني وکړئ د بست اړین شرایط اضافه کړئ",
+        pleaseAddPositionRequirements: "مهرباني وکړئ د بست اړین شرایط اضافه کړئ",
         selectCertificate: "مهرباني وکړئ اړوند سند انتخاب کړئ",
         selectEducationLevel: "مهرباني وکړئ د زده‌کړې کچه انتخاب کړئ",
         totalRequirments: "د بست د اړینو شرایطو ټوټل",
@@ -448,9 +446,9 @@ const pashto = {
         certificatesPart: "د اسنادو برخه",
         educationPart: "د زده‌کړو برخه",
         trainingsPart: "د کورسونو او روزنو برخه",
-        monthOrMonths:"میاشت/ میاشتې",
-         Required: "اړین",
-  notRequired: " اړین ندی",
+        monthOrMonths: "میاشت/ میاشتې",
+        Required: "اړین",
+        notRequired: " اړین ندی",
 
         organizations: "اداره عمومی",
         organizationsList: "د ادارو لیست",
@@ -559,7 +557,7 @@ const pashto = {
         employeeEducation: "د کارکوونکي زده کړې",
         positionRequiredEducation: "د دندې اړینې زده کړې",
 
-        certificates: "Certificates",
+        certificates: "سرتیفیکټونه",
 
         courseTypes: "د کورس ډولونه",
         courses: "کورسونه",
@@ -648,7 +646,8 @@ const pashto = {
             selectStatus: "حالت وټاکئ",
             description: "تشریح",
             descriptionPlaceholder: "د روزنې پلان تشریح دننه کړئ",
-            licenseNumber: "د جواز شمېره", licensePlaceholder: "د جواز شمېره ولیکئ",
+            licenseNumber: "د جواز شمېره",
+            licensePlaceholder: "د جواز شمېره ولیکئ",
             days: "ورځې",
             statuses: {
                 planned: "پلان شوی",
@@ -657,6 +656,21 @@ const pashto = {
                 cancelled: "لغوه شوی",
             },
         },
+    },
+    dashboard: {
+        title: "د بشري سرچینو ډشبورډ",
+        description: "د څانګو، بستونو، کارکوونکو او اداري جوړښت عمومي کتنه.",
+        departments: "څانګې",
+        positions: "بستونه",
+        filled: "ډک شوي بستونه",
+        vacancies: "خالي بستونه",
+        departmentStructure: "د څانګو جوړښت",
+        departmentStructureDescription: "اداري جوړښت چې اصلي او فرعي څانګې ښيي.",
+        recentEmployees: "وروستي کارکوونکي",
+        recentEmployeesDescription: "په اداره کې وروستي ثبت شوي کارکوونکي.",
+        noPosition: "هیڅ بست نه دی ټاکل شوی",
+        noRecentEmployees: "وروستي کارکوونکي نشته",
+        noRecentEmployeesDescription: "د ښودلو لپاره کوم نوی ثبت شوی کارکوونکی نشته.",
     },
 };
 

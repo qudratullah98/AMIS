@@ -108,8 +108,7 @@ const dari = {
     },
 
     error: {
-        general:
-            "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
+        general: "مشکلی رخ داده است! لطفاً فیلدهای ورودی را بررسی کنید یا با ادمین تماس بگیرید.",
         credentialInvalid: "ایمیل یا رمز عبور نادرست است",
 
         fieldIsNeeded: "پر کردن این بخش الزامی است.",
@@ -173,8 +172,7 @@ const dari = {
             unit_required: "انتخاب واحد خدمت الزامی است.",
             unit_invalid: "واحد خدمت انتخاب‌شده معتبر نیست.",
 
-            airline_rates_required:
-                "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
+            airline_rates_required: "حداقل یک نرخ برای شرکت هوایی باید وارد شود.",
             airline_rates_invalid: "اطلاعات نرخ‌های شرکت‌های هوایی معتبر نیست.",
             airline_rates_min: "حداقل یک شرکت هوایی باید اضافه شود.",
 
@@ -198,8 +196,7 @@ const dari = {
             year_integer: "سال باید یک عدد صحیح باشد.",
             year_min: "سال باید حداقل 1000 باشد.",
             year_max: "سال نباید بیشتر از 9999 باشد.",
-            organization_year_unique:
-                "برای این سازمان، تشکیل این سال قبلاً ثبت شده است.",
+            organization_year_unique: "برای این سازمان، تشکیل این سال قبلاً ثبت شده است.",
 
             reference_number_required: "شماره مرجع الزامی است.",
             reference_number_string: "شماره مرجع باید متن باشد.",
@@ -211,7 +208,7 @@ const dari = {
 
             description_string: "توضیحات باید متن باشد.",
             description_max: "توضیحات نباید بیشتر از 255 کاراکتر باشد.",
-            totalPositions:'تمام بستها'
+            totalPositions: 'تمام بستها'
         },
         department: {
             tashkil_required: "انتخاب تشکیل الزامی است.",
@@ -433,8 +430,7 @@ const dari = {
     },
 
     tashkilat: {
-        pleaseAddPositionRequirements:
-            "لطفاً شرایط مورد نیاز بست را اضافه نمایید",
+        pleaseAddPositionRequirements: "لطفاً شرایط مورد نیاز بست را اضافه نمایید",
         selectCertificate: "لطفاً سند مورد نظر را انتخاب نمایید",
         selectEducationLevel: "لطفاً سطح تحصیلی را انتخاب نمایید",
         totalRequirments: "مجموع شرایط مورد نیاز بست",
@@ -583,7 +579,7 @@ const dari = {
         employeeEducation: "تحصیلات کارمند",
         positionRequiredEducation: "تحصیلات مورد نیاز بست",
 
-        certificates: "Certificates",
+        certificates: "سرتیفیکتها",
 
         courseTypes: "انواع کورس",
         courses: "کورس‌ها",
@@ -650,7 +646,8 @@ const dari = {
             addressPlaceholder: "آدرس را وارد کنید",
             description: "توضیحات",
             descriptionPlaceholder: "توضیحات را وارد کنید",
-            licenseNumber: "شماره جواز", licensePlaceholder: "شماره جواز را وارد کنید",
+            licenseNumber: "شماره جواز",
+            licensePlaceholder: "شماره جواز را وارد کنید",
             types: {
                 internal: "آموزش‌دهنده داخلی",
                 external: "آموزش‌دهنده خارجی",
@@ -685,6 +682,21 @@ const dari = {
                 cancelled: "لغو شده",
             },
         },
+    },
+    dashboard: {
+        title: "داشبورد منابع بشری",
+        description: "نمای کلی از بخش‌ها، بست‌ها، کارمندان و ساختار اداری.",
+        departments: "بخش‌ها",
+        positions: "بست‌ها",
+        filled: "بست‌های پرشده",
+        vacancies: "بست‌های خالی",
+        departmentStructure: "ساختار بخش‌ها",
+        departmentStructureDescription: "ساختار اداری که بخش‌های اصلی و فرعی را نشان می‌دهد.",
+        recentEmployees: "کارمندان اخیر",
+        recentEmployeesDescription: "کارمندانی که اخیراً در اداره ثبت شده‌اند.",
+        noPosition: "هیچ بست تعیین نشده است",
+        noRecentEmployees: "کارمند اخیر موجود نیست",
+        noRecentEmployeesDescription: "هیچ کارمند جدیدی برای نمایش موجود نیست.",
     },
 };
 
