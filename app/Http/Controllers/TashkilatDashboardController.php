@@ -22,10 +22,11 @@ class TashkilatDashboardController extends Controller
 
         // Get all departments with their positions
         $departmentsTree = Department::with([
-            'positions:id,department_id,title,grade,total_positions'
+            'positions:id,department_id,title,grade,total_positions',
+            'positions.vacancies',
         ])
             ->select('id', 'tashkil_id', 'parent_id', 'name', 'code', 'description')
-            ->get();
+            ->get(); 
 
         return Inertia::render('Tashkilat/Dashboard', [
             'stats' => [
